@@ -1,22 +1,16 @@
-/*
-div, ul, img {
-  border: 1px solid gray;
-}
-*/
-
 body {
   background-image: url('../images/background.jpg');
   background-color: #F0EFE2;
   margin: 0;
-  margin-bottom: 50px;
   padding: 0;
-  font-weight: 100;
-  font-size: 16px;
+  margin-bottom: 50px;
   color: #000;
+  font-size: 16px;
+  font-weight: 200;
 }
 #main {
   clear: both;
-  width: 900px;
+  width: 1000px;
   margin: 0 auto;
   margin-top: 30px;
   background: rgba(255,255,255, 1);
@@ -32,7 +26,7 @@ body {
   height: 80px;
 }
 #header {
-  width: 900px;
+  width: 1000px;
   margin: 0 auto;
   position: relative;
   color: white;
@@ -43,7 +37,7 @@ body {
   padding-left: 10px;
   font-family: "Julius Sans One", sans-serif;
   font-size: 30px;
-  width: 300px;
+  width: 400px;
 }
 #email {
   padding-left: 10px;
@@ -57,13 +51,16 @@ body {
   right: 10px;
   bottom: 5px;
 }
-#navigator a:link, #navigator a:visited,  {
+#navigator a:link {
   text-decoration: none;
+}
+#navigator a:hover, #navigator a:visited {
+  background: #364C62 ;
 }
 .nav_cell {
   display: inline-block;
-  font: normal 120% arial, sans-serif;
   color: #FFF;
+  font: normal 120% arial, sans-serif;
   text-transform: uppercase;
   padding:0 10px;
 }
@@ -80,32 +77,9 @@ body {
   margin-right: 10px;
   line-height: 1.5;
 }
-.block {
-  margin-left: 25px;
-  border-left: 5px solid #ddd;
-  padding-left: 15px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
 .introduction {
   margin-bottom: 20px;
-}
-.abstract, .introduction {
   overflow: auto;
-}
-.abstract .right p {
-  font-style: italic;
-  margin: 0;
-}
-.publication {
-  margin-top: 10px;
-  padding-bottom: 2px;
-  line-height: 1.25;
-}
-.project_img {
-  margin-right: 20px;
-  float: left;
-  width: 250px;
 }
 
 span.emph {
@@ -113,7 +87,7 @@ span.emph {
   font-weight: normal;
 }
 .title {
-  color: #7A5919;
+  color: #213355;
   font-weight: bold;
   font: normal 175% 'century gothic', arial, sans-serif;
   margin-top: 15px;
@@ -121,7 +95,7 @@ span.emph {
   margin-bottom: 10px;
 }
 .subtitle {
-  color: #7A5919;
+  color: #213355;
   margin-left: 20px;
   font-weight: bold;
   font: normal 120% 'century gothic', arial, sans-serif;
@@ -131,6 +105,9 @@ span.emph {
 a:link, a:visited {
   color: #2BC246;
   text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
 }
 a.anchor {
   display: block;
