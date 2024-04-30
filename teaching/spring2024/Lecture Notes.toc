@@ -1,0 +1,32 @@
+\contentsline {chapter}{\numberline {1}Brownian motion and Martingale}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Probabilistic terminology}{7}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Brownian motion}{8}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Martingale}{13}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Stochastic Integral}{15}{section.1.4}%
+\contentsline {section}{\numberline {1.5}It\^o's formula and its applications}{19}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Applications in martingale theory}{19}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Applications in PDEs}{22}{subsection.1.5.2}%
+\contentsline {chapter}{\numberline {2}It\^o processes}{23}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Support theorem}{23}{section.2.1}%
+\contentsline {section}{\numberline {2.2}ABP estimate and Generalized It\^o's formula}{26}{section.2.2}%
+\contentsline {chapter}{\numberline {3}It\^o's stocahstic differential equations}{33}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Strong solutions}{33}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Lipschitz conditions}{33}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Definitions of solutios to \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eq:sde}\unskip \@@italiccorr )}}}{34}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}SDEs with H\"older drifts}{35}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Stochastic Flow}{36}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Weak solutions}{37}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Uniqueness in law}{37}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Markov properties}{38}{subsection.3.2.2}%
+\contentsline {chapter}{\numberline {4}Applications to Elliptic PDEs}{41}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Dirichlet Problems and Harmonic functions}{41}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Once again on the hitting probability}{43}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Harnack Inequality and H\"older estimate}{46}{section.4.3}%
+\contentsline {chapter}{\numberline {5}H\"ormander's Theorem}{51}{chapter.5}%
+\contentsline {chapter}{\numberline {A}Useful facts}{57}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Sobolev spaces}{57}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Singular integral}{57}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Interpolation Theorems}{58}{section.A.3}%
+\contentsline {chapter}{\numberline {B}Some basic results of PDEs}{59}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Monge-Ampère Equation}{59}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Schauder estimate}{62}{section.B.2}%

@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!--header and icon-->
+  <title>Guohuan Zhao - AMSS</title>
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
+
+  <!--meta-->
+	<meta name="google-site-verification" content="zKoZ-prRc76I8iJIlJ9P1ao01bUPS95ah5DnTLyU-oc" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+	<script>
+	$(document).ready(function(){
+	  $("a").on('click', function(event) {
+	    if (this.hash !== "") {
+	      event.preventDefault();
+
+	      var hash = this.hash;
+
+	      $('html, body').animate({
+	        scrollTop: $(hash).offset().top
+	      }, 500, function(){
+	        window.location.hash = hash;
+	      });
+	    }
+	  });
+	});
+	</script>
+</head>
+
+<!--main content-->
+<body>
+  <!--banner info-->
+  <div class="banner">
+    <div id="header">
+      <div id="name">Guohuan Zhao (赵国焕)</div>
+      <div id="email">Email: gzhao@amss.ac.cn</div>
+      <div id="navigator">
+        <div class="nav_cell"><a class="nav" href="#home", style="color:white; text-decoration:none">Home</a></div>
+        <div class="nav_cell"><a class="nav" href="#publication", style="color:white; text-decoration:none">Publication</a></div>
+        <div class="nav_cell"><a class="nav" href="#teaching", style="color:white; text-decoration:none">Teaching</a></div>
+        <div class="nav_cell"><a class="nav" href="#contact", style="color:white;text-decoration:none">Contact</a></div>
+        <div class="nav_cell"><a class="nav" href="chinese.html" target="_blank", style="color:white;text-decoration:none">Chinese</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- home -->
+  <div id="main">
+    <div class="content">
+      <a class="anchor" id="home"></a>
+      <div class="introduction">
+
+        <div id="selfie">
+          <!--这里放照片-->
+          <img src="images/selfie2.jpg" /><br>
+          <div style="text-align: center; margin-top: 10px; font: normal 0.90em 'trebuchet ms', arial, sans-serif;"></div>
+        </div>
+
+        <!--这里自我简介-->
+        <div class="right">
+          <p>I am currently an Associate Professor at the <a class="link" href="http://www.amss.ac.cn/" target="_blank">Academy of Mathematics and Systems Science (AMSS) of CAS</a>. Before that, I was a postdoctoral researcher in the <a class="link" href="https://www.uni-bielefeld.de/(en)/fakultaeten/mathematik/" target="_blank">Department of Mathematics at Bielefeld University</a>. To learn more about my education and professional experience, please review my <a class="link" href="files/my_cv_2022.pdf" target="_blank">cv</a>. </p>
+         <br>
+          <div class="subtitle">Research Interests:</div>
+          <ul>
+               <li class="big">Stochastic analysis.</li>
+               <li class="big">Markov processes.</li>
+               <li class="big">Nonlocal operators.</li>
+          </ul>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- publication -->
+    <div class="content">
+      <div class="title">Publication</div>
+      <a class="anchor" id="publication" name="publication"></a>
+
+      <p style="margin-left: 20px">My papers on <a class="link" href="https://scholar.google.com/citations?hl=zh-CN&user=2uVlCpoAAAAJ" target="_blank">Google Scholar</a>.</p>
+
+      <!--这里添加working paper/href是文章的链接 中间放题目-->
+      <div class="subtitle">Working papers and preprints:</div>
+
+        <ol>
+
+          <li>Zhang, X., <span class="emph"> Zhao, G.</span><br>
+          <a class="link" href="https://arxiv.org/abs/1710.10537" target="_blank">Heat kernel and ergodicity of SDEs with distributional drifts.</a><br>
+          </li>
+
+          <li>Zhang, X., <span class="emph"> Zhao, G.</span><br>
+			    <a class="link" href="https://arxiv.org/abs/1809.05712" target="_blank">Dirichlet problem for supercritical nonlocal operators.</a><br>
+          </li>
+
+          <li><span class="emph"> Zhao, G.</span><br>
+          <a class="link" href="https://arxiv.org/abs/1911.05562" target="_blank">Stochastic Lagrangian Flows for SDEs with rough coefficients.</a><br>
+          </li>
+
+          <li><span class="emph"> Zhao, G.</span><br>
+          <a class="link" href="https://arxiv.org/abs/2003.04829" target="_blank">On Distribution dependent SDEs with singular drifts.</a><br>
+          </li>
+
+          <li>Röckner, M., <span class="emph"> Zhao, G.</span><br>
+          <a class="link" href="https://arxiv.org/abs/2103.05803" target="_blank">SDEs with critical time dependent drifts: strong solutions.</a><br>
+          </li>
+
+          <li>Chen, Z. Q., Hu, E., <span class="emph"> Zhao, G.</span><br>
+          <a class="link" href="" target="_blank">Dirichlet heat kernel estimates for cylindrical stable process.</a><br>
+          </li>
+
+        </ol>
+      <!--这里添加发表paper/href是文章的链接 中间放题目-->
+      <div class="subtitle">Peer-Reviewed Articles:</div>
+
+        <ol>
+          <li>Röckner, M.,<span class="emph"> Zhao, G.</span><sup> # </sup> (2023)<br>
+          <a class="link" href="https://arxiv.org/abs/2012.04161" target="_blank">SDEs with critical time dependent drifts: weak solutions.</a><br>
+          <i>Bernoulli, 29(1), 757-784.</i><br>
+          </li>
+
+          <li><span class="emph"> Zhao, G.</span><sup> # </sup> (2022)<br>
+          <a class="link" href="https://www.ems-ph.org/journals/of_article.php?jrn=rmi&doi=1313" target="_blank">SDEs with random and irregular coefficients.</a><br>
+          <i>Revista Matemática Iberoamericana, 38(3), 947-980.</i><br>
+          </li>
+
+          <li>Ling, C., <span class="emph"> Zhao, G.</span><sup> # </sup> (2022)<br>
+          <a class="link" href="https://www.sciencedirect.com/science/article/pii/S0022039622000316" target="_blank">Nonlocal elliptic equation in Holder space and the martingale problem.</a><br>
+          <i>Journal of Differential Equations, 314(25), 653-699.</i><br>
+          </li>
+
+          <li>Chen, Z. Q.<sup> # </sup>, Zhang, X., <span class="emph"> Zhao, G.</span> (2021)<br>
+          <a class="link" href="https://www.ams.org/journals/tran/2021-374-11/S0002-9947-2021-08343-9/" target="_blank">Supercritical SDEs driven by multiplicative stable-like Lévy processes.</a><br>
+          <i>Transactions of the American Mathematical Society, 374(11), 7621-7655.</i><br>
+          </li>
+
+          <li><span class="emph"> Zhao, G.</span><sup> # </sup> (2021)<br>
+          <a class="link" href="https://www.sciencedirect.com/science/article/abs/pii/S0022247X21002997" target="_blank">Regularity properties of jump diffusions with irregular coefficients.</a><br>
+          <i>Journal of Mathematical Analysis and Applications 502(1), 125220.</i><br>
+          </li>
+
+          <li>Zhang, X., <span class="emph"> Zhao, G.</span><sup> # </sup> (2021)<br>
+          <a class="link" href="https://link.springer.com/article/10.1007/s00220-020-03888-w" target="_blank">Stochastic Lagrangian path for Leray solutions of 3D Navier-Stokes equations.</a><br>
+          <i>Communications in Mathematical Physics, 381(2), pp. 491-525.</i><br>
+          </li>
+
+          <li>Xia, P., Xie, L., Zhang, X.<sup> # </sup>, <span class="emph"> Zhao, G.</span> (2020)<br>
+          <a class="link" href="https://www.sciencedirect.com/science/article/abs/pii/S0304414919303448" target="_blank">Lq (Lp)-theory of stochastic differential equations.</a><br>
+          <i>Stochastic Processes and their Applications, 130(8), 5188-5211.</i><br>
+          </li>
+
+          <li>Jia, C.<sup> # </sup>, <span class="emph"> Zhao, G.</span> (2020)<br>
+          <a class="link" href="https://www.ams.org/journals/proc/2020-148-08/S0002-9939-2020-14804-6/home.html" target="_blank">Moderate maximal inequalities for the Ornstein-Uhlenbeck process.</a><br>
+          <i>Proceedings of the American Mathematical Society, 148, 3607-3615.</i><br>
+          </li>
+
+          <li><span class="emph"> Zhao, G.</span><sup>#</sup> (2019)<br>
+          <a class="link" href="https://www.ams.org/journals/proc/2019-147-02/S0002-9939-2018-14293-8/home.html" target="_blank">Weak uniqueness for SDEs driven by supercritical stable processes with Holder drifts.</a><br>
+          <i>Proceedings of the American Mathematical Society, 147,  849--860.</i><br>
+          </li>
+
+          <li>Zhang, X.<sup> # </sup>, <span class="emph"> Zhao, G.</span> (2018)<br>
+          <a class="link" href="https://link.springer.com/article/10.1007/s40304-018-0164-7" target="_blank">Singular Brownian diffusion processes.</a><br>
+          <i>Communications in Mathematics and Statistics, 6(4),  533-581.</i><br>
+          </li>
+
+          <li>Ren, Y., Yang T.<sup> # </sup>, <span class="emph"> Zhao, G.</span> (2014)<br>
+          <a class="link" href="https://link.springer.com/article/10.1007/s11425-014-4857-4" target="_blank">Conditional limit theorems for critical continuous-state branching processes.</a><br>
+          <i>Science China Mathematics, 57, 2577–2588.</i><br>
+          </li>
+        </ol>
+    <hr>
+
+    <!-- teaching -->
+    <div class="content">
+      <div class="title">Teaching</div>
+      <a class="anchor" id="teaching"></a>
+    </div>
+    <ul>
+      <!--这里每个学期可以添加新课程 href是课程主页链接html 中间放课程题目-->
+      <li> Spring 2024: <a class="link" href="teaching/spring2024/spring2024.html" target="_blank"> 随机微分方程.</a>
+      </li>
+    </ul>
+    <hr>
+
+    <!-- contact -->
+    <div class="content">
+      <div class="title">Contact</div>
+      <a class="anchor" id="contact"></a>
+      <p style="margin-left:20px">Add: No. 55, Zhongguancun East Road, Haidian District, Beijing 100190</p>
+      <p style="margin-left:20px">Office: Room 722, Siyuan Building &bull; Tel: 010-82541214</p>
+      <p style="margin-left:20px">Email: gzhao@amss.ac.cn</p>
+    </div>
+
+    <hr>
+
+  <div style="margin-top: 10px; text-align: center; font: normal 100% 'lucida sans unicode', arial, sans-serif;color: #AAA;">
+  Copyright &copy; 2024, Guohuan Zhao.<br>
+  </div>
+
+	<!-- Start of StatCounter Code for Default Guide -->
+	<script type="text/javascript">
+		var sc_project=10595714;
+		var sc_invisible=1;
+		var sc_security="ee39bc4f";
+		var scJsHost = (("https:" == document.location.protocol) ?
+			"https://secure." : "http://www.");
+		document.write("<sc"+"ript type='text/javascript' src='" +
+			scJsHost+
+			"statcounter.com/counter/counter.js'></"+"script>");
+	</script>
+	<noscript><div class="statcounter"><a title="shopify visitor
+		statistics" href="http://statcounter.com/shopify/"
+		target="_blank"><img class="statcounter"
+		src="http://c.statcounter.com/10595714/0/ee39bc4f/1/"
+		alt="shopify visitor statistics"></a></div></noscript>
+		<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>
