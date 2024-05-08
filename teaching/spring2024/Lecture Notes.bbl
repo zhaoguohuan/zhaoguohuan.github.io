@@ -1,5 +1,17 @@
 \begin{thebibliography}{Kry21b}
 
+\bibitem[Bas98]{bass1998diffusions}
+Richard~F Bass.
+\newblock {\em Diffusions and elliptic operators}.
+\newblock Springer Science \& Business Media, 1998.
+
+\bibitem[Bis81]{bismut1981martingales}
+Jean-Michel Bismut.
+\newblock Martingales, the malliavin calculus and hypoellipticity under general
+  h{\"o}rmander's conditions.
+\newblock {\em Zeitschrift f{\"u}r Wahrscheinlichkeitstheorie und verwandte
+  Gebiete}, 56(4):469--505, 1981.
+
 \bibitem[Dur19]{durrett2019probability}
 Rick Durrett.
 \newblock {\em Probability: theory and examples}, volume~49.
@@ -15,6 +27,12 @@ Hans-J{\"u}rgen Engelbert.
 Zhiyuan Huang.
 \newblock {\em Fundamentals of stochastic analysis, version 2 (in Chinese)}.
 \newblock Science Press, 2001.
+
+\bibitem[IW14]{ikeda2014stochastic}
+Nobuyuki Ikeda and Shinzo Watanabe.
+\newblock {\em Stochastic differential equations and diffusion processes},
+  volume~24.
+\newblock Elsevier, 2014.
 
 \bibitem[Kry09]{krylov1980controlled}
 N.~V. Krylov.
@@ -46,6 +64,11 @@ N~V Krylov and M~V Safonov.
 \newblock A certain property of solutions of parabolic equations with
   measurable coefficients.
 \newblock {\em Mathematics of the USSR-Izvestiya}, 16(1):151, feb 1981.
+
+\bibitem[RY13]{revuz2013continuous}
+Daniel Revuz and Marc Yor.
+\newblock {\em Continuous martingales and Brownian motion}, volume 293.
+\newblock Springer Science \& Business Media, 2013.
 
 \bibitem[Yan21]{Yan2021Measure}
 Jiaan Yan.

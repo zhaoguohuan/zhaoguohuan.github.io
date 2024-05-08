@@ -21,6 +21,11 @@ filecolor=blue,
 urlcolor=red,
 citecolor=magenta]{hyperref}
 
+%-------------------------------------index 
+\usepackage{makeidx}  % Provide indexing commands
+\makeindex
+%\usepackage{showidx}  % Show marginal notes of index entries
+
 %------------------------------------- My color 
 %\pagecolor{black}\color{white}
 
@@ -29,7 +34,7 @@ citecolor=magenta]{hyperref}
 \pagestyle{fancy}
 %\fancyhead{} % clear all fields
 % O: odd pages E: even pages L: left C: center R: right H: header  F: font
-% \setlength{\headheight}{14pt}
+\setlength{\headheight}{15pt}
  %\fancyhead[CE]{} 
  %\fancyhead[LE]{\thepage} 
  %\fancyhead[CO]{} 
@@ -240,7 +245,7 @@ citecolor=magenta]{hyperref}
 	{\bf Notation}: 
 	\begin{itemize}
 		\item $\mN=\{0,1,2,\cdots\}\}$, $\mR_+=[0,\infty)$. 
-		\item $\sL^n$ is the Lebesgue measure on $\mR^n$. 
+		\item $\sL^d$ is the Lebesgue measure on $\mR^d$. 
 		\item $\mS^d_+$ is the collection of all symmetric non-negative matrix in $\mR^{d\times d}$. For any $\delta\in (0,1]$, $\mS_\delta^d : = \l\{a\in \mS^d_+: a_{ij}=a_{ji}, \delta I_d \leq a \leq \delta^{-1} I_d \r\}$. 
 		\item We use $:=$ as a way of definition. 
 		\item The letter $c$ or $C$ with or without subscripts stands for an unimportant constant, whose value may change in different places. We use $a \asymp b$ to denote that $a$ and $b$ are comparable up to a constant, and use $a\lesssim b~(a\gtrsim b)$ to denote $a\leq Cb~(a\geq Cb)$ for some constant $C$.
@@ -264,19 +269,19 @@ citecolor=magenta]{hyperref}
 %		\item {\bf Quadratic variation}: the quadratic variation of a local martingale $X$ is the unique increasing continuous process $\langle X \rangle_t$ such that $X_t^2-\langle X \rangle_t$ is a local martingale. If $X_t = M_t + A_t$, where $M_t$ is a local martingale and $A_t$ has paths of finite bounded variation, then $\<X\>_t$ is defined to be $\<M\>_t$. For two semimartingales $X$ and $Y$, we also define $\<X,Y\>_t:= \frac{1}{2}(\<X+Y\>_t-\<X\>_t-\<Y\>_t)$. 
 %		\item $1$-dimensional {\bf Brownian motion} adapted to $\cF_t$: $W_t$ is a process with continuous paths such that $W_t$ is adapted to $\cF_t$ and if $s<t$, then $W_t-W_s$ is independent of $\cF_s$ and has the law of a mean zero Gaussian random variable with variance $t-s$. A $d$-dimensional Brownian motion is a $d$-dimensional process whose components are independent $1$- dimensional Brownian motions.
 %	\end{enumerate}
-	\chapter{Brownian motion\index{Brownian motion}  and Martingale}\label{chapt:BM}
+	\chapter{Brownian motion and Martingale}\label{chapt:BM}
 	
 	\section{Probabilistic terminology}
 	
 	Let $(\Omega, \cF, \bP)$ be a probability space and $(E, \cE)$ be a measurable space. $X:(\Omega,\cF)\to (E, \cE)$ a measurable map, and $\cG$ a $\sigma$-field $\subseteq \cF$.  
 	
-	When $E=\mR$, we define the {\bf conditional expectation} of $X$ given $\cG$, $\bE(X|\cG)$, to be any random variable $Y$ that satisfies 
+	When $E=\mR$, we define the {\bf conditional expectation}\index{conditional expectation} of $X$ given $\cG$, $\bE(X|\cG)$, to be any random variable $Y$ that satisfies 
 	\begin{enumerate}[(a)]
 		\item $Y\in \cG$; 
 		\item for all $A\in \cG$, $\bE(X; A)=\bE(Y; A)$. 
 	\end{enumerate}
 	
-	$Q_{\cG}: \Omega\times \cE\to [0,1]$ is said to be a {\bf {regular conditional distribution}} (RCD) for $X$ given $\cG$ if 
+	$Q_{\cG}: \Omega\times \cE\to [0,1]$ is said to be a {\bf {regular conditional distribution}\index{regular conditional distribution (probability)}} (RCD) for $X$ given $\cG$ if 
 	\begin{enumerate}[(a)]
 		\item For each $A\in \cE$, $\omega\mapsto Q_{\cG}(\omega, A)$ is a version of $\bE(\1_A(X)|\cG)$; 
 		\item For a.e. $\omega\in \Omega$, $A\mapsto Q_{\cG}(\omega, A)$ is a probability measure. 
@@ -346,7 +351,7 @@ citecolor=magenta]{hyperref}
 	\end{theorem}
 	
 	\begin{definition}\label{Def:BM}
-		A stochastic process $(W_t)_{t\in \mR_+}$ is a one-dimensional Brownian motion started at $0$ if
+		A stochastic process $(W_t)_{t\in \mR_+}$ is a one-dimensional {\bf Brownian motion} \index{Brownian motion} started at $0$ if
 		\begin{enumerate}
 			\item[(a)] $W_0=0$, a.s.;
 			\item[(b)] for all $s \leq t, W_t-W_s$ is a mean zero Gaussian random variable with variance $t-s$;
@@ -518,10 +523,8 @@ citecolor=magenta]{hyperref}
 	\end{example}
 	
  Below we recall the results about discrete time martingales and submartingales that will be used. The proof of the subsequent statements can be found in Durrett’s book \cite{durrett2019probability}, and in many other books dealing with discrete time martingales.
-	\begin{theorem}
-		\begin{equation}
-			A_0=0, \quad X_n=M_n+A_n
-		\end{equation}
+	\begin{theorem}[Doob]\label{thm:Doob-D}
+ If $X_n\in \cF_n$  is a submartingale then it can be uniquely decomposed as $X_n=M_n+A_n$, where $M_n\in \cF_n$ is martingale, $A_n=0$, $A_{n+1}\geq A_n$ almost surely and $A_n$ is $\cF_{n-1}$-measurable.
 	\end{theorem}
 	The following theorem lies at the basis of all other results for
 	martingales.
@@ -598,7 +601,18 @@ citecolor=magenta]{hyperref}
 		\lim_{n\to\infty}\bE (X|\cF_n) = \bE (X|\cF_\infty),\quad a.s. \mbox{ and in } L^1. 
 		\]
 	\end{corollary}
+
+    For an example of a discrete martingale, let $\Omega=[0,1], \mathbf{P}$ Lebesgue measure, and $f$ an integrable function on $[0,1]$. Let $\mathcal{F}_n$ be the $\sigma$-field generated by the sets 
+    \[
+        \left\{\left[k / 2^n,(k+1) / 2^n\right), k=0,1, \ldots, 2^n-1\right\}. 
+    \]
+    Let $f_n=\mathbf{E}\left[f \mid \mathcal{F}_n\right]$. If $I$ is an interval in $\mathcal{F}_n,$ shows that
+    $$
+      f_n(x)=\frac{1}{|I|} \int_I f(y) d y \quad \text { if } x \in I.
+    $$
+    $f_n$ is a particular example of what is known as a dyadic martingale. Of course, $[0,1]$ could be replaced by any interval as long as we normalize so that the total mass of the interval is $1$. We could also divide cubes in $\mathbb{R}^d$ into $2^d$ subcubes at each step and define $f_n$ analogously. Such martingales are called dyadic martingales. In fact, we could replace Lebesgue measure by any finite measure $\mu$, and instead of decomposing into equal subcubes, we could use any nested partition of sets we like, provided none of these sets had $\mu$ measure $0$.
 	
+	\medspace
 	
 	{\bf {\em All of the above results also hold for all right continuous martingale (submartingales) (see \cite{Huang})}}. 
 	
@@ -798,6 +812,19 @@ citecolor=magenta]{hyperref}
 		\end{equation}
 	\end{theorem}
 	(see \cite[Theorem 13.5]{Huang}). 
+
+ It is often useful to use the language of Stratonovitch's integration to study stochastic differential equations because the Itô’s formula takes a much nicer form. If $M_t$ is an $\cF_t$-adapted real valued local martingale and if $H_t$ is an $\cF_t$-adapted continuous semimartingale satisfying $\bP\left(\int_0^TH_s\d \<M\>_s<\infty\right)=1$, then by definition the Stratonovitch integral of  $H_t$ with respect to $M_t$ is defined as
+\[
+    \int_0^T H_t \circ \d  M_t =\int_0^T H_t\d M_t+\frac{1}{2} \langle H, M \rangle_T. 
+\]
+By using Stratonovitch integral instead of Itô’s, the Itô formula reduces to the classical change of variable formula.
+
+\begin{theorem}\label{thm:Stra}
+    Let  $M_t$ be a $d$–dimensional continuous semimartingale. Let now $f$ be a $C^2$ function. We have
+    \[
+    f(M_t)  =f(M_0)+\int_0^t \partial_i f (X_s) \circ \d M^i_s, \quad t \geq 0.
+    \]
+\end{theorem}
 	
 	\begin{theorem}[{Burkholder-Davis-Gundy inequalities}]
 		If $M_t$ is a continuous martingale with $M_0=0$, and $\tau$ is a stopping time, then 
@@ -848,8 +875,8 @@ citecolor=magenta]{hyperref}
 	\end{proposition}
 	
 	We shall use this lemma to prove the following
-	Another approach to proving \eqref{eq:bdg} is utilizing  "good-$\lambda$" inequality (cf. \cite{}).   
-	\begin{theorem}[L\'evy's theorem]
+	Another approach to proving \eqref{eq:bdg} is utilizing  "good-$\lambda$" inequality (cf. \cite{revuz2013continuous}).   
+	\begin{theorem}[L\'evy's theorem]\label{thm:levy}
 		If $X_t$ is a $d$-dimensional $\sF$-adapted process, each of whose coordinates is a continuous local martingale, and $\langle X^i, X^j \rangle_t=\delta_{ij} t$, then $X_t$ is a $d$-dimensional $\sF$-Brownian motion.
 	\end{theorem}
 	\begin{proof}
@@ -897,15 +924,49 @@ citecolor=magenta]{hyperref}
 		\]
 	\end{proof}
 	
-	\begin{theorem}[Dambis–Dubins–Schwarz]
+	\begin{theorem}[Dambis–Dubins–Schwarz]\label{thm:DDS}
 		Let $M$ be a continuous local martingale such that $\<M\>_\infty=\infty$. There exists a Brownian motion $B$ such that 
 		$$
 		    M_t=B_{\<M\>_t}. 
 		$$
-	\end{theorem}\label{thm:DDS}
+	\end{theorem}
+    The proof of Dambis–Dubins–Schwarz's Theorem can also be found in \cite{Huang}. 
+
+ \begin{theorem}[Exponential martingale inequality]\label{thm:EMI}
+     Let $M_t$ be a continuous martingale, $\tau$ a bounded stopping time, then
+     \[
+     \bP\left(\sup_{t\leq \tau} |M_t|>\lambda~ \&~ \<M\>_\tau\leq\mu\right)\leq 2\e^{-\frac{\lambda^2}{2\mu}}.
+     \]
+     
+     We need 
+     \begin{lemma}\label{lem:BM_P1}
+		Let $W$ be a $1$-dimensional Brownian motion. Then for any $\lambda, t>0$ 
+		\begin{equation*}
+			\bP \l(\sup_{s\in [0,t]}|W_s|> \lambda\r) \leq 2\e^{-\frac{\lambda^2}{2t}}
+		\end{equation*}
+	\end{lemma}
 	\begin{proof}
-		Let 
+		Let $X_t= \e^{a|W_t|}$ with $a>0$. Since $x\mapsto \e^{a|x|}$ is a convex function, $X_t$ is a submartingale. By Doob's inequality (see Theorem \ref{Thm-Doob-Max}), we have 
+		\begin{align*}
+			\bP \l(W^*_t>\lambda \r)= \bP \l(X^*_t>\e^{a\lambda}\r)\leq \e^{-a\lambda} \bE X_t = \frac{\e^{-a \lambda} }{\pi t} \int_{0}^\infty \e^{a x-\frac{x^2}{2t}} \d x = 2\e^{\frac{a^2 t}{2}-a\lambda}.
+		\end{align*}
+		Taking $a=\lambda/t$, we obtain 
+		\[
+		    \bP \l(W^*_t>\lambda \r) \leq 2 \e^{-\frac{\lambda^2}{2t}}. 
+		\]
 	\end{proof}
+     \begin{proof}[Proof of Theorem \ref{thm:EMI}]
+         By Theorem \ref{thm:DDS}, $M_t$ is a time change of a Brownian motion $W_t$. So the desired probability is bounded by 
+         \[
+             \bP\left(\sup_{t\leq T} |W_t|>\lambda~ \&~ \<W\>_T<\mu\right),
+         \]
+         where $T$ is a stopping time. Since $\<W\>_T=T$, the probability above is in turn bounded by
+         \[
+             \bP\left(\sup_{t\leq \mu} |W_t|>\lambda\right)\leq 2\e^{-\frac{\lambda^2}{2\mu}}. 
+         \]
+     \end{proof}
+
+ \end{theorem}
 	
 	\subsection{Applications in PDEs}
 	In chapter \ref{chapt:sde}, we will consider the following stochastic differential equation (SDE): 
@@ -972,7 +1033,7 @@ citecolor=magenta]{hyperref}
 	For simplicity,  we always assume that $a\in \mS^d_{\delta}$. 
 	
 	\section{Support theorem} 
-	The following result is a simplify version of Stroock-Varadhan's support theorem. 
+	The following result is a simplify version of Stroock-Varadhan's support theorem, which is taken from \cite{bass1998diffusions}. 
 	\begin{theorem}[Support theorem]
 		Suppose $\sigma$, $\sigma^{-1}$ and $b$ are bounded, $x_t$ satisfies \eqref{eq:Ito-process}. Suppose $\varphi: [0,1]\to \mR^d$ is continuous with $\varphi(0)=0$. Then for each $\eps>0$, there exists a constant $c>0$ depending only on $\eps$, the modulus of continuity of $\varphi$, and the bounds on $b$, $\sigma$ and $\sigma^{-1}$ such that 
 		\begin{equation}\label{Eq-support}
@@ -982,22 +1043,7 @@ citecolor=magenta]{hyperref}
 	This can be phrased as saying the graph of $x_t$ stays inside an $\eps$-tube about $\varphi$. 
 	
 	To prove Theorem \ref{thm:support}, we need some  auxiliary lemmas. 
-	\begin{lemma}\label{lem:BM_P1}
-		Let $W$ be a $1$-dimensional Brownian motion. Then for any $\lambda, t>0$ 
-		\begin{equation*}
-			\bP \l(\sup_{s\in [0,t]}|W_s|\leq \lambda\r) \geq 1-2\e^{-\frac{\lambda^2}{2t}}
-		\end{equation*}
-	\end{lemma}
-	\begin{proof}
-		Let $X_t= \e^{a|W_t|}$ with $a>0$. Since $x\mapsto \e^{a|x|}$ is a convex function, $X_t$ is a submartingale. By Doob's inequality (see Theorem \ref{Thm-Doob-Max}), we have 
-		\begin{align*}
-			\bP \l(W^*_t>\lambda \r)= \bP \l(X^*_t>\e^{a\lambda}\r)\leq \e^{-a\lambda} \bE X_t = \frac{\e^{-a \lambda} }{\pi t} \int_{0}^\infty \e^{a x-\frac{x^2}{2t}} \d x = 2\e^{\frac{a^2 t}{2}-a\lambda}.
-		\end{align*}
-		Taking $a=\lambda/t$, we obtain 
-		\[
-		\bP \l(W^*_t>\lambda \r) \leq 2 \e^{-\frac{\lambda^2}{2t}}. 
-		\]
-	\end{proof}
+	
 	By Lemma \ref{lem:BM_P1}, there is a constant $\delta_0>0$ such that 
 	\begin{equation}\label{eq:BM_P1}
 		\inf_{|x|\leq 1/3} \bP\l(\sup_{t\in [0,\delta_0]} |W^x_t|\leq 1\r)\geq 5/6. 
@@ -1179,7 +1225,7 @@ citecolor=magenta]{hyperref}
 	\]
 	
 	Proposition \ref{Prop-ABP} implies 
-	\begin{theorem}[Krylov-\cite{krylov1980controlled}]\label{thm:Krylov1}
+	\begin{theorem}[Krylov \cite{krylov1980controlled}]\label{thm:Krylov1}
 		There is a constant $C(d)$ such that for any $R>0$, and nonnegative Borel $f$ given on $\mathbb{R}^d$, we have
 		\begin{equation}\label{eq:Kry1}
 			\bE \int_0^{\tau_{R}(x)} f\left(x+x_t\right) \sqrt[d]{\operatorname{det} a_t} \, \d t \leq C(d)  R\|f\|_{L^d\left(B_R\right)}. 
@@ -1444,7 +1490,7 @@ citecolor=magenta]{hyperref}
 	\end{proof}
 
  \begin{remark}
-     The above generalized It\^o's formula also holds for Ito process given by \eqref{eq:Ito-process} with $a\in \mS^d_\delta$, and $b$ satisfying $|b_t|\leq \mathfrak{b}(x_t)$ $(\mathfrak{b}\in L^d)$. 
+     The above generalized It\^o's formula also holds for Itô process given by \eqref{eq:Ito-process}, where $a\in \mS^d_\delta$, and $b$ satisfying $|b_t|\leq \mathfrak{b}(x_t)$ with $\mathfrak{b}\in L^d$. 
  \end{remark}
   
 	
@@ -1482,7 +1528,7 @@ citecolor=magenta]{hyperref}
 		Choosing $T>0$ sufficiently small such that $C_1 (T+T^2)\leq 1/2$, then $\cT$ is a Contraction mapping on $B$. Banach fixed-point theorem yields that $\cT$ has a unique fixed point, which is the unique pathwise solution to \eqref{eq:sde}. We can extend the same result to arbitrarily time intervals. 
 	\end{proof}
 	
-	\subsection{Definitions of solutios to \eqref{eq:sde}}
+	\subsection{Definitions of solutions}
 	\begin{enumerate}
 		\item {\bf strong solution exists} to \eqref{eq:sde}: if given the Brownian motion $W_t$ there exists a process $X_t$ satisfying \eqref{eq:sde} such that $X_t$ is adapted to the filtration generated by $W_t$.
 		\item {\bf weak solution exists} to \eqref{eq:sde}: if there exists $(\Omega, \cF, \bP, \sF; X_t, W_t)$ such that $W_t$ is a $\sF$-Brownian motion and the equation \eqref{eq:sde} holds. 
@@ -1579,28 +1625,157 @@ citecolor=magenta]{hyperref}
 	
 	\subsection{Stochastic Flow}
 
-    \begin{theorem}
-        If $\sigma$ and $b$ are Lipschitz, then there exist versions of $X(x, t)$ that are jointly continuous in $x$ and $t$ a.s.
+Consider \eqref{eq:sde}  .   \begin{theorem}\label{thm:flow1}
+        If $\sigma$ and $b$ are Lipschitz, then there exist versions of $X(t,x)$ that are jointly continuous in $t$ and $x$ a.s.
     \end{theorem}
-	
-    If $\sigma$ and $b$ are smoother functions, then $X(x, t)$ will be smoother in $x$. Let us suppose for now that we are in dimension one. If in  we divide both sides by $x-y$, let $y \rightarrow x$, and use the chain rule, formally we obtain
+	\begin{proof}
+	    \begin{align*}
+	        X(t,x)-X(t,y)=x-y+\int_0^t \l[ \sigma(X(s,x))-\sigma(X(s,y))\r]\d W_s+ \int_0^t \l[b(X(s,x))-b(X(s,y))\r]\d s 
+	    \end{align*}
+     By the Burkholder-Davis-Gundy inequalities, for any $t\in[0,1]$, 
+\begin{align*}
+    &\bE \sup_{s\in [0,t]} \l| \int_0^s \l[\sigma(X_r(x))-\sigma(X_r(y))\r]\d W_r \r|^p\\
+    \leq& C \bE \l(\int_0^t |X_{s}(x)-X(s,y)|^2 \d s \r)^{p/2}\\
+    \leq & C \bE \int_0^t |X_{s}(x)-X(s,y)|^p \d s. 
+\end{align*}
+Set $g(t)=\bE \sup_{s\in [0,t]}|X(s,x)-X(s,y)|^p$. Then 
+\[
+    g(t)\leq C |x-y|^p+\int_0^t g(s) \d s, \quad t\in [0,1]. 
+\]
+Gronwall's inequality yields 
+\[
+    \bE \sup_{t\in[0,1]} \l|X(t,x)-X(t,y)\r|^p \leq C |x-y|^p, \quad \forall p\geq 2. 
+\]
+Moreover, 
+\[
+    \bE \l|X(t,x)-X(s,y)\r|^p\leq C \l(|x-y|+|t-s|^{\frac{1}{2}}\r)^p, \quad x,y\in \mR^d,~ t,s\in [0,1],~p\geq 2.
+\]
+This together with Lemma \ref{Le:GRRI} implies that there is a version of continuous version of $(t,x)\mapsto X(t,x)$ such that 
+\[
+    \|X(\omega)\|_{C^{\alpha}([0,1]; \dot C^\beta(B_R))} \leq K(\omega)
+\]
+with $\alpha\in (0,1/2)$ and $\beta\in(0,1)$, and $K\in L^p$ for all $p\geq 1$. 
+	\end{proof}
+ \begin{remark}
+     The above result also holds if $\sigma$ and $b$ are $\omega$-dependent and $\|\sigma\|_{C^1}+\|b\|_{C^1}\leq L$ a.s., for some constant $L$. 
+ \end{remark}
+   The collection of processes $X(t,x)$ is called a flow. If $\sigma$ and $b$ are smoother functions, then $X(t,x)$ will be smoother in $x$.  If in  we take derivative, and use the chain rule, formally we obtain
     \[
         \begin{aligned}
-            X'(x, t) = & 1  +\int_0^t \sigma^{\prime}(X(x, s)) X'(x, s) \d W_s\\
-            & +\int_0^t b^{\prime}(X(x, s))X'(x, s) \d s .
+            \partial_j X^i_t(x) = & \delta^i_j +\int_0^t \partial_l\sigma^i_k(X(s,x))  \partial_jX^l(s,x) \d W^k_s\\
+            & +\int_0^t \partial_l b^i(X(s,x))\partial_j X^l(s,x) \d s .
         \end{aligned}
     \]
     To make this more precise, suppose $\sigma$ and $b$ are in $C^2$ and are bounded with bounded first and second derivatives and consider the SDE 
+    \begin{equation}\label{eq:DX}
+        \d J(t,x)=\partial_l\sigma(X(t,x)) J^l(t,x) \d W_t+\nabla b(X(t,x)) J(t,x) \d t, \quad Y_0=I
+    \end{equation}
+    Follow the proof of Theorem \ref{thm:flow1}, we have 
+    \begin{proposition}\label{prop:Jacobi}
+    Assume $\sigma, b\in C^2_b$. A pathwise solution to \eqref{eq:DX} exists and is unique. The solution has moments of all orders. If $J(t,x)$ denotes the solution, versions of $J(t,x)$ exist that are jointly Hölder continuous in $t$ and $x$, and 
+        \[
+          \bE \sup_{t\in[0,1]}\l|J(t,x)-J(t,y)\r|^p\leq C |x-y|^p, \quad x,y\in \mR^d,~p\geq 1.
+       \]    
+    \end{proposition}
+    
+\begin{exercise}
+    Prove the above Lemma. 
+\end{exercise}
+
+We now prove the differentiability of $X(t,x)$. 
+\begin{theorem}
+    Suppose  $\sigma,b\in C^k_b$. Then $x\mapsto X(t,x)$ is $C^{k-1,\alpha}$ a.s., and $\nabla X(t,x)=J(t,x)$. 
+\end{theorem}
+\begin{proof}
+    For simplicity we take $b=0$ and $k=2$. 
+    Set 
     \[
-        \d Y_t=\sigma^{\prime}(X(x, t)) Y_t \d W_t+b^{\prime}(X(x, t)) Y_t \d t, \quad Y_0=1
+    \nabla_{j}^{h}X^i_t(x):=\frac{1}{|h|} \l[X_t^i(x+e_jh)-X_t^i(x)\r], \quad h\in (-1,1)
     \]
-    A pathwise solution to (10.3) exists and is unique. The solution has moments of all orders. If $(D X)(x, t)$ denotes the solution, versions of $(D X)(x, t)$ exist that are jointly continuous in $x$ and $t$.
+    and 
+    \[
+    Z^h(t,x):=\nabla^{h}X(t,x)-J(t,x). 
+    \]
+    Noting that 
+    \[
+    \nabla^{h}_{j}X(t,x)=I+\int_0^t \underbrace{\left[\int_0^1 \partial_l\sigma(\tau X(s,x+e_j h)+(1-\tau)X(s,x)) \d \tau\right]}_{\leq \|\nabla \sigma\|_\infty} \nabla^{h}_j X^l(s,x) \d W_s, 
+    \]
+   as we done in the proof of Theorem \ref{thm:flow1}, it is not hard to prove 
+    \begin{equation}\label{eq:difx-X}
+        \sup_{x\in \mR^d; h\in (-1,1)}\bE \sup_{t\in[0,1]}|\nabla^{h}X(t,x)|^p<\infty, \quad p\geq 1. 
+    \end{equation}
+   By Taylor expansion, 
+   \begin{equation*}
+       \begin{aligned}
+           &\nabla^{h}_jX(t,x)-\nabla^{h}_jX(t,y)\\
+           =&\int_0^t \underbrace{\left[\int_0^1 \partial_l\sigma(\tau X(s,x+e_j h)+(1-\tau)X(s,x)) \d \tau\right]}_{\leq \|\nabla\sigma\|_\infty} \l[\nabla^{h}_jX^l(t,x)-\nabla^{h}_jX^l(t,y)\r] \d W_s\\
+           &+\int_0^t \underbrace{\left[\int_0^1 \partial_l\sigma(\tau X(s,x+e_jh)+(1-\tau)X(s,x))-\partial_l\sigma(\tau X(s,y+e_jh)+(1-\tau)X(s,y)) \d \tau\right]}_{\leq \|\nabla^2\sigma\|_\infty(|X(s,x+e_jh)-X(s,y+e_jh)|+|X(s,x)-X(s,y)|)} \\
+           &\qquad\qquad\qquad \qquad \qquad\qquad\qquad \qquad \qquad\qquad\qquad \qquad \qquad\qquad\qquad \qquad \nabla^{h}_jX^l(s,y) \d W_s. 
+       \end{aligned}
+   \end{equation*}
+   Let 
+   \[
+   g(t)=\bE \sup_{s\in[0,t]}|\nabla^{h}X(s,x)-\nabla^{h}X(s,y)|^p.
+   \]
+   Then BDG and Gronwall's inequality yield 
+   \[
+   \begin{aligned}
+       g(t)\leq& C \int_0^t \bE \left[\left(|X(s,x+h)-X(s,y+h)|+|X(s,x)-X(s,y)|\right)\nabla^{h}X^l(s,y)\right]^p \d s\\
+       \leq& C\left[ \bE \int_0^t \left(\l|X(s,x+h)-X(s,y+h)|+|X(s,x)-X(s,y)\r|\right)^{2p}\d s \right]^{1/2} \\
+       &\qquad\qquad\qquad\quad \left[ \bE\int_0^t|\nabla^{h}X(s,y)|^{2p} \d s \right]^{1/2} \overset{\eqref{eq:difx-X}}{\leq} C |x-y|^p, \quad p\geq 2. 
+   \end{aligned}
+   \]
+   This together with Proposition \ref{prop:Jacobi} implies 
+   \begin{equation}\label{eq:Z1}
+       \bE\sup_{t\in[0,1]}|Z^h(t,x)-Z^h(t,y)|^p\leq C |x-y|^p, \quad p\geq 1. 
+   \end{equation}
+    On the other hand, 
+    \begin{equation*}
+    \begin{aligned}
+        Z^h(t,x)=&\int_0^t \left\{ \nabla^{h}\left[\sigma(X(s,x))\right]-\partial_l \sigma(X(s,x))J^l(s,x)\right\} \d W_s\\
+        =& \int_0^t \left\{\partial_l \sigma(X(s,x)) \left[\nabla^{h} X^l(s,x)-J^l(s,x)\right]+R^h(s,x) \right\} \d W_s\\
+       =&\int_0^t \left[\partial_l \sigma(X(s,x)) Z^h(s,x)+R^h(s,x) \right] \d W_s, 
+    \end{aligned}    
+    \end{equation*}
+    where 
+    \[
+        R^h(s,x)= \nabla^{h}\left[\sigma(X(s,x))\right]-\partial_l \sigma(X(s,x)) \nabla^{h} X^l(s,x), 
+    \]
+    and 
+    \[
+         |R^h(s,x)|\leq |h|\,\|\nabla^2\sigma\|_\infty |\nabla^{h}X(s,x)|. 
+    \]
+    Again utilizing BDG inequality and Gronwall's inequality, we see that for each $p\geq 2$, 
+    \begin{equation*}
+    \begin{aligned}
+        \bE \sup_{\tau\in [0,t]}|Z^h(\tau,x)|^p \leq& C \bE \left\{ \int_0^t \left[|Z^h(s,x)|^2+\left(R^h(s,x)\right)^2\right] \d s \right\}^{p/2}\\
+        \leq&C \int_0^t \bE \sup_{\tau\in [0,s]}|Z^h(\tau,x)|^p \d s + C |h|^p \int_0^t\bE |\nabla^{h}X(s,x)|^p \d s,
+    \end{aligned}     
+    \end{equation*}
+    which together with \eqref{eq:difx-X} implies 
+    \begin{equation}\label{eq:Z2}
+        \bE \sup_{t\in [0,1]}|Z^h(t,x)|^p \leq C |h|^p, \quad |h|<1. 
+    \end{equation}
+    Combining \eqref{eq:Z1} and \eqref{eq:Z2}, we obtain 
+    \begin{equation*}
+        \bE\sup_{t\in[0,1]}|Z^h(t,x)-Z^h(t,y)|^p\leq C |x-y|^{\theta p}|h|^{(1-\theta)p}, \quad \theta\in [0,1], ~ p\geq 1~|h|<1. 
+    \end{equation*}
+    Thanks to Lemma \eqref{Le:GRRI}, for any $\alpha\in (0,1)$, 
+    \begin{equation*}
+        \lim_{|h|\to 0}\bE \sup_{t\in[0,1]}\|Z^h(t,\cdot)\|_{C^{\alpha}}^p=0, \quad p\geq 1. 
+    \end{equation*}
+    Therefore, $X(t,\cdot)\in C^{1,\alpha}$ a.s. and $\nabla X(t,x)=J(t,x)$. 
+    \end{proof}
+    One can also show (see Ikeda and Watanabe \cite{ikeda2014stochastic}) that the map $x\mapsto X(t,x)$ is one-to-one and onto $\mR^d$. 
 
 
-	
 	\section{Weak solutions}
 	
-	In this section, we study the weak well-posedness of \eqref{eq:sde}. The core is to study 
+	In this section, we study the weak well-posedness of \eqref{eq:sde}. The core is to study the regularity of following resolvent equation: 
+	\begin{equation}\label{eq:resolvent2}
+		\lambda u - L u =f,  
+	\end{equation}
+	where $L=a_{ij}\p_{ij}$ and $a\in \mS_\delta^d$ and uniformly continuous. 
 	
 	\subsection{Uniqueness in law}
 	\begin{theorem}[Stroock-Varadhan]\label{thm:SV}
@@ -1609,22 +1784,11 @@ citecolor=magenta]{hyperref}
 	
 	Our strategy is 
 	\begin{enumerate}[(a)]
-		\item %Utilizing Girsanov transformation to simplify the problem to the case without drift term; 
+		\item Utilizing Girsanov transformation to simplify the problem to the case without drift term; 
 		\item Using generalized It\^o's formual and $L^p$-estimate for the  resolvent equation to show the uniqueness of $\mathrm{law} (X_t)$. 
 		\item  Proving the law of $(X_t)_{t\geq 0}$ is unique  by induction. 
 	\end{enumerate}
 	
-	
-	Consider the following resolvent equation: 
-	\begin{equation}\label{eq:resolvent2}
-		\lambda u - L u =f,  
-	\end{equation}
-	where $L=a_{ij}\p_{ij}$ and $a\in \mS_\delta^d$ and uniformly continuous. 
-	
-	\begin{lemma}
-		
-	\end{lemma}
-    
     \begin{lemma}\label{lem:laplace-lp}
 		Let $L=\Delta$ and $p\in (1,\infty)$. For any $f\in L^p$, there exists a unique solution $u\in W^{2,p}$ solving \eqref{eq:resolvent2}. Moreover, $u$ satisfies  
 		\begin{equation}
@@ -2139,11 +2303,178 @@ that finishes the proof of Lemma \ref{lem:CZ}.
             \underset{Q_{2^{-K-n}}(x_n)}{\operatorname{Osc}} u \geq \delta^{-K-n}\left(\delta^{-1}-1\right) .
         $$
         So $\osc_{Q_{2^{N-K-n}}(x_n)} u \geq \delta^{-K-n-2}$, which implies that there exists $x_{n+1} \in$ $Q_{ 2^{N-K-n}}(x_n)$ with $u\left(x_{n+1}\right) \geq \delta^{-K-n-2}$ because $u$ is nonnegative. By induction we obtain a sequence $x_n$ with $x_n \in Q_3(y)$ and $u\left(x_n\right) \rightarrow \infty$. This contradicts the boundedness of $u$ on $Q_4$. Therefore $u$ is bounded on $Q_1$ by $\delta^{-K-1}$.
-
     \end{proof}
 	
 
-	\chapter{H\"ormander's Theorem}\label{chapt:hormander}
+	\chapter{Malliavin's proof of H\"ormander's Theorem}\label{chapt:hormander}
+     Consider 
+     \begin{equation}\label{eq:sde-S}
+         \d X_t(x)=\sigma(X_t)\circ \d W_s+ b(X_t) \d t, \quad X_0(x)=x.
+     \end{equation}
+     
+     The Malliavin calculus is a method originally developed for proving smoothness of $p_t(x,y)$ in the variable $y$, where $p_t(x,y)$ is the transition density of a process associated to an operator with smooth coefficients. The basic idea involves an integration by parts formula in an infinite-dimensional space.
+
+     There are two main approaches, one using the Girsanov transformation and the other using the Ornstein-Uhlenbeck operator. We follow the Girsanov approach pioneered by Bismut \cite{bismut1981martingales} to obtain the integration by parts formula. 
+
+    \section{Integration by parts}
+    
+    Let $d\geq 1$, and $\xi$ be a $d$-dimensional standard Gaussian random variable. Then 
+    \[
+    \bP\circ \xi^{-1}(\d x)=\mu(\d x)=\frac{1}{({2\pi})^{\frac{d}{2}}}\e^{-\frac{|x|^2}{2}} \d x. 
+    \]
+    Suppose $\varphi\in C_c^\infty(\mR^d)$ and $h\in \mR^d$, integration by parts formula yields that 
+    \begin{equation}\label{eq:IBP1}
+        \begin{aligned}
+        \bE \l[\nabla_h \varphi(\xi)\r]=&\frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mR^d}\nabla_h \varphi(x)\e^{-\frac{|x|^2}{2}} \d x\\
+        =&\frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mR^d} \varphi(x)\<x,h\> \e^{-\frac{|x|^2}{2}} \d x=\bE \l[\varphi(\xi)\<\xi,h\>\r]. 
+        \end{aligned}
+    \end{equation}
+    Moreover, one can verify that 
+    \begin{equation}\label{eq:IBP2}
+        \bE [\partial^\alpha \varphi(\xi)]= \bE [\varphi(\xi)P_\alpha(\xi)], 
+    \end{equation}
+    where $\alpha\in \mN^d$ and $P_\alpha$ is a polynomial.
+    \begin{remark}
+        Charles Stein also showed that if \eqref{eq:IBP1} holds for all bounded, continuous and piecewise continuously differentiable functions $\varphi$ with $\bE|\varphi'(\xi)|<\infty$, then $\xi$ has a standard normal distribution.
+    \end{remark}
+
+    The following lemma is a criterion for smooth densities 
+    \begin{lemma}
+        Suppose $\xi: \Omega \rightarrow \mathbb{R}^d$. Suppose for each $k$ there exists $C_k$ such that
+        $$
+         \left|\mathbf{E}\nabla^k \varphi(\xi)\right| \leq C_k\|\varphi\|_{\infty}
+        $$
+        whenever $\varphi \in C^k_c$. Then there exists $\rho$ smooth such that
+        $$
+        \mathbf{P}(\xi \in A)=\int_A \rho(x) \d x
+        $$
+        for all Borel sets $A$.
+    \end{lemma}
+    \begin{proof}
+        Let $\mu=\bP\circ \xi^{-1}\in \sP(\mR^d)\subseteq\sD'(\mR^d)$, and $\mu_\eps(x)=\int_{\mR^d}\varrho_\eps(x-y)\mu(\d y)$. By our assumption, for any $\alpha=(\alpha_1,\cdots\alpha_d)\in \mN^d$ with $\alpha_1+\cdots\alpha_d=k$, 
+        \[
+        \begin{aligned}
+            (-1)^{|\alpha|}\<\varphi, \partial^\alpha\mu_\eps\>=&\<\partial^\alpha \varphi, \mu_\eps\>=\<\partial^\alpha \varphi*\varrho_\eps, \mu\>\\
+            =&\int_{\mR^d}\partial^\alpha \varphi*\varrho_\eps(x) \mu(\d x)\\
+            \leq& C_k\|\varphi\|_\infty, \quad \forall \varphi\in C_c^\infty,~ k\in \mN.
+        \end{aligned}
+        \]
+         This implies that $\sup_{\eps} \|\nabla^k\mu_\eps\|_1\leq C_k$. In the light of Sobolev embedding, one can see that $\sup_{\eps}\|\nabla^k\mu_\eps\|_\infty\leq C'_k$. Therefore, $\mu_\eps\to \rho\in C_b^\infty$. 
+    \end{proof}
+    \begin{remark}
+        For a random map $\xi:\Omega\to \mR^d$, if $\xi$ satisfies \eqref{eq:IBP2} and $|\xi|^k$ is integrable for each $k\in \mN$, then $\bP\circ\xi^{-1}$ admits a smooth density.  
+    \end{remark}
+
+    The main tool in the proof is the Malliavin calculus with its integration by part formula in Wiener space (infinite-dimension space), which was developed precisely in order to provide a probabilistic proof of Hörmander's Theorem. It essentially relies on the fact that the image of a Gaussian measure under a smooth submersion that is sufficiently integrable possesses a smooth density with respect to Lebesgue measure. 
+    
+    \begin{lemma}\label{lem:IBP}
+       Suppose $F$ maps $C([0,1];\mR^d)$ to $\mathbb{R}, F$ is bounded, and $F$ has a bounded Fréchet derivative at each point of $C([0,1];\mR^d)$. Let $W_t$ be d-dimensional Brownian motion, and $\cF_t$ is the filtration generated by $W$. Suppose $h_s$ is adapted and bounded and let $H_t=\int_0^t h_s d s$. Then
+       \[
+           \mathbf{E}\left[D_H F(W)\right]=\mathbf{E}\left[F(W) \int_0^1 \dot{H}_s \d W_s\right]
+       \]
+       For each $\omega$, both $W_t$ and $H_t$ are in $C[0,1]$. The right-hand side represents the expectation of the Fréchet derivative at $W .(\omega)$ in the direction $H .(\omega)$.
+    \end{lemma}
+\begin{proof}
+    Let
+    $$
+      X_t^{\varepsilon}=W_t+\varepsilon \int_0^t h_s \d s
+    $$
+
+     Let
+    $$
+         M_t^{\varepsilon}=\exp \left(-\varepsilon \int_0^t h_s \d W_s-\frac{\varepsilon^2}{2} \int_0^t\left|h_s\right|^2 \d s\right) .
+    $$
+
+     Let $\mathbf{P}_{\varepsilon}$ be defined by $\d \mathbf{P}_{\varepsilon} / \d \mathbf{P}=M_t^{\varepsilon}$ on $\mathcal{F}_t$. By Girsanov's theorem, under $\mathbb{P}_{\varepsilon}$ the process
+    $$
+        W_t-\left\langle W,-\varepsilon \int_0 h_s \d W_s\right\rangle_t=W_t+\varepsilon \int_0^t h_s \d s=X_t^{\varepsilon}
+    $$
+    is a martingale with the same quadratic variation as $W_t$, namely $t$. By Theorem \ref{thm:levy}, under $\mathbf{P}_{\varepsilon}$ the process $X_t$ is a Brownian motion. Therefore
+    $$
+        \mathbf{E}_{\varepsilon} F\left(X^{\varepsilon}\right)=\mathbf{E} F(W) .
+    $$
+
+    On the other hand,
+    $$
+    \begin{aligned}
+    & \mathbf{E}_{\varepsilon} F\left(X^{\varepsilon}\right) \\
+    & \quad=\mathbf{E}\left[F\left(W+\varepsilon \int_0^\cdot h_s \d s\right) \exp \left(-\varepsilon \int_0^1 h_s \d W_s+\frac{\varepsilon^2}{2} \int_0^1\left|h_s\right|^2 \d s\right)\right] .
+    \end{aligned}
+    $$
+
+    By, the right-hand side of  is independent of $\varepsilon$. We differentiate with respect to $\varepsilon$ and set $\varepsilon=0$. The assumptions on $h$ and $F$ allow us to interchange the operations of differentiation and expectation by use of the dominated convergence theorem and we obtain
+    \[
+    0=-\mathbf{E}\left[F(W) \int_0^1 h_s \d W_s\right]+\mathbf{E} [ D_H F(W) ].
+    \]
+\end{proof}
+
+    The main examples of $F(W)$ we will consider later is $\varphi(X_t(W))$, where $\varphi$ is smooth and $X_t$ solves an SDE. However, the It\^o map $F: W\mapsto X$ is even not continuous from $C([0,1];\mR^n)$ to $C([0,1];\mR^d)$. So we need some extension. 
+
+    \medspace
+    
+    Assume 
+    \begin{equation}\label{aspt:H}
+        H_t=\int_0^t h_s d s~ \mbox{ and }~ \bE \int_0^1 |h_s|^2 \d s <\infty. 
+    \end{equation}  
+    Let $F$ be a function on $C([0,1];\mR^d)$. We say $F(W)$ is in $\sW^{1,p}$ with derivative $D_{H}F(W)$ if there exist functionals $F_n$ on $C([0,1];\mR^d)$ that are bounded, continuous, Fréchet differentiable with bounded and continuous Fréchet derivatives, and with $F_n(W) \rightarrow F(W)$ in $L^p$ and $D_H F_n(W) \rightarrow D_HF(W)$ in $L^p$.       \begin{theorem}
+        Assume \eqref{aspt:H}, and assume that $\varphi\in C^\infty_b$. If $p \geq 2$ and $F(W)\in \sW^{1,p}$, then 
+        \[
+           \mathbf{E} D_H F(W) =\mathbf{E}\left[F(W) \int_0^1 h_s \d W_s\right], 
+       \]
+       and 
+       \[
+       D_H \varphi(F(W))=\nabla \varphi(F(W))D_HF(W). 
+       \]
+    \end{theorem}
+    \begin{proof}
+        We apply the generalization of Lemma \ref{lem:IBP} discussed above to $F_n$ and let $n \rightarrow \infty$. The convergence of $\mathbf{E}\left[D_H F_n(W)\right]$ is a consequence of the $L^p$ convergence of $D_H F_n(W)$ to $D_H F(W)$ in $L^p, p \geq 2$. Since $\mathbf{E}\left(\int_0^1 h_s \d W_s\right)^2=\mathbf{E} \int_0^1\left|h_s\right|^2 \d s$, the convergence of $\mathbf{E}\left[F_n(W) \int_0^1 h_s \d W_s\right]$ follows from the $L^p$ convergence of $F_n(W)$ to $F(W)$ in $L^p$ with $p \geq 2$ and the Cauchy-Schwarz inequality. The second assertion can be obtained by similar way. 
+    \end{proof}
+
+    Below we Set $(\Omega, \cF, \cF_t, \bP)$ be the Wiener space, and $W_t(\omega)=\omega(t)$ be the Brownian motion under $\bP$. In this case, $F=F(W)$. 
+    
+    Given $F\in \mD^1_2$. Suppose that $H_t$ given by \eqref{aspt:H} is deterministic. It is not hard to verify that the map 
+    \[
+       H:=L^2([0,1];\mR^n)\ni h\mapsto D_HF \in  L^2(\bP)
+    \]
+    is linear and bounded from $H$ to $L^2(\bP)$. 
+    So for each $F\in \mD^{1}_{2}$, there exists a unique we can define a map, denoted by $D$ such that $D: F\mapsto L^2(H; \bP)$ 
+    
+    As mentioned above the main examples of $\sW^{1,p}$ functionals will be $f(X_t)$.
+    \begin{proposition}
+        Let $W_t$ be $n$-dimensional Brownian motion. Suppose $X_t$ is an $d$-dimensional process that is a solution to \eqref{eq:sde-S}, where $\sigma$ and $b$ are $C^{\infty}_b$
+    \end{proposition}
+    Therefore, if $\varphi\in C^\infty_b$, then $F=\varphi\left(X_1\right)\in \sW^{1,p}$ for all $p \geq 2$. 
+
+    
+    We need to calculate $D_HX_1(W)$ when $H_t$ satisfies \eqref{aspt:H} and $X_t$ solves \eqref{eq:sde-S}. For simplicity, we assume $b=0$ below. By definition, $X_1(W)=x+\int_0^1 \sigma\left(X_t(W)\right) \circ \d W_t$ and 
+    \begin{equation*}
+    \begin{gathered}
+    X_1(W+\varepsilon H)=x+\int_0^1 \sigma\left(X_t(W+\varepsilon H)\right) \circ \d\left(W_t+\varepsilon H_t\right) \\
+    =x+\int_0^1 \sigma\left(X_t(W+\varepsilon H)\right) \circ \d W_t \\
+    +\varepsilon \int_0^1 \sigma\left(X_t(W+\varepsilon H)\right) h_t \d t 
+    \end{gathered}
+    \end{equation*}
+    Taking the difference, dividing by $\eps$, and letting $\eps\to0$, we obtain that
+    \[
+        D_HX_1(W)=\int_0^1\nabla \sigma(X_t) D_HX_t(W)\circ \d W_t+\int_0^1\sigma(X_t)h_t\d t. 
+    \]
+    $$
+D(\varphi(F))=\sum_{i=1}^m \partial_i \varphi(F) D F^i .
+$$
+Hence, 
+$$
+\left\langle D(\varphi(F)), D F^j\right\rangle_H=\sum_{i=1}^m \partial_i \varphi(F) \gamma_F^{i j} ;
+$$
+therefore,
+$$
+\partial_i \varphi(F)=\sum_{j=1}^m\left\langle D(\varphi(F)), D F^j\right\rangle_H\left(\gamma_F^{-1}\right)^{j i} .
+$$
+
+
+    
+    \section{}
+
+    \section{Hörmander's Theorem}
 	
 	$U(x)=\sum_{i=1}^N U^i(x)\p_i=U^k(x)\partial_k$, $V(x)=V^k(x)\p_k$, define the Lie Bracket  $[U, V]$ as: 
 	$$[U,V](x):= U^k(x) \p_k(V^l(x))\p_l-V^l\p_l(U^k(x))\p_k$$
@@ -2166,7 +2497,7 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 	Why we consider this kind of condition? 
 	
 	\begin{theorem}[Stroock-Varadhan's support theorem]
-		The law of the solution to \eqref{SDE3} on pathspace is supported by the closure of those smooth curves that, at every point $(x, t)$, are tangent to the hyperplane spanned by $\{\hat{V}_0(x,t), \cdots , \hat{V}_N(x,t)\}$, where we set 
+		The law of the solution to \eqref{SDE3} on pathspace is supported by the closure of those smooth curves that, at every point $(t, x)$, are tangent to the hyperplane spanned by $\{\hat{V}_0(x,t), \cdots , \hat{V}_N(x,t)\}$, where we set 
 		$$\hat{V}_0(x,t)=\begin{pmatrix} V_0(x)\\ 1 \end{pmatrix},  \,\,\, \hat{V}_j(x,t)=\begin{pmatrix} V_j(x)\\ 0 \end{pmatrix}, \,\,\, j=1,2\cdots N. $$
 	\end{theorem}
 	
@@ -2180,7 +2511,7 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 	\end{theorem}
 	
 	In view of this result, H\"ormander’s condition is not surprising. Indeed, if we define $E(x,t) = \bigcup_{k\geq 0} \sV^k(x,t)$, then this gives us a subbundle of $\mR^{N+1}$ which
-	is integrable. Note that the dimension of $E(x,t)$ could in principle depend on $(x, t)$, but since the dimension is a lower semicontinuous function, it will take its maximal value on an open set. If, on some open set, this maximal value is less than $n + 1$, then support theorem tells us that, there exists a submanifold (with boundary) $\cM^- \subset \cM$ of dimension strictly less than $n$ such that $T_{(y,s)}\cM^- = E_{(y,s)}$ for every $(y, s) \subset \cM^-$ . In particular, all the curves appearing in the Stroock-Varadhan support theorem and supporting the law of the solution to (1.1) must lie in $\cM^-$ until they reach its boundary. As a consequence, since $\cM^-$ is always transverse to the sections with constant $t$, the solutions at time $t$ will, with positive probability, lie in a submanifold of $\cM$ of strictly positive codimension. This immediately implies that the transition probabilities cannot be continuous with respect to Lebesgue measure.
+	is integrable. Note that the dimension of $E(x,t)$ could in principle depend on $(t, x)$, but since the dimension is a lower semicontinuous function, it will take its maximal value on an open set. If, on some open set, this maximal value is less than $n + 1$, then support theorem tells us that, there exists a submanifold (with boundary) $\cM^- \subset \cM$ of dimension strictly less than $n$ such that $T_{(y,s)}\cM^- = E_{(y,s)}$ for every $(y, s) \subset \cM^-$ . In particular, all the curves appearing in the Stroock-Varadhan support theorem and supporting the law of the solution to (1.1) must lie in $\cM^-$ until they reach its boundary. As a consequence, since $\cM^-$ is always transverse to the sections with constant $t$, the solutions at time $t$ will, with positive probability, lie in a submanifold of $\cM$ of strictly positive codimension. This immediately implies that the transition probabilities cannot be continuous with respect to Lebesgue measure.
 	
 	\begin{theorem}
 	Consider \eqref{SDE3} and assume that all vector fields have bounded derivatives of all orders. If it satisfies \textbf{H}, then its solutions admit a smooth density with respect to Lebesgue measure and the corresponding Markov semigroup maps bounded functions into smooth functions.
@@ -2324,11 +2655,30 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 	    \end{lemma}
 	
 	\section{Sobolev spaces}
+    Let $W^{k,p}$ denote the Sobolev space consisting of all real-valued functions on $\mR^d$ whose weak derivatives up to order k are functions in $L^p$. Here $k$ is a non-negative integer and $1\leq p<\infty$. The first part of the Sobolev embedding theorem states that 
+	\begin{theorem}[Sobolev]\label{thm:Sobolev}
+		If $k>l$, and $1\leq p<q<\infty$ are two real numbers such that 
+        \[
+            \frac{1}{p}-\frac{k-l}{d}=\frac{1}{q}, 
+        \]
+        then 
+        \[
+            W^{k,p}\hookrightarrow W^{l,q}. 
+        \]
+	\end{theorem}
+    The second part of the Sobolev embedding theorem applies to embeddings in Hölder spaces $C^{r,\alpha}$. 
+    \begin{theorem}[Morrey]\label{thm:Morrey}
+        If $d< pk$ and
+    \[
+        r+\alpha =k-\frac {d}{p}
+    \]
+    with $\alpha\in (0, 1)$, then one has the embedding 
+    \[
+        W^{k,p}\hookrightarrow C^{r,\alpha }.
+    \]
 	
-	\begin{lemma}[Sobolev embedding]
-		
-	\end{lemma}
-	
+    \end{theorem}
+    
 	\section{Singular integral}
 	Singular integrals are central to harmonic analysis and are intimately connected with the study of partial differential equations. Singular integral is an integral operator
 	\[
@@ -2352,16 +2702,25 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 	\] 
 	A particular consequence of this last observation is that the Riesz transform defines a bounded linear operator in $L^2$.
 	
-	\begin{lemma}
-		For each $i\in \{1,\cdots, d\}$, $R_i$ is bounded on $L^p$ with $p\in (1,\infty)$ and satisfy weak-type (1,1) estimates: 
+	\begin{theorem}
+	For each $i\in \{1,\cdots, d\}$, $R_i$ is bounded on $L^p$ with $p\in (1,\infty)$ and satisfy weak-type (1,1) estimates: 
 		\begin{equation}
 			\l| \l\{x\in \mR^d:  |R_i f(x)|>\lambda \r\}\r|\leq C_d \|f\|_1/\lambda. 
-		\end{equation}
-	\end{lemma}
+		\end{equation}\end{theorem}
 	
     \section{Interpolation Theorems} 
     
-	
+	\begin{lemma}\label{lem:Inter}
+	    \begin{enumerate}
+	        \item 
+         \begin{equation}
+             \|\nabla u\|_p\leq C \|\nabla^2 u\|_p^{\frac{1}{2}}\|u\|_p^{\frac{1}{2}}. 
+         \end{equation}
+            \item \begin{equation}
+                [\nabla u]_\alpha\leq C [\nabla^2 u]_\alpha^{\frac{1}{2}} [u]_{\alpha}^{\frac{1}{2}}. 
+            \end{equation}
+	    \end{enumerate}
+	\end{lemma}
 	
 	
 	
@@ -2614,7 +2973,10 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 			\delta |\xi|^2\leq a^{ij}\xi_i\xi_j, 
 		\end{equation}
 		\begin{equation}
-			(\|a\|_{L^\infty(B_R)}+ R^\alpha [a]_{\alpha; B_R})+(R\|b\|_{L^\infty(B_R)}+ R^{1+\alpha} [b]_{\alpha; B_R})+(R^2\|c\|_{L^\infty(B_R)}+ R^{2+\alpha} [c]_{\alpha; B_R}) \leq \Lambda. 
+            \begin{aligned}
+                (\|a\|_{L^\infty(B_R)}+ R^\alpha [a]_{\alpha; B_R})&+(R\|b\|_{L^\infty(B_R)}+ R^{1+\alpha} [b]_{\alpha; B_R})\\
+                &+(R^2\|c\|_{L^\infty(B_R)}+ R^{2+\alpha} [c]_{\alpha; B_R}) \leq \Lambda.
+            \end{aligned} 
 		\end{equation}
 		Then, 
 		$$
@@ -2661,6 +3023,7 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 
 	\bibliographystyle{alpha} 
 	\bibliography{mybib}
-	
+ 
+	\printindex
 	
 \end{document}
