@@ -24,12 +24,12 @@
 \contentsline {section}{\numberline {4.3}Harnack Inequality and H\"older estimate}{52}{section.4.3}%
 \contentsline {chapter}{\numberline {5}Malliavin's proof of H\"ormander's Theorem}{57}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Integration by parts}{57}{section.5.1}%
-\contentsline {section}{\numberline {5.2}}{61}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Hörmander's Theorem}{61}{section.5.3}%
-\contentsline {chapter}{\numberline {A}Useful facts}{67}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Sobolev spaces}{67}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Singular integral}{68}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Interpolation Theorems}{68}{section.A.3}%
-\contentsline {chapter}{\numberline {B}Some basic results of PDEs}{69}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Monge-Ampère Equation}{69}{section.B.1}%
-\contentsline {section}{\numberline {B.2}Schauder estimate}{72}{section.B.2}%
+\contentsline {section}{\numberline {5.2}Malliavin Matrix}{62}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Hörmander's Theorem}{64}{section.5.3}%
+\contentsline {chapter}{\numberline {A}Useful facts}{69}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Sobolev spaces}{69}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Singular integral}{70}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Interpolation Theorems}{70}{section.A.3}%
+\contentsline {chapter}{\numberline {B}Some basic results of PDEs}{71}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Monge-Ampère Equation}{71}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Schauder estimate}{74}{section.B.2}%

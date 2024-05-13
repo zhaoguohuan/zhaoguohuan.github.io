@@ -612,7 +612,7 @@ citecolor=magenta]{hyperref}
     $$
     $f_n$ is a particular example of what is known as a dyadic martingale. Of course, $[0,1]$ could be replaced by any interval as long as we normalize so that the total mass of the interval is $1$. We could also divide cubes in $\mathbb{R}^d$ into $2^d$ subcubes at each step and define $f_n$ analogously. Such martingales are called dyadic martingales. In fact, we could replace Lebesgue measure by any finite measure $\mu$, and instead of decomposing into equal subcubes, we could use any nested partition of sets we like, provided none of these sets had $\mu$ measure $0$.
 	
-	\medspace 
+	\medspace
 	
 	{\bf {\em All of the above results also hold for all right continuous martingale (submartingales) (see \cite{Huang})}}. 
 	
@@ -2347,11 +2347,10 @@ that finishes the proof of Lemma \ref{lem:CZ}.
     		\item If $h$ is a smooth vector field on $\mR^d$. Then, 
     		\begin{equation}\label{eq:IBP2}
     			\begin{aligned}
-    				\bE \< \nabla \varphi(\xi), h\> =& \int \<\nabla \varphi,h\>  \d \mu=-\int \varphi\,\underbrace{(\div h-\<h,\cdot\>)}_{\div_\mu h} \d \mu\\
+    				\bE \nabla_h \varphi(\xi) =& \int \<\nabla \varphi,h\>  \d \mu=-\int \varphi\,\underbrace{(\div h-\<h,\cdot\>)}_{\div_\mu h} \d \mu\\
     				=&\bE\{ \varphi(\xi) [\<h,\xi\>-\div h(\xi) ]\}. 
     			\end{aligned}
     		\end{equation}
-    		The operator $L:=-\div_\mu \nabla=\Delta-x\cdot\nabla$ is called the Ornstein-Uhlenbeck operator. 
     	\end{enumerate}
     \end{remark}
 
@@ -2387,14 +2386,14 @@ that finishes the proof of Lemma \ref{lem:CZ}.
     Below we set $\Omega=C([0,1];\mR^n)$ and $(\Omega, \cF, \cF_t, \bP)$ be the Wiener space. Then the canonical process $\omega_t$ is a $n$-dimensional Brownian motion under $\bP$. 
     
     \begin{lemma}\label{lem:IBP}
-       Suppose $F, G\in C^1_b(\Omega)$ (both $F$ and $G$ are bounded and have bounded Fréchet derivative). Suppose $h_s$ is adapted and bounded and let $H_t=\int_0^t h_s \d s$. Then
+       Suppose $F$ maps $\Omega$ to $\mathbb{R}, F$ is bounded, and $F$ has a bounded Fréchet derivative at each point of $\Omega$. Suppose $h_s$ is adapted and bounded and let $H_t=\int_0^t h_s d s$. Then
        \begin{equation}\label{eq:IBP}
-       	    \bE (\cD_H F\, G) = \bE\l[ F \l(-\cD_H G+G  \int_0^1 \dot H_t \d \omega_t\r) \r]. 
+       	    \mathbf{E}\left[D_H F \right]=\mathbf{E}\left[F \int_0^1 h_s \d \omega_s\right]
        \end{equation}
        The left-hand side represents the expectation of the Fréchet derivative at $\omega_{\cdot}$ in the direction $H.(\omega)$.
     \end{lemma}
-    \begin{proof}
-    We first prove the case that $G=1$. Let
+\begin{proof}
+    Let
     $$
       X_t^{\varepsilon}=\omega_t+\varepsilon \int_0^t h_s \d s
     $$
@@ -2423,121 +2422,35 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 
     By, the right-hand side of  is independent of $\varepsilon$. We differentiate with respect to $\varepsilon$ and set $\varepsilon=0$. The assumptions on $h$ and $F$ allow us to interchange the operations of differentiation and expectation by use of the dominated convergence theorem and we obtain
     \[
-        \mathbf{E}\left[F \int_0^1 \dot H_s \d \omega_s\right]=\mathbf{E} [ \cD_H F].
+    0=-\mathbf{E}\left[F \int_0^1 h_s \d \omega_s\right]+\mathbf{E} [ D_H F].
     \]
-    Now replacing $F$ in the above identity with $FG$, and using chain rule for $\cD_H$, we obtain our assertion. 
-    \end{proof}
-   
-    Let 
-    \[
-        W^{1,2}_0([0,1];\mR^d)=\l\{H\in C([0,1];\mR^n): H(0)=0, \dot H\in L^2([0,1];\mR^n)\r\}
-    \]
-    and 
-    \[
-    \<H, H'\>_{W^{1,2}_0}:= \int_0^1 \dot H(s)\cdot \dot H'(s) \d s. 
-    \]
-    
-    Suppose that $F$ and $H$ satisfy the same conditions in Lemma \ref{lem:IBP}. Then by \eqref{eq:IBP}, 
-    \begin{equation}\label{eq:IBP3}
-    	\bE [\cD_H F]= \mathbf{E}\left[F  \int_0^1 \dot H(t) \d\omega_t\right]=\bE [F (\dot H\cdot \omega)], 
-    \end{equation}
-    where $(\dot H\cdot \omega)$ is the It\^o integral $\int_0^1 \dot H_t\d \omega_t$. 
-    
-    Compare \eqref{eq:IBP2} with \eqref{eq:IBP3}. 
-    The adapted process $H$ can be regard as ``divergence-free" vector field on Wiener space. In this case, 
-    \[
-    \<h,x\> \rightsquigarrow  (\dot H \cdot \omega)``="\< H,  \omega\>_{W^{1,2}_0}~ \mbox{ and }~ ``\div H"=0.
-    \]  
-    
-    \medspace
-    
-    Note that 
-    \[
-    (W^{1,2}_0, \|\cdot\|_{W^{1,2}_0})\simeq (L^2([0,1];\mR^n); \|\cdot\|_2)=:( \cH, |\cdot|_{ \cH}). 
-    \]
-    Let $\{h_k\}_{k\in \mN}$ be a normal orthogonal basis of $\cH$, and $W^{1,2}_0 \ni H_k(t)=\int_0^t h_k(s) \d s$.  Set 
-    \[
-        D_kF:=\cD_{H_k}F, \quad F\in C_b^1(\Omega). 
-    \]
-    Since $\sum_k ({D_k}F)^2$ is bounded (since $F\in C_b^1(\Omega)$), we can define 
-    \[
-        D F:= \sum_k D_k F \, h_k\in L^\infty(\Omega; \cH), ~\mbox{ and }~ |DF|_{\cH}= \sqrt{\sum_k ({D_k}F)^2}. 
-    \]
-    
-     Next we going to identify $``\div H"$, when $H$ is not adapted. Suppose that 
-     \[
-          u_k\in C^1_b(\Omega)~\mbox{ and }~ u= \sum_{k} u_k h_k,
-     \] 
-     where the summation contains only finite non-zero terms. Then by \eqref{eq:IBP}, 
-    \[
-    \begin{aligned}
-    	\bE \l\<DF, u\r\>_{\cH} =&\bE \Big\<DF, \sum_{k} u_k h_k\Big\>_{\cH} = \bE \Big(\sum_{k} D_k F\, u_k \Big)\\
-    	=& \bE \Big(F \sum_{k} u_k  (h_k \cdot \omega) \Big) - \bE \Big(F\, \sum_{k} D_{k} u_k\Big)\\
-    	=& \bE \Big[ F \Big( \overbrace{  \underbrace{\sum_{k} u_k  (h_k\cdot\omega) }_{``="\<u,\omega\>_{\cH}}-  \underbrace{\sum_{k} D_{k} u_k}_{``="\div u}  }^{-\div_{\bP} u=:\delta(u)} \Big)\Big]
-    \end{aligned}
-    \]
-    The operator $\delta$ is called the divergence operator (cf. \cite{nualart2006malliavin}). In particular, for any $h\in \cH \mbox{ and } F,G\in C^1_b(\Omega)$, we have 
-    \begin{equation}
-    	\bE [\<DF, h\>G]=\bE [ FG(h\cdot \omega)]-\bE[F\<DG,h\>]. 
-    \end{equation}
-    
-    \medspace 
-    
-    The main examples of $F$ we will consider later is $\varphi(X_t)$, where $\varphi$ is smooth and $X_t$ solves an SDE. However, the It\^o map $F: \omega_{\cdot}\mapsto X_{\cdot}(\omega)$ is even not continuous from $C([0,1];\mR^n)$ to $C([0,1];\mR^d)$. So we need some extension. In fact, as a consequence of the integration by parts formula, we can show that the operator $D$ is closable  from $L^2(\Omega,\bP;\mR)$ to $L^2(\Omega,\bP;\cH)$, which guarantees that it is “well-behaved” from a functional-analytic point of view.
-    
-    \begin{proposition}
-    	The operator $D$ is closable. In other words if, for some sequence $F_n$, one has $F_n\to 0$ in $L^2(\Omega, \bP;\mR)$ and $DF_n\to u$ in $L^2(\Omega, \bP;\cH)$, then $u=0$.
-    \end{proposition}
-    \begin{exercise}
-    	Prove the above poposition. (Hint: show that $C_b^1(\Omega)$ is dense in $L^2(\Omega,\bP)$.)
-    \end{exercise}
-    
-    We henceforth denote by $\sW^{1,2}$ the domain of the closure of $D$ and we do not distinguish between $D$ and its closure. One can of course apply the Malliavin differentiation operator repeatedly, thus yielding an unbounded closed operator $D^k$ from $L^2(\Omega,\bP)$ to $L^2(\Omega, \bP; \cH^{\otimes k})$ We denote the domain of this operator by $\sW^{k,2}$. Actually, a similar proof shows that powers of $D$ are closable as unbounded operators from $L^p(\Omega, \mathbf{P})$ to $L^p\left(\Omega, \mathbf{P}; H^{\otimes k}\right)$ for every $p \geq 1$. We denote the domain of these operators by $\mathscr{W}^{k, p}$. Furthermore, for any Hilbert space $\cK$, we denote by $\mathscr{W}^{k, p}(\cK)$ the domain of $D^k$ viewed as an operator from $L^p(\Omega, \mathbf{P}; \cK)$ to $L^p\left(\Omega, \mathbf{P}; H^{\otimes k} \otimes \cK\right)$. We call a random variable belonging to $\mathscr{W}^{k, p}$ for every $k, p \geq 1$. We call a random variable belonging to $\mathscr{W}^{k, p}$ for every $k, p \geq 1$ "Malliavin smooth" and we write $\sS=\bigcap_{k, p} \mathscr{W}^{k, p}$ as well as $\sS(\cK)=\bigcap_{k, p} \mathscr{W}^{k, p}(\cK)$. The Malliavin smooth random variables play a role analogous to that of Schwartz test functions in finite-dimensional analysis.
-    
-   As mentioned above the main examples of $\sS$ functionals will be considered is $\varphi(X_t)$.
-   \begin{proposition}
-   	Let  $X_t$ be the $d$-dimensional process that is a solution to \eqref{eq:sde-S}. Assume that $\sigma$ and $b$ are $C^{\infty}_b$. Then $X_t \in \sS$.   
-   \end{proposition}
-   
-   \begin{proposition}
-   	For every $p$ there exist constants $K$ and $C$ such that, for every
-   	separable Hilbert space $\cK$ and every $u\in \sS(\cH \otimes \cK)$, one has the bound
-   	\[
-   	    \bE |\delta u|^p\leq C \sum_{0\leq k\leq K} \l( \bE |D^k u|^{2p} \r)^{1/2}
-   	\]
-   \end{proposition}
-   \begin{proof}
-   	Take now $p>2$. Using the definition of $\delta$ combined with the chain rule for $D$, Proposition 3.8 , and Young's inequality, we obtain the bound
-   	$$
-   	\begin{aligned}
-   		\mathbf{E}|\delta u|^p & =(p-1) \mathbf{E}\left(|\delta u|^{p-2}\langle u, D \delta u\rangle\right)=(p-1) \mathbf{E}|\delta u|^{p-2}\left(|u|^2+\langle u, \delta D u\rangle\right) \\
-   		& \leq \frac{1}{2} \mathbf{E}|\delta u|^p+c \mathbf{E}\left(|u|^p+|u|^{p / 2}|\delta D u|^{p / 2}\right),
-   	\end{aligned}
-   	$$
-   	for some constant $c$. We now use Hölder's inequality which yields
-   	$$
-   	\mathbf{E}\left(|u|^{p / 2}|\delta D u|^{p / 2}\right) \leq\left(\mathbf{E}|u|^{2 p}\right)^{1 / 4}\left(\mathbf{E}|\delta D u|^{2 p / 3}\right)^{3 / 4} .
-   	$$
-   	
-   	Combining this with the above, we conclude that there exists a constant $C$ such that
-   	$$
-   	\mathbf{E}|\delta u|^p \leq C\left(\mathbf{E}\left|D^{\ell} u\right|^{2 p}\right)^{1 / 2}+\left(\mathbf{E}|\delta D u|^{2 p / 3}\right)^{3 / 2} .
-   	$$
-   	
-   	The proof is concluded by a simple inductive argument.
-   \end{proof}
-  
-   
-   
-    Suppose that $F\in \cS$. Define 
-   \[
-       L F =\delta (D F)= \sum_k \Big(D_kD_kF-D_k F \int_0^1 h_k(t) \d \omega_t\Big)
-   \]
+\end{proof}
+
+    \begin{remark}
+    	Compare \eqref{eq:IBP2} with \eqref{eq:IBP}. 
+    	The adapted process $H$ can be regard as ``divergence-free" vector field on Wiener space. In this case, 
+    	\[
+    	    \<h,x\> \rightsquigarrow \int_0^1 \dot H_t \d \omega_t``="\int_0^1 \<\dot H, \dot \omega\>\d t~ \mbox{ and }~ ``\div" H=0.
+    	\]  
+    	
+    \end{remark}
+
+    The main examples of $F$ we will consider later is $\varphi(X_t)$, where $\varphi$ is smooth and $X_t$ solves an SDE. However, the It\^o map $F: \omega_{\cdot}\mapsto X_{\cdot}(\omega)$ is even not continuous from $C([0,1];\mR^n)$ to $C([0,1];\mR^d)$. So we need some extension. 
 
     \medspace
     
-    
-   
+    Set 
+    \[
+        \cH=\l\{H\in C([0,1];\mR^n): H(0)=0, \dot H\in L^2([0,1];\mR^n)\r\}, \quad \<H, H'\>_{\cH}:= \int_0^1 \dot H(s)\cdot \dot H'(s) \d s. 
+    \]
+    Suppose that $\{H_k\}_{k\in \mN}$ is a normal orthogonal basis of $\cH$. Suppose $F$ maps $\Omega$ to $\mathbb{R}, F$ is bounded, and its Fréchet derivative is also bounded. Set 
+    \[
+        D_kF:=D_{H_k}F,  \quad D F:= \sum_k D_{H_k}F \, H_k, \quad |DF|_{\cH}= \sqrt{\sum_k ({D_k}F)^2}. 
+    \]
+    Suppose that $F$, $|DF|_{\cH}$ and $|D^2F|_{HS}$ are bounded. Define 
+    \[
+        L F = \sum_k \Big(D_kD_kF-\underbrace{D_k F \int_0^1 h_k(s) \d \omega_s}_{``=" \<V, \omega\>_\cH}\Big)
+    \]
     Then $L$ is the operator corresponding to the Ornstein-Uhlenbeck operator $\Delta-x\cdot \nabla$ in finite dimensional case, and 
     \begin{exercise}
     	Prove that 
@@ -2554,7 +2467,7 @@ that finishes the proof of Lemma \ref{lem:CZ}.
     	\bE [(LF)G]=\bE [F (LG)]=-\bE [D_kFD_kG]. 
     \end{equation*}
     
-    
+    Let $p\geq 1$, and $F$ be a function on $\Omega$. We say $F, G$ is in $\sW^{1,p}$ if there exist functionals $F_n$ on $\Omega$ that are bounded, continuous, Fréchet differentiable with bounded and continuous Fréchet derivatives, and with $F_n \rightarrow F$ in $L^p$ and $|D (F_m-F_n)|_{\cH}\rightarrow 0$ in $L^p$. In this case, $F\in L^p$ and for each $k$, and there exists an $\cH$-valued random map, denoted by $DF$ such that  $|DF_n-DF|_\cH \to 0$ in $L^p$.  The general $\sW^{k,p}$-space $(k\geq 1)$ can be defined by the same way. 
     \begin{theorem}\label{thm:IBP}
          Let $p > 1$, $F\in \sW^{1,p}$ and . Assume that $h_t$ is adapted, $H_t=\int_0^t h_s \d s$ and $|H|_{\cH}$ is bounded. Then 
          \begin{enumerate}[(i)]
@@ -2572,18 +2485,22 @@ that finishes the proof of Lemma \ref{lem:CZ}.
          	\end{equation}
          \end{enumerate}
     \end{theorem}
-   \begin{proof}
-   	We apply Lemma \ref{lem:IBP} discussed above to $F_n$ and let $n \rightarrow \infty$. The convergence of $\mathbf{E}\left[D_H F_n(W)\right]$ can be seen by 
-   	$$
-   	|D_HF_n-D_H F_m|=\<H, DF_{n}-DF_{m}\>_{\cH} \leq |H|_{\cH} |D(F_n-F_m)|_{\cH} \to 0 \mbox{ in } L^p, ~ p > 1. 
-   	$$
-   	Since 
-   	\[
-   	\mathbf{E}\left(\int_0^1 h_s \d \omega_s\right)^{p'}\leq C_p\mathbf{E} \l(\int_0^1\left|h_s\right|^2\d s\r)^{p'/2} \leq C\bE |H|_{\cH}^{p'}<\infty, ~ 1<p'<\infty, 
-   	\] 
-   	the convergence of $\mathbf{E}\left[F_n \int_0^1 h_s \d \omega_s\right]$ follows from the $L^p$ convergence of $F_n$ to $F$ in $L^p$ with $p >1$ and the Hölder inequality. The second assertion can be obtained by similar way. 
-   \end{proof}
+    \begin{proof}
+        We apply Lemma \ref{lem:IBP} discussed above to $F_n$ and let $n \rightarrow \infty$. The convergence of $\mathbf{E}\left[D_H F_n(W)\right]$ can be seen by 
+        $$
+            |D_HF_n-D_H F_m|=\<H, DF_{n}-DF_{m}\>_{\cH} \leq |H|_{\cH} |D(F_n-F_m)|_{\cH} \to 0 \mbox{ in } L^p, ~ p > 1. 
+        $$
+        Since 
+        \[
+            \mathbf{E}\left(\int_0^1 h_s \d \omega_s\right)^{p'}\leq C_p\mathbf{E} \l(\int_0^1\left|h_s\right|^2\d s\r)^{p'/2} \leq C\bE |H|_{\cH}^{p'}<\infty, ~ 1<p'<\infty, 
+        \] 
+        the convergence of $\mathbf{E}\left[F_n \int_0^1 h_s \d \omega_s\right]$ follows from the $L^p$ convergence of $F_n$ to $F$ in $L^p$ with $p >1$ and the Hölder inequality. The second assertion can be obtained by similar way. 
+    \end{proof}
     
+    As mentioned above the main examples of $\sW^{k,p}$ functionals will be considered is $\varphi(X_t)$.
+    \begin{proposition}
+    	Let  $X_t$ be the $d$-dimensional process that is a solution to \eqref{eq:sde-S}. Assume that $\sigma$ and $b$ are $C^{\infty}_b$. Then $X_t \in \sW^{k,p}$ for all $k\geq 1$ and $p>1$.  
+    \end{proposition}
     
     \section{Malliavin Matrix}
     Now assume that $F=(F_1,\cdots F_d)$, each $F_i$ is real-valued and $F_i\in \cap_{k,p\geq 1}\sW^{k,p}$, and that $\varphi\in C^\infty_b(\mR^d)$. Let 
@@ -2673,10 +2590,6 @@ that finishes the proof of Lemma \ref{lem:CZ}.
     		D_kX_t=J(t) \int_0^t J^{-1}(s) V(X_s) h_k(s) \d s
     	\end{equation}
     \end{proposition}
-    Consequently, 
-    \begin{equation}
-    	\gamma_{X_t}=\< D X_t, D X^{T}_t\>=  J(t)  \int_0^t J^{-1}(s) V(X_s) V^{T}(X_s) [J^{-1}(s)]^{T} \d s \, J^T(t). 
-    \end{equation}
     \begin{proof}
     	By It\^o's formula and \eqref{eq:Jacobi2}, 
     	\begin{align*}
@@ -2687,10 +2600,6 @@ that finishes the proof of Lemma \ref{lem:CZ}.
     	\end{align*}
     	Therefore, $t\mapsto J(t) \int_0^t J^{-1}(s) V(X_s) h_k(s) \d s$ satisfies the same equation as $D_k X_t$, which yields \eqref{eq:DX-J}. 
     \end{proof}
-    Set 
-    \[
-        C(t):= \int_0^t J^{-1}(s) V(X_s) V^{T}(X_s) [J^{-1}(s)]^{T} \d s. 
-    \]
    
     
     
@@ -2735,18 +2644,18 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 	Consider \eqref{eq:sde-S} and assume that all vector fields have bounded derivatives of all orders. If it satisfies\eqref{aspt:H}, then its solutions admit a smooth density with respect to Lebesgue measure and the corresponding Markov semigroup maps bounded functions into smooth functions.
 	\end{theorem}
 	
-%	Let $J_{r,t}$ be the solution of equation: 
-%	\begin{align}
-%		J_{r,t}=I+\int_r^t V'_0(X_s) J_{r,s}\d s+\int_r^t V'_j(X_s) J_{r,s}\circ \d W^j_s. 
-%	\end{align}
-%	Since $D^i_rX_t$ satisfies: 
-%	$$D^i_rX_t=V_i(X_r)+\int_r^t V'_0(X_s) D^i_r X_s \d s+\int_r^t V'_j(X_s)D^i_rX_s\circ \d W^j_s. $$
-%	We get $D^i_rX_t=J_{r,t} V_i(X_t)$. Denote $J_t=J_{0,t}$ for simple, then $J_{s,t}=J_{t}J_{s}^{-1}$ and $J_{t}^{-1}$ satisfies: 
-%	$$J_t^{-1}=I-\int_0^t J_s^{-1} V'_0(X_s)\d s-\int_0^t J_s^{-1} V'_j(X_s)\circ\d W_s^j. $$
-%	By the above discussion, 
-%	$$
-%	\gamma_t = \sum_{i=1}^N\<D^i X_t, D^i X_t\>=J_t\int_0^t J^{-1}_s V_j(X_s)V^{T}_j(X_s)(J^{-1}_s)^T \d s \,J^T_t=J_t C_t J^T_t. 
-%	$$
+	Let $J_{r,t}$ be the solution of equation: 
+	\begin{align}
+		J_{r,t}=I+\int_r^t V'_0(X_s) J_{r,s}\d s+\int_r^t V'_j(X_s) J_{r,s}\circ \d W^j_s. 
+	\end{align}
+	Since $D^i_rX_t$ satisfies: 
+	$$D^i_rX_t=V_i(X_r)+\int_r^t V'_0(X_s) D^i_r X_s \d s+\int_r^t V'_j(X_s)D^i_rX_s\circ \d W^j_s. $$
+	We get $D^i_rX_t=J_{r,t} V_i(X_t)$. Denote $J_t=J_{0,t}$ for simple, then $J_{s,t}=J_{t}J_{s}^{-1}$ and $J_{t}^{-1}$ satisfies: 
+	$$J_t^{-1}=I-\int_0^t J_s^{-1} V'_0(X_s)\d s-\int_0^t J_s^{-1} V'_j(X_s)\circ\d W_s^j. $$
+	By the above discussion, 
+	$$
+	\gamma_t = \sum_{i=1}^N\<D^i X_t, D^i X_t\>=J_t\int_0^t J^{-1}_s V_j(X_s)V^{T}_j(X_s)(J^{-1}_s)^T \d s \,J^T_t=J_t C_t J^T_t. 
+	$$
 	We only need to prove $\det C_t\in L^{\infty-}$. 
 	
 	We need the following useful lemma. 
@@ -2927,15 +2836,13 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 		\end{equation}\end{theorem}
 	
     \section{Interpolation Theorems} 
-    The following simple Interpolation theorem is useful. 
+    
 	\begin{lemma}\label{lem:Inter}
-		 
 	    \begin{enumerate}
-	        \item Let $p\in[1,\infty)$. There exits constant $C$ such that 
+	        \item 
          \begin{equation}
              \|\nabla u\|_p\leq C \|\nabla^2 u\|_p^{\frac{1}{2}}\|u\|_p^{\frac{1}{2}}. 
          \end{equation}
-            Let $\alpha\in (0,\alpha)$. There exits constant $C$ such that 
             \item \begin{equation}
                 [\nabla u]_\alpha\leq C [\nabla^2 u]_\alpha^{\frac{1}{2}} [u]_{\alpha}^{\frac{1}{2}}. 
             \end{equation}
@@ -3077,28 +2984,6 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 		where $\ell_{x_0, p}(x)=u(x_0)+p\cdot (x-x_0)$. Set $\bar{u}:=\max\{\ell_{x_0, p}+\delta, u\}\gneqq u$. Notice that $\bar{u}$ is convex, $\bar{u} \geqslant u$, and it follows by \eqref{eq:baru} that $\bar{u}=u$ in a neighborhood of $\left\{x_1, \ldots, x_N\right\} \cup \partial \Omega$. In particular, $\left.\bar{u}\right|_{\partial \Omega}=0$ and $\partial \bar{u}\left(x_i\right)=\partial u\left(x_i\right)$, which implies that $u\log eqq\bar u\in \cS[\nu]$. This is a contradiction. 
 		
 		{\em Step 5}: $\mu_u=\nu$. By {\em Step 3} and {\em Step 4}, we know that $\mu_{u}=\sum_{i=1}^N \beta_i \delta_{x_i}$ with $\beta_i\geq \alpha_i$. Assume that $\beta_1=\mu_u(x_1)>\nu(x_1)=\alpha_1$. 
-		
-		Since $\partial u\left(x_j\right)$ is a convex set of positive measure, pick a vector $p \in \mathbb{R}^n$ that belongs to the interior of $\partial u\left(x_j\right)$, define $\ell_{x_j, p}(z):=u(z)+\left\langle p, z-x_j\right\rangle$, and consider the function $U:=u-\ell_{x_j, p}$. Notice that $\partial U(z)=\partial u(z)-p$ for all $z$, which implies, in particular, that $\left|\partial U\left(x_j\right)\right|=\beta_j$ and that 0 belongs to the interior of $\partial U\left(x_j\right)$.
-		Choose $\delta>0$ small enough so that
-		$$
-		\left\{U \leq U\left(x_j\right)+\delta\right\} \cap\left(\left\{x_1, \ldots, x_N\right\} \cup \partial \Omega\right)=\emptyset,
-		$$
-		and define the function
-		$$
-		\widetilde{U}(z):= \begin{cases}U(z) & \text { if } U>U\left(x_j\right)+\delta \\ (1-\delta) U(z)+\delta\left[U\left(x_j\right)+\delta\right] & \text { if } U \leq U\left(x_j\right)+\delta .\end{cases}
-		$$
-		
-		Taking $\delta>0$ even smaller if necessary, we observe that
-		$$
-		\left|\partial \widetilde{U}\left(x_j\right)\right|=(1-\delta)^n\left|\partial U\left(x_j\right)\right|=(1-\delta)^n \beta_j>\alpha_j .
-		$$
-		
-		Notice that $\widetilde{U} \geqslant U$ and $\widetilde{U}=U$ in a neighborhood of $\left\{x_1, \ldots, x_N\right\} \cup \partial \Omega$. Hence, considering $\tilde{u}:=\widetilde{U}+\ell_{x_j, p}$ (see Figure 2.7 ), we see that $\tilde{u} \geq u$,
-		$$
-		\left.\tilde{u}\right|_{\partial \Omega}=\left.u\right|_{\partial \Omega}=0, \quad \partial \tilde{u}\left(x_i\right)=\partial u\left(x_i\right) \quad \forall i \neq j, \quad \text { and } \quad\left|\partial \tilde{u}\left(x_j\right)\right|>\alpha_j .
-		$$
-		
-		Thus, $\tilde{u} \in \mathcal{S}[v]$, but this contradicts the maximality of $u$ and concludes the proof.
 	\end{proof}
 	
 	

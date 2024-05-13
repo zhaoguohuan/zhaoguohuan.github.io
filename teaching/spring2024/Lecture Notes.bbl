@@ -65,6 +65,11 @@ N~V Krylov and M~V Safonov.
   measurable coefficients.
 \newblock {\em Mathematics of the USSR-Izvestiya}, 16(1):151, feb 1981.
 
+\bibitem[Nua06]{nualart2006malliavin}
+David Nualart.
+\newblock {\em The {M}alliavin calculus and related topics}, volume 1995.
+\newblock Springer, 2006.
+
 \bibitem[RY13]{revuz2013continuous}
 Daniel Revuz and Marc Yor.
 \newblock {\em Continuous martingales and Brownian motion}, volume 293.
