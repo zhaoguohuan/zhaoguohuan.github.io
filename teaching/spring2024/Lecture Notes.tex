@@ -47,8 +47,8 @@ citecolor=magenta]{hyperref}
 \renewcommand{\sectionmark}[1]{%
 	\markboth{\thesection\quad #1}{}}
 \fancyhead{}
-\fancyhead[L]{\leftmark}
-\fancyhead[R]{\rightmark}
+\fancyhead[LE]{\leftmark}
+\fancyhead[RO]{\rightmark}
 \fancyfoot{}
 \fancyfoot[C]{\thepage}
 
@@ -286,7 +286,7 @@ citecolor=magenta]{hyperref}
 		\item For each $A\in \cE$, $\omega\mapsto Q_{\cG}(\omega, A)$ is a version of $\bE(\1_A(X)|\cG)$; 
 		\item For a.e. $\omega\in \Omega$, $A\mapsto Q_{\cG}(\omega, A)$ is a probability measure. 
 	\end{enumerate}
-	If $E=\Omega$, $X(\omega)=\omega$, then $Q_{\cG}$ is called a {\bf regular conditional probability}. 
+	If $E=\Omega$, $X(\omega)=\omega$, then $Q_{\cG}$ is called a {\bf regular conditional probability}\index{regular conditional probability}. 
 	
 	The following results can be found in Durrett's book \cite{durrett2019probability}.  
 	\begin{proposition}
@@ -299,7 +299,7 @@ citecolor=magenta]{hyperref}
 			\begin{equation}
 				\bE (XY|\cG)=\bE (X|\cG)Y. 
 			\end{equation}
-			\item (Jesen's inequality) If $\varphi$ is a convex function, then 
+			\item (Jesen's inequality) If $\varphi$ is a {\bf convex}\index{convex} function, then 
 			\begin{equation}
 				\bE (\varphi(X)|\cG) \leq \varphi(\bE (X|\cG)). 
 			\end{equation}
@@ -313,8 +313,10 @@ citecolor=magenta]{hyperref}
 		\]
 	\end{proposition}
 	
+	A measurable space $(E, \cE)$ is said to be {\bf standard} if $(E,\cE)$ is isomorphic (as a measurable space) to $(\mR; \cB(\mR))$.
+	
 	\begin{theorem}
-		RCD exists if $E$ is a {\bf standard measure space} and $\cE=\cB(E)$. 
+		RCD exists if $(E, \cB(E))$ is a {\bf standard measure space}. 
 	\end{theorem}
 	
 		\begin{proposition}
@@ -333,8 +335,7 @@ citecolor=magenta]{hyperref}
 	\section{Brownian motion}
 	A stochastic process defined on $(\Omega, \cF, \bP)$ taking value in $E$ can be understood in various ways. It involves a collection of random variables $X_t\in E$ indexed by a parameter set $\bT$ (usually, $\bT=\mN$ or $\mR_+$), where $X_t$ is a measurable map from $(\Omega, \cF,\bP)$ to $(E, \cB(E)$ for each $t\in \bT$. The parameter set $\bT$ typically represents time and can be discrete or continuous. The process can also be regard as a measurable map from $(\Omega, \cF, \bP)$ to the space of functions $E^\bT$. The Kolmogorov $\sigma$-field on $E^{\bT}$ is the smallest $\sigma$-field making the projections $\pi_t: E^{\bT} \ni f\mapsto f(t)\in E$ measurable. This definition ensures that a random map  $\Omega \ni \omega \mapsto X_{\cdot}(\omega) \in E^{\bT}$ is measurable if its component random variables $X_t:\Omega \to E$ are measurable for all $t\in \bT$. Therefore, the mapping $\omega\mapsto X_{\cdot}(\omega)$ induces a measure on $(E^{\bT}, \cB(E^{\bT}))$ denoted by $\mP$. The underlying probability model $(\Omega, \cF, \bP)$ is replaceable by the canonical model $(\mP, E^{\bT}, \cB(E^{\bT}))$ with a specific choice of $X_t(f)=\pi_t(f)=f(t)$. In simpler terms, a stochastic process is just a probability measure $\mP$ on $(E^{\bT}, \cB(E^{\bT}))$.
 	
-	Another point of view is that the only relevant objects are the joint distributions of $(X_{t_1}, X_{t_2},$ \\
-	$... , X_{t_n})$ for every $n$ and every finite subset $I = (t_1, t_2, ... , t_n)$ of $\bT$. These can be specified as probability measures $\mu_{I}$ on $\mR^n$. These $\mu_{I}$ cannot be totally arbitrary. If we allow different permutations of the same set, so that $I$ and $I'$ are permutations of each other then $\mu_I$ and $\mu_{I'}$ should be related by the same permutation. If $I\subseteq I'$, then we can obtain the joint distribution of $(X_t)_{t\in I}$ by projecting the joint distribution of $(X_t)_{t\in I'}$ from $\mR^{n'}$ to $\mR^{n}$ where $n$ and $n'$ are the cardinalities of $I$ and $I'$ respectively. A stochastic process can then be viewed as a family $(\mu_I)$ of distributions on various finite dimensional spaces that satisfy the consistency conditions. A theorem of Kolmogorov says that this is not all that different. Any such consistent family arises from a $\mP$ on $(E^{{\bT}} , \cB(E^{\bT}))$ which is uniquely determined by the family $(\mu_I)$.
+	Another point of view is that the only relevant objects are the joint distributions of $(X_{t_1}, X_{t_2},... , X_{t_n})$ for every $n$ and every finite subset $I = (t_1, t_2, ... , t_n)$ of $\bT$. These can be specified as probability measures $\mu_{I}$ on $\mR^n$. These $\mu_{I}$ cannot be totally arbitrary. If we allow different permutations of the same set, so that $I$ and $I'$ are permutations of each other then $\mu_I$ and $\mu_{I'}$ should be related by the same permutation. If $I\subseteq I'$, then we can obtain the joint distribution of $(X_t)_{t\in I}$ by projecting the joint distribution of $(X_t)_{t\in I'}$ from $\mR^{n'}$ to $\mR^{n}$ where $n$ and $n'$ are the cardinalities of $I$ and $I'$ respectively. A stochastic process can then be viewed as a family $(\mu_I)$ of distributions on various finite dimensional spaces that satisfy the consistency conditions. A theorem of Kolmogorov says that this is not all that different. Any such consistent family arises from a $\bP$ on $(E^{{\bT}} , \cB(E^{\bT}))$ which is uniquely determined by the family $(\mu_I)$.
 	\begin{theorem}[Kolmogorov's consistency Theorem, cf. \cite{Yan2021Measure}]\label{Thm:K1}
 		Let $E$ be a standard measure space. Assume that we are given for every $t_1,...,t_n\in \bT$ a probability measure  $\mu_{t_1\cdots t_n}$ on $E^n$, and that these probability measures satisfy:
 		\begin{enumerate}
@@ -362,8 +363,6 @@ citecolor=magenta]{hyperref}
 	By Theorem \ref{Thm:K1}, we can define a probability measure $\mQ$ on $\mR^{\mR_+}\, (E=\mR, \bT=\mR_+)$ such that the canonical process $X_t(f)=f(t)$ satisfies $(a)$, $(b)$ and $(c)$. However, whether the measure is concentrated on the space of continuous functions is not a simple question. In fact, since $\bT=\mR_+$ is uncountable the space of bounded functions, continuous functions, etc., are \textbf{not} measurable sets of $\mR^{\mR_+}$. They do not belong to the natural $\sigma$-field. Essentially, in probability theory, the rules involve only a countable collection of sets at one time, and any information that involves the values of an uncountable number of measurable functions is beyond reach. There is an intrinsic reason for this. In probability theory, we can always change the values of a random variable on a set of measure $0$, and we have not changed anything significant. Since we are allowed to mess up each function on a set of measure $0$, we have to assume that each function has indeed been messed up on a set of measure 0. If we are dealing with a countable number of functions, the 'mess up' has occurred only on the countable union of these individual sets of measure $0$, which, by the properties of a measure, is again a set of measure $0$. On the other hand, if we are dealing with an uncountable set of functions, then these sets of measure $0$ can possibly gang up on us.
 	
 	Of course it would be foolish of us to mess things up unnecessarily. If we can clean things up and choose a nice version of our random variables we should do so. But we cannot really do this sensibly unless we decide first what nice means. We however face the risk of being too greedy and it may not be possible to have a version as nice as we seek. But then we can always change our mind. 
-	
-	%Therefore, often, we aim to find a version with continuous trajectories, meaning we restrict $\Omega$ to the space of continuous functions on $\mR_+$. We seek to establish a measure $\mP$ on $C(\mR_+; \mR^d)$ with the natural $\sigma$-field. However, this is not always achievable. We are looking for sufficient conditions on the finite dimensional distributions $(\mu_I)$ to ensure the existence of $\mP$ on $C(\mR_+; \mR^d)$.
 	
 	\begin{lemma}[Fractional Sobolev inequality]\label{Le:GRRI}
 		Let $D$ be an open set in $\mR^n$, $p\geq 1$ and $s\in (n/p,1)$. Let $f:D\to \mR^d$ be a measurable function. Assume \begin{align*}
@@ -396,115 +395,16 @@ citecolor=magenta]{hyperref}
 		\[
 		\|Y_{\cdot}(\omega)\|_{C^{\alpha}(I)}\lesssim  K(\omega):= \l(\iint_{I\times I} \frac{|X_t(\omega)-X_s(\omega)|^p}{|t-s|^{2+\alpha p}}\, \d s \d t\r)^{1/p}\in L^p(\bP).
 		\]
-		By Fubini theorem, there exists a $\sL$-null set $N\subseteq I$, such that for each $t\notin N$, $\bP(X_t\neq Y_t)=0$. For any $t_0\in N$, by \eqref{eq:moment}, one can see that $X_{t_n} \xrightarrow[I\backslash N \ni t_n \to t_0]{\bP} X_{t_0}$. On the other hand, $X_{t_n}\overset{\cdot}{=}Y_{t_n}\to Y_{t_0}$, so we have $X_{t_0}\overset{\cdot}{=}Y_{t_0}$. Therefore, $Y$ is a version of $X$.  
+		By Fubini theorem, there exists a $\sL$-null set $N\subseteq I$, such that for each $t\notin N$, $\bP(X_t\neq Y_t)=0$. For any $t_0\in N$, by \eqref{eq:moment}, one can see that $X_{t_n} \xrightarrow[I\backslash N \ni t_n \to t_0]{\bP} X_{t_0}$. On the other hand, $X_{t_n}\overset{a.s.}{=}Y_{t_n}\to Y_{t_0}$, so we have $X_{t_0}\overset{a.s.}{=}Y_{t_0}$. Therefore, $Y$ is a version of $X$.  
 	\end{proof}
 	
 	Thanks to Theorem \ref{Thm:K2} and the discussion after Definition \ref{Def:BM}, we get the existence of Brownian motion. 
-	
-	We already observed that as a consequence of Kolmogorov’s continuity theorem, the Brownian paths are $\alpha$-H\"older continuous for every $\alpha \in \left(0,\frac{1}{2}\right)$. The next proposition, which is known as the law of iterated logarithm shows in particular that Brownian paths are not $\frac{1}{2}$-H\"older continuous.
-	\begin{theorem}[law of iterated logarithm]
-		Let $(B_t)_{t\ge 0}$ be a Brownian motion. For $s \ge 0$,
-		\[
-		\bP \left( \lim \inf_{t \rightarrow 0} \frac{B_{t+s}-B_s}{\sqrt{2t \log  \log  \frac{1}{t}}} =-1 , \lim \sup_{t \rightarrow 0} \frac{B_{t+s}-B_s}{\sqrt{2t\log  \log  \frac{1}{t}}} =1 \right)=1.  
-		\]
-	\end{theorem}
-	\begin{proof}
-		Thanks to the symmetry and invariance by translation of the Brownian motion, it suffices to show that:
-		$$
-		\bP \left( \lim \sup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t\log  \log  \frac{1}{t}}} =1 \right)=1.  
-		$$
-		Let us first prove that 
-		$$
-		\bP \left( \lim \sup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \le 1 \right)=1.  
-		$$
-		Let us denote $h(t)=\sqrt{2t \log  \log  \frac{1}{t}}$.   Let $\alpha, \beta >0$, from Doob’s maximal inequality applied to the martingale $\left(e^{\alpha B_t-\frac{\alpha^2}{2}t} \right)_{t \ge 0}$, we have for $t \ge 0$:
-		\[
-		\bP  \left(  \sup_{0 \le s \le t} \left( B_s-\frac{\alpha}{2}s\right)>\beta \right)=\bP  \left(  \sup_{0 \le s \le t} e^{\alpha B_s -\frac{\alpha^2}{2}s} >e^{\alpha \beta}\right) \le e^{-\alpha \beta}.
-		\]
-		Let now $\theta , \delta \in (0,1)$. Using the previous inequality for every $n \in \mathbb{N}$ with $t=\theta^n, \alpha=\frac{(1+\delta)h(\theta^n)}{\theta^n}, \beta=\frac{1}{2} h (\theta^n)$,  yields when $n \rightarrow +\infty$,
-		$$
-		\bP  \left(  \sup_{0 \le s \le \theta^n} \left( B_s -\frac{(1+\delta)h(\theta^n)}{2\theta^n}s\right)>\frac{1}{2} h (\theta^n) \right)=O\left( \frac{1}{n^{1+\delta}} \right).  
-		$$
-		Therefore from Borel-Cantelli lemma, for almost every $\omega \in \Omega$, we may find $N(\omega)\in \mathbb{N}$ such that for $n \ge N(\omega)$,
-		$$
-		\sup_{0 \le s \le \theta^n} \left( B_s(\omega)-\frac{(1+\delta)h(\theta^n)}{2\theta^n} s\right) \le \frac{1}{2}h (\theta^n).  
-		$$
-		But,
-		$$
-		\sup_{0 \le s \le \theta^n} \left( B_s(\omega) -\frac{(1+\delta)h(\theta^n)}{2\theta^n} s\right) \le \frac{1}{2} h (\theta^n)  
-		$$
-		implies that for $\theta^{n+1} \le t\le \theta^n$,
-		$$
-		B_t (\omega) \le \sup_{0 \le s \le \theta^n} B_s(\omega) \le \frac{1}{2} (2+\delta)h (\theta^n) \le \frac{(2+\delta)h(t)}{2\sqrt{\theta}}.  
-		$$
-		We conclude:
-		$$
-		\bP \left( \lim \sup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t\log  \log  \frac{1}{t}}} \le \frac{2+\delta}{2\sqrt{\theta}}\right)=1.  
-		$$
-		Letting now $\theta \rightarrow 1$ and $\delta \rightarrow 0$ yields
-		$$
-		\bP \left( \lim \sup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \le 1\right)=1.  
-		$$
-		Let us now prove that
-		$$
-		\bP \left( \lim \sup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t\log  \log  \frac{1}{t}}} \ge 1 \right)=1.  
-		$$
-		Let $\theta \in (0,1)$. For $n \in \mathbb{N}$, we denote
-		$$
-		A_n=\left\{ \omega, B_{\theta^n}(\omega)-B_{\theta^{n+1}}(\omega) \ge (1-\sqrt{\theta})h(\theta^n)\right\}.  
-		$$
-		Let us prove that $\sum \bP  (A_n)=+\infty$.  The basic inequality
-		$$
-		\int_{a}^{+\infty} e^{-\frac{u^2}{2}}du \ge \frac{a}{1+a^2}e^{-\frac{a^2}{2}},  
-		$$
-		implies
-		$$
-		\bP  (A_n)=\frac{1}{\sqrt{2\pi}}\int_{a_n}^{+\infty}e^{-\frac{u^2}{2}}du  \ge \frac{a_n}{1+a_n^2}e^{-\frac{a_n^2}{2}},  
-		$$
-		with
-		$$
-		a_n=\frac{(1-\sqrt{\theta})h(\theta^n)}{\theta^{n/2} \sqrt{1-\theta}}.  
-		$$
-		When $n \to +\infty$,
-		$$
-		\frac{a_n}{1+a_n^2} e^{-\frac{a_n^2}{2}}=O\left(\frac{1}{n^{\frac{1+\theta-2\sqrt{\theta}}{1-\theta}}}\right),  
-		$$
-		therefore,
-		$$
-		\sum \bP  (A_n)=+\infty.  
-		$$
-		As a consequence of the independence of the Brownian increments and of Borel-Cantelli lemma, the event
-		$$
-		B_{\theta^n}-B_{\theta^{n+1}} \ge (1-\sqrt{\theta})h(\theta^n)  
-		$$
-		will occur almost surely for infinitely many $n$'s. But, thanks to the first part of the proof, for almost every $\omega$, we may find $N(\omega)$ such that for $n \ge N(\omega)$,
-		$$
-		B_{\theta^{n+1}}>-2h(\theta^{n+1})\ge-2\sqrt{\theta} h(\theta^n).  
-		$$
-		
-		Thus, almost surely, the event $B_{\theta^n} >h(\theta^n)(1-3\sqrt{\theta})$ will occur for infinitely many $n$'s. This implies
-		$$
-		\bP \left( \lim \sup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \ge 1-3\sqrt{\theta} \right)=1.  
-		$$
-		We finally get
-		\[
-		\bP \left( \lim \sup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \ge 1 \right)=1.  
-		\]
-		by letting $\theta \to 0$. 
-	\end{proof}
-	As a straightforward consequence, we may observe that the time inversion invariance property of Brownian motion implies: 
-	\begin{corollary}
-		Let $(B_t)_{t\ge 0}$ be a standard Brownian motion.
-		\[ 
-		\bP \left( \lim \inf_{t \rightarrow +\infty} \frac{B_{t}}{\sqrt{2t \log  \log  t}} =-1,\lim  \sup_{t \rightarrow +\infty} \frac{B_{t}}{\sqrt{2t \log  \log  t}} =1\right)=1.
-		\]
-	\end{corollary}
 	
 	
 	\section{Martingale}
 	
 	
-	
+	\subsection{Discrete time}
 	%Let $\bT=\mN$ or $\mR_+$, be a parameter set for time. 
 	
 	
@@ -517,6 +417,7 @@ citecolor=magenta]{hyperref}
 	\begin{definition}
 		Let $X_t$ be a real-valued $\cF_t$-adapted processes. If for each $t$ and $s<t$, $X_t$ is integrable and $\bE(X_t | \cF_s) \geq (\leq) X_s$ a.s., then we call $X_t$ is a {\bf submartingale (supermartingale)}. We say $X_t$ is a {\bf martingale} if it is both a submartingale and a supermartingale. 
 	\end{definition}
+	Suppose $M_n$ is a martingale, and $\varphi$ is convex function. Assume that $\bE |\varphi(M_n)|<\infty$, in the light of Jesen's inequality, $\varphi(M_n)$ is a submartingale. 
 	
 	\begin{example}
 		Let $\xi_1, \xi_2, \cdots$ be a sequence of i.i.d random variable. Set $X_n:=\sum_{i=0}^n \xi_i$ and $\cF_n:=\sigma(\xi_0,\cdots \xi_n)$. 
@@ -524,8 +425,20 @@ citecolor=magenta]{hyperref}
 	
  Below we recall the results about discrete time martingales and submartingales that will be used. The proof of the subsequent statements can be found in Durrett’s book \cite{durrett2019probability}, and in many other books dealing with discrete time martingales.
 	\begin{theorem}[Doob]\label{thm:Doob-D}
- If $X_n\in \cF_n$  is a submartingale then it can be uniquely decomposed as $X_n=M_n+A_n$, where $M_n\in \cF_n$ is martingale, $A_n=0$, $A_{n+1}\geq A_n$ almost surely and $A_n$ is $\cF_{n-1}$-measurable.
+ If $X_n\in \cF_n$  is a submartingale then it can be uniquely decomposed as $X_n=M_n+A_n$, where $M_n\in \cF_n$ is martingale, $A_0=0$, $A_{n+1}\geq A_n$ almost surely and $A_n$ is $\cF_{n-1}$-measurable.
 	\end{theorem}
+	\begin{proof}
+		Let 
+		\begin{equation*}
+			A_0=0, \quad A_n:=\sum_{k=1}^n\bE (X_{k}-X_{k-1}|\cF_{k-1})
+		\end{equation*}
+		and 
+		\[
+		    M_n=X_n-A_n= X_0+ \sum_{k=1}^n \l[ (X_k-X_{k-1})- \bE (X_{k}-X_{k-1}|\cF_{k-1})\r]. 
+		\]
+		Then $M_n$ and $A_n$ are the desired processes. The proof for the uniqueness result is easy. 
+	\end{proof}
+	
 	The following theorem lies at the basis of all other results for
 	martingales.
 	\begin{theorem}[Doob's Optional stopping theorem]\label{thm:Doob}
@@ -600,34 +513,32 @@ citecolor=magenta]{hyperref}
 		\[
 		\lim_{n\to\infty}\bE (X|\cF_n) = \bE (X|\cF_\infty),\quad a.s. \mbox{ and in } L^1. 
 		\]
-	\end{corollary}
-
-    For an example of a discrete martingale, let $\Omega=[0,1], \mathbf{P}$ Lebesgue measure, and $f$ an integrable function on $[0,1]$. Let $\mathcal{F}_n$ be the $\sigma$-field generated by the sets 
-    \[
-        \left\{\left[k / 2^n,(k+1) / 2^n\right), k=0,1, \ldots, 2^n-1\right\}. 
-    \]
-    Let $f_n=\mathbf{E}\left[f \mid \mathcal{F}_n\right]$. If $I$ is an interval in $\mathcal{F}_n,$ shows that
-    $$
-      f_n(x)=\frac{1}{|I|} \int_I f(y) d y \quad \text { if } x \in I.
-    $$
-    $f_n$ is a particular example of what is known as a dyadic martingale. Of course, $[0,1]$ could be replaced by any interval as long as we normalize so that the total mass of the interval is $1$. We could also divide cubes in $\mathbb{R}^d$ into $2^d$ subcubes at each step and define $f_n$ analogously. Such martingales are called dyadic martingales. In fact, we could replace Lebesgue measure by any finite measure $\mu$, and instead of decomposing into equal subcubes, we could use any nested partition of sets we like, provided none of these sets had $\mu$ measure $0$.
+	\end{corollary} 
 	
-	\medspace 
+	\subsection{Continuous time}
 	
-	{\bf {\em All of the above results also hold for all right continuous martingale (submartingales) (see \cite{Huang})}}. 
+	{\bf {\em All of the above results also hold for all right continuous martingale (submartingales) (see \cite{Huang})}}, except the Doob decomposition theorem. 
+	
+	The celebrated {\bf Doob-Meyer decomposition}\index{Doob-Meyer decomposition} says that, under mild hypotheses, a submartingale can be decomposed into a martingale plus an increasing process. We are limiting ourselves to continuous submartingales, and the theorem we want to state is the following.
 	
 	\begin{theorem}
-	Assume $X$ is a continuous submartingale, then there exists a unique martingale $M$ and a unique continuous increasing adapted process $A$ such that 
-	\[
-	A_0=0, \quad X_t= M_t+A_t. 
-	\]
+		Suppose that $X_t$ is a continuous submartingale, then there exists a unique martingale $M$ and a unique continuous adapted process $A$ with finite bounded variation on each interval such that 
+		\[
+		A_0=0, \quad X_t= M_t+A_t. 
+		\]
 	\end{theorem}
-	If $M$ is a continuous square integrable martingale, then $M^2$ is a submartingale. Thus, there exists a continuous increasing process, denoted by $\langle M\rangle$, the {\bf quadratic variation} of $M$, such that $M^2-\langle M\rangle$ is a martingale. Particularly, $\bE M_t^2 - \bE M_0^2 = \bE \langle M \rangle_t$. 
+	
+	\medspace
+	
+	We say that $M_t$ if a {\bf local martingale} if there exist stopping times $\tau_n\uparrow \infty$ such that $X_{\tau_n\wedge t}$ is a martingale for each $n\in \mN$. A process is a {\bf semimartingale} if it is the sum of a local martingale and a process that is locally of finite bounded variation (i.e., finite bounded variation on every interval $[0,t]$). We will be dealing almost exclusively with continuous processes, so unless stated otherwise, all of our processes will have continuous paths. 
+	
+	If $M$ is a continuous square integrable martingale, then $M^2$ is a submartingale.  In the light of {Doob-Meyer's decomposition} theorem, there is a (unique) increasing continuous process, denoted by $\<M\>_t$ such that $M^2_t-\<M\>_t$ is a martingale. Particularly, $\bE M_t^2 - \bE M_0^2 = \bE \langle M \rangle_t$.  More general, if $M$ is a local martingale, the {\bf quadratic variation} of $M$ is the unique increasing continuous process $\<M\>_t$ such that $M^2_t-\<M\>_t$ is a local martingale.  
+	
 	 
-	
-	\section{Stochastic Integral}
-	
-	From now on, unless stated otherwise, our processes have continuous paths. 
+	 If $X_t=$ $M_t+A_t$, where $M_t$ is a local martingale and $A_t$ has paths of locally finite bounded variation, then $\langle X\rangle_t$ is defined to be $\langle M\rangle_t$. If $X$ and $Y$ are two semimartingales, we define
+	$$
+	    \langle X, Y\rangle_t=\frac{1}{2}\left(\langle X+Y\rangle_t-\langle X\rangle_t-\langle Y\rangle_t\right). 
+	$$
 	
 	\begin{lemma}
 		Let $M_t$ be a square integrable martingale (that is, $M_t \in L^2$ for every $t \geq 0$ ). Let $0 \leq s<t$ and let $s=t_0<t_1<\cdots<t_n=t$ be a division of the interval $[s, t]$. Then,
@@ -648,21 +559,24 @@ citecolor=magenta]{hyperref}
 		and the desired result follows by summing over $i$. 
 	\end{proof}
 	
-	We say that $M_t$ if a {\bf local martingale} if there exist stopping times $\tau_n\uparrow \infty$ such that $X_{\tau_n\wedge t}$ is a martingale for each $n\in \mN$.
+	
 	\begin{theorem}\label{Thm:quadratic}
 		Let $M_t$ be a continuous local martingale. There exists an increasing process denoted by $\langle M \rangle_t$, which is unique up to indistinguishability, such that $M_t^2-\langle M\rangle_t$ is a continuous local martingale. Furthermore, for every fixed $t>0$, if $\pi^n=\{(t_0^n,\cdots, t_{k_n}^n): 0=t_0^n<t_1^n<\cdots<t_{k_n}^n=t\}$ is an increasing sequence of subdivisions of $[0, t]$ with mesh going to 0 , then we have
-		$$
-		\langle  M\rangle_t=\lim _{n \rightarrow \infty} \sum_{i=1}^{k_n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right)^2
-		$$
+		\begin{equation}\label{eq:quadratic}
+			\langle  M\rangle_t=\lim _{n \rightarrow \infty} \sum_{i=1}^{k_n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right)^2
+		\end{equation}
 		in probability. The process $\langle M\rangle_t$ is called the quadratic variation of $M_t $. 
 	\end{theorem}
 	
-	\begin{lemma}
+	\begin{lemma}\label{lem:quadratic}
 		Let $M_t$ be a continuous bounded martingale.  Let $\pi^n=\{(t_0^n,\cdots, t_{k_n}^n): 0=t_0^n<t_1^n<\cdots<t_{k_n}^n=T\}$ be an increasing sequence of subdivisions of $[0, T]$ with mesh going to 0 , then for each $n$, 
 		$$
 		N^n_t:= \sum_{i=1}^{k_n}M_{t_{i-1}}(M_{t_i\wedge t}-M_{t_{i-1}\wedge t})
 		$$ 
-		is a martingale, and $N^n_t$ convergent uniformly on compacts, with probability one to some square integrable martingale $N_t$. 
+		is a martingale, and there exists a  continuous square integrable martingale $N_t$ such that 
+		\[
+		\bE \sup_{t\in [0,T]} |N_t^n-N_t|^2 \to 0. 
+		\]
 	\end{lemma}
 	\begin{proof}
 		It is easy to verify that $N_t^n$ is a martingale. 
@@ -677,7 +591,7 @@ citecolor=magenta]{hyperref}
 		$$
 		\begin{aligned}
 			& \bE\left[M_{t_{i-1}^n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right) M_{t_{j-1}^m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)\right] \\
-		    =& \bE\left[M_{t_{i-1}^n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right) M_{t_{j-1}^m} \bE\left[M_{t_j^m}-M_{t_{j-1}^m} \mid \mathscr{F}_{t_{j-1}^m}\right]\right]=0 .
+			=& \bE\left[M_{t_{i-1}^n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right) M_{t_{j-1}^m} \bE\left[M_{t_j^m}-M_{t_{j-1}^m} \mid \mathscr{F}_{t_{j-1}^m}\right]\right]=0 .
 		\end{aligned}
 		$$
 		
@@ -691,7 +605,7 @@ citecolor=magenta]{hyperref}
 		$$
 		and we observe that, if $k$ is such that $i_{n, m}(k)=i$ but $k \neq j$,
 		$$
-	    \bE\left[M_{t_{i-1}^n}\left(M_{t_k^m}-M_{t_{k-1}^m}\right) M_{t_{j-1}^m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)\right]=0
+		\bE\left[M_{t_{i-1}^n}\left(M_{t_k^m}-M_{t_{k-1}^m}\right) M_{t_{j-1}^m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)\right]=0
 		$$
 		(condition on $\mathscr{F}_{t_{k-1}^m}$ if $k>j$ and on $\mathscr{F}_{t_{j-1}^m}$ if $k<j$ ). The only case that remains is $k=j$, and we have thus obtained
 		$$
@@ -705,52 +619,231 @@ citecolor=magenta]{hyperref}
 		Furthermore,
 		\begin{equation*}
 			\begin{aligned}
-				\bE\left[\left(N_T^n\right)^2\right] & =\sum_{1 \leq i \leq p_n} \bE\left[M_{t_{i-1}^n}^2\left(M_{t_i^n}-M_{t_{i-1}^n}\right)^2\right] \\
-				& =\sum_{1 \leq i \leq p_n} \bE\left[M_{t_{i-1}^n}^2 \bE\left[\left(M_{t_i^n}-M_{t_{i-1}^n}\right)^2 \mid \mathscr{F}_{i_{i-1}^n}^n\right]\right] \\
-				& =\sum_{1 \leq i \leq p_n} \bE\left[M_{t_{i-1}^n}^2 \sum_{j: i_{n, m}(j)=i} \bE\left[\left(M_{t_j^m}-M_{t_{j-1}^m}^m\right)^2 \mid \mathscr{F}_{t_{i-1}^n}\right]\right] \\
-				& =\sum_{1 \leq j \leq p_m, i=i_{n, m}(j)} \bE\left[M_{t_{i-1}^n}^2\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right],
+				\bE\left[\left(N_T^n\right)^2\right] & =\sum_{1 \leq i \leq k_n} \bE\left[M_{t_{i-1}^n}^2\left(M_{t_i^n}-M_{t_{i-1}^n}\right)^2\right] \\
+				& =\sum_{1 \leq i \leq k_n} \bE\left[M_{t_{i-1}^n}^2 \bE\left[\left(M_{t_i^n}-M_{t_{i-1}^n}\right)^2 \mid \mathscr{F}_{i_{i-1}^n}^n\right]\right] \\
+				& =\sum_{1 \leq i \leq k_n} \bE\left[M_{t_{i-1}^n}^2 \sum_{j: i_{n, m}(j)=i} \bE\left[\left(M_{t_j^m}-M_{t_{j-1}^m}^m\right)^2 \mid \mathscr{F}_{t_{i-1}^n}\right]\right] \\
+				& =\sum_{1 \leq j \leq k_m, i=i_{n, m}(j)} \bE\left[M_{t_{i-1}^n}^2\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right],
 			\end{aligned}
 		\end{equation*}
 		
 		If we combine the last three displays, we get
 		$$
-		\bE\left[\left(N_T^n-N_T^m\right)^2\right]=\bE\left[\sum_{1 \leq j \leq p_m, i=i_{n, m}(j)}\left(M_{t_{i-1}^n}-M_{t_{j-1}^m}\right)^2\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] .
+		\bE\left[\left(N_T^n-N_T^m\right)^2\right]=\bE\left[\sum_{1 \leq j \leq k_m, i=i_{n, m}(j)}\left(M_{t_{i-1}^n}-M_{t_{j-1}^m}\right)^2\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] .
 		$$
 		
 		Using the Cauchy-Schwarz inequality, we then have
 		$$
 		\begin{aligned}
-			\bE\left[\left(N_T^n-N_T^m\right)^2\right] \leq & \bE\left[\sup _{1 \leq j \leq p_m, i=i_{n, m}(j)}\left(M_{t_{i-1}^n}-M_{t_{j-1}^m}\right)^4\right]^{1 / 2} \\
-			& \times \bE\left[\left(\sum_{1 \leq j \leq p_m}\left(M_{t_j^m}-M_{t_{j-1}^m}^m\right)^2\right)^2\right]^{1 / 2} .
+			\bE\left[\left(N_T^n-N_T^m\right)^2\right] \leq & \bE\left[\sup _{1 \leq j \leq k_m, i=i_{n, m}(j)}\left(M_{t_{i-1}^n}-M_{t_{j-1}^m}\right)^4\right]^{1 / 2} \\
+			& \times \bE\left[\left(\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}^m\right)^2\right)^2\right]^{1 / 2} .
 		\end{aligned}
 		$$
 		
 		By the continuity of sample paths (together with the fact that the mesh of our subdivisions tends to 0 ) and dominated convergence, we have
 		$$
-		\lim _{n, m \rightarrow \infty, n \leq m} \bE\left[\sup _{1 \leq j \leq p_m, i=i_{n, m}(j)}\left(M_{t_{i-1}^n}-M_{t_{j-1}^m}\right)^4\right]=0 .
+		\lim _{n, m \rightarrow \infty, n \leq m} \bE\left[\sup _{1 \leq j \leq k_m, i=i_{n, m}(j)}\left(M_{t_{i-1}^n}-M_{t_{j-1}^m}\right)^4\right]=0 .
 		$$
 		
 		To complete the proof of the lemma, it is then enough to prove the existence of a finite constant $C$ such that, for every $m$,
 		$$
-		\bE\left[\left(\sum_{1 \leq j \leq p_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right)^2\right] \leq C .
+		\bE\left[\left(\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right)^2\right] \leq C .
 		$$
 		
 		Let $A$ be a constant such that $\left|M_t\right| \leq A$ for every $t \geq 0$. Expanding the square and using Proposition 3.14 twice, we have
-		$$
-		\begin{aligned}
-			& \bE\left[\left(\sum_{1 \leq j \leq p_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right)^2\right] \\
-			& =\bE\left[\sum_{1 \leq j \leq p_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^4\right]+2 \bE\left[\sum_{1 \leq j<k \leq p_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\left(M_{t_k^m}-M_{t_{k-1}^m}\right)^2\right] \\
-			& \leq 4 A^2 \bE\left[\sum_{1 \leq j \leq p_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] \\
-			& \quad+2 \sum_{j=1}^{p_m-1} \bE\left[\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2 \bE\left[\sum_{k=j+1}^{p_m}\left(M_{t_k^m}-M_{t_{k-1}^m}\right)^2 \mid \mathscr{F}_{t_j^m}\right]\right] \\
-			& =4 A^2 \bE\left[\sum_{1 \leq j \leq p_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] \\
-			& \quad+2 \sum_{j=1}^{p_m-1} \bE\left[\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2 \bE\left[\left(M_T-M_{t_j^m}\right)^2 \mid \mathscr{F}_{t_j^m}\right]\right]
-		\end{aligned}
-		$$
+		\begin{align*}
+			& \bE\left[\left(\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right)^2\right] \\
+			& =\bE\left[\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^4\right]+2 \bE\left[\sum_{1 \leq j<k \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\left(M_{t_k^m}-M_{t_{k-1}^m}\right)^2\right] \\
+			& \leq 4 A^2 \bE\left[\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] \\
+			& \quad+2 \sum_{j=1}^{k_m-1} \bE\left[\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2 \bE\left[\sum_{k=j+1}^{k_m}\left(M_{t_k^m}-M_{t_{k-1}^m}\right)^2 \mid \mathscr{F}_{t_j^m}\right]\right] \\
+			& =4 A^2 \bE\left[\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] \\
+			& \quad+2 \sum_{j=1}^{k_m-1} \bE\left[\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2 \bE\left[\left(M_T-M_{t_j^m}\right)^2 \mid \mathscr{F}_{t_j^m}\right]\right]\\
+			& \leq 12 A^2 E\left[\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] \\
+			& =12 A^2 E\left[\left(M_T-M_0\right)^2\right] \\
+			& \leq 48 A^4
+		\end{align*}
+		Thanks to Doob’s inequality, we obtain our assertion. 
 	\end{proof}
 	
+	We now return to the proof of the theorem. 
 	\begin{proof}[Proof of Theorem \ref{Thm:quadratic}]
+		Assume that $M$ is a continuous bounded martingale with $M_0=0$. Note that 
+		\[
+		M_t^2-2 N_t^n = \sum_{i=1}^{k_n} (M_{t_i\wedge t}-M_{t_{i-1}\wedge t})^2
+		\]
+		are nondecreasing along the finite sequence $\left(t_i^n, 0 \leq i \leq k_n\right)$. By passing to the limit $n \rightarrow \infty$ along the sequence $\left(n_k\right)_{k \geq 1}$, we get that the sample paths of $M_t^2-$ $2 Y_t$ are continuous and  nondecreasing on $[0, T]$, and it is a martingale. It follows that we can define an increasing process $A^T_t$ such that $A^T_t=M_t^2-2Y_t$ for every $t \in[0, T]$ and clearly $M_t^2-A^{T}_t$ is a martingale. It is now standard to verify that $A^{T}_t$ and $A^{T'}_t$ are coincide when $t\leq T\wedge T'$. It follows that we can define an increasing process $\langle M \rangle$ such that $\langle M \rangle_t=A_t^{T}$ for every $t \in[0, T]$ and every $T \geq 1$, a.s., and clearly $M_t^2-\langle M \rangle_t$ is a martingale. By fact that $N_T^n$ converges in $L^2$ to $N_T=\frac{1}{2}\left(M_T^2-A_T^T\right)$, we get that
+		$$
+		\lim _{n \rightarrow \infty} \sum_{j=1}^{k_n}\left(M_{t_j^n}-M_{t_{j-1}^n}\right)^2=\langle M \rangle_T
+		$$
+		in $L^2$. This completes the proof of the theorem in the case when $M_0=0$ and $M$ is bounded.
 		
+		Let us consider the general case. Writing $M_t=M_0+m_t$, so that $M_t^2=$ $M_0^2+2 M_0 m_t+m_t^2$, and noting that $M_0 m_t$ is a continuous local martingale, we see that we may assume that $M_0=0$. We then set
+		$$
+		\tau_n=\inf \left\{t \geq 0:\left|M_t\right| \geq n\right\}
+		$$
+		and we can apply the bounded case to the stopped martingales $M^{\tau_n}$. Set $A^{[n]}=$ $\left\langle M^{\tau_n}\right\rangle$. The uniqueness part of the theorem shows that the processes $A_{t \wedge \tau_n}^{[n+1]}$ and $A_t^{[n]}$ are indistinguishable. It follows that there exists an increasing process $A$ such that, for every $n$, the processes $A_{t \wedge \tau_n}$ and $A_t^{[n]}$ are indistinguishable. By construction, $M_{t \wedge \tau_n}^2-A_{t \wedge \tau_n}$ is a martingale for every $n$, which precisely implies that $M_t^2-A_t$ is a continuous local martingale. We take $\langle M \rangle_t=A_t$, which completes the proof of the existence part of the theorem.
+		
+		Finally, to get \eqref{eq:quadratic}, it suffices to consider the case $M_0=0$. The bounded case then shows that \eqref{eq:quadratic} holds if $M$ and $\langle M \rangle_t$ are replaced respectively by $M^{\tau_n}$ and $\langle M \rangle_{t \wedge \tau_n}$ (even with convergence in $L^2$ ). Then it is enough to observe that, for every $t>0, P\left(t \leq \tau_n\right)$ converges to 1 when $n \rightarrow \infty$.
 	\end{proof}
+	
+	
+	\subsection{Some applications}
+	
+	For an example of a discrete martingale, let $\Omega=[0,1], \mathbf{P}$ Lebesgue measure, and $f$ an integrable function on $[0,1]$. Let $\mathcal{F}_n$ be the $\sigma$-field generated by the sets 
+	\[
+	\left\{\left[k / 2^n,(k+1) / 2^n\right), k=0,1, \ldots, 2^n-1\right\}. 
+	\]
+	Let $f_n=\mathbf{E}\left[f \mid \mathcal{F}_n\right]$. If $I$ is an interval in $\mathcal{F}_n,$ shows that
+	$$
+	f_n(x)=\frac{1}{|I|} \int_I f(y) d y \quad \text { if } x \in I.
+	$$
+	$f_n$ is a particular example of what is known as a dyadic martingale. Of course, $[0,1]$ could be replaced by any interval as long as we normalize so that the total mass of the interval is $1$. We could also divide cubes in $\mathbb{R}^d$ into $2^d$ subcubes at each step and define $f_n$ analogously. Such martingales are called dyadic martingales. In fact, we could replace Lebesgue measure by any finite measure $\mu$, and instead of decomposing into equal subcubes, we could use any nested partition of sets we like, provided none of these sets had $\mu$ measure $0$.
+	\begin{exercise}
+		Show that the martingale convergence theorem implies that $f_n\to f$, a.e. 
+	\end{exercise}
+	
+	
+	 The martingale convergence theorem also provides the basis of the Calderón-Zygmund lemma. We give the standard proof, phrased in martingale language.
+	 \begin{lemma}[Calderón-Zygmund]
+	 	Let $f \geq 0$ be integrable. Let $\alpha>0$. There exists a closed set $F$ and countably many pairwise disjoint open cubes $Q_i$ such that $\left|F^c \Delta \cup_i Q_i\right|=0, f \leq \alpha$ a.e. on $F$, and for each $i$,
+	 	$$
+	 	\alpha \leq \frac{1}{\left|Q_i\right|} \int_{Q_i} f \leq 2^d \alpha .
+	 	$$
+	 	Moreover, 
+	 	\[
+	 	\left|F^c\right| \leq \frac{1}{\alpha} \int f .
+	 	\]
+	 \end{lemma}
+	 \begin{proof}
+	 	First of all, note that the last assertion is a consequence of (4.9), since (4.9) implies $\left|Q_i\right| \leq \int_{Q_i} f / \alpha$. Summing over $i$ then gives $\left|\cup_i Q_i\right| \leq$ $\int_{\cup_2 Q_2} f / \alpha \leq \int f / \alpha$.
+	 	
+	 	Suppose next that $R$ is a cube with $|R|^{-1} \int_R f<\alpha / 2$ and look at the dyadic martingale $f_n=\bE \left[f \mid \mathcal{F}_n\right]$, where $\mathcal{F}_n$ is the partition of $R$ into $2^{n d}$ equal cubes. Let $T=\inf \left\{n: f_n>\alpha\right\}$. Note by our assumption on $R$ that $T>0$. For each $n,(T=n)$ is the union of cubes in $\mathcal{F}_n$, and the boundary of $(T=n)$ has measure 0 . Let
+	 	$$
+	 	F^c=\bigcup_n(\operatorname{int}(T=n)) .
+	 	$$
+	 	
+	 	Then $F$ is closed.
+	 	If $n<T$, then $f_n \leq \alpha$. By the martingale convergence theorem, on $(T=\infty)$ we have $f=\lim _n f_n \leq \alpha$. Since $F$ differs from the set $(T=\infty)=$ $(T<\infty)^c=\left(\cup_n(T=n)\right)^c$ by a set of measure 0 , then $f \leq \alpha$ a.e. on $F$.
+	 	
+	 	If $Q$ is one of the cubes in $\mathcal{F}_n$ contained in $(T=n)$ and $x \in \operatorname{int}(Q)$, then
+	 	$$
+	 	\frac{1}{|Q|} \int_Q f=f_n(x) \geq \alpha .
+	 	$$
+	 	
+	 	By our definition of $T, f_{n-1}(x) \leq \alpha$. Let $Q^{\prime}$ be the element of $\mathcal{F}_{n-1}$ containing $Q$. Then since $\left|Q^{\prime}\right|=2^d|Q|$,
+	 	$$
+	 	\frac{1}{|Q|} \int_Q f \leq \frac{2^d}{\left|Q^{\prime}\right|} \int_{Q^{\prime}} f \leq 2^d \alpha .
+	 	$$
+	 	
+	 	Finally, take $n_0$ large enough so that $\|f\|_1 / 2^{n_0 d}<\alpha / 2$. We will take each cube $R_j$ that has side length $2^{n_0}$ and vertices at integer multiples of $2^{n_0}$ and decompose $R_j$ into $F_j$ and $Q_i^j$ as above. If we then let $F=\cup_j F_j$, we have our result.
+	 \end{proof}
+	
+	
+	\bigskip
+	
+	We already observed that as a consequence of Kolmogorov’s continuity theorem, the Brownian paths are $\alpha$-H\"older continuous for every $\alpha \in \left(0,\frac{1}{2}\right)$. The next proposition, which is known as the law of iterated logarithm shows in particular that Brownian paths are not $\frac{1}{2}$-H\"older continuous.
+	\begin{theorem}[law of iterated logarithm]
+		Let $(B_t)_{t\ge 0}$ be a Brownian motion. For $s \ge 0$,
+		\[
+		\bP \left( \liminf_{t \rightarrow 0} \frac{B_{t+s}-B_s}{\sqrt{2t \log  \log  \frac{1}{t}}} =-1 , \limsup_{t \rightarrow 0} \frac{B_{t+s}-B_s}{\sqrt{2t\log  \log  \frac{1}{t}}} =1 \right)=1.  
+		\]
+	\end{theorem}
+	\begin{proof}
+		Thanks to the symmetry and invariance by translation of the Brownian motion, it suffices to show that:
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t\log  \log  \frac{1}{t}}} =1 \right)=1.  
+		$$
+		Let us first prove that 
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \le 1 \right)=1.  
+		$$
+		Let us denote $h(t)=\sqrt{2t \log  \log  \frac{1}{t}}$.   Let $\alpha, \beta >0$, from Doob’s maximal inequality applied to the martingale $\left(e^{\alpha B_t-\frac{\alpha^2}{2}t} \right)_{t \ge 0}$, we have for $t \ge 0$:
+		\[
+		\bP  \left(  \sup_{0 \le s \le t} \left( B_s-\frac{\alpha}{2}s\right)>\beta \right)=\bP  \left(  \sup_{0 \le s \le t} e^{\alpha B_s -\frac{\alpha^2}{2}s} >e^{\alpha \beta}\right) \le e^{-\alpha \beta}.
+		\]
+		Let now $\theta , \delta \in (0,1)$. Using the previous inequality for every $n \in \mathbb{N}$ with $t=\theta^n, \alpha=\frac{(1+\delta)h(\theta^n)}{\theta^n}, \beta=\frac{1}{2} h (\theta^n)$,  yields when $n \rightarrow +\infty$,
+		$$
+		\bP  \left(  \sup_{0 \le s \le \theta^n} \left( B_s -\frac{(1+\delta)h(\theta^n)}{2\theta^n}s\right)>\frac{1}{2} h (\theta^n) \right)=O\left( \frac{1}{n^{1+\delta}} \right).  
+		$$
+		Therefore from Borel-Cantelli lemma, for almost every $\omega \in \Omega$, we may find $N(\omega)\in \mathbb{N}$ such that for $n \ge N(\omega)$,
+		$$
+		\sup_{0 \le s \le \theta^n} \left( B_s(\omega)-\frac{(1+\delta)h(\theta^n)}{2\theta^n} s\right) \le \frac{1}{2}h (\theta^n).  
+		$$
+		But,
+		$$
+		\sup_{0 \le s \le \theta^n} \left( B_s(\omega) -\frac{(1+\delta)h(\theta^n)}{2\theta^n} s\right) \le \frac{1}{2} h (\theta^n)  
+		$$
+		implies that for $\theta^{n+1} \le t\le \theta^n$,
+		$$
+		B_t (\omega) \le \sup_{0 \le s \le \theta^n} B_s(\omega) \le \frac{1}{2} (2+\delta)h (\theta^n) \le \frac{(2+\delta)h(t)}{2\sqrt{\theta}}.  
+		$$
+		We conclude:
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t\log  \log  \frac{1}{t}}} \le \frac{2+\delta}{2\sqrt{\theta}}\right)=1.  
+		$$
+		Letting now $\theta \rightarrow 1$ and $\delta \rightarrow 0$ yields
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \le 1\right)=1.  
+		$$
+		Let us now prove that
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t\log  \log  \frac{1}{t}}} \ge 1 \right)=1.  
+		$$
+		Let $\theta \in (0,1)$. For $n \in \mathbb{N}$, we denote
+		$$
+		A_n=\left\{ \omega, B_{\theta^n}(\omega)-B_{\theta^{n+1}}(\omega) \ge (1-\sqrt{\theta})h(\theta^n)\right\}.  
+		$$
+		Let us prove that $\sum \bP  (A_n)=+\infty$.  The basic inequality
+		$$
+		\int_{a}^{+\infty} e^{-\frac{u^2}{2}}du \ge \frac{a}{1+a^2}e^{-\frac{a^2}{2}},  
+		$$
+		implies
+		$$
+		\bP  (A_n)=\frac{1}{\sqrt{2\pi}}\int_{a_n}^{+\infty}e^{-\frac{u^2}{2}}du  \ge \frac{a_n}{1+a_n^2}e^{-\frac{a_n^2}{2}},  
+		$$
+		with
+		$$
+		a_n=\frac{(1-\sqrt{\theta})h(\theta^n)}{\theta^{n/2} \sqrt{1-\theta}}.  
+		$$
+		When $n \to +\infty$,
+		$$
+		\frac{a_n}{1+a_n^2} e^{-\frac{a_n^2}{2}}=O\left(\frac{1}{n^{\frac{1+\theta-2\sqrt{\theta}}{1-\theta}}}\right),  
+		$$
+		therefore,
+		$$
+		\sum \bP  (A_n)=+\infty.  
+		$$
+		As a consequence of the independence of the Brownian increments and of Borel-Cantelli lemma, the event
+		$$
+		B_{\theta^n}-B_{\theta^{n+1}} \ge (1-\sqrt{\theta})h(\theta^n)  
+		$$
+		will occur almost surely for infinitely many $n$'s. But, thanks to the first part of the proof, for almost every $\omega$, we may find $N(\omega)$ such that for $n \ge N(\omega)$,
+		$$
+		B_{\theta^{n+1}}>-2h(\theta^{n+1})\ge-2\sqrt{\theta} h(\theta^n).  
+		$$
+		
+		Thus, almost surely, the event $B_{\theta^n} >h(\theta^n)(1-3\sqrt{\theta})$ will occur for infinitely many $n$'s. This implies
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \ge 1-3\sqrt{\theta} \right)=1.  
+		$$
+		We finally get
+		\[
+		\bP \left( \limsup_{t \rightarrow 0} \frac{B_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \ge 1 \right)=1.  
+		\]
+		by letting $\theta \to 0$. 
+	\end{proof}
+	As a straightforward consequence, we may observe that the time inversion invariance property of Brownian motion implies: 
+	\begin{corollary}
+		Let $(B_t)_{t\ge 0}$ be a standard Brownian motion.
+		\[ 
+		\bP \left( \liminf_{t \rightarrow +\infty} \frac{B_{t}}{\sqrt{2t \log  \log  t}} =-1,\lim  \sup_{t \rightarrow +\infty} \frac{B_{t}}{\sqrt{2t \log  \log  t}} =1\right)=1.
+		\]
+	\end{corollary} 
+	
+	\section{Stochastic Integral}
+	
+	From now on, unless stated otherwise, our processes have continuous paths. 
+	
+	
 	Let $M_t$ be a square integrable martingale, $0=t_0\leq t_1\leq \cdots \leq t_{n}=T$ and $H_s(\omega) = \sum_{i=0}^{n-1} F_i(\omega)\1_{(t_{i},t_{i+1}]}(s)$, where $F_i$ is bounded and $\cF_{t_i}$-measurable. Define 
 	\[
 	\int_0^t H_s \d M_s:= \sum_{i=0}^{n-1} F_i (M_{t\wedge t_{i+1}}-M_{t\wedge t_{i}}). 
@@ -1014,7 +1107,7 @@ By using Stratonovitch integral instead of Itô’s, the Itô formula reduces to
 		\begin{equation*}%\label{eq:exitT-finite}
 			\bE(\tau_D<\infty)=1, 
 		\end{equation*}
-		where $\tau_D=\inf\{t>0: x\notin D\}$. Then
+		where $\tau_D=\inf\{t>0: X^x_t\notin D\}$. Then
 		\[
 		    u(x)=\mathbf{E} \int_0^{\tau_D} e^{-\lambda s} f\left(X_s^x\right) \d s.		
 		\]
@@ -2011,7 +2104,7 @@ We now prove the differentiability of $X(t,x)$.
 
     One can also the following Schrödinger type operator: 
     \[
-      L_q u= Lu+cu. 
+      L_q u= Lu+q u. 
     \]
    Equation involving the above operator are considerably simpler than the quantum mechanics Schrödinger equation because here all terms are real-valued. 
 
@@ -2036,6 +2129,31 @@ $$
 $$
 where $c$ is a constant only depends on $d,\delta$ and $\varepsilon$. 
 	\end{exercise}
+	
+	\begin{exercise}
+		In this exercise, $d \geq 3$. Let $K$ be a compact subset of the open unit ball of $\mathbb{R}^d$, and $T_K:=\inf \left\{t \geq 0: B_t \in K\right\}$. We assume that $D:=\mathbb{R}^d \backslash K$ is connected. We also consider a function $g$ defined and continuous on $K$. The goal of the exercise is to determine all functions $u: \bar{D} \rightarrow \mathbb{R}$ that satisfy:
+		(P) $u$ is bounded and continuous on $\bar{D}$, harmonic on $D$, and $u(y)=g(y)$ if $y \in \partial D$.
+		(This is the Dirichlet problem in $D$, but in contrast with Sect. 7.3 above, $D$ is unbounded here.) We fix an increasing sequence $\left(R_n\right)_{n \geq 1}$ of reals, with $R_1 \geq 1$ and $R_n \uparrow \infty$ as $n \rightarrow \infty$. For every $n \geq 1$, we set $T_{(n)}:=\inf \left\{t \geq 0:\left|B_t\right| \geq R_n\right\}$.
+		
+		1. Suppose that $u$ satisfies (P). Prove that, for every $n \geq 1$ and every $x \in D$ such that $|x|<R_n$,
+		$$
+		u(x)=E_x\left[g\left(B_{T_K}\right) \mathbf{1}_{\left\{T_K \leq T_{(n)}\right\}}\right]+E_x\left[u\left(B_{\left.T_{(n)}\right)}\right) \mathbf{1}_{\left\{T_{(n)} \leq T_K\right\}}\right] .
+		$$
+		2. Show that, by replacing the sequence $\left(R_n\right)_{n \geq 1}$ with a subsequence if necessary, we may assume that there exists a constant $\alpha \in \mathbb{R}$ such that, for every $x \in D$,
+		$$
+		\lim _{n \rightarrow \infty} E_x\left[u\left(B_{T_{(n)}}\right)\right]=\alpha,
+		$$
+		and that we then have
+		$$
+		\lim _{|x| \rightarrow \infty} u(x)=\alpha .
+		$$
+		3. Show that, for every $x \in D$,
+		$$
+		u(x)=E_x\left[g\left(B_{T_K}\right) \mathbf{1}_{\left\{T_K<\infty\right\}}\right]+\alpha P_x\left(T_K=\infty\right) .
+		$$
+		4. Assume that $D$ satisfies the exterior cone condition at every $y \in \partial D$ (this is defined in the same way as when $D$ is bounded). Show that, for any choice of $\alpha \in \mathbb{R}$, the formula of question 3. gives a solution of the problem (P).
+	\end{exercise}
+	
 	
 	\section{Once again on the hitting probability}
 	Recall that 
@@ -2063,7 +2181,6 @@ where $c$ is a constant only depends on $d,\delta$ and $\varepsilon$.
 	If $Q$ is a dyadic cube different from $Q_1$, we say that $\widetilde{Q}$ is the predecessor of $Q$ if $Q$ is one of the $2^n$ cubes obtained from dividing $\widetilde{Q}$.
 	
 	We also let $Q(\kappa)$ denote the cube with the same center as $Q$ but side length $\kappa$ times as long.
-	
 	
 	\begin{lemma}[Krylov-Safonov \cite{krylov1979estimate}]\label{lem:CZ}
 		Let $\gamma\in (0,1)$. If $\Gamma\subset Q_1$ and $|\Gamma|\leq \gamma$, then there exists a sequaence of dyakic cubes, say $\{Q^i\}_{i\in \cI}$ such that 
@@ -2492,38 +2609,62 @@ that finishes the proof of Lemma \ref{lem:CZ}.
     	Prove the above poposition. (Hint: show that $C_b^1(\Omega)$ is dense in $L^2(\Omega,\bP)$.)
     \end{exercise}
     
-    We henceforth denote by $\sW^{1,2}$ the domain of the closure of $D$ and we do not distinguish between $D$ and its closure. One can of course apply the Malliavin differentiation operator repeatedly, thus yielding an unbounded closed operator $D^k$ from $L^2(\Omega,\bP)$ to $L^2(\Omega, \bP; \cH^{\otimes k})$ We denote the domain of this operator by $\sW^{k,2}$. Actually, a similar proof shows that powers of $D$ are closable as unbounded operators from $L^p(\Omega, \mathbf{P})$ to $L^p\left(\Omega, \mathbf{P}; H^{\otimes k}\right)$ for every $p \geq 1$. We denote the domain of these operators by $\mathscr{W}^{k, p}$. Furthermore, for any Hilbert space $\cK$, we denote by $\mathscr{W}^{k, p}(\cK)$ the domain of $D^k$ viewed as an operator from $L^p(\Omega, \mathbf{P}; \cK)$ to $L^p\left(\Omega, \mathbf{P}; H^{\otimes k} \otimes \cK\right)$. We call a random variable belonging to $\mathscr{W}^{k, p}$ for every $k, p \geq 1$. We call a random variable belonging to $\mathscr{W}^{k, p}$ for every $k, p \geq 1$ "Malliavin smooth" and we write $\sS=\bigcap_{k, p} \mathscr{W}^{k, p}$ as well as $\sS(\cK)=\bigcap_{k, p} \mathscr{W}^{k, p}(\cK)$. The Malliavin smooth random variables play a role analogous to that of Schwartz test functions in finite-dimensional analysis.
+    We henceforth denote by $\sW^{1,2}$ the domain of the closure of $D$ and we do not distinguish between $D$ and its closure. One can of course apply the Malliavin differentiation operator repeatedly, thus yielding an unbounded closed operator $D^k$ from $L^2(\Omega,\bP)$ to $L^2(\Omega, \bP; \cH^{\otimes k})$ We denote the domain of this operator by $\sW^{k,2}$. Actually, a similar proof shows that powers of $D$ are closable as unbounded operators from $L^p(\Omega, \mathbf{P})$ to $L^p\left(\Omega, \mathbf{P}; H^{\otimes k}\right)$ for every $p \geq 1$. We denote the domain of these operators by $\mathscr{W}^{k, p}$. Furthermore, for any Hilbert space $\cK$, we denote by $\mathscr{W}^{k, p}(\cK)$ the domain of $D^k$ viewed as an operator from $L^p(\Omega, \mathbf{P}; \cK)$ to $L^p\left(\Omega, \mathbf{P}; \cH^{\otimes k} \otimes \cK\right)$. We call a random variable belonging to $\mathscr{W}^{k, p}$ for every $k, p \geq 1$. We call a random variable belonging to $\mathscr{W}^{k, p}$ for every $k, p \geq 1$ "Malliavin smooth" and we write $\sS=\bigcap_{k, p} \mathscr{W}^{k, p}$ as well as $\sS(\cK)=\bigcap_{k, p} \mathscr{W}^{k, p}(\cK)$. The Malliavin smooth random variables play a role analogous to that of Schwartz test functions in finite-dimensional analysis.
     
    As mentioned above the main examples of $\sS$ functionals will be considered is $\varphi(X_t)$.
    \begin{proposition}
    	Let  $X_t$ be the $d$-dimensional process that is a solution to \eqref{eq:sde-S}. Assume that $\sigma$ and $b$ are $C^{\infty}_b$. Then $X_t \in \sS$.   
    \end{proposition}
    
+   \begin{lemma}
+   	   \[
+   	      \bE|\delta u|^2 = \bE |u|^2+ \sum_{k} \bE \<D u_k, Du_k\>_{\cH}
+   	   \]
+   \end{lemma}
+   \begin{proof}
+   	   Suppose $u= \sum_{k=1}^N u_k h_k$ with $u_k\in C^2_b(\Omega)$. Recall that 
+   	   \[
+   	       \delta u=  u_k (h_k\cdot \omega)- D_k u_k. 
+   	   \]
+   	   Then 
+   	   \[
+   	       \delta D_{k'}u = \delta( D_{k'} u_k\, h_k ) =D_{k'} u_k ( h_k\cdot \omega)-D_{k}D_{k'}u_k
+   	   \]
+   	  and 
+   	  \begin{equation*}
+   	    	D_{k'}\delta u = D_{k'} \l( u_k (h_k\cdot \omega)- D_k u_k \r)=D_{k'} u_k (h_k\cdot \omega)+u_{k'}-D_{k'}D_k u_k
+   	    \end{equation*}
+   	    Therefore, $D\delta u-\delta D u=u$. 
+   	    \[
+   	        \bE |\delta u|^2 = \bE \<u, D \delta u\>= \bE |u|^2_{\cH}+ \bE \<u, \delta D u\>_{\cH} = \bE |u|^2_{\cH}+ \bE |D u|_{\cH\otimes\cH}^2= \|u\|_{\sW^{1,2}}^2.  
+   	    \]
+   	    
+   \end{proof}
+   
    \begin{proposition}
-   	For every $p$ there exist constants $K$ and $C$ such that, for every
+   	For every $p\geq 1$ there exist constants $K$ and $C$ such that, for every
    	separable Hilbert space $\cK$ and every $u\in \sS(\cH \otimes \cK)$, one has the bound
    	\[
    	    \bE |\delta u|^p\leq C \sum_{0\leq k\leq K} \l( \bE |D^k u|^{2p} \r)^{1/2}
    	\]
    \end{proposition}
    \begin{proof}
-   	Take now $p>2$. Using the definition of $\delta$ combined with the chain rule for $D$, Proposition 3.8 , and Young's inequality, we obtain the bound
+   	
+   	By the above Lemma, we only prove the case that $p>2$. Using the definition of $\delta$ combined with the chain rule for $D$, Proposition 3.8 , and Young's inequality, we obtain the bound
    	$$
    	\begin{aligned}
-   		\mathbf{E}|\delta u|^p & =(p-1) \mathbf{E}\left(|\delta u|^{p-2}\langle u, D \delta u\rangle\right)=(p-1) \mathbf{E}|\delta u|^{p-2}\left(|u|^2+\langle u, \delta D u\rangle\right) \\
-   		& \leq \frac{1}{2} \mathbf{E}|\delta u|^p+c \mathbf{E}\left(|u|^p+|u|^{p / 2}|\delta D u|^{p / 2}\right),
+   		\mathbf{E}|\delta u|^p & =(p-1) \mathbf{E}\left(|\delta u|^{p-2}\langle u, D \delta u\rangle\right)=(p-1) \mathbf{E}|\delta u|^{p-2}\left(|u|^2+\langle u, D\delta u\rangle_\cH\right) \\
+   		& \leq \frac{1}{2} \mathbf{E}|\delta u|^p+C \mathbf{E}\left(|u|^p+|u|^{p / 2}|D \delta  u|^{p / 2}\right),
    	\end{aligned}
    	$$
-   	for some constant $c$. We now use Hölder's inequality which yields
+   	for some constant $C$. We now use Hölder's inequality which yields
    	$$
-   	\mathbf{E}\left(|u|^{p / 2}|\delta D u|^{p / 2}\right) \leq\left(\mathbf{E}|u|^{2 p}\right)^{1 / 4}\left(\mathbf{E}|\delta D u|^{2 p / 3}\right)^{3 / 4} .
+   	\mathbf{E}\left(|u|^{p / 2}|\delta D u|^{p / 2}\right) \leq\left(\mathbf{E}|u|^{2 p}\right)^{1 / 4}\left(\mathbf{E}|D \delta u|^{2 p / 3}\right)^{3 / 4} .
    	$$
-   	
    	Combining this with the above, we conclude that there exists a constant $C$ such that
    	$$
-   	\mathbf{E}|\delta u|^p \leq C\left(\mathbf{E}\left|D^{\ell} u\right|^{2 p}\right)^{1 / 2}+\left(\mathbf{E}|\delta D u|^{2 p / 3}\right)^{3 / 2} .
+   	\mathbf{E}|\delta u|^p \leq C\left(\mathbf{E}\left|D u\right|^{2 p}\right)^{1 / 2}+\left(\mathbf{E}|\delta D u|^{2 p / 3}\right)^{3 / 2} .
    	$$
-   	
    	The proof is concluded by a simple inductive argument.
    \end{proof}
   
@@ -2621,16 +2762,14 @@ that finishes the proof of Lemma \ref{lem:CZ}.
     	Thanks to \eqref{eq:d-phiF} and Theorem \ref{thm:IBP}, 
     	\begin{equation*}
     		\begin{aligned}
-    			&\bE \nabla^T \varphi(F)=\bE \l[ \gamma_{F}^{-1} D_k(\varphi(F)) D_k F \r]\\
-    			=& \bE \l[D_k( \gamma_{F}^{-1} \varphi(F) D_kF)\r]-\bE \l[ D_k(\gamma_{F}^{-1}) \varphi(F) D_k F\r]- \bE \l[ \gamma_{F}^{-1}\varphi(F) D_kD_k F\r]\\
-    			=& \bE \l\{ \varphi(F)  \gamma_{F}^{-1} \l[D_kF \int_0^1 v_k(s) \d \omega_s -D_kD_k F\r] \r\} -\bE \l[ \varphi(F)  D_k(\gamma_{F}^{-1}) D_k F\r] \\
-    			=&- \bE \l[ \varphi(F) \gamma_F^{-1} LF\r] + \bE \l[ \varphi(F) \gamma_F^{-1} (D_k\gamma_F) \gamma_F^{-1} (D_k F) \r]. 
+    			&\bE \nabla^T \varphi(F)=\bE \l[  \<D(\varphi(F)), \gamma_{F}^{-1} D F \>_{\cH} \r]\\
+    			=& \bE \l[ \varphi(F)   \delta(\gamma_{F}^{-1} D F)\r]\\
     		\end{aligned}
     	\end{equation*}
     	This yields that 
     	\begin{align*}
-    		\l| \bE \nabla^T \varphi(F) \r| \leq& \|\varphi\|_\infty  \l\{ \bE [\gamma_F^{-1} LF]+ \bE \l[\gamma_F^{-1} (D_k\gamma_F) \gamma_F^{-1} (D_k F)\r] \r\}\\
-    		\leq& C(p, \|F\|_{\sW^{2,p}}, \|\gamma_F^{-1}\|_p) \|\varphi\|_\infty, \quad p\gg 1. 
+    		\l| \bE \nabla^T \varphi(F) \r| \leq& \|\varphi\|_\infty  \bE [\delta(\gamma_{F}^{-1} D F)]
+    		\leq C(p, \|F\|_{\sW^{k,p}}, \|\gamma_F^{-1}\|_p) \|\varphi\|_\infty, \quad p\gg 1. 
     	\end{align*}
     \end{proof}
     
@@ -2800,14 +2939,14 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 	\end{lemma}
 	
 	\begin{lemma}
-	Suppose $Y_t=\int_0^t \sigma_s\d B_s$, $\bE  \|\sigma\|_\infty^p\leq K_p<\infty$, then $\forall \alpha \in(0,\frac{1}{2})$, $p\geq 1$, $\bE  \|Y\|_{C^\alpha }^p\leq C(K,\alpha ,p)$, i.e. $Y\in L^{\infty-}$. 
+	Suppose $Y_t=\int_0^t \sigma_s\d B_s$, $\bE  \|\sigma\|_\infty^p\leq K_p<\infty$, then $\forall \alpha \in(0,\frac{1}{2})$, $p\geq 1$, $\bE  \|Y\|_{C^\alpha }^p\leq C(K,\alpha ,p)$. 
 	\end{lemma}
 	\begin{proof}
 		Choose $\beta, p$ such that
 		$$\alpha +\frac{1}{p}<\beta<\frac{1}{2},$$
-		by Sobolev embedding theorem, 
-		$$\bE  \|Y\|^p_{C^\alpha }\leq C_{\alpha ,\beta,p}\bE  \|Y\|^p_{W^\beta_p}=C \bE \left(\int_0^1\int_0^1 \frac{|Y_s-Y_t|^p}{|s-t|^{1+\beta p}}\d s\d t\right)= C\int_0^1\int_0^1 \frac{\bE  |Y_s-Y_t|^p}{|s-t|^{1+\beta p}}\d s\d t. $$
-		By BDG inequality, 
+		by Lemma \ref{Le:GRRI}, 
+		$$\bE  \|Y\|^p_{\dot C^\alpha } \leq C \bE \left(\int_0^1\int_0^1 \frac{|Y_s-Y_t|^p}{|s-t|^{1+\beta p}}\d s\d t\right)= C\int_0^1\int_0^1 \frac{\bE  |Y_s-Y_t|^p}{|s-t|^{1+\beta p}}\d s\d t. $$
+		Thanks to BDG inequality, 
 		$$\bE  |Y_s-Y_t|^p\leq C \bE \Big(\int_s^t \|\sigma_r\|_\infty^2\d r\Big )^{p/2}\leq C_p|s-t|^{p/2}.$$
 		Combining the above inequalities,  
 		$$\bE  \|Y\|^p_{C^\alpha }\leq C \int_0^1 \int_0^1  |s-t|^{-1-\beta p+p/2}\d s\d t<\infty. $$
