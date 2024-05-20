@@ -244,10 +244,12 @@ citecolor=magenta]{hyperref}
 	
 	{\bf Notation}: 
 	\begin{itemize}
+		\item We use $:=$ as a way of definition. 
 		\item $\mN=\{0,1,2,\cdots\}\}$, $\mR_+=[0,\infty)$. 
 		\item $\sL^d$ is the Lebesgue measure on $\mR^d$. 
+		\item $B_r(x)=\{y\in\mR^d: |y-x|<r\}$, $B_r=B_r(0)$. 
+		\item $Q_r(x)=\{y\in \mR^d: |y_i-x_i|<r/2, ~ i=1,2,\cdots, d\}$, $Q_r=Q_r(0)$. 
 		\item $\mS^d_+$ is the collection of all symmetric non-negative matrix in $\mR^{d\times d}$. For any $\delta\in (0,1]$, $\mS_\delta^d : = \l\{a\in \mS^d_+: a_{ij}=a_{ji}, \delta I_d \leq a \leq \delta^{-1} I_d \r\}$. 
-		\item We use $:=$ as a way of definition. 
 		\item The letter $c$ or $C$ with or without subscripts stands for an unimportant constant, whose value may change in different places. We use $a \asymp b$ to denote that $a$ and $b$ are comparable up to a constant, and use $a\lesssim b~(a\gtrsim b)$ to denote $a\leq Cb~(a\geq Cb)$ for some constant $C$.
 		\item $W_t$ is a Brownian motion staring from $0$ and $W_t^x$ a Brownian motion staring from $x$.
   \item $\tau_D$ is the first exit time of a process from domain $D$; $\sigma_\Gamma$ is the first hitting time of $\Gamma$.  
@@ -408,14 +410,18 @@ citecolor=magenta]{hyperref}
 	%Let $\bT=\mN$ or $\mR_+$, be a parameter set for time. 
 	
 	
-	Let $(\Omega, \cF, \bP)$ be a standard probability space. Let $\mathcal{F}_n\ (n\in \mN)$ be an increasing sequence of $\sigma$-fields. A sequence of random variables $X_n$ is {\bf adapted} to $\mathcal{F}_n$ if for each $n, X_n$ is $\mathcal{F}_n$ measurable. Similarly a collection of random variables $X_t\ (t\in \mR_+)$ is adapted to $\mathcal{F}_t$ if each $X_t$ is $\mathcal{F}_t$ measurable. We say the filtration $\mathcal{F}_t$ satisfies the usual conditions if $\mathcal{F}_t$ is {\bf right continuous} (i.e., $\mathcal{F}_t=\mathcal{F}_{t+}$ for all $t$, where $\mathcal{F}_{t+}=\cap_{\varepsilon>0} \mathcal{F}_{t+\varepsilon}$ ) and each $\mathcal{F}_t$ is {\bf complete} (i.e., $\mathcal{F}_t$ contains all $\mathbf{P}$-null sets). %For the most part, in this and the following sections there will only be one probability measure and we assume the filtration $\mathcal{F}_t$ satisfies the usual conditions. Where we do have a family $\left\{\mathbf{P}^x\right\}$ of probability measures, the reader can check that the $\mathcal{F}_t$ constructed in Sect. 3 contain all the null sets that are needed. 
+	Let $(\Omega, \cF, \bP)$ be a standard probability space. Let $\mathcal{F}_n\ (n\in \mN)$ be an increasing sequence of $\sigma$-fields. A sequence of random variables $X_n$ is {\bf adapted} to $\mathcal{F}_n$ if for each $n, X_n$ is $\mathcal{F}_n$ measurable. Similarly a collection of random variables $X_t\ (t\in \mR_+)$ is adapted to $\mathcal{F}_t$ if each $X_t$ is $\mathcal{F}_t$ measurable. We say the filtration $\mathcal{F}_t$ satisfies the usual conditions if $\mathcal{F}_t$ is {\bf right continuous} (i.e., $\mathcal{F}_t=\mathcal{F}_{t+}$ for all $t$, where $\mathcal{F}_{t+}=\cap_{\varepsilon>0} \mathcal{F}_{t+\varepsilon}$ ) and each $\mathcal{F}_t$ is {\bf complete} (i.e., $\mathcal{F}_t$ contains all $\mathbf{P}$-null sets). For the most part, in this and the following sections there will only be one probability measure and we assume the filtration $\mathcal{F}_t$ satisfies the usual conditions. %Where we do have a family $\left\{\mathbf{P}^x\right\}$ of probability measures, the reader can check that the $\mathcal{F}_t$ constructed in Sect. 3 contain all the null sets that are needed. 
 	 
 	We say $\tau: \Omega\to \mN \ (\mR_+) \cup\{\infty\}$ is a {\bf stopping time} if $\tau$ satisfying $\{\tau\leq n\}\in \cF_n \ (\{\tau\leq t\}\in \cF_t)$, for each $n\in \mN \ (t\in \mR_+)$.  
 	 
-	$\mathcal{F}_\tau$ is a $\sigma$-field containing all measurable sets $A\in cF$ such that $A \cap \{\tau \leq n\} \in \mathcal{F}_n\ (A \cap \{\tau \leq t\} \in\cF_t)$ for all $n\in \mN\ (t \in \mR_+)$. 
-		
+	$\mathcal{F}_\tau$ is a $\sigma$-field containing all measurable sets $A\in \cF$ such that $A \cap \{\tau \leq n\} \in \mathcal{F}_n\ (A \cap \{\tau \leq t\} \in\cF_t)$ for all $n\in \mN\ (t \in \mR_+)$. 
+	
+	\medspace
+	
+	Below we recall the results about discrete time martingales and submartingales that will be used. The proof of the subsequent statements can be found in Durrett’s book \cite{durrett2019probability}, and in many other books dealing with discrete time martingales.
+	
 	\begin{definition}
-		Let $X_t$ be a real-valued $\cF_t$-adapted processes. If for each $t$ and $s<t$, $X_t$ is integrable and $\bE(X_t | \cF_s) \geq (\leq) X_s$ a.s., then we call $X_t$ is a {\bf submartingale (supermartingale)}. We say $X_t$ is a {\bf martingale} if it is both a submartingale and a supermartingale. 
+		Let $X_n$ be a real-valued $\cF_n$-adapted processes. If for each $n$ and $m<n$, $X_n$ is integrable and $\bE(X_n | \cF_m) \geq (\leq) X_m$ a.s., then we call $X_n$ is a {\bf submartingale (supermartingale)}. We say $X_n$ is a {\bf martingale} if it is both a submartingale and a supermartingale. 
 	\end{definition}
 	Suppose $M_n$ is a martingale, and $\varphi$ is convex function. Assume that $\bE |\varphi(M_n)|<\infty$, in the light of Jesen's inequality, $\varphi(M_n)$ is a submartingale. 
 	
@@ -423,7 +429,7 @@ citecolor=magenta]{hyperref}
 		Let $\xi_1, \xi_2, \cdots$ be a sequence of i.i.d random variable. Set $X_n:=\sum_{i=0}^n \xi_i$ and $\cF_n:=\sigma(\xi_0,\cdots \xi_n)$. 
 	\end{example}
 	
- Below we recall the results about discrete time martingales and submartingales that will be used. The proof of the subsequent statements can be found in Durrett’s book \cite{durrett2019probability}, and in many other books dealing with discrete time martingales.
+ 
 	\begin{theorem}[Doob]\label{thm:Doob-D}
  If $X_n\in \cF_n$  is a submartingale then it can be uniquely decomposed as $X_n=M_n+A_n$, where $M_n\in \cF_n$ is martingale, $A_0=0$, $A_{n+1}\geq A_n$ almost surely and $A_n$ is $\cF_{n-1}$-measurable.
 	\end{theorem}
@@ -486,8 +492,8 @@ citecolor=magenta]{hyperref}
 		\end{align*}
 	\end{proof}
 	
-	\begin{corollary}\label{Cor-Lp}
-		Let $M_n$ be a martingale and $T$ be a stopping time. For each $p>1$, $\bE |M_T^*|^p \leq C_p \bE |M_T|^p$. 
+	\begin{corollary}\label{cor:Doob-Lp}
+		Let $M_n$ be a martingale and $\tau$ be a stopping time. For each $p>1$, $\bE |M_\tau^*|^p \leq C_p \bE |M_tau|^p$. 
 	\end{corollary}
 	
 	 Let $a\leq b$. Set $\sigma_1=\inf\{n\geq 0: X_n\leq a\}$, $\tau_1= \inf\{n>\sigma_1: X_n\geq b\}$, $\sigma_2=\inf\{n>\tau_1: M_n\leq a\}$, $\tau_2= \inf\{n>\sigma_2: X_n\geq b\}$, $\dots$, and 
@@ -518,6 +524,15 @@ citecolor=magenta]{hyperref}
 	\subsection{Continuous time}
 	
 	{\bf {\em All of the above results also hold for all right continuous martingale (submartingales) (see \cite{Huang})}}, except the Doob decomposition theorem. 
+	
+	\begin{exercise}\label{ex:mart-l2}
+		Using the continuous-time version of Corollary \ref{cor:Doob-Lp} to show the following result: 
+		
+		Suppose that $\{M^n_t\}_{t\geq 0}$ is a sequence of continuous square integrable martingales, and for each $T>0$, $M_T^n-M^m_T\to 0$ in $L^2$ as $n,m\to \infty$. Then there exists a continuous square integrable martingale $M_t$ such that for each $T>0$,  
+		\[
+		    (M^n-M)^*_T \overset{L^2}{\rightarrow} 0 ~\mbox{ as }~ n\to \infty. 
+		\]
+	\end{exercise}
 	
 	The celebrated {\bf Doob-Meyer decomposition}\index{Doob-Meyer decomposition} says that, under mild hypotheses, a submartingale can be decomposed into a martingale plus an increasing process. We are limiting ourselves to continuous submartingales, and the theorem we want to state is the following.
 	
@@ -569,7 +584,7 @@ citecolor=magenta]{hyperref}
 	\end{theorem}
 	
 	\begin{lemma}\label{lem:quadratic}
-		Let $M_t$ be a continuous bounded martingale.  Let $\pi^n=\{(t_0^n,\cdots, t_{k_n}^n): 0=t_0^n<t_1^n<\cdots<t_{k_n}^n=T\}$ be an increasing sequence of subdivisions of $[0, T]$ with mesh going to 0 , then for each $n$, 
+		Let $M_t$ be a continuous bounded martingale.  Let $\pi^n=\{(t_0^n,\cdots, t_{k_n}^n): 0=t_0^n<t_1^n<\cdots<t_{k_n}^n=T (\leq \infty)\}$ be an increasing sequence of subdivisions of $[0, T]$ with mesh going to 0 , then for each $n$, 
 		$$
 		N^n_t:= \sum_{i=1}^{k_n}M_{t_{i-1}}(M_{t_i\wedge t}-M_{t_{i-1}\wedge t})
 		$$ 
@@ -685,8 +700,7 @@ citecolor=magenta]{hyperref}
 		Finally, to get \eqref{eq:quadratic}, it suffices to consider the case $M_0=0$. The bounded case then shows that \eqref{eq:quadratic} holds if $M$ and $\langle M \rangle_t$ are replaced respectively by $M^{\tau_n}$ and $\langle M \rangle_{t \wedge \tau_n}$ (even with convergence in $L^2$ ). Then it is enough to observe that, for every $t>0, P\left(t \leq \tau_n\right)$ converges to 1 when $n \rightarrow \infty$.
 	\end{proof}
 	
-	
-	\subsection{Some applications}
+	\subsection{Some Applications of Martingale Theory}
 	
 	For an example of a discrete martingale, let $\Omega=[0,1], \mathbf{P}$ Lebesgue measure, and $f$ an integrable function on $[0,1]$. Let $\mathcal{F}_n$ be the $\sigma$-field generated by the sets 
 	\[
@@ -704,37 +718,42 @@ citecolor=magenta]{hyperref}
 	
 	 The martingale convergence theorem also provides the basis of the Calderón-Zygmund lemma. We give the standard proof, phrased in martingale language.
 	 \begin{lemma}[Calderón-Zygmund]
-	 	Let $f \geq 0$ be integrable. Let $\alpha>0$. There exists a closed set $F$ and countably many pairwise disjoint open cubes $Q_i$ such that $\left|F^c \Delta \cup_i Q_i\right|=0, f \leq \alpha$ a.e. on $F$, and for each $i$,
-	 	$$
-	 	\alpha \leq \frac{1}{\left|Q_i\right|} \int_{Q_i} f \leq 2^d \alpha .
-	 	$$
+	 	Let $f \geq 0$ and $f\in L^1(Q_1)$. Let $\lambda>0$. There exists a closed set $F$ and countably many pairwise disjoint open cubes $Q^i$ such that $\left|F^c \Delta \cup_i Q^i\right|=0, f \leq \lambda$ a.e. on $F$, and for each $i$,
+	 	\begin{equation}\label{eq:cz-f}
+	 		\lambda \leq \frac{1}{\left|Q^i\right|} \int_{Q^i} f \leq 2^d \lambda .
+	 	\end{equation} 
 	 	Moreover, 
 	 	\[
-	 	\left|F^c\right| \leq \frac{1}{\alpha} \int f .
+	 	\left|F^c\right| \leq \frac{1}{\lambda} \int f .
 	 	\]
 	 \end{lemma}
 	 \begin{proof}
-	 	First of all, note that the last assertion is a consequence of (4.9), since (4.9) implies $\left|Q_i\right| \leq \int_{Q_i} f / \alpha$. Summing over $i$ then gives $\left|\cup_i Q_i\right| \leq$ $\int_{\cup_2 Q_2} f / \alpha \leq \int f / \alpha$.
-	 	
-	 	Suppose next that $R$ is a cube with $|R|^{-1} \int_R f<\alpha / 2$ and look at the dyadic martingale $f_n=\bE \left[f \mid \mathcal{F}_n\right]$, where $\mathcal{F}_n$ is the partition of $R$ into $2^{n d}$ equal cubes. Let $T=\inf \left\{n: f_n>\alpha\right\}$. Note by our assumption on $R$ that $T>0$. For each $n,(T=n)$ is the union of cubes in $\mathcal{F}_n$, and the boundary of $(T=n)$ has measure 0 . Let
+	 	First of all, note that the last assertion is a consequence of \eqref{eq:cz-f}, since \eqref{eq:cz-f} implies $\left|Q^i\right| \leq \int_{Q^i} f / \lambda$. Summing over $i$ then gives 
+	 	\[
+	 	    \left|\bigcup_i Q^i\right| \leq\int_{\cup_i Q^i} f / \lambda \leq \int f / \lambda. 
+	 	\]
+	 	Suppose next that $Q$ is a cube with $|Q|^{-1} \int_Q f<\lambda$ and look at the dyadic martingale $f_n=\bE \left[f \mid \mathcal{F}_n\right]$, where $\mathcal{F}_n$ is the partition of $Q$ into $2^{n d}$ equal cubes. Let $\tau=\inf \left\{n: f_n>\lambda\right\}$. Note by our assumption on $Q$ that $\tau>0$. For each $n$, $\{\tau=n\}$ is the union of cubes in $\mathcal{F}_n$, and the boundary of $\{T=n\}$ has measure 0 . Let
 	 	$$
-	 	F^c=\bigcup_n(\operatorname{int}(T=n)) .
-	 	$$
-	 	
-	 	Then $F$ is closed.
-	 	If $n<T$, then $f_n \leq \alpha$. By the martingale convergence theorem, on $(T=\infty)$ we have $f=\lim _n f_n \leq \alpha$. Since $F$ differs from the set $(T=\infty)=$ $(T<\infty)^c=\left(\cup_n(T=n)\right)^c$ by a set of measure 0 , then $f \leq \alpha$ a.e. on $F$.
-	 	
-	 	If $Q$ is one of the cubes in $\mathcal{F}_n$ contained in $(T=n)$ and $x \in \operatorname{int}(Q)$, then
-	 	$$
-	 	\frac{1}{|Q|} \int_Q f=f_n(x) \geq \alpha .
+	 	F^c=\bigcup_n \operatorname{int}\{T=n\} .
 	 	$$
 	 	
-	 	By our definition of $T, f_{n-1}(x) \leq \alpha$. Let $Q^{\prime}$ be the element of $\mathcal{F}_{n-1}$ containing $Q$. Then since $\left|Q^{\prime}\right|=2^d|Q|$,
+	 	Then $F$ is closed. If $n<\tau$, then $f_n \leq \lambda$. By the martingale convergence theorem, on $\{\tau=\infty\}$ we have $f=\lim _n f_n \leq \lambda$ a.e.. Since $F$ differs from the set
+	 	\[
+	 	    \{\tau=\infty\}=\{\tau<\infty\}^c=\l(\cup_n\{\tau=n\}\r)^c
+	 	\]
+	 	by a set of measure 0, then $f \leq \lambda$ a.e. on $F$.
+	 	
+	 	If $Q$ is one of the cubes in $\mathcal{F}_n$ contained in $\{\tau=n\}$ and $x \in \operatorname{int}(Q)$, then
 	 	$$
-	 	\frac{1}{|Q|} \int_Q f \leq \frac{2^d}{\left|Q^{\prime}\right|} \int_{Q^{\prime}} f \leq 2^d \alpha .
+	 	\frac{1}{|Q|} \int_Q f=f_n(x)>\lambda .
 	 	$$
 	 	
-	 	Finally, take $n_0$ large enough so that $\|f\|_1 / 2^{n_0 d}<\alpha / 2$. We will take each cube $R_j$ that has side length $2^{n_0}$ and vertices at integer multiples of $2^{n_0}$ and decompose $R_j$ into $F_j$ and $Q_i^j$ as above. If we then let $F=\cup_j F_j$, we have our result.
+	 	By our definition of $\tau$, $f_{n-1}(x) \leq \lambda$. Let $\widetilde{Q}$ be the element of $\mathcal{F}_{n-1}$ containing $Q$. Then since $\left|\widetilde{Q}\right|=2^d|Q|$,
+	 	$$
+	 	\frac{1}{|Q|} \int_Q f \leq \frac{2^d}{\left|\widetilde{Q}\right|} \int_{\widetilde{Q}} f \leq 2^d \lambda .
+	 	$$
+	 	
+	 	Finally, take $n_0$ large enough so that $\|f\|_1 / 2^{n_0 d}<\lambda / 2$. We will take each cube $Q_j$ that has side length $2^{n_0}$ and vertices at integer multiples of $2^{n_0}$ and decompose $Q_j$ into $F_j$ and $Q_j$ as above. If we then let $F=\cup_j F_j$, we have our result.
 	 \end{proof}
 	
 	
@@ -841,56 +860,120 @@ citecolor=magenta]{hyperref}
 	
 	\section{Stochastic Integral}
 	
-	From now on, unless stated otherwise, our processes have continuous paths. 
+	We write $\mH^2$ for the space of all continuous martingales $M$ such that $\bE \<M\>_\infty<\infty$ and $M_0=0$, with the usual convention that two indistinguishable processes are identified. 
+	\begin{exercise}
+		The space $\mH^2$ equipped with the scalar product $\<M, N\>_\infty$ is a Hilbert space.
+	\end{exercise}
 	
-	
-	Let $M_t$ be a square integrable martingale, $0=t_0\leq t_1\leq \cdots \leq t_{n}=T$ and $H_s(\omega) = \sum_{i=0}^{n-1} F_i(\omega)\1_{(t_{i},t_{i+1}]}(s)$, where $F_i$ is bounded and $\cF_{t_i}$-measurable. Define 
+	Let $M\in \mH^2$, $0=t_0\leq t_1\leq \cdots \leq t_{n}<\infty$ and $H_s(\omega) = \sum_{i=0}^{n-1} F_i(\omega)\1_{(t_{i},t_{i+1}]}(s)$, where $F_i$ is bounded and $\cF_{t_i}$-measurable. Denote the collection of all such $H$ by $\cS_{a}$. 
+	 
+	For any $H\in \cS_{a}$, define 
 	\[
-	\int_0^t H_s \d M_s:= \sum_{i=0}^{n-1} F_i (M_{t\wedge t_{i+1}}-M_{t\wedge t_{i}}). 
+	    (H\cdot M)_t=\int_0^t H_s \d M_s:= \sum_{i=0}^{n-1} F_i (M_{t\wedge t_{i+1}}-M_{t\wedge t_{i}}). 
 	\]
-	Then 
-	\begin{lemma}
-		$t\mapsto \int_0^t H_s \d M_s$ is a $L^2$-martingale. Moreover, we have the following It\^o isometry:  
+   
+   We have 
+	\begin{lemma}\label{lem:iso}
+		Let $M\in \mH^2$ and $H\in \cS_a$. Then $(H\cdot M)\in \mH^2$, and 
+		\begin{equation}\label{eq:iso1}
+			\<H\cdot M\>_t= \int_0^t H_s^2 \d \<M\>_s. 
+		\end{equation}
+		In particular, we have the following It\^o isometry:  
 		\begin{equation}
 			\bE \l(\int_0^t H_s \d M_s \r)^2 = \bE \int_0^t H_s^2 \d \<M\>_s. 
 		\end{equation}
 	\end{lemma}
 	\begin{proof}
 		\begin{align*}
-			\bE \l(\int_0^1 H_s \d M_s\r)^2=& \bE \sum_{i} H_{t_i}^2 (M_{t_{i+1}}-M_{t_i})^2 + 2\bE \sum_{i<j} H_{t_i}H_{t_j}(M_{t_{i+1}}-M_{t_i})(M_{t_{j+1}}-M_{t_j}) \\
-			=&: I_1+ I_2. 
+			\bE \l(\int_0^t H_s \d M_s\r)^2=& \bE \sum_{i} H_{t_i}^2 (M_{t\wedge t_{i+1}}-M_{t\wedge t_i})^2\\
+			 &+ 2\bE \sum_{i<j} H_{t_i}H_{t_j}(M_{t\wedge t_{i+1}}-M_{t\wedge t_i})(M_{t\wedge t_{j+1}}-M_{t\wedge t_j}) =: I_1+ I_2. 
 		\end{align*}
 		\begin{align*}
 			\begin{aligned}
-				I_1=&\sum_{i} \bE \bE \l(H_{t_i}^2 (M_{t_{i+1}}-M_{t_i})^2\big|\cF_{t_i}\r)= \sum_{i} \bE \l[ H_{t_i}^2 \bE\l( (M_{t_{i+1}}-M_{t_i})^2\big|\cF_{t_i}\r) \r] \\
-				=&\sum_{i}  \bE H_{t_i}^2 (\<M\>_{t_{i+1}}-\<M\>_{t_{i}})= \bE  \int_0^1 H^2_s \d \<M\>_s ,
+				I_1(t)=&\sum_{i} \bE \bE \l(H_{t_i}^2 (M_{t\wedge t_{i+1}}-M_{t\wedge t_i})^2\big|\cF_{t\wedge t_i}\r)= \sum_{i} \bE \l[ H_{t_i}^2 \bE\l( (M_{t\wedge t_{i+1}}-M_{t\wedge t_i})^2\big|\cF_{t\wedge t_i}\r) \r] \\
+				=&\sum_{i}  \bE H_{t_i}^2 (\<M\>_{t\wedge t_{i+1}}-\<M\>_{t\wedge t_{i}})= \bE  \int_0^t H^2_s \d \<M\>_s ,
 			\end{aligned}
 		\end{align*}
 		\begin{align*}
-			I_2= 2\sum_{i<j} \bE \l[  H_{t_i}H_{t_j}(M_{t_{i+1}}-M_{t_i}) \bE \l( (M_{t_{j+1}}-M_{t_j}) \big|\cF_{t_j}\r) \r]=0. 
+			I_2= 2\sum_{i<j} \bE \l[  H_{t_i}H_{t_j}(M_{t\wedge t_{i+1}}-M_{t\wedge t_i}) \bE \l( (M_{t_{t\wedge j+1}}-M_{t\wedge t_j}) \big|\cF_{t\wedge t_j}\r) \r]=0. 
 		\end{align*}
 		Therefore, 
 		\begin{equation*}
-			\bE \l(\int_0^1 H_s \d M_s\r)^2=  \bE  \int_0^1 H^2_s \d \<M\>_s. 
+			\bE \l(\int_0^t H_s \d M_s\r)^2=  \bE  \int_0^t H^2_s \d \<M\>_s. 
 		\end{equation*}
-		$t\mapsto \int_0^t H_s \d W_s=  \sum_{i=0}^{n-1} H_{t_i}(W_{t\wedge t_{i+1}}-W_{t\wedge t_i})$ is a continuous martingale. 
+		
+		Similarly, one can also prove that 
+		\[
+		    \bE\l\{ \l[ \l(\int_{t_0}^t H_s \d M_s\r)^2-\int_{t_0}^t H^2_s \d \<M\>_s  \r] \Big| \cF_{t_0}\r\}=0, \quad t_0<t, 
+		\]
+		which yields \eqref{eq:iso1}. It is also easy to verify that $t\mapsto \int_0^t H_s \d W_s=  \sum_{i=0}^{n-1} H_{t_i}(W_{t\wedge t_{i+1}}-W_{t\wedge t_i})$ is a continuous martingale, we let it to the reader. 
 	\end{proof}
 	
-	We then can use this to extend the above construction to more general $H_s$ satisfying $\int_0^t H_s^2 \d \langle M \rangle_s<\infty$ by taking limits in $L^2$. For general continuous local martingale, we can employ standard localization argument to define the above integral. For $X_t=M_t+A_t$, a semimartingale, $\int_0^t H_s \d X_s$ is given by
+	We then can use the above lemma and Exercise \ref{ex:mart-l2} to extend the above construction to more general $H_s$ satisfying the following condition: there exists a sequence $H^n\in \cS_a$ such that 
+	\[
+	    \bE \int_0^\infty (H^n_s-H_s)^2 \d \langle M \rangle_s<\infty. 
+	\] 
+	
+	We denote the progressive $\sigma$-field on $\mathbb{R}_{+}\times\Omega$ by $\cP$, and if $M \in \mathbb{H}^2$, we let $L^2_{\cP}(M)$ be the set of all progressive processes $H$ such that
+	$$
+	\bE\left[\int_0^{\infty} H_s^2 \mathrm{~d}\langle M \rangle_s\right]<\infty,
+	$$
+	with the convention that two progressive processes $H$ and $H^{\prime}$ satisfying this integrability condition are identified if $H_s=H_s^{\prime}=0, \mathrm{~d}\langle M\rangle_s$ a.e., a.s. We can view $L^2_{\cP}(M)$ as an ordinary $L^2$ space, namely
+	$$
+	L^2_{\cP}(M)=L^2\left( \mathbb{R}_{+}\times \Omega, \mathscr{P},  \mathrm{d}\langle M \rangle_s \mathrm{d} P\right)
+	$$
+	where $\mathrm{d}\langle M \rangle_s \mathrm{d} P$ refers to the finite measure on $\left(\mathbb{R}_{+}\times \Omega, \mathscr{P}\right)$ that assigns the mass
+	$$
+	\bE\left[\int_0^{\infty} 1_A(\omega, s) \mathrm{d}\langle M\rangle_s\right]
+	$$
+	to a set $A \in \mathscr{P}$ (the total mass of this measure is $\bE \langle M\rangle_{\infty} =\|M\|_{\mathbb{H}^2}^2$ ).
+	Just like any $L^2$ space, the space $L^2_{\cP}(M)$ is a Hilbert space for the scalar product. Just like any $L^2$ space, the space $L^2_{\cP}(M)$ is a Hilbert space for the scalar product
+	$$
+	(H, K)_{L^2_{\cP}(M)}=\bE\left[\int_0^{\infty} H_s K_s \mathrm{~d}\langle M\rangle_s\right]. 
+	$$
+	
+	\begin{proposition}
+		For every $M \in \mathbb{H}^2$, $\cS_a$ is dense in $L^2_{\cP}(M)$.
+	\end{proposition}
+	
+	Therefore, by the above result and the discussion after Lemma \ref{lem:iso}, for each $M\in \mH^2$ and $H\in L^2_{\cP}(M)$, we can define 
+	\[
+	    (H\cdot M)_t=\int_0^t H_s \d M_s:=\lim_{n\to \infty} \int_0^t H^n_s \d M_s, 
+	\]
+	where $H^n\in \cS_a$ such that $H^n\to H$ in $L^2_{\cP}(M)$. Moreover, $(H\cdot M)\in \mH^2$ and 
+	\[
+	    \<H\cdot M\>_t= \int_0^t H^2_s \d \<M\>_s. 
+	\]
+    
+	
+	Let $M , N \in \mathbb{H}^2$, $H \in L^2_\cP(M)$ and $K \in L^2_{\cP}(N)$. Since $H \cdot M$ and $K \cdot N$ are martingales in $\mathbb{H}^2$, we have, for every $t \in[0, \infty]$,
+	$$
+	\begin{aligned}
+		\bE\left[\left(\int_0^t H_s \mathrm{~d} M_s\right)\left(\int_0^t K_s \mathrm{~d} N_s\right)\right]  = \bE\left[\int_0^t H_s K_s \mathrm{~d}\langle M, N\rangle_s\right],
+	\end{aligned}
+	$$
+	In particular,
+	$$
+	\bE\left[\left(\int_0^t H_s \mathrm{~d} M_s\right)^2\right]=\bE\left[\int_0^t H_s^2 \mathrm{~d}\langle M\rangle_s\right] .
+	$$
+	
+	\begin{proposition}
+		Let $M, N\in\mH^2$, and let $H \in L^2(M)$. If $K$ is a progressive process, we have $K H \in$ $L^2(M)$ if and only if $K \in L^2(H \cdot M)$. If the latter properties hold,
+		$$
+		(K H) \cdot M=K \cdot(H \cdot M) .
+		$$
+	\end{proposition}
+	
+	
+	
+	
+	
+	For general continuous local martingale, we can employ standard localization argument to define the above integral. For $X_t=M_t+A_t$, a semimartingale, $\int_0^t H_s \d X_s$ is given by
 	$$
 	\int_0^t H_s \d X_s=\int_0^t H_s \d M_s+\int_0^t H_s \d A_s, 
 	$$
 	where the first integral on the right is a stochastic integral and the second integral on the right is a Riemann-Stieltjes integral.
-	
-	\begin{proposition}
-		\begin{equation*}
-			\l\<\int_0^\cdot H_s \d M_s\r\>_t= \int_0^t H_s^2 \d \<M\>_s. 
-		\end{equation*}
-		Let $N_t=\int_0^t H_s\d M_s$
-		\begin{equation*}
-			\int_0^t K_s\d N_s=\int_0^t K_s H_s \d M_s
-		\end{equation*}
-	\end{proposition}
+
 	
 	\section{It\^o's formula and its applications}
 	
@@ -1073,20 +1156,25 @@ By using Stratonovitch integral instead of Itô’s, the Itô formula reduces to
 	    \lambda u - L u =f, 
 	\]
 	where $L=\frac{1}{2}\sigma_{ik}\sigma_{jk}\p_{ij}+b_i\p_i$. 
+	The relationship between these two subjects can be easily established by It\^o's formula. 
+
+\medspace
 	
-	The relationship between these two subjects can be easily established by It\^o's formula: 
+	Here we consider the case that $L=\frac{1}{2}\Delta$. 
+	
+	
 	\begin{theorem}\label{thm:FK1}
-		Suppose $u$ is a $C^2_b$ function satisfying the above Poisson equation. Then
+		Suppose $u$ is a $C^2_b$ function satisfying the above Poisson equation with $L=\frac{1}{2}\Delta$. Then
 		$$
-		u(x)=\mathbf{E} \int_0^{\infty} e^{-\lambda t} f\left(X^x_t\right) \d t
+		u(x)=\mathbf{E} \int_0^{\infty} e^{-\lambda t} f\left(W^x_t\right) \d t
 		$$
 	\end{theorem}
 	\begin{proof}
 		Applying It\^o's formula, we have 
-		$\d u(X^x_t)=\d M_t + Lu(X^x_t) \d t$. So 
+		$\d u(W^x_t)=\d M_t + \frac{1}{2}\Delta u(W^x_t) \d t$. So 
 		\[
 		    \begin{aligned}
-		    	e^{-\lambda t} u\left(X_t^x\right)-u\left(x\right)=&\int_0^t e^{-\lambda s} \d M_s+\int_0^t e^{-\lambda s} L u\left(X^x_s\right) \d s \\
+		    	e^{-\lambda t} u\left(W_t^x\right)-u\left(x\right)=&\int_0^t e^{-\lambda s} \d M_s+\int_0^t e^{-\lambda s} L u\left(X^x_s\right) \d s \\
 		    	&-\lambda \int_0^t e^{-\lambda s} u\left(X^x_s\right) \d s.
 		    \end{aligned}
 		\]
@@ -1115,6 +1203,30 @@ By using Stratonovitch integral instead of Itô’s, the Itô formula reduces to
 	\begin{exercise}
 		Prove Theorem \ref{thm:PR-Dir}. 
 	\end{exercise}
+	
+	In this exercise, $d \geq 3$. Let $K$ be a compact subset of the open unit ball of $\mathbb{R}^d$, and $T_K:=\inf \left\{t \geq 0: B_t \in K\right\}$. We assume that $D:=\mathbb{R}^d \backslash K$ is connected. We also consider a function $g$ defined and continuous on $K$. The goal of the exercise is to determine all functions $u: \bar{D} \rightarrow \mathbb{R}$ that satisfy:
+	(P) $u$ is bounded and continuous on $\bar{D}$, harmonic on $D$, and $u(y)=g(y)$ if $y \in \partial D$.
+	(This is the Dirichlet problem in $D$, but in contrast with Sect. 7.3 above, $D$ is unbounded here.) We fix an increasing sequence $\left(R_n\right)_{n \geq 1}$ of reals, with $R_1 \geq 1$ and $R_n \uparrow \infty$ as $n \rightarrow \infty$. For every $n \geq 1$, we set $T_{(n)}:=\inf \left\{t \geq 0:\left|B_t\right| \geq R_n\right\}$.
+	
+	\begin{proof}
+		1. Suppose that $u$ satisfies (P). Prove that, for every $n \geq 1$ and every $x \in D$ such that $|x|<R_n$,
+		$$
+		u(x)=E_x\left[g\left(B_{T_K}\right) \mathbf{1}_{\left\{T_K \leq T_{(n)}\right\}}\right]+E_x\left[u\left(B_{\left.T_{(n)}\right)}\right) \mathbf{1}_{\left\{T_{(n)} \leq T_K\right\}}\right] .
+		$$
+		2. Show that, by replacing the sequence $\left(R_n\right)_{n \geq 1}$ with a subsequence if necessary, we may assume that there exists a constant $\alpha \in \mathbb{R}$ such that, for every $x \in D$,
+		$$
+		\lim _{n \rightarrow \infty} E_x\left[u\left(B_{T_{(n)}}\right)\right]=\alpha,
+		$$
+		and that we then have
+		$$
+		\lim _{|x| \rightarrow \infty} u(x)=\alpha .
+		$$
+		3. Show that, for every $x \in D$,
+		$$
+		u(x)=E_x\left[g\left(B_{T_K}\right) \mathbf{1}_{\left\{T_K<\infty\right\}}\right]+\alpha P_x\left(T_K=\infty\right) .
+		$$
+		4. Assume that $D$ satisfies the exterior cone condition at every $y \in \partial D$ (this is defined in the same way as when $D$ is bounded). Show that, for any choice of $\alpha \in \mathbb{R}$, the formula of question 3. gives a solution of the problem (P).
+	\end{proof}
 	
 	
 	\chapter{It\^o processes}\label{chapt:Ito}
@@ -2130,30 +2242,6 @@ $$
 where $c$ is a constant only depends on $d,\delta$ and $\varepsilon$. 
 	\end{exercise}
 	
-	\begin{exercise}
-		In this exercise, $d \geq 3$. Let $K$ be a compact subset of the open unit ball of $\mathbb{R}^d$, and $T_K:=\inf \left\{t \geq 0: B_t \in K\right\}$. We assume that $D:=\mathbb{R}^d \backslash K$ is connected. We also consider a function $g$ defined and continuous on $K$. The goal of the exercise is to determine all functions $u: \bar{D} \rightarrow \mathbb{R}$ that satisfy:
-		(P) $u$ is bounded and continuous on $\bar{D}$, harmonic on $D$, and $u(y)=g(y)$ if $y \in \partial D$.
-		(This is the Dirichlet problem in $D$, but in contrast with Sect. 7.3 above, $D$ is unbounded here.) We fix an increasing sequence $\left(R_n\right)_{n \geq 1}$ of reals, with $R_1 \geq 1$ and $R_n \uparrow \infty$ as $n \rightarrow \infty$. For every $n \geq 1$, we set $T_{(n)}:=\inf \left\{t \geq 0:\left|B_t\right| \geq R_n\right\}$.
-		
-		1. Suppose that $u$ satisfies (P). Prove that, for every $n \geq 1$ and every $x \in D$ such that $|x|<R_n$,
-		$$
-		u(x)=E_x\left[g\left(B_{T_K}\right) \mathbf{1}_{\left\{T_K \leq T_{(n)}\right\}}\right]+E_x\left[u\left(B_{\left.T_{(n)}\right)}\right) \mathbf{1}_{\left\{T_{(n)} \leq T_K\right\}}\right] .
-		$$
-		2. Show that, by replacing the sequence $\left(R_n\right)_{n \geq 1}$ with a subsequence if necessary, we may assume that there exists a constant $\alpha \in \mathbb{R}$ such that, for every $x \in D$,
-		$$
-		\lim _{n \rightarrow \infty} E_x\left[u\left(B_{T_{(n)}}\right)\right]=\alpha,
-		$$
-		and that we then have
-		$$
-		\lim _{|x| \rightarrow \infty} u(x)=\alpha .
-		$$
-		3. Show that, for every $x \in D$,
-		$$
-		u(x)=E_x\left[g\left(B_{T_K}\right) \mathbf{1}_{\left\{T_K<\infty\right\}}\right]+\alpha P_x\left(T_K=\infty\right) .
-		$$
-		4. Assume that $D$ satisfies the exterior cone condition at every $y \in \partial D$ (this is defined in the same way as when $D$ is bounded). Show that, for any choice of $\alpha \in \mathbb{R}$, the formula of question 3. gives a solution of the problem (P).
-	\end{exercise}
-	
 	
 	\section{Once again on the hitting probability}
 	Recall that 
@@ -2553,6 +2641,24 @@ that finishes the proof of Lemma \ref{lem:CZ}.
     \[
     \<H, H'\>_{W^{1,2}_0}:= \int_0^1 \dot H(s)\cdot \dot H'(s) \d s. 
     \]
+    
+    \begin{exercise}
+    	Let $h\in W^{1,2}_0$. Porve that 
+    	\[
+    	    \frac{\bP\l( \|\omega-h\|\leq \eps\r)}{\bP\l(\|\omega\|\leq \eps \r)}\to \exp \l(-\frac{1}{2}\int_0^1 |\dot h_s|^2 \d s \r). 
+    	\]
+    \end{exercise}
+    
+    \begin{exercise}
+    	Let 
+    	\[
+    	    A_\eps= \l\{\omega: \bigcup_{h\in W^{1,2}_0} \|\omega-h\|<\eps\r\}
+    	\]
+    	Porve that 
+    	\[
+    	    \bP \l(W^{1,2}_0\r)=0, \quad \bP (A_\eps)=1. 
+    	\]
+    \end{exercise}
     
     Suppose that $F$ and $H$ satisfy the same conditions in Lemma \ref{lem:IBP}. Then by \eqref{eq:IBP}, 
     \begin{equation}\label{eq:IBP3}
@@ -3036,8 +3142,9 @@ that finishes the proof of Lemma \ref{lem:CZ}.
 	
     \end{theorem}
     
-	\section{Singular integral}
-	Singular integrals are central to harmonic analysis and are intimately connected with the study of partial differential equations. Singular integral is an integral operator
+    \chapter{Harmonic analysis from the perspective of Probability}
+    
+    Singular integrals are central to harmonic analysis and are intimately connected with the study of partial differential equations. Singular integral is an integral operator
 	\[
 	    T(f)(x)=\int K(x,y)f(y)\,\d y,
 	\]
