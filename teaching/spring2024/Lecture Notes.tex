@@ -1100,6 +1100,13 @@ By using Stratonovitch integral instead of Itô’s, the Itô formula reduces to
 		\]
 	\end{proof}
 	
+	 \begin{exercise}[Onsager–Machlup function]
+		Let $h\in C^2([0,1])$ with $h(0)=0$. Porve that 
+		\[
+		\lim_{\eps\to0}\frac{\bP\l( \|\omega-h\|<\eps\r)}{\bP\l(\|\omega\|<\eps \r)} = \exp \l(-\frac{1}{2}\int_0^1 |\dot h_s|^2 \d s \r). 
+		\]
+	\end{exercise}
+	
 	\begin{theorem}[Dambis–Dubins–Schwarz]\label{thm:DDS}
 		Let $M$ be a continuous local martingale such that $\<M\>_\infty=\infty$. There exists a Brownian motion $B$ such that 
 		$$
@@ -2642,12 +2649,6 @@ that finishes the proof of Lemma \ref{lem:CZ}.
     \<H, H'\>_{W^{1,2}_0}:= \int_0^1 \dot H(s)\cdot \dot H'(s) \d s. 
     \]
     
-    \begin{exercise}
-    	Let $h\in W^{1,2}_0$. Porve that 
-    	\[
-    	    \frac{\bP\l( \|\omega-h\|\leq \eps\r)}{\bP\l(\|\omega\|\leq \eps \r)}\to \exp \l(-\frac{1}{2}\int_0^1 |\dot h_s|^2 \d s \r). 
-    	\]
-    \end{exercise}
     
     \begin{exercise}
     	Let 

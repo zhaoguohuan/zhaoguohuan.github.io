@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.2.18)  18 MAY 2024 11:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.2.18)  27 MAY 2024 12:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -923,15 +923,15 @@ Chapter 1.
 ]
 Chapter 2.
 [31]
-Overfull \hbox (13.67953pt too wide) detected at line 1281
+Overfull \hbox (13.67953pt too wide) detected at line 1288
 \OT1/cmr/bx/n/12 P [] \U/msa/m/n/12 > [] \OT1/cmr/bx/n/12 P [] \U/msa/m/n/12 > 
 \OT1/cmr/m/n/12 6[] =: \OML/cmm/m/it/12 c\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 "\OT
 1/cmr/m/n/12 ) \OML/cmm/m/it/12 > \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :
  []
 
 [32] [33] [34]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 145
-7.
+LaTeX Font Info:    Trying to load font information for U+euf on input line 146
+4.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 )
@@ -944,12 +944,12 @@ Underfull \vbox (badness 2318) has occurred while \output is active []
 
 ]
 [42] [43]
-Overfull \hbox (27.7459pt too wide) detected at line 1839
+Overfull \hbox (27.7459pt too wide) detected at line 1846
 []
  []
 
 [44] [45]
-Overfull \hbox (25.24762pt too wide) detected at line 1920
+Overfull \hbox (25.24762pt too wide) detected at line 1927
 [][]
  []
 
@@ -958,13 +958,13 @@ Overfull \hbox (25.24762pt too wide) detected at line 1920
 ]
 Chapter 4.
 [53] [54] [55] [56] [57]
-<hit prob.pdf, id=838, 845.04686pt x 597.50786pt>
+<hit prob.pdf, id=839, 845.04686pt x 597.50786pt>
 File: hit prob.pdf Graphic file (type pdf)
 <use hit prob.pdf>
-Package pdftex.def Info: hit prob.pdf  used on input line 2413.
+Package pdftex.def Info: hit prob.pdf  used on input line 2420.
 (pdftex.def)             Requested size: 409.76732pt x 289.73625pt.
  [58] [59 <./hit prob.pdf>] [60]
-Overfull \hbox (13.296pt too wide) in paragraph at lines 2506--2507
+Overfull \hbox (13.296pt too wide) in paragraph at lines 2513--2514
 []\OT1/cmr/m/n/12 Suppose we have $\OML/cmm/m/it/12 x[] \OMS/cmsy/m/n/12 2 \OML
 /cmm/m/it/12 Q[] []$ \OT1/cmr/m/n/12 with $\OML/cmm/m/it/12 u [] \U/msa/m/n/12 
 > \OML/cmm/m/it/12 ^^N[]$\OT1/cmr/m/n/12 , $\OML/cmm/m/it/12 j \U/msa/m/n/12 6 
@@ -976,15 +976,15 @@ Overfull \hbox (13.296pt too wide) in paragraph at lines 2506--2507
 ]
 Chapter 5.
 [63] [64] [65] [66]
-Overfull \hbox (3.12877pt too wide) in paragraph at lines 2715--2716
-[][]\OT1/cmr/bx/n/12 Exercise 5.1.3. []\OT1/cmr/m/it/12 Prove the above popo-si
+Overfull \hbox (3.12877pt too wide) in paragraph at lines 2716--2717
+[][]\OT1/cmr/bx/n/12 Exercise 5.1.2. []\OT1/cmr/m/it/12 Prove the above popo-si
 -tion. (Hint: show that $\OML/cmm/m/it/12 C[]\OT1/cmr/m/n/12 (
 )$ \OT1/cmr/m/it/12 is dense in $\OML/cmm/m/it/12 L[]\OT1/cmr/m/n/12 (
 \OML/cmm/m/it/12 ; \OT1/cmr/bx/n/12 P\OT1/cmr/m/n/12 )$\OT1/cmr/m/it/12 .) 
  []
 
 [67] [68] [69] [70] [71] [72] [73]
-Overfull \hbox (37.6756pt too wide) in paragraph at lines 3074--3075
+Overfull \hbox (37.6756pt too wide) in paragraph at lines 3075--3076
 [][]\OT1/cmr/bx/n/12 Lemma 5.3.8 \OT1/cmr/m/n/12 (Quan-ti-ta-tive ver-sion of D
 oob-Meyer's de-com-po-si-tion)\OT1/cmr/bx/n/12 . []\OT1/cmr/m/it/12 Let $\OML/c
 mm/m/it/12 W$ \OT1/cmr/m/it/12 be a $\OML/cmm/m/it/12 d\OMS/cmsy/m/n/12 ^^@$\OT
@@ -1004,7 +1004,7 @@ Appendix C.
 [81
 
 ] [82] [83] [84] [85]
-Overfull \hbox (8.93205pt too wide) detected at line 3491
+Overfull \hbox (8.93205pt too wide) detected at line 3492
 []
  []
 
@@ -1048,7 +1048,7 @@ ve/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive
 ive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/
 texlive/2021/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/
 2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on "Lecture Notes.pdf" (90 pages, 647486 bytes).
+Output written on "Lecture Notes.pdf" (90 pages, 647471 bytes).
 PDF statistics:
  1302 PDF objects out of 1440 (max. 8388607)
  1123 compressed objects within 12 object streams

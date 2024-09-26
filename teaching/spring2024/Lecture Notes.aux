@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -54,10 +57,10 @@
 \newlabel{eq:bdg}{{1.13}{25}{Burkholder-Davis-Gundy inequalities}{equation.1.13}{}}
 \newlabel{thm:levy}{{1.5.5}{25}{L\'evy's theorem}{theorem.1.5.5}{}}
 \citation{Huang}
-\newlabel{thm:DDS}{{1.5.8}{26}{Dambis–Dubins–Schwarz}{theorem.1.5.8}{}}
+\newlabel{thm:DDS}{{1.5.8}{27}{Dambis–Dubins–Schwarz}{theorem.1.5.8}{}}
 \newlabel{thm:EMI}{{1.5.9}{27}{Exponential martingale inequality}{theorem.1.5.9}{}}
 \newlabel{lem:BM_P1}{{1.5.10}{27}{}{theorem.1.5.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.5.2}Applications in PDEs}{27}{subsection.1.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5.2}Applications in PDEs}{28}{subsection.1.5.2}\protected@file@percent }
 \newlabel{thm:FK1}{{1.5.11}{28}{}{theorem.1.5.11}{}}
 \newlabel{thm:PR-Dir}{{1.5.12}{28}{}{theorem.1.5.12}{}}
 \citation{bass1998diffusions}

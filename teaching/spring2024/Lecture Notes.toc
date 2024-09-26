@@ -8,7 +8,7 @@
 \contentsline {section}{\numberline {1.4}Stochastic Integral}{21}{section.1.4}%
 \contentsline {section}{\numberline {1.5}It\^o's formula and its applications}{24}{section.1.5}%
 \contentsline {subsection}{\numberline {1.5.1}Applications in martingale theory}{24}{subsection.1.5.1}%
-\contentsline {subsection}{\numberline {1.5.2}Applications in PDEs}{27}{subsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.5.2}Applications in PDEs}{28}{subsection.1.5.2}%
 \contentsline {chapter}{\numberline {2}It\^o processes}{31}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Support theorem}{31}{section.2.1}%
 \contentsline {section}{\numberline {2.2}ABP estimate and Generalized It\^o's formula}{34}{section.2.2}%
