@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!--tile and icon-->
+  <title>Guohuan Zhao - AMSS</title>
+  <link rel="icon" href="../../images/favicon.ico"/>
+
+  <!--meta-->
+  <meta name="description" content="Guohuan Zhao" />
+  <meta name="google-site-verification" content="zKoZ-prRc76I8iJIlJ9P1ao01bUPS95ah5DnTLyU-oc" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+	<script>
+	$(document).ready(function(){
+	  $("a").on('click', function(event) {
+	    if (this.hash !== "") {
+	      event.preventDefault();
+
+	      var hash = this.hash;
+
+	      $('html, body').animate({
+	        scrollTop: $(hash).offset().top
+	      }, 500, function(){
+	        window.location.hash = hash;
+	      });
+	    }
+	  });
+	});
+	</script>
+</head>
+
+<!--main part of homepage-->
+<body>
+  <!--banner info-->
+  <div class="banner">
+    <div id="header">
+      <!--这里更改课程题目-->
+      <div id="name">随机微分方程</div>
+      <div id="email">邮箱: gzhao@amss.ac.cn</div>
+    </div>
+  </div>
+
+  <!--content of homepage-->
+  <div id="main">
+      <div class="title">Lecture Notes</div>
+       
+       <ul>
+           <!--这里更改课件 href是课间的地址 -->
+           <li><div style="float:left;"><a class="link" href="Lecture Notes.pdf" target="_blank">Stochastic Differential Equations and Applications v$_2$</a></div>
+            <!--这里放课程日期-->
+               <div style="float:right;">Feb. 25, 2025</div>
+           </li>
+       </ul>
+       
+       <!--div class="title">Homework</div>
+       
+       <ul>
+           <!--这里更改课件 href是课间的地址 -->
+           <!-- <li><div style="float:left;"><a class="link" href="Exercise.pdf" target="_blank">部分习题</a></div>
+            <!--这里放课程日期-->
+            <!-- <div style="float:right;">Feb. 25, 2025</div>
+           <!--</li>
+       <!--/ul>
+       
+             
+      <div style="margin-top: 10px; text-align: center; font: normal 100% 'lucida sans unicode', arial, sans-serif;color: #AAA;">
+      Copyright &copy; 2025, Guohuan Zhao.<br>
+  </div>
+
+	<!-- Start of StatCounter Code for Default Guide -->
+	<script type="text/javascript">
+		var sc_project=10595714;
+		var sc_invisible=1;
+		var sc_security="ee39bc4f";
+		var scJsHost = (("https:" == document.location.protocol) ?
+			"https://secure." : "http://www.");
+		document.write("<sc"+"ript type='text/javascript' src='" +
+			scJsHost+
+			"statcounter.com/counter/counter.js'></"+"script>");
+	</script>
+	<noscript><div class="statcounter"><a title="shopify visitor
+		statistics" href="http://statcounter.com/shopify/"
+		target="_blank"><img class="statcounter"
+		src="http://c.statcounter.com/10595714/0/ee39bc4f/1/"
+		alt="shopify visitor statistics"></a></div></noscript>
+		<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>
