@@ -1,0 +1,102 @@
+\chapter{Divergence Form Operators}
+
+Let \(a\in \mS^d_\delta\). One can also consider the following Dirichlet form 
+\[
+\cE (u, v) : = \int_{\mR^d} a_{ij} \partial_i u \partial_i v=\cE(v,u), \quad u, v \in H^1. 
+\]
+Then, 
+\[
+\cE(u, v) = - \langle Lu, v \rangle=-\< u, Lv \>, \quad u, v \in C_c^\infty, 
+\]
+where
+\[
+L u = \partial_j (a_{ij}\partial_i u).
+\]
+By our assumption on \(a\), 
+\[
+\cE(u,u)\asymp \int_{\mR^d} |\nabla u|^2 = \|u\|_{H^1}^2. 
+\]
+
+\medskip
+Assume that \(a\in \mS^d_\delta\cap C^\infty\), and \((\mP_x, X_t)\) be the diffusion process associated to 
+
+For any \(f\in L^1\cap L^\infty\), set \(P_tf(x)=\mE_x f(X_t)\). Then 
+\[
+\partial_t P_t f = L P_t f, \quad f\in C^\infty_c. 
+\]
+By the symmetricity of \(L\), we have 
+\begin{align*}
+    \partial_t\<f,P_t^*g\>=\partial_t\<P_tf,g\>=\<L P_t f, g\>= \<P_tL f, g\>= \<f, LP_t^* g\>, \quad f,g\in C_c^\infty.
+\end{align*}
+This yields that \(P_t^* f= P_tf\). Consequently, 
+\[
+\int P_t f = \partial_t \langle P_t f, 1\rangle = \langle f,  P_t 1 \rangle = \int f.
+\]
+
+
+
+Assume \( f \geq 0 \), \( f\in C_c^\infty \) and \(\|f\|_1 = 1\).
+
+\[
+\frac{\d }{\d t} \|P_t f\|_2^2 = \partial_t \langle P_t f, \partial_t P_t f \rangle = 2 \langle P_t f, L P_t f \rangle \leq -2 \delta \| \nabla P_t f \|_2^2
+\]
+By Nash's inequality: 
+\[
+\|u\|_2 \leq C(d)\| u \|_1^{\frac{2}{d+2}} \| \nabla u \|_2^{\frac{d}{d+2}}
+\] 
+and the fact that \(\|P_t f \|_1 \leq \|f\|_1=1\), we obtain
+\[
+\frac{\d }{\d t} \|P_t f\|_2^2 \leq -c\left( \frac{\|P_t f \|_2}{\|P_t f \|_1^{\frac{2}{d+2}}} \right)^{\frac{2(d+2)}{d}} \leq -c\left( \|P_t f \|_2^2 \right)^{1+\frac{2}{d}}
+\]
+Put \(\theta(t) = \|P_t f\|^2_2\). Then \(\theta'(t) \leq -c\left(\theta(t)\right)^{1+\frac{2}{d}}\) and \(\theta(t) > 0\). This yields 
+\[
+\left[ \theta^{-\frac{2}{d}}(t) \right]' \geq c> 0\Rightarrow \theta^{-\frac{2}{d}}(t) \geq ct + \theta^{-\frac{2}{d}}(0). 
+\]
+Thus, 
+\[
+\|P_t f\|_2^2 \leq \theta(t) \leq Ct^{-\frac{d}{2}}, \quad \|f\|_1 =1. 
+\]
+So we obtain 
+\begin{equation}\label{eq:L1-to-L2}
+    \|P_t\|_{L^1 \to L^2} \leq Ct^{-\frac{d}{4}}
+\end{equation}
+For any \( f \in L^2, \, g \in L^1 \), 
+\[
+    \langle P_tf, g \rangle = \langle f, P_t g \rangle \leq C\|f\|_2 \|P_t g\|_2 \leq Ct^{-\frac{d}{4}} \|g\|_1 \|f\|_2. 
+\]
+This yields 
+\begin{equation}\label{eq:L2-to-Linfity}
+    \| P_t\|_{L^2 \rightarrow L^\infty} \leq Ct^{-\frac{d}{4}}
+\end{equation}
+\eqref{eq:L1-to-L2} and \eqref{eq:L2-to-Linfity} imply that 
+\[
+    \|P_t\|_{L^1 \rightarrow L^\infty} \leq \|P_{\frac{t}{2}}\|_{L^1 \rightarrow L^2} \|P_{\frac{t}{2}}\|_{L^2 \rightarrow L^\infty} \leq Ct^{-\frac{d}{2}}. 
+\]
+Therefore, 
+\[
+    p(t,x,y)\leq Ct^{-\frac{d}{2}}. 
+\]
+
+\medskip
+Set 
+\[
+P_{t}^{\varphi} f(x) := e^{\varphi (x)} P_{t}(e^{-\varphi} f)(x)
+\]
+\begin{equation}
+    \begin{aligned}
+        \langle L^{\varphi} f, g \rangle =& \langle \partial_{t} P_{t}^{\varphi} f, g \rangle|_{t=0} = \langle e^{\varphi} \partial_{t} P_{t}(e^{-\varphi} f), g \rangle|_{t=0}\\
+        =& -\int_{\mR^d}a_{ij} \partial_{i} (e^{-\varphi} f) \partial_{j} (e^{\varphi} g) \\
+        =& \langle L f, g \rangle + \int a_{ij} (\p_i g\p_j\varphi f-\p_i f\p_j\varphi g) + \int a_{ij} \p_i\varphi \p_j \varphi fg
+    \end{aligned}
+\end{equation}
+\[
+\frac{\d }{\d t}\|P_t^\varphi f\|_2^2=\<L^\varphi P^\varphi_t f, P^\varphi_t f\> + \int a_{ij} \p_i\varphi \p_j \varphi f^2. 
+\]
+
+Let \(\varphi(x)=\beta\cdot x\) with \(\beta\in \mR^d\), and \(\|f\|_1=1\). Then 
+\[
+\frac{\d }{\d t}\|P_t^\varphi f\|_2^2\leq C |\beta|^2 \|P_t f\|_2^2 -c\left( \|P_t f \|_2^2 \right)^{1+\frac{2}{d}} 
+\]
+\[
+\theta'(t)\leq C |\beta|^2 \theta(t)-c(\theta(t))^{1+\frac{2}{d}}
+\]

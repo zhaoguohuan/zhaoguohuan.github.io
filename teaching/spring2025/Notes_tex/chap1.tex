@@ -1,0 +1,536 @@
+%-----------------------------------------------------------------------
+% Beginning of chap1.tex
+%-----------------------------------------------------------------------
+%
+%  AMS-LaTeX sample file for a chapter of a monograph, to be used with
+%  an AMS monograph document class.  This is a data file input by
+%  chapter.tex.
+%
+%  Use this file as a model for a chapter; DO NOT START BY removing its
+%  contents and filling in your own text.
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\part{This is a Part Title Sample}
+
+\chapter{Construction of Diffusion processes I}
+
+
+\section{Brownian Motion}
+The {\em Brownian motion} is a continuous stochastic process characterized by independent increments that follow a normal distribution. It is widely used to model the irregular motion of tiny particles suspended in a fluid. As one of the fundamental concepts in stochastic analysis, Brownian motion serves as a cornerstone for understanding more complicate stochastic processes.
+
+In physics, Brownian motion was discovered in 1827 by the British botanist Robert Brown. While observing pollen particles suspended in water under a conventional microscope, he noticed their irregular motion. Since 1860, numerous scientists have studied this phenomenon and identified the following key characteristics of Brownian motion: 
+\begin{enumerate}
+    \item The motion of the particles consists of translation and rotation; %, appearing very irregular, and their trajectories are almost everywhere without tangents;
+    \item The movements of the particles are apparently uncorrelated, even when the particles approach each other to distances smaller than their diameters;
+    \item The smaller the particles, the lower the viscosity of the liquid, or the higher the temperature, the more active the motion of the particles;
+    \item The composition and density of the particles have no effect on their motion;
+    \item The motion of the particles never stops.
+\end{enumerate}
+
+In 1905, Einstein proposed a related theory. His theory has two parts: the first part defines the diffusion equation for Brownian particles, where the diffusion coefficient is related to the mean square displacement of the Brownian particles, and the second part describes the relationship between the diffusion coefficient and measurable physical quantities. Here we briefly introduce the first part: determining the distance a Brownian particle moves in a given time. Classical mechanics cannot determine this distance because a Brownian particle will be subjected to a large number of collisions, approximately \(10^{14}\) collisions per second. Einstein considered the position of the particle in space at time \( t \) as a random variable \( X_t \), and let \( \rho(t,x) \) be the density of \( X_t \). Assume \( \tau_B \) is the relaxation time, and \( \Delta t \gg \tau_B \). The increment \( X_{t+\Delta t} - X_t \) over the time interval \( \Delta t \) is also a random variable, and its probability density is assumed to be \( \varphi_{\Delta t} \) (depending only on \( \Delta t \)). For a homogeneous liquid, we can naturally assume that \( \varphi_{\Delta t} \) is rotationally symmetric. Using Taylor expansion:
+\begin{align*}
+    \rho(t,x) + \partial_t \rho(t,x) \Delta t \approx & \rho(t + \Delta t, x) = \int_{\mathbb{R}^3} \rho(t,x-y) \varphi_{\Delta t}(y) \d y\\
+    \approx& \rho(t,x) \int_{\mathbb{R}^3} \varphi_{\Delta t}(y) \d y - \nabla \rho(t,x) \cdot \int_{\mathbb{R}^3} y \varphi_{\Delta t}(y) \d y\\
+    &+ \frac{1}{2} \partial_{y_iy_j}^2 \rho(t,x) \int_{\mathbb{R}^3} y_iy_j \varphi_{\Delta t}(y) \d y\\
+    =& \rho(t,x) + \frac{1}{2} \int_{\mathbb{R}^3} |y|^2 \varphi_{\Delta t}(y) dy \Delta \rho(t,x).
+\end{align*}
+Therefore,
+\[
+\partial_t \rho = \frac{\int_{\mathbb{R}^3} |y|^2 \varphi_{\Delta t}(y) dy}{2\Delta t} \Delta \rho.
+\]
+
+From both theoretical and experimental perspectives, it is reasonable to assume that \( \nu = \frac{1}{2\Delta t} \int_{\mathbb{R}^3} |y|^2 \varphi_{\Delta t}(y) dy \) is a constant, called the diffusion coefficient of the Brownian particle. Thus, the above equation can be written as:
+
+\[
+\partial_t \rho = \nu \Delta \rho, \quad \rho(0,x) = f(x).
+\]
+
+The solution to this heat equation is:
+
+\[
+\rho(t,x) = \int_{\mathbb{R}^3} \frac{1}{(4\pi\nu t)^{3/2}} e^{-\frac{(x-y)^2}{4\nu t}} f(y) dy.
+\]
+
+From this, we obtain that if \( X_0 = x \), then the distribution of \( X_t \) is a standard Gaussian distribution. The second part of Einstein's theory relates the diffusion constant to physically measurable quantities, such as the mean square displacement of the particle over a given time interval. This result allows for the experimental determination of Avogadro's number and, consequently, the size of molecules. However, we will not discuss this further here.
+
+\subsection{Mathematical Definition of Brownian Motion}
+
+Note that Einstein did not explicitly establish a mathematical model for Brownian motion. This problem was solved by Wiener. 
+
+\begin{definition}\label{Def:BM}
+    \( (W_t)_{t\geq 0} \) is a stochastic process satisfying:
+    \begin{enumerate}
+        \item {\bf Stationary independent increments and Gaussian property}: For \( t > s \), the increment \( W_t - W_s \) follows a normal distribution with mean 0 and variance \( (t-s)I_{d\times d} \), and the increment \( W_t - W_s \) is independent of the process \( (W_u)_{0\leq u\leq s} \) before time \( s \);
+        \item {\bf Path continuity}: \( (W_t)_{t\geq 0} \) is almost surely continuous;
+    \end{enumerate}
+    Usually, we assume \( W_0 = 0 \), in which case, \(W\) is called standard Brownian motion.
+\end{definition} 
+Of course, a natural mathematical question is whether such a stochastic process exists. 
+
+%In fact, we can define a probability measure \( \mathbb{P} \) on \( \Omega = C(\mathbb{R}^+; \mathbb{R}) \) such that the canonical process \( W_t(\omega) = \omega \) on \( \Omega \) is a standard Brownian motion, and it can be proven that for any \( \alpha \in (0,1/2) \):
+% \[
+% \mathbb{P}(\|W\|_{C^\alpha([0,T];\mathbb{R})} < \infty) = 1,
+% \]
+% and
+% \[
+% \mathbb{P}\left(\limsup_{t \to t_0} \frac{|W_t - W_{t_0}|}{\sqrt{t-t_0}} < \infty\right) = 0.
+% \]
+\medskip
+
+A stochastic process defined on $(\Omega, \cF, \bP)$ taking value in a measurable space $(E, \cE)$ can be understood in various ways. It involves a collection of random variables $X_t\in E$ indexed by a parameter set $\bT$ (usually, $\bT=\mN$ or $\mR_+$), where $X_t$ is a measurable map from $(\Omega, \cF,\bP)$ to $(E, \cE)$ for each $t\in \bT$. The parameter set $\bT$ typically represents time and can be discrete or continuous. The process can also be regard as a measurable map from $(\Omega, \cF, \bP)$ to the space of functions $E^\bT$. The Kolmogorov $\sigma$-field on $E^{\bT}$ is the smallest $\sigma$-field making the projections $\pi_t: E^{\bT} \ni f\mapsto f(t)\in E$ measurable. This definition ensures that a random map  $\Omega \ni \omega \mapsto X_{\cdot}(\omega) \in E^{\bT}$ is measurable if its component random variables $X_t:\Omega \to E$ are measurable for all $t\in \bT$. Therefore, the mapping $\omega\mapsto X_{\cdot}(\omega)$ induces a measure on $(E^{\bT}, \cE^{\bT})$ denoted by $\mP$. The underlying probability model $(\Omega, \cF, \bP)$ is replaceable by the canonical model $(\mP, E^{\bT}, \cE^{\bT})$ with a specific choice of $X_t(f)=\pi_t(f)=f(t)$. In simpler terms, a stochastic process is just a probability measure $\mP$ on $(E^{\bT}, \cE^{\bT})$.
+	
+Another point of view is that the only relevant objects are the joint distributions of $(X_{t_1}, X_{t_2}, \cdots , X_{t_n})$ for every $n$ and every finite subset $I = (t_1, t_2, ... , t_n)$ of $\bT$. These can be specified as probability measures $\mu_{I}$ on $\mR^n$. These $\mu_{I}$ cannot be totally arbitrary. If we allow different permutations of the same set, so that $I$ and $I'$ are permutations of each other then $\mu_I$ and $\mu_{I'}$ should be related by the same permutation. If $I\subseteq I'$, then we can obtain the joint distribution of $(X_t)_{t\in I}$ by projecting the joint distribution of $(X_t)_{t\in I'}$ from $\mR^{n'}$ to $\mR^{n}$ where $n$ and $n'$ are the cardinalities of $I$ and $I'$ respectively. A stochastic process can then be viewed as a family $(\mu_I)$ of distributions on various finite dimensional spaces that satisfy the consistency conditions. A theorem of Kolmogorov says that this is not all that different. Any such consistent family arises from a $\mP$ on $(E^{{\bT}} , \cE^{\bT})$ which is uniquely determined by the family $(\mu_I)$.
+
+\begin{definition}
+    We say A measurable space \((E, \cE)\) is said to be standard if there exists a Polish space \(X\) such that \((E,\cE)\) is isomorphic (as a measurable space) to \((X,\cB(X))\). 
+\end{definition}
+
+\begin{theorem}[Kolmogorov's consistency Theorem, cf. \cite{Yan2021Measure}]\label{Thm:K1}
+    Let $E$ be a standard measure space. Assume that we are given for every $t_1,...,t_n\in \bT$ a probability measure  $\mu_{t_1\cdots t_n}$ on $E^n$, and that these probability measures satisfy:
+	\begin{enumerate}[(i)]
+		\item for each $\tau\in S_n$ and $A_i \in \cE$, 
+		$$
+			\mu_{t_1\cdots t_n} (A_1 \times ... \times A_n)=\mu_{t_{\tau(1)}\cdots t_{\tau(n)}} (A_{\tau(1)} \times ... \times A_{\tau(n)});
+		$$
+		\item for each $A_i \in \cE$, 
+		$$
+			\mu_{t_1\cdots t_n} (A_1 \times ... \times A_{n-1} \times E)=\mu_{t_1\cdots t_{n-1}} (A_1 \times ... \times A_{n-1}). 
+		$$
+	\end{enumerate}
+    Then, there is a unique probability measure $\bP$ on $(E^{\bT}, \cE^{\bT})$ such that for $t_1,...,t_n \in \bT, A_1,...,A_n \in \cE$: $\bP (f(t_1) \in A_1,...,f(t_n) \in A_n)=\mu_{t_1,...,t_n}(A_1 \times ... \times A_n)$. 
+\end{theorem}
+	
+	
+Let \(\bT=\mR_+\) and \(E\) be a Polish space. By \Cref{Thm:K1}, we can define a probability measure $\mP$ on $E^{\mR_+}$ such that the canonical process $X_t(f)=f(t)$ satisfies the conditions in \Cref{Thm:K1}. However, whether the measure is concentrated on the space of continuous functions is not a simple question. In fact, since $\bT=\mR_+$ is uncountable the space of bounded functions, continuous functions, etc., are \textbf{not} measurable sets of $E^{\mR_+}$. They do not belong to the natural $\sigma$-field. Essentially, in probability theory, the rules involve only a countable collection of sets at one time, and any information that involves the values of an uncountable number of measurable functions is beyond reach. There is an intrinsic reason for this. In probability theory, we can always change the values of a random variable on a set of measure $0$, and we have not changed anything significant. Since we are allowed to mess up each function on a set of measure $0$, we have to assume that each function has indeed been messed up on a set of measure 0. If we are dealing with a countable number of functions, the `mess up' has occurred only on the countable union of these individual sets of measure $0$, which, by the properties of a measure, is again a set of measure $0$. On the other hand, if we are dealing with an uncountable set of functions, then these sets of measure $0$ can possibly gang up on us.
+	
+Often, we aim to find a version of stochastic process with continuous trajectories,  or equivalently, to establish a measure $\mP$ on $C(\mR_+; \mR^d)$ with the natural $\sigma$-field. However, this is not always achievable. We are looking for sufficient conditions on the finite dimensional distributions $(\mu_I)$ to ensure the existence of $\mP$ on $C(\mR_+; \mR^d)$.
+	
+\begin{theorem}[Kolmogorov]\label{Thm:K2}
+    Let $I=[0,T]$, and let $p>1$ and $\beta\in(1/p,1)$. Assume $(Y_t\in \mR^d)_{t\in I}$ satisfies  
+    \begin{equation}\label{eq:moment}
+        \bE |Y_s-Y_t|^p \leq c |t-s|^{1+\beta p}, \quad ~\forall t,s\in I. 
+    \end{equation}
+    Then there exists a version of $Y$, say $X$ (for each \(t\in I\), $\bP(X_t=Y_t)=1$), such that  
+    \[
+        \bP\l(\sup_{t\in I}\frac{|X_t-X_s|}{|t-s|^\alpha}\leq K\r) =1, 
+    \]
+    where $\alpha\in (0,\beta-1/p)$, $K=K(\alpha,\beta,p,c,I,\omega)$ and $\bE K^p<\infty$. 
+\end{theorem}
+\begin{proof}
+    Regard $Y$ as a measurable function from  $\Omega\times I$ to $\mR^d$. By Lemma \ref{Le:GRRI} below, there is a null set $\cN\subseteq \Omega$ and a measurable function $X: \Omega\times I \to \mR^d$, such that for each $\omega\notin \cN$, 
+    \[
+	\sL^1\l(\{ t\in I: X_t(\omega)\neq Y_t(\omega)\}\r)=0, 
+    \]
+    and $X(\omega)_{\cdot}$ is a continuous function. Moreover, 
+    \[
+    \|X_{\cdot}(\omega)\|_{C^{\alpha}(I)}\lesssim  K(\omega):= \l(\iint_{I\times I} \frac{|Y_t(\omega)-Y_s(\omega)|^p}{|t-s|^{2+\alpha p}}\, \d s \d t\r)^{1/p}\in L^p(\bP).
+    \]
+    By Fubini theorem, there exists a $\sL^1$-null set $N\subseteq I$, such that for each $t\notin N$, $\bP(X_t\neq Y_t)=0$. For any $t_0\in N$, by \eqref{eq:moment}, one can see that $Y_{t_n} \xrightarrow[I\backslash N \ni t_n \to t_0]{\bP} Y_{t_0}$. On the other hand, $Y_{t_n}\overset{\mbox{a.s}}{=}X_{t_n}\to X_{t_0}$, so we have $X_{t_0}\overset{\mbox{a.s}}{=}Y_{t_0}$. Therefore, $X$ is a continuous version of $Y$. 
+\end{proof}
+
+\begin{lemma}[Fractional Sobolev inequality]\label{Le:GRRI}
+    Let $R>0$, $p>n$ and $s\in (n/p,1)$. Let $f:B_R\to \mR^d$ be a measurable function. Assume 
+    \begin{align*}
+	\iint_{B_R\times B_R}\frac{|f(x)-f(y)|^p}{|x-y|^{n+sp}}\, \d x \d y<\infty. 
+    \end{align*}
+    Then there exists a version of $f$, say $\tilde f$, such that 
+    \begin{equation}
+	\sup_{x,y\in B_R}\frac{|\tilde f(x)-\tilde f(y)|}{|x-y|^{s-\frac{n}{p}}}\leq C \l(\iint_{B_R\times B_R} \frac{|f(x)-f(y)|^p}{|x-y|^{n+sp}}\, \d x\d y\r)^{1/p}, 
+    \end{equation}
+    Here $C$ only depends on $n,s,p$ and $R$. 
+\end{lemma}
+	
+Thanks to \Cref{Thm:K2} and the discussion after  \Cref{Thm:K1}, we can first construct a probability measure \(\bP\) on \(\Omega=(\mR^d)^{\mR_+}\) such that 
+\begin{align*}
+    &\bP(Y_{t_1}\in A_1,\cdots, Y_{t_n}\in A_n)\\
+    =&\int_{A_1}\cdots\int_{A_n} p_{t_1}(x_1) p_{t_2-t_1}(x_1-x_2) \cdots p_{t_n-t_{n-1}}(x_{n-1}-x_n) \d x_1\cdots \d x_n,  
+\end{align*}
+where \(Y_t(\omega)=\omega\) is the canonical process, and \(p_t(x)=(2\pi t)^{-\frac{d}{2}} \exp (-|x|^2/(2t))\). Then using \Cref{Thm:K2}, one can establish the existence of an \(\alpha\)-Hölder  continuous version of \(Y\) with \(\alpha\in (0,\frac{1}{2})\), which is a Brownian motion. Once we get such a continuous version, in fact we obtain a probability measure \(\mP\) on \(C(\mR_+; \mR^d)\), under which the canonical process is a Brownian motion.  
+
+\section{Markov Processes}
+Intuitively speaking, a process \(X\) is Markov if, given its whole past up until some time \(s\), the future behaviour depends only its state at time \(s\). To make this precise, let us suppose that X takes values in a measurable space \((E,\mathcal{E})\) and, to denote the past, let \(\mathcal{F}_t\) be the sigma-algebra generated by \(\{X_s\colon s\leq t\}\). The Markov property then says that, for any times $s\leq t$ and bounded measurable function $f\colon E\rightarrow{\mathbb R}$, the expected value of $f(X_t)$ conditional on \(\mathcal{F}_s\) is a function of \(X_s\). Equivalently,
+
+\begin{equation}\label{eq:markov}
+    {\mathbf E}\left[f(X_t)\mid\mathcal{F}_s\right]={\mathbf E}\left[f(X_t)\mid X_s\right],\quad \mbox{a.s}.
+\end{equation}
+More generally, this idea makes sense with respect to any filtered probability space \(\mathbb{F}=(\Omega,\mathcal{F},(\mathcal{F}_t)_{t\geq 0},{\mathbf P})\). A process \(X\) is Markov with respect to \(\mathbb{F}\) if it is adapted and \eqref{eq:markov} holds for times \(s\leq t\).
+
+Continuous time Markov processes are usually defined in terms of transition functions. These specify how the distribution of \(X_t\) is determined by its value at an earlier time \(s\). To state the definition of transition functions, it is necessary to introduce the concept of transition probabilities.
+\begin{definition}
+    A (transition) kernel \(Q\) on a measurable space \((E,\mathcal{E})\) is a map
+    \begin{align*}
+        Q: &E\times\mathcal{E}\rightarrow{\mathbb R}_+\cup\{\infty\},\\ 
+        & (x,A)\mapsto N(x,A)
+    \end{align*}
+    such that for each \(x\in E\), the map \(A\mapsto Q(x,A)\) is a measure, and for each \(A\in\mathcal{E}\), the map \(x\mapsto N(x,A)\) is measurable. If, furthermore, \(Q(x,E)=1\) for all \(x\in E\), then \(Q\) is a transition probability.
+\end{definition}
+For any \(f\in B(E)\), we set 
+\[
+Qf(x)= \int_{E} f(y)Q(x, \d y). 
+\]
+
+A transition probability, then, associates to each \(x\in E\) is a probability measure on \((E,\mathcal{E})\). This can be used to describe how the conditional distribution of a process at a time \(t\) depends on its value at an earlier time \(s\) by 
+\[
+{\mathbf P}(X_t\in A\mid\mathcal{F}_s)=Q(X_s,A). 
+\]
+A Markov process is defined by a collection of transition probabilities \((P_{s,t})_{t\geq s}\), describing how it goes from its state at time \(s\) to a distribution at time \(t\). We only consider the homogeneous case here, meaning that \(P_{s,t}\) depends only on the size \(t-s\) of the time increment, so the notation \(P_{s,t}\) can be replaced by \(P_{t-s}\). % This is not much of a restriction because, given an inhomogeneous Markov process X, it is always possible to look at its space-time process {(t,X_t)} taking values in {{\mathbb R}_+\times E}, which will be homogeneous Markov.
+\begin{definition}
+    A homogeneous transition function on \((E,\mathcal{E})\) is a collection \(P_t, ~ t\ge 0\) of transition probabilities on \((E,\mathcal{E})\) such that 
+    \[
+    P_{s+t}=P_sP_t, \quad s,t\geq 0
+    \]
+\end{definition}
+
+A process X is Markov with transition function \(P=(P_t)_{t\geq 0}\), and with respect to a filtered probability space \({(\Omega,\mathcal{F},(\mathcal{F}_t)_{t\ge 0},{\mathbf P})} \) if it is adapted and
+\[
+{\mathbf E}\left(f(X_t)\mid\mathcal{F}_s\right)=P_{t-s}f(X_s), \quad t>s.  
+\]
+The identity \({P_{s+t}=P_sP_t}\) is known as the Chapman-Kolmogorov equation, and is required so that the transition probabilities are consistent with the tower rule for conditional expectations. Alternatively \((P_t)_{t\geq 0}\) forms a semigroup.
+
+The distribution of a Markov process is determined uniquely by its transition function and initial distribution.
+
+\begin{proposition}
+    Suppose that \(X\) is a Markov process on \({(E,\mathcal{E})}\) with transition function \(P\) such that \({X_0}\) has distribution \(\mu\). Then, for any times \({0=t_0<t_1<\cdots<t_n}\) and bounded measurable function \({f\colon E^{n+1}\rightarrow{\mathbb R}}\),
+    \begin{align*}
+        &{\mathbf E}[f(X_{t_0},\ldots,X_{t_n})]\\
+        =&\int\!\!\int\!\cdots\!\int f(x_0,\ldots,x_n)\,P_{t_n-t_{n-1}}(x_{n-1},\d x_n)\cdots P_{t_1-t_0}(x_0,\d x_1)\mu(\d x_0).
+    \end{align*}
+\end{proposition}
+
+\begin{proposition}
+    Let \({(E,\mathcal{E})}\) be a measurable space, and \({\Omega=E^{{\mathbb R}_+}}\). Denote its coordinate process by \(X\), 
+    \begin{align*}
+        X_t\colon&\Omega\rightarrow E, \quad \omega\mapsto X_t(\omega)=\omega(t).
+    \end{align*}
+    Also, let \({\mathcal{F}^0}\) be the \(\sigma\)-algebra generated by \({\{X_t\colon t\in{\mathbb R}_+\}}\) and, for each \({t\geq 0}\), let \({\mathcal{F}_t^0}\) be the \(\sigma\)-algebra generated by \({\{X_s\colon s\le t\}}\). So, \((\mathcal{F}^0_t)_{t\geq 0}\) is a filtration on the measurable space \({(\Omega,\mathcal{F}^0)}\) with respect to which \(X\) is adapted. 
+    
+    Then, for every transition function \((P_t)_{t\geq 0}\) and probability distribution \({\mu}\) on \(E\), there is a unique probability measure \({{\mathbb P}}\) on \({(\Omega,\mathcal{F}^0)}\) under which \(X\) is a Markov process with transition function \((P_t)_{t\geq 0}\) and initial distribution \(\mu\).
+\end{proposition}
+\begin{remark}
+    The superscripts $'0'$ just denote the fact that we are using the uncompleted \(\sigma\)-algebras. Once the probability measure has been defined, it is standard practice to complete the filtration, which does not affect the Markov property.
+\end{remark}
+
+The unique measure with respect to which \(X\) is Markov with the given transition function and initial distribution is denoted by \({\mathbb P}_\mu\), and expectation with respect to this measure is denoted by \({\mathbb E}_\mu\). In particular, if \(\mu=\delta_x\) then we write \({\mathbb P}_x\equiv{\mathbb P}_{\delta_x}\) and, similarly, write \({\mathbb E}_x\) for \({\mathbb E}_{\delta_x}\). 
+
+
+\section{Diffusions}
+Diffusion is a physical phenomenon that describes the process by which several substances mixed together tend to move towards equilibrium. For example, Brownian motion describes the process by which pollen particles suspended in a liquid gradually "diffuse" to a "uniform" distribution. A natural question arises: if the physical properties of the liquid at different times and locations affect the pollen particles differently, for instance, in a flowing liquid, what motion laws will the pollen particles follow?
+
+The diffusion process does not have a unified mathematical definition, but its core is a {\em Markov process} with continuous trajectories. Similar to Brownian motion, the evolution of its macroscopic properties can be characterized by establishing equations that satisfy the transition probabilities. Alternatively, by tracking the trajectory of each pollen particle, a probability space can be constructed, and {\em stochastic differential equations (SDE)} can be established to describe the motion laws they obey from a microscopic perspective. 
+
+We will first present its construction using the first method, which can be traced back to Kolmogorov's early groundbreaking papers on Markov processes.
+
+
+
+\subsection{Fokker-Planck-Kolmogorov equations}
+Compared to Brownian motion, we give three conditions for a {\em time-homogeneous}  diffusion process \(X_t\): for any \( \varepsilon > 0 \),
+\begin{equation}\label{eq:TF1}
+    \lim_{t\to0} t^{-1}\sup_{x\in\mR^d} P_{t}(x, B^c_\eps(x)) = 0,
+\end{equation}
+\begin{equation}\label{eq:TF2}
+    \lim_{t \to 0} t^{-1}\int_{|y-x|\leq\eps} (y-x) P_t(x, \d y)=b(x), 
+\end{equation}
+\begin{equation}\label{eq:TF3}
+    \lim_{t \to 0} ({2t})^{-1} \int_{|y-x|\leq} \l(y-x\r)_{i}\l(y-x\r)_{j}P_t(x,\d y) = a_{ij}(x)\quad i,j=1,\cdots,d.
+\end{equation}
+\( b \) and \( a \) are called the drift coefficient and diffusion coefficient of the diffusion process \( (X_t)_{t\geq 0} \), respectively. In the sequel, we always assume that 
+\[
+a, b\in L^\infty. 
+\]
+
+We want to derive the evolution laws that the transition probabilities should satisfy.  Let \(f\in C_b^2(\mR^d)\). Then 
+\begin{equation*}
+    \begin{aligned}
+        &\frac{P_tf(x)-f(x)}{t} \\
+        =& \frac{1}{t} \int_{|y-x|\leq \eps} \l(f(y)-f(x)\r)P_t(x, \d y) + \frac{1}{t} \int_{|y-x|>\eps} \l(f(y)-f(x)\r)P_t(x, \d y)=:I_1+ I_2. 
+    \end{aligned}
+\end{equation*}
+By Taylor's expansion theorem, and using \eqref{eq:TF2} and \eqref{eq:TF3}, we have 
+\begin{align*}
+    I_1 =& \frac{1}{t} \int_{|y-x|\leq \eps} (y-x)_i P_t(x, \d y) ~ \partial_if(x) \\
+    &+ \frac{1}{2t} \int_{|y-x|\leq \eps} (y-x)_i(y-x)_j P_t(x, \d y) ~ \partial_{ij}f(x)  + o(1)\\
+    \longrightarrow& b(x)\cdot\nabla f(x)+ a_{ij}(x)\partial_{ij} f(x), ~ t\to 0.
+\end{align*}
+Applying \eqref{eq:TF1}, we have \(I_2\to 0\), as \(t\to 0\). Therefore, 
+\begin{equation}\label{eq:bk1}
+    \lim_{t\to\infty}\frac{P_tf(x)-f(x)}{t} = a_{ij}(x)\partial_{ij} f(x)+b(x)\cdot\nabla f(x)=:Lf(x), \quad f\in C^2_b(\mR^d). 
+\end{equation}
+Assume that 
+\[
+P_t(x, \d y)=p(t,x,y) \d y~ \mbox{ and } P_tf\in C_b^2, \quad t\geq 0.
+\] 
+Thanks to the Chapman-Kolmogorov equation and \eqref{eq:bk1}, one can verify that 
+\[
+\partial_t P_t f(x) = LP_tf(x), \quad \lim_{t\to 0}P_t f(x)= f(x), 
+\]
+which can be read as 
+\begin{equation}\label{Eq:BK}
+    \partial_t p(\cdot,y)=L p(\cdot,y), \quad \lim_{t\to0}p(t,\cdot, y) = \delta_y. 
+\end{equation}
+
+Kolmogorov's idea for constructing the diffusion process corresponding to \(L\) involves solving the partial differential equation (PDE) \eqref{Eq:BK} (in fact his solves the forward equation in his paper) to obtain the density of the process, \(p(t, x, \cdot)\).
+
+\medskip
+
+We need to introduce some notations. For any $y\in \mR^d$, put 
+\[
+  L_{a(y)}f(x) := a_{ij}(y)\p_{ij}f(x) 
+\]
+and 
+$$
+p^y_0(t, x, z):=\l[\pi t \sqrt[d]{\det(a(y))}\r]^{-\frac{d}{2}} \exp\l( -\frac{a^{-1}_{ij}(y) (x-z)_i(x-z)_j}{t} \r). 
+$$
+
+Let 
+\[
+    \mD=\{(t,x,y): 0\leq t\leq 1, x,y\in \mR^d, x\neq y\}. 
+\]
+For any $\lambda>0, \gamma\in \mR$, put  
+\[
+    \varrho_{\lambda, \gamma}(t, x):= t^{(-d+\gamma)/2} \e^{-\frac{\lambda|x|^2}{ t}} , \quad t> 0, x\in \mR^d. 
+\]
+$\varrho_{\lambda}$ is denoted by $\varrho_\lambda$ for simplicity. For any $p^{(1)}, p^{(2)}, \cdots, p^{(n)}: \mD\to \mR$, define 
+\begin{equation*}
+    \begin{aligned}
+        &\l[p^{(n)}\otimes \cdots \otimes p^{(2)}\otimes p^{(1)}\r](t,x,y)\\
+        :=& \int_{0<\tau_1<\cdots<\tau_{n-1}<t}\int_{\mR^{nd}}  p^{(n)}(t-\tau_{n-1}, x, z_{n-1})\cdots\\
+        &\qquad \qquad \qquad \quad  p^{(2)}(\tau_2-\tau_1,z_2, z_1)p^{(1)}(\tau_1, z_1, y)\d z_1\cdots\d z_{n_1}~\d \tau_1\cdots\d \tau_{n-1}. 
+    \end{aligned}
+\end{equation*}
+
+\medskip
+
+It is easy to verify that 
+$$
+\partial_t p_0^y(\cdot,z)=L_{a(y)}p_0^y(\cdot, z), \quad y, z\in \mR^d. 
+$$
+Recall that \(p\) satisfies \eqref{Eq:BK}, therefore, 
+\[
+\partial_t p= L_{a(y)}p+ (L-L_{a(y)})p. 
+\]
+{\em Formally}, using Duhamel’s formula, we have 
+\[
+  p(t,x,y)= p_0^y(t,x,y)+[p_0^y\otimes (L-L_{a(y)})p](t,x,y), 
+\]
+\begin{align}\label{Eq:p-Duhamel}
+p(\cdot,y)=\sum_{n=0}^\infty \Big[ \underbrace{p_0^y \otimes \overbrace{[(L-L_{a(y)})p_0^y]^{\otimes^n}}}^{=:q_n}_{=:p_n}\Big](\cdot,y)=\l[ p_0^y+p_0^y\otimes q\r] (\cdot,y),   \quad q=\sum_{n=1}q_n  
+\end{align}
+and 
+\begin{equation}\label{Eq:p-Duhamel'}
+    p(\cdot, y)=\l[p_0^y+p_0^y\otimes (L-L_{a(y)}) p \r] (\cdot, y), \quad y\in \mR^d. 
+\end{equation}
+For notion simplicity, we omit the superscript \(y\) below. 
+
+We attempt to show that the infinite series in \eqref{Eq:p-Duhamel} do convergence (in some sense), and \(p\) given by \eqref{Eq:p-Duhamel} satisfying \eqref{Eq:p-Duhamel'} is a fundamental solution to \eqref{Eq:BK}, provided that the coefficients satisfies 
+\begin{assumption}\label{Aspt:ab1}
+    There exists \(\alpha\in (0,1)\) and \(\Lambda>1\) such that 
+    \begin{equation*}
+        \Lambda^{-1} |\xi|^2\leq a_{ij}\xi_i\xi_j\leq \Lambda|\xi|^2
+    \end{equation*}
+    and
+    \begin{equation*}
+        \|a\|_{C^\alpha}=N_1<\infty, \quad \|b\|_{L^\infty}=N_2<\infty. 
+    \end{equation*}
+\end{assumption} 
+
+\subsection{Heat Kernel Estimate}
+In this subsection, we use the classical Levi's freezing coefficients method to prove that \eqref{Eq:BK} admits a nice solution provided that the coefficients \(a\) and \(b\) satisfies \Cref{Aspt:ab1}. 
+
+
+For simplicity, we always assume \(b=0\) in the sequel. Readers interested in the general case can work out the details themselves.
+
+\begin{theorem}\label{Thm:HKE1}
+    Under \Cref{Aspt:ab1}, there is a unique continuous transition density function \(p(t,x,y)\in \mD\) such that 
+    \[
+    \partial_tp(\cdot,y)=Lp(\cdot,y)~\mbox{ and }~ \lim_{t\to0}p(t,x,y)=\delta_y, \quad y\in \mR^d.  
+    \]
+    Moreover, 
+    \begin{enumerate}[(i)]
+        \item 
+        for any \(f\in C_0(\mR^d)\), \(P_t f\to f\) uniformly; 
+        \item for any \(t\in [0,1], x\in \mR^d\)
+        \begin{equation}
+            p(t,x,\cdot)\geq 0 ~ \mbox{ and }~\int_{\mR^d} p(t,x,y) \d y=1; 
+        \end{equation}
+        \item for any \(t,s\in [0,1]\) and \(x,y\in \mR^d\)
+        \begin{equation}
+             p(t+s,x,y)= \int_{\mR^d} p(t,x,z)p(s,z,y) \d z; 
+        \end{equation}
+        \item there is a constant \(C>1\) only depending on \(d,\alpha,\Lambda\) and \(N_i\) such that such that for any \((t,x,y)\in \mD\), 
+        \begin{equation}\label{Eq:HEK1}
+            C^{-1} t^{-\frac{d}{2}} \exp(-{C|x|^2}/t)) \leq p(t,x,y)\leq C t^{-\frac{d}{2}} \exp(-{|x|^2}/(Ct))). 
+        \end{equation}
+    \end{enumerate}
+\end{theorem}
+
+\begin{lemma}\label{Lem:Dp0}
+    For any \(k\in \mN\), there is a constant \(\lambda_k>0\) such that 
+    \begin{align*}
+        |\nabla^k_{x}p_0|\lesssim \varrho_{\lambda_{k}, -k}
+    \end{align*}
+    and for any \(t\in [0,1]\), \(x_1,x_2,z\in \mR^d\) and \(\beta\in (0,1) \), it holds that 
+    \begin{equation*}
+    \begin{aligned}
+        &|\nabla^k_{x}p_0(t,x_1, z)-\nabla^k_{x}p_0(t,x_2, z)| \\
+        \lesssim& |x_1-x_2|^{\beta} \l[\varrho_{\lambda_{k}, -k-\beta}(t,x_1,z)+\varrho_{\lambda_{k}, -k-\beta}(t,x_2,z)\r]. 
+    \end{aligned}  
+    \end{equation*}
+\end{lemma}
+\begin{exercise}
+    Prove \Cref{Lem:Dp0}. 
+\end{exercise}
+
+\begin{lemma}\label{Lem:q}
+    It holds that  
+    \begin{equation}\label{eq:q-uper}
+        |q|\lesssim \varrho_{\lambda, \alpha-2};
+    \end{equation}
+    For any \(t\in [0,1]\), \(x_1,x_2,y\in \mR^d\) and \(\beta\in (0,1) \), it holds that 
+    \begin{equation}\label{eq:q-holder}
+        |q(t,x_1,y)-q(t,x_2,y)|\lesssim |x_1-x_2|^{\beta} \sum_{i=1,2}\varrho_{\lambda, \alpha-\beta-2}(t,x_i,y). 
+    \end{equation}
+\end{lemma}
+\const{\Cqn}
+\begin{proof}
+    We Claim that 
+    \begin{framed}
+    \begin{equation}\label{eq:iteration-qn}
+        |q_n(t,x,y)|\leq \underbrace{\frac{\left(C_{\Cqn} \Gamma(\alpha / 2)\right)^n}{(\lambda / \pi)^{d(n-1) / 2} \Gamma(n \alpha / 2)}}_{=:\gamma_n}\varrho_{\lambda, n\alpha-2}(t,x-y),
+    \end{equation}
+    where \(\Gamma\) is the Gamma function, and \(C_{\Cqn}\) and \(\lambda\) only depends on \(d,\alpha,\Lambda\) and \(N_i\). 
+    \end{framed}
+    By \Cref{Lem:Dp0} and the H\"older regularity of \(a\), we have 
+    \[
+    |q_1(t,x,y)|=|[(L-L_{a(y)})p_0](t,x,y)|\leq C_{\Cqn} \varrho_{\lambda, \alpha-2} (t,x,y). 
+    \]
+    Assume \eqref{eq:iteration-qn} holds. This together with the fact that \(q_{n+1}=q_1\otimes q_n\) yields 
+    \begin{equation*}
+        \begin{aligned}
+            & \left|q_{n+1}(t,x,y)\right| \\
+            \leq& C_{\Cqn} \gamma_n \int_0^t (t-\tau)^{\frac{\alpha}{2}-1}\tau^{\frac{n \alpha}{2}-1} \d \tau \int_{\mathbb{R}^d} \varrho_{\lambda}(t-\tau, x-z) \varrho_{\lambda}(\tau, z-y) \mathrm{d} z   \\
+            =& C_{\Cqn}\left(\pi \lambda^{-1}\right)^{d / 2} \gamma_n \varrho_{\lambda}(t, x-y)  \int_0^t (t-\tau)^{\frac{\alpha}{2}-1}\tau^{\frac{n \alpha}{2}-1} \d \tau \\
+            =& C_{\Cqn} \left(\pi \lambda^{-1}\right)^{d / 2} \gamma_n \varrho_{\lambda,(n+1) \alpha-2}(t, x-y) B\left(\frac{n \alpha}{2}, \frac{\alpha}{2}\right)\\
+            =&\gamma_{n+1} \varrho_{\lambda,(n+1) \alpha-2}(t, x-y). 
+        \end{aligned}
+    \end{equation*}
+    Therefore, we finish the proof for \eqref{eq:iteration-qn}, which also implies 
+    \begin{equation*}
+        q=\sum_{n=1}^\infty q_n \lesssim \varrho_{\lambda, \alpha-2}.
+    \end{equation*}
+
+    Next, we verify that 
+    \begin{equation}\label{eq:q1-holder}
+        \left|q_1(t,x_1,y)-q_1(t,x_2,y)\right| \lesssim \left|x_1-x_2\right|^{\beta} \sum_{i=1,2} \varrho_{\lambda, \alpha-\beta-2}\left(t, x_i-y\right), \quad (t,x,y)\in \mD. 
+    \end{equation}
+    If \(|x_1-x_2|>\sqrt{t}\), then it is a consequence of \eqref{eq:iteration-qn}. When \(|x_1-x_2|\leq \sqrt{t}\), we have 
+    \begin{equation*}
+        \begin{aligned}
+            & \left|q_1(t,x_1,y)-q_1(t,x_2,y)\right|\\
+            \leq&\left|a\left(x_1\right)-a\left(x_2\right)\right| \cdot\left|\nabla_x^2 p_0(t,x_1,y)\right|+\left|a\left(x_2\right)-a(y)\right| \cdot\left|\nabla_x^2 p_0(t,x_1,y)-\nabla_x^2 p_0(t,x_2,y)\right| \\
+            \lesssim&\left|x_1-x_2\right|^\alpha \varrho_{\lambda_2,-2}\left(t, x_1-y\right)+\left|x_2-y\right|^\alpha\left|x_1-x_2\right| \varrho_{\lambda_3,-3}\left(t, x_2-y-\theta\left(x_1-x_2\right)\right) \\
+            \lesssim&\left|x_1-x_2\right|^{\beta} \varrho_{\lambda, \alpha-\beta-2}\left(t, x_1-y\right)+\left|x_2-y\right|^\alpha\left|x_1-x_2\right|^{\beta} \varrho_{\lambda,-\beta-2}\left(t, x_2-y\right) \\
+            \lesssim&\left|x_1-x_2\right|^{\beta} \sum_{i=1,2} \varrho_{\lambda, \alpha-\beta-2}\left(t, x_i-y\right) .
+        \end{aligned}
+    \end{equation*}
+    Therefore, \eqref{eq:q1-holder} holds for any \((t,x,y)\in \mD\). Noting that \(q=q_1+q_1\otimes q\), we have 
+    \begin{equation*}
+        \begin{aligned}
+            &|q(t,x_1,y)-q(t,x_2,y)|\\
+            \lesssim& \left|x_1-x_2\right|^{\beta} \sum_{i=1,2} \varrho_{\lambda, \alpha-\beta-2}\left(t, x_i-y\right) \\
+            &+\left|x_1-x_2\right|^{\beta}\int_0^t (t-\tau )^{\frac{\alpha-\beta}{2}-1} \tau^{\frac{\alpha}{2}-1} \d \tau  \sum_{i=1,2} \varrho_{\lambda}\left(t, x_i-y\right)\\
+            \lesssim& \left|x_1-x_2\right|^{\beta} \sum_{i=1,2} \varrho_{\lambda, \alpha-\beta-2}\left(t, x_i-y\right). 
+        \end{aligned}
+    \end{equation*}
+\end{proof}
+
+The above lemma implies that the infinite series in \eqref{Eq:p-Duhamel} do convergence, and \(p\) given by \eqref{Eq:p-Duhamel} satisfying \eqref{Eq:p-Duhamel'}. 
+
+\begin{lemma}\label{Lem:D2p}
+    There is a constant \(\lambda>0\) such that 
+    \begin{equation}
+        |p|\lesssim \varrho_{\lambda}, \quad |\partial_t p|+ |\nabla^2_x p| \lesssim \varrho_{\lambda, -2}
+    \end{equation}
+    and 
+    \begin{equation}
+        [L-L_{a(y)})p](t,x,y)=q(t,x,y). 
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    Recalling that \(p=p_0+p_0\otimes q\), by \Cref{Lem:Dp0}, we only need to prove 
+    \begin{equation}\label{eq:p0q}
+        |\nabla_x^2 p_0\otimes q | \lesssim \varrho_{\lambda, \alpha-2}. 
+    \end{equation}
+    Note 
+    \begin{equation*}
+    \begin{aligned}
+        \nabla_x^2 (p_0\otimes q)(t,x,y)
+        =& \int_0^t\!\!\int_{\mR^d}\nabla_x^2 p_0(t-\tau,x,z) ~q(\tau,z,y) \, \d z \, \d \tau\\
+        =&\int_0^{\frac{t}{2}} \cdots+ \int_{\frac{t}{2}}^t \cdots=:I_1+I_2. 
+    \end{aligned}
+    \end{equation*}
+    Thanks to \Cref{Lem:Dp0} and \Cref{Lem:q}, 
+    \begin{align*}
+        |I_1|\lesssim&  \int_0^{\frac{t}{2}}\varrho_{\lambda, -2}(t-\tau,x-z) \varrho_{\lambda, \alpha-2}(\tau,z-y) \, \d z \d \tau\\
+        \lesssim&  \varrho_\lambda(t,x-y) \int_0^{\frac{t}{2}} (t-\tau)^{-1} \tau^{\frac{\alpha}{2}-1} \d \tau \lesssim  \varrho_{\lambda, \alpha-2} (t,x-y) 
+    \end{align*}
+    Noting that \(p_0(t,x,z)=p_0(t,x-z)\), we have  
+    \[
+    \int_{\mR^d}\nabla^k_x p_0(t,x,z) \d z=0, \quad k\in \mN. 
+    \]
+    In view of \eqref{eq:q-holder}, we get 
+    \begin{align*}
+        |I_2|=& \l| \int_{\frac{t}{2}}^t \d \tau \int_{\mR^d}\nabla_x^2p_0(t-\tau, x,z) \l[ q(\tau, z, y) - q(\tau, x, y) \r] \d z \r| \\
+        \lesssim & \int_{\frac{t}{2}}^t (t-\tau)^{\frac{\beta}{2}-1} \tau^{\frac{\alpha-\beta}{2}-1} \d \tau \int_{\mR^d}\l[ \varrho_{\lambda}(\tau,y-z)+ \varrho_{\lambda}(\tau,x-y)\r] \varrho_{\lambda} (t-\tau,x-z) \d z \\
+        \lesssim & \varrho_{\lambda, \alpha-2} (t,x-y). 
+    \end{align*}
+    Therefore, \(|\nabla_x^2 p|\lesssim \varrho_{\lambda, -2}\). Similarly, one can verify that \(|\partial_tp|\lesssim \varrho_{\lambda, -2}\). 
+\end{proof}
+
+The above lemma implies 
+\[
+    p(t,x,y)=p_0(t,x,y)+[p_0\otimes (L-L_{a(y)})p](t,x,y),  
+\]
+which yields that \(p\) satisfies \(\partial_t p= L p\). 
+
+\begin{proof}[Proof of \Cref{Thm:HKE1}]
+    (i). It is easy to verify that 
+    \[
+    v(t,x):=\int_{\mR^d}p_0(t,x,z)f(z) \d z
+    \]
+    convergence to \(f\) uniformly when \(f\in C_0(\mR^d)\) as \(t\to0\). In the light of \eqref{eq:q-uper}, we have 
+    \begin{equation}\label{eq:pOq}
+        |p_0\otimes q|\lesssim \varrho_{\lambda, \alpha}, 
+    \end{equation} 
+    which yields that 
+    \[
+    \l| \int_{\mR^d}(p_0\otimes q)(t,x,y)f(y) \d y \r|\lesssim t^{\frac{\alpha}{2}} \|f\|_{L^\infty}\to 0. 
+    \]
+    Therefore, our desired assertion holds, due to the fact that \(p=p_0+p_0\otimes q\). 
+
+    (ii) and (iii) follow directly as consequences of the maximum principle for parabolic equations. 
+
+    (iv) Thanks to \Cref{Lem:D2p}, we only need to prove the lower bound estimate. There exists constant \(T>0\) such that
+    \begin{equation}\label{eq:ondigonal}
+        p(t,x,y) \geq  p_0(t,x,y) - |p_0\otimes q|(t,x,y)\gtrsim  t^{-\frac{d}{2}}-t^{\frac{-d+\alpha}{2}}\gtrsim t^{-\frac{d}{2}}, \quad |x-y|<\sqrt{t},~ t\in [0,T].
+    \end{equation}
+    If \(|x-y|>\sqrt{t}\), let Let \(n\) be the least integer greater than \(4|x-y|/\sqrt{t}\), i.e. 
+    \(n-1\leq 4|x-y|^2/t<n\). 
+    \[
+    x_i=x+{(y-x)i}/{n}, \quad B_i:=B\left(x_i, 8^{-1}\sqrt{t/n} \right) \quad \text { and } \quad t_i= i t / n.
+    \]
+    Noting that for all \(z_i\in B_i\), 
+    \[
+    \left|z_i-z_{i+1}\right| \leqslant\left|z_i-x_i\right|+\left|x_i-x_{i+1}\right|+\left|x_{i+1}-z_{i+1}\right| \leq \frac{\sqrt{t/n}}{2},
+    \]
+    by the on-digonal estimate \eqref{eq:ondigonal}, we have  \const{\Condigonal} \const{\Clower}
+    \[
+    p(t_{i+1}-t_i, z_{i}, z_{i+1}) \geq c_{\Condigonal} (t/n)^{-\frac{d}{2}}. 
+    \]
+    Hence, by the C-K equation, there is a constant \(c_{\Clower}\in (0,1)\) such that 
+    \begin{align*}
+        p(t,x,y)\geq& \int_{B_{n-1}}\cdots\int_{B_1} p(t_1,x,z_1)\cdots p(t_{n}-t_{n-1},z_{n-1}, y) \d z_1\cdots\d z_{n-1}\\
+        \geq & \l[ c_{\Condigonal} (t/n)^{-\frac{d}{2}} \r]^n \l[\omega_d \l(\sqrt{t/(64n)}\r)^d\r]^{n-1}\geq t^{-\frac{d}{2}} c_{\Clower}^n n^{\frac{d}{2}}\\
+        \geq & t^{-\frac{d}{2}} c_{\Clower}^{4|x-y|^2/t} (|x-y|^2/t)^{\frac{d}{2}} \gtrsim \varrho_{\lambda}(t,x,y). 
+    \end{align*}
+\end{proof}

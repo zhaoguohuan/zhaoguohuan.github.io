@@ -1,0 +1,46 @@
+\contentsline {chapter}{\tocchapter {Chapter}{}{Preface}}{vii}{chapter*.1}%
+\contentsline {chapter}{\tocchapter {Chapter}{1}{Construction of Diffusion processes I}}{1}{chapter.1}%
+\contentsline {section}{\tocsection {}{1.1}{Brownian Motion}}{1}{section.1.1}%
+\contentsline {subsection}{\tocsubsection {}{1.1.1}{Mathematical Definition of Brownian Motion}}{2}{subsection.1.1.1}%
+\contentsline {section}{\tocsection {}{1.2}{Markov Processes}}{5}{section.1.2}%
+\contentsline {section}{\tocsection {}{1.3}{Diffusions}}{6}{section.1.3}%
+\contentsline {subsection}{\tocsubsection {}{1.3.1}{Fokker-Planck-Kolmogorov equations}}{7}{subsection.1.3.1}%
+\contentsline {subsection}{\tocsubsection {}{1.3.2}{Heat Kernel Estimate}}{9}{subsection.1.3.2}%
+\contentsline {chapter}{\tocchapter {Chapter}{2}{Construction of Diffusion processes II}}{13}{chapter.2}%
+\contentsline {section}{\tocsection {}{2.1}{Motivation}}{13}{section.2.1}%
+\contentsline {section}{\tocsection {}{2.2}{Basic Stochastic Analysis}}{14}{section.2.2}%
+\contentsline {subsection}{\tocsubsection {}{2.2.1}{Stochastic Integral}}{17}{subsection.2.2.1}%
+\contentsline {section}{\tocsection {}{2.3}{It\^o's formula and its applications}}{21}{section.2.3}%
+\contentsline {section}{\tocsection {}{2.4}{Stochastic Differential Equations}}{25}{section.2.4}%
+\contentsline {subsection}{\tocsubsection {}{2.4.1}{Lipschitz conditions}}{25}{subsection.2.4.1}%
+\contentsline {subsection}{\tocsubsection {}{2.4.2}{Definitions of solutions}}{26}{subsection.2.4.2}%
+\contentsline {subsection}{\tocsubsection {}{2.4.3}{SDEs with H\"older drifts}}{26}{subsection.2.4.3}%
+\contentsline {subsection}{\tocsubsection {}{2.4.4}{Stochastic Flow}}{29}{subsection.2.4.4}%
+\contentsline {chapter}{\tocchapter {Chapter}{3}{Path properties of Itô Processes}}{31}{chapter.3}%
+\contentsline {section}{\tocsection {}{3.1}{Some Properties of Brownian Motion}}{31}{section.3.1}%
+\contentsline {section}{\tocsection {}{3.2}{Support theorem}}{35}{section.3.2}%
+\contentsline {section}{\tocsection {}{3.3}{ABP estimate and Generalized It\^o's formula}}{37}{section.3.3}%
+\contentsline {chapter}{\tocchapter {Chapter}{4}{Weak well-posedness}}{45}{chapter.4}%
+\contentsline {section}{\tocsection {}{4.1}{Uniqueness in law}}{45}{section.4.1}%
+\contentsline {section}{\tocsection {}{4.2}{Strong Markov property}}{46}{section.4.2}%
+\contentsline {chapter}{\tocchapter {Chapter}{5}{Applications to Elliptic equations}}{49}{chapter.5}%
+\contentsline {section}{\tocsection {}{5.1}{Poisson equations}}{49}{section.5.1}%
+\contentsline {section}{\tocsection {}{5.2}{Dirichlet Problems and Harmonic functions}}{50}{section.5.2}%
+\contentsline {section}{\tocsection {}{5.3}{Once again on the hitting probability}}{51}{section.5.3}%
+\contentsline {section}{\tocsection {}{5.4}{Harnack Inequality and H\"older estimate}}{55}{section.5.4}%
+\contentsline {chapter}{\tocchapter {Chapter}{6}{Divergence Form Operators}}{57}{chapter.6}%
+\contentsline {section}{\tocsection {}{}{Heat Kernel Upper Bound via Log-Sobolev Inequality}}{59}{section*.2}%
+\contentsline {subsection}{\tocsubsection {}{}{Setup and Assumptions}}{59}{section*.3}%
+\contentsline {subsection}{\tocsubsection {}{}{Log-Sobolev Inequality}}{59}{section*.4}%
+\contentsline {subsection}{\tocsubsection {}{}{Main Result}}{59}{section*.5}%
+\contentsline {subsection}{\tocsubsection {}{}{Proof}}{59}{section*.6}%
+\contentsline {subsubsection}{\tocsubsubsection {}{}{Step 1: Ultracontractivity from Log-Sobolev}}{59}{section*.7}%
+\contentsline {subsubsection}{\tocsubsubsection {}{}{Step 2: On-Diagonal Bound}}{60}{section*.8}%
+\contentsline {subsubsection}{\tocsubsubsection {}{}{Step 3: Davies Method for Off-Diagonal Bounds}}{60}{section*.9}%
+\contentsline {subsubsection}{\tocsubsubsection {}{}{Step 4: Gaussian Upper Bound}}{60}{section*.10}%
+\contentsline {chapter}{\tocchapter {Chapter}{7}{Appendix}}{63}{chapter.7}%
+\contentsline {section}{\tocsection {}{7.1}{Probabilistic terminology}}{63}{section.7.1}%
+\contentsline {section}{\tocsection {}{7.2}{Maximal Principle}}{64}{section.7.2}%
+\contentsline {section}{\tocsection {}{7.3}{Schauder estimate}}{64}{section.7.3}%
+\contentsline {section}{\tocsection {}{7.4}{Monge-Ampère Equation}}{66}{section.7.4}%
+\contentsline {chapter}{\tocchapter {Chapter}{}{Bibliography}}{69}{chapter*.11}%

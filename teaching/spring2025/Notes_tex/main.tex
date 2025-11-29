@@ -1,0 +1,257 @@
+%-----------------------------------------------------------------------
+% Beginning of chapter.tex
+%-----------------------------------------------------------------------
+%
+%  This is a sample file for use with AMS-LaTeX.  It provides an example
+%  of how to set up a file for a book to be typeset with AMS-LaTeX.
+%
+%  This is the driver file.  Separate chapters should be included at
+%  the end of this file.
+%
+%  ***** DO NOT USE THIS FILE AS A STARTER FOR YOUR BOOK. *****
+%  Follow the guidelines in the file chapter.template.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{amsbook}
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts,enumerate, mathrsfs, mathtools, appendix}
+\usepackage{relsize}
+\usepackage{stmaryrd}
+\usepackage{esint}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage[%colorlinks=false,   
+colorlinks=true,
+linkcolor=blue,
+filecolor=blue,
+urlcolor=red,
+citecolor=magenta]{hyperref}
+\usepackage{cleveref}
+%------------------------------------- hyper  
+
+
+\includeonly{preface,chap1,chap2,chap3,chap4,chap5,chap6,appendix,index}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{assumption}{Assumption}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+%    Absolute value notation
+\newcommand{\abs}[1]{\lvert#1\rvert}
+
+%    Blank box placeholder for figures (to avoid requiring any
+%    particular graphics capabilities for printing this document).
+\newcommand{\blankbox}[2]{%
+  \parbox{\columnwidth}{\centering
+%    Set fboxsep to 0 so that the actual size of the box will match the
+%    given measurements more closely.
+    \setlength{\fboxsep}{0pt}%
+    \fbox{\raisebox{0pt}[#2]{\hspace{#1}}}%
+  }%
+}
+
+%-------------------------------------mark conastant
+\newcounter{counterConstant} 
+\newcommand{\const}[1]{	\addtocounter{counterConstant}{1}
+\edef#1{\arabic{counterConstant}}
+}
+%-------------------------------------
+
+%-------------------------------------abbreviation
+\def\cA{{\mathcal A}}
+\def\cB{{\mathcal B}}
+\def\cC{{\mathcal C}}
+\def\cD{{\mathcal D}}
+\def\cE{{\mathcal E}}
+\def\cF{{\mathcal F}}
+\def\cG{{\mathcal G}}
+\def\cH{{\mathcal H}}
+\def\cI{{\mathcal I}}
+\def\cJ{{\mathcal J}}
+\def\cK{{\mathcal K}}
+\def\cL{{\mathcal L}}
+\def\cM{{\mathcal M}}
+\def\cN{{\mathcal N}}
+\def\cO{{\mathcal O}}
+\def\cP{{\mathcal P}}
+\def\cQ{{\mathcal Q}}
+\def\cR{{\mathcal R}}
+\def\cS{{\mathcal S}}
+\def\cT{{\mathcal T}}
+\def\cU{{\mathcal U}}
+\def\cV{{\mathcal V}}
+\def\cW{{\mathcal W}}
+\def\cX{{\mathcal X}}
+\def\cY{{\mathcal Y}}
+\def\cZ{{\mathcal Z}}
+
+\def\mA{{\mathbb A}}
+\def\mB{{\mathbb B}}
+\def\mC{{\mathbb C}}
+\def\mD{{\mathbb D}}
+\def\mE{{\mathbb E}}
+\def\mF{{\mathbb F}}
+\def\mG{{\mathbb G}}
+\def\mH{{\mathbb H}}
+\def\mI{{\mathbb I}}
+\def\mJ{{\mathbb J}}
+\def\mK{{\mathbb K}}
+\def\mL{{\mathbb L}}
+\def\mM{{\mathbb M}}
+\def\mN{{\mathbb N}}
+\def\mO{{\mathbb O}}
+\def\mP{{\mathbb P}}
+\def\mQ{{\mathbb Q}}
+\def\mR{{\mathbb R}}
+\def\mS{{\mathbb S}}
+\def\mT{{\mathbb T}}
+\def\mU{{\mathbb U}}
+\def\mV{{\mathbb V}}
+\def\mW{{\mathbb W}}
+\def\mX{{\mathbb X}}
+\def\mY{{\mathbb Y}}
+\def\mZ{{\mathbb Z}}
+
+\def\bA{{\mathbf A}}
+\def\bB{{\mathbf B}}
+\def\bC{{\mathbf C}}
+\def\bD{{\mathbf D}}
+\def\bE{{\mathbf E}}
+\def\bF{{\mathbf F}}
+\def\bG{{\mathbf G}}
+\def\bH{{\mathbf H}}
+\def\bI{{\mathbf I}}
+\def\bJ{{\mathbf J}}
+\def\bK{{\mathbf K}}
+\def\bL{{\mathbf L}}
+\def\bM{{\mathbf M}}
+\def\bN{{\mathbf N}}
+\def\bO{{\mathbf O}}
+\def\bP{{\mathbf P}}
+\def\bQ{{\mathbf Q}}
+\def\bR{{\mathbf R}}
+\def\bS{{\mathbf S}}
+\def\bT{{\mathbf T}}
+\def\bU{{\mathbf U}}
+\def\bV{{\mathbf V}}
+\def\bW{{\mathbf W}}
+\def\bX{{\mathbf X}}
+\def\bY{{\mathbf Y}}
+\def\bZ{{\mathbf Z}}
+
+\def\sA{{\mathscr A}}
+\def\sB{{\mathscr B}}
+\def\sC{{\mathscr C}}
+\def\sD{{\mathscr D}}
+\def\sE{{\mathscr E}}
+\def\sF{{\mathscr F}}
+\def\sG{{\mathscr G}}
+\def\sH{{\mathscr H}}
+\def\sI{{\mathscr I}}
+\def\sJ{{\mathscr J}}
+\def\sK{{\mathscr K}}
+\def\sL{{\mathscr L}}
+\def\sM{{\mathscr M}}
+\def\sN{{\mathscr N}}
+\def\sO{{\mathscr O}}
+\def\sP{{\mathscr P}}
+\def\sQ{{\mathscr Q}}
+\def\sR{{\mathscr R}}
+\def\sS{{\mathscr S}}
+\def\sT{{\mathscr T}}
+\def\sU{{\mathscr U}}
+\def\sV{{\mathscr V}}
+\def\sW{{\mathscr W}}
+\def\sX{{\mathscr X}}
+\def\sY{{\mathscr Y}}
+\def\sZ{{\mathscr Z}}
+
+\def\l{\left}
+\def\r{\right}
+\def\<{\langle}
+\def\>{\rangle}
+
+\def\geq{\geqslant}
+\def\leq{\leqslant}
+
+\def\1{{\mathbf{1}}}
+\def\p{\partial}
+\def\d{\text{\rm{d}}}
+\def\e{\mathrm{e}}
+\def\eps{\varepsilon}
+\def\Re{{\mathrm{Re}}}
+\def\Im{{\mathrm{Im}}}
+\def\var{{\mathrm{var}}}
+\def\HS{{\mathrm{\tiny HS}}}
+\def\div{\mathord{{\rm div}}}
+\def\osc{\mathop{{\rm osc}}}
+\def\sgn{\textit{\rm sgn}}
+\def\Law{{\mathord{{\rm Law}}}}
+\def\esssup{\mathop{\mathrm{ess\,sup}}}
+\def\essinf{\mathop{\mathrm{ess\,inf}}}
+
+%-------------------------------------
+
+\begin{document}
+\frontmatter
+\title{An Introduction to Diffusion Processes}
+
+%    Information for first author
+\author{Guohuan Zhao}
+%    Address of record for the research reported here
+\address{The Academy of Mathematics and Systems Science of Chinese Academy of Sciences, Beijing 100190, China}
+%    Current address
+%\curraddr{Department of Mathematics and Statistics,
+%Case Western Reserve University, Cleveland, Ohio 43403}
+\email{gzhao@amss.ac.cn}
+%    \thanks will become a 1st page footnote.
+%\thanks{}
+%    Information for second author
+\date{\today}
+%\subjclass[2020]{Primary 54C40, 14E20;\\Secondary 46E25, 20C20}
+%\keywords{\texttt{amsbook}, AMS-\LaTeX}
+
+\maketitle
+
+\setcounter{page}{4}
+\tableofcontents
+
+\include{preface}
+
+\mainmatter
+
+\include{chap1}
+\include{chap2}
+\include{chap3}
+\include{chap4}
+\include{chap5}
+\include{chap6}
+\include{appendix}
+
+\bibliographystyle{alpha} 
+\bibliography{mybib}
+
+%\backmatter
+%\include{index}
+
+\end{document}
+
+%-----------------------------------------------------------------------
+% End of chapter.tex
+%-----------------------------------------------------------------------

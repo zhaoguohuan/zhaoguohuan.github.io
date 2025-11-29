@@ -1,0 +1,170 @@
+\chapter{Weak well-posedness}
+In this section, we study the weak well-posedness of
+\eqref{eq:sde} (with \(b=0\)). 
+The core is to study the regularity of following resolvent equation: 
+\begin{equation}\label{eq:resolvent2}
+    \lambda u - L u =f, 
+\end{equation}
+where $L u=a_{ij}\partial_{ij}u$, $a\in \mS_\delta^d$ and uniformly continuous. 
+	
+\section{Uniqueness in law}
+	\begin{theorem}[Stroock-Varadhan]\label{thm:SV}
+		 Under the assumptions that $\sigma$ is continuous and bounded, and $\sigma(x)\sigma^t(x)>0$ for each $x\in \mR^d$. Then SDE  \eqref{eq:sde} (with \(b=0\)) has a weak solution, and the distribution of such solution is unique. 
+	\end{theorem}
+	
+	Our strategy is 
+	\begin{enumerate}[(a)]
+		\item Using generalized It\^o's formual and $L^p$-estimate for the  resolvent equation to show the uniqueness of $\mathrm{law} (X_t)$. 
+		\item  Proving the finite-dimensional distribution of $(X_t)_{t\geq 0}$ is unique  by induction. 
+	\end{enumerate}
+	
+\begin{lemma}\label{lem:laplace-lp}
+    Let $L=\Delta$ and $p\in (1,\infty)$. For any $f\in L^p$, there exists a unique solution $u\in W^{2,p}$ solving \eqref{eq:resolvent2}. Moreover, $u$ satisfies \begin{equation}
+        \lambda \|u\|_p+\|\nabla u^2\|_{p}\leq C \|f\|_p,  
+    \end{equation}
+    where $C$ only depends on $d$ and $p$.  
+\end{lemma}	
+\begin{theorem}
+    Let $p\in (1,\infty)$.  There exists a constant $\lambda_0=\lambda_0(d, p, \omega_a)>0$ such that  for any $\lambda\geq \lambda_0$ and $f\in L^p$, equation  \eqref{eq:resolvent2} admits  a unique solution $u\in W^{2,p}$. 
+\end{theorem}
+\begin{proof}
+    Assume that $u\in W^{2,p}$. We want to show that for sufficiently large $\lambda$, it holds that 
+    \begin{equation}\label{eq:lp-priori1}
+        \lambda \|u\|_p+\|u\|_{W^{2,p}} \leq C \|\lambda u- L u\|_p. 
+    \end{equation}
+    Suppose we have \eqref{eq:lp-priori1}. Let $T_0=\lambda - \Delta$ and $T_1=\lambda - L$, and $B=W^{2,p}$ and $V=L^p$. Utilizing Lemma \ref{lem:continum} and Lemma \ref{lem:laplace-lp}, we can see that \eqref{eq:resolvent2} has a solution in $W^{2,p}$. 
+    
+    Now let us prove \eqref{eq:lp-priori1} for \(L=a^{ij}\partial_{ij}\). Let $f:=\lambda u-L u$. Assume $\zeta\in C_c^\infty(B_2)$ such that $\zeta\geq 0$, $\zeta\equiv1$ in $B_1$. Set $\zeta_\eps^z=\zeta((x-z)/\eps)$. Then
+    \begin{equation*}
+        \lambda (u\zeta_\eps^z) - a_{ij}(z)\p_{ij}(u\zeta_\eps^z) =  f\zeta_\eps^z-2a_{ij}\p_i u\p_{j}\zeta_\eps^z -a_{ij}\p_{ij}\zeta_\eps^z u +(a_{ij}-a_{ij}(z)) \p_{ij}(u\zeta_\eps^z).
+    \end{equation*}
+    By Lemma \ref{lem:laplace-lp},  we get 
+		\begin{equation*}
+			\begin{aligned}
+				\lambda \|u \zeta_\eps^z\|_p+ \|\nabla^2(u\zeta_\eps^z)\|_{p} \leq & C \omega_a(2\eps) \|\nabla^2 (u\zeta_\eps^z)\|_p+ C \|f\|_{L^p(B_{2\eps}(z))}\\
+				&+C \eps^{-1} \|\nabla u \|_{L^p(B_{2\eps}(z))}+ C\eps^{-2} \|u\|_{L^p(B_{2\eps}(z))}. 
+			\end{aligned}
+		\end{equation*}
+		Choosing $\eps_0>0$ sufficiently small such that $C\omega_a(2\eps_0)\leq 1/2$, then 
+		\begin{equation}\label{eq:u-frozen}
+			\begin{aligned}
+				&\lambda \|u\|_{L^p(B_{\eps_0}(z))} + \|\nabla^2 u\|_{L^p(B_{\eps_0}(z))} \\
+				\leq& C \|f\|_{L^p(B_{2{\eps_0}}(z))}+C {\eps_0}^{-1} \|\nabla u \|_{L^p(B_{2{\eps_0}}(z))}+ C\eps_0^{-2} \|u\|_{L^p(B_{2{\eps_0}}(z))}. 
+			\end{aligned}
+		\end{equation}
+		\begin{framed}
+		    {\bf Fact}: There exist constants $c=c(d,  p, \eps)>0$ and $C=C(d,  p, \eps)>0$, and a sequence $\{z_i \}_{i\in \mN}\subseteq \mR^d$ such that 
+		    \begin{equation}\label{eq:Lp-decomp}
+			    c \sum_{i} \int |h\zeta_\eps^{z_i}|^p   \leq \int |h|^p \leq C \sum_{i} \int |h\zeta_\eps^{z_i}|^p. 
+		    \end{equation}
+		\end{framed}
+		By \eqref{eq:u-frozen} and \eqref{eq:Lp-decomp}, we obtain 
+		\begin{equation*}
+			\lambda \|u\|_{p}^p + \|\nabla^2 u\|_{p}^p 
+			\leq C \|f\|_{p}^p+C \|\nabla u \|_{p}^p+ C \|u\|_{p}^p, 
+		\end{equation*}
+		where $C$ only depends on $d, p$ and $\omega_a$. Using intepolation theorem, one can see that 
+		\[
+		    \lambda \|u\|_{p} +\|\nabla u\|_p + \|\nabla^2 u\|_{p}^p \leq \frac{1}{2} \|\nabla^2 u\|_p+ \frac{\lambda_0}{2} \|u\|_{p} + C \|f\|_p, 
+		\]
+		where $\lambda_0\geq 1$ is a constant only depends on $d, p$ and $\omega_a$. Therefore, for any $\lambda \geq \lambda_0\geq 1$, we have 
+		\[
+		    \lambda \|u\|_p+\| u\|_{W^{2,p}} \leq C \|f\|_p. 
+		\]
+	\end{proof}
+	
+	Now let $f\in C_c^\infty(\mR^d)$. Assume that $u\in W^{2,d}$ is a solution to \eqref{eq:resolvent2} for some $\lambda\geq \lambda_0$.  Applying Generalized It\^o's formula, one can see that 
+	\begin{align*}
+		\d \l(\e^{-\lambda t} u(X_{s+t}) \r)=  \e^{-\lambda t} \l[-\lambda u(X_{s+t}) + Lu(X_{s+t})\r] + \e^{-\lambda t} \nabla u(X_{s+t}) \sigma (X_{s+t})\d W_{s+t}. 
+	\end{align*}
+	Taking expection conditional on $\cF_s$, we get 
+	\[
+	    u(X_s) =\bE(u(X_s)| \cF_s)=  \int_0^\infty \e^{-\lambda t}\bE \l(  f(X_{s+t})   \big | \cF_s \r) \d t,\quad \forall \lambda \gg 1. 
+	\]
+    This implies that $\bP (X_{s+t}\in \cdot| \cF_s)$ is unique and $\bP (X_{s+t}\in \cdot| \cF_s)=\bP (X_{s+t}\in \cdot| X_s)$. Using this fact, then the uniqueness in law of $X_t$ can be obtained by induction. 
+
+\section{Strong Markov property}
+Define $\cW$ to be the set of all continuous functions from $\mR_+$ to $\mR^d$. Suppose that for each starting point $x$ the SDE \eqref{eq:sde} has a solution that is unique in law. Let us denote the solution by $X(x, t, \omega)$. For each $x$ define a probability measure $\mP_x$ on $\cW$ so that
+	\begin{align*}
+		&\bP \l(X(x, t_1)\in A_1,\cdots, X(x, t_n)\in A_n\r)\\
+		=&\mP_x(\omega({t_1})\in A_1,\cdots, \omega({t_n})\in A_n). 
+	\end{align*}
+
+Let $\cG^0_t$ be the $\sigma$-algebra generated by $\{\omega_s: s\leq t\}$. We complete these $\sigma$-fields by considering all sets that are in the $\mP_x$ completion of $\cG^0_t$ for all $x$. Finally, we obtain a right continuous filtration by letting $\cG_t:=\cap_{\eps>0} \cG_{t+\eps}^0$. We then extend $\mP_x$ to $\cG_\infty$.
+
+For each \(t\geq 0\), the shift operator $\theta_t:\cW\to \cW$ is given by $\theta_t\omega (s)= \omega(t+s), s\geq 0$. For any finite stopping time \(\tau\), we also set \(\theta_\tau (\omega)(s)=\omega(\tau(\omega)+s), s\geq 0\). 
+    
+The {\bf strong Markov property} of \((\mP_x)_{x\in\mR^d}\) is the assertion that 
+\[
+    \mE_x(Y\circ\theta_{\tau}|\cG_\tau) = \mE_{X_\tau}(Y), 
+\]
+whenever $x\in \mR^d$, $Y\in \cG_\infty$ is bounded, $\tau$ a finite stopping time and \(X_t(\omega)=\omega(t)\) is the canonical process. 
+
+From now on, by a slight abuse of notation, we will say $(\mP_x, X_t)$ is a strong Markov process if $(\mP_x)_{x\in \mR^d}$ satisfies the strong Markov property.
+    
+    To prove the strong Markov property it suffices to show 
+    \begin{equation}\label{eq:s-markov}
+	\mE_x(f(X_{\tau+t})|\cG_\tau)=\mE_{X_\tau} f(X_t),
+    \end{equation}
+    for all $x\in \mR^d$, $f\in C_c(\mR^d)$ and $\tau$ a bounded stopping time. 
+	
+\begin{theorem}\label{thm:Markov}
+    Suppose the solution to \eqref{eq:sde} is weakly unique for each $x\in \mR^d$. Then $(\mP_x, X_t)$ is a strong Markov process.
+\end{theorem}
+	
+\begin{proof}
+    Let \((\cW, \cG, (\cG_t)_{t\geq 0},\mP_x; X, W)\) be a weak solution to \eqref{eq:sde}, where \(X_t\) is the canonical process and \(W_t\) is a \(\cG_t\)-Brownian motion. By definition 
+    $$
+        X_t=X_0+\int_0^t \sigma\left(X_s\right) \d W_s+\int_0^t b\left(X_s\right) \d s. 
+    $$
+    Set $X'_t=X_{\tau+t}$ and $W'_t=W_{\tau+t}-W_{\tau}$. By definition, we have 
+    \begin{equation}
+        X'_t=X'_0+\int_0^t \sigma\left(X'_s\right) \d W'_s+\int_0^t b\left(X'_s\right) \d s.
+    \end{equation}
+    Let $Q_\tau:\cW\times \sB(\cW)\to [0,1]$ be the regular conditional probability given \(\cG_\tau\). Then for each bounded function \(Y\in \cG\), it holds that 
+    \begin{equation}
+        \mE_x(Y|\cG_\tau)(\omega)= \int_{\cW} Y(\omega') Q_\tau(\omega, \d \omega')=:E_{Q_\tau(\omega, \cdot)}(Y), \quad \mP_x\mbox{-a.s}.
+    \end{equation}\label{eq:RCP}
+    \begin{framed}
+	{\bf Claim}:  For \(\mP_x\)-a.s. \(\omega \in \cW\), it holds that 
+        \begin{enumerate}[(a)]
+            \item $X_0'(\omega')=X_{\tau(\omega)}(\omega)$, for $Q_\tau(\omega,\cdot)$-a.s. \(\omega'\in \cW\).  
+            \item $W'$ is a Brownian motion with respect to the measure $Q_{\tau}(\omega, \cdot)$. 
+        \end{enumerate}
+    \end{framed}
+    By our claim above, \(X'_t\) is a weak solution to \eqref{eq:sde} with initial data \(X'_0=X_{\tau(\omega)}(\omega)\) under \(Q_\tau(\omega,\cdot)\). The uniqueness in law implies that
+    \[
+        E_{Q_{\tau}} f\left(X'_t\right)=\mathbb{E}_{X_\tau} f\left(X_t\right), \quad \mP_x\mbox{-a.s.}
+    \]
+    On the other hand, by definition 
+    \[
+        E_{Q_{\tau}} f\left(X'_t\right)= E_{Q_{\tau}} f\left(X_{\tau+t}\right)= \mE_x(f(X_{\tau+t})|\cG_{\tau}). 
+    \]
+    Thus, we get \eqref{eq:s-markov}. 
+    
+    Our task now is to prove the claim. 
+    
+    For (a). Let \(B=\{\omega'\in\cW: \omega'(\tau(\omega'))\in A\subseteq \cB(\mR^d)\}\in \cG_\tau\). Then by the definition of \(Q_\tau\), for \(\mP_x\)-a.s. \(\omega\in \cW\), we have  
+    \begin{equation*}
+        Q_\tau (\omega, B)= \mP_x(B|\cG_\tau)(\omega)=\1_{B}(\omega)=
+    \begin{cases}
+        1, \quad \mbox{if } \omega(\tau(\omega))\in A\\
+        0, \quad \mbox{if } \omega(\tau(\omega))\notin A, 
+    \end{cases}
+    \end{equation*}
+    which yields claim (a) above. 
+
+    For (b), we need the following
+    \begin{framed}
+        {\bf Fact}: If $W_t$ is a $\cG_t$-Brownian motion and $\tau$ is a finite stopping time, then $W_{\tau+t}-W_{\tau}$ is a $\cG_{\tau+t}$-Brownian motion. (This can be proved by L\'evy's Characterization Theorem)
+    \end{framed}
+    Using the above fact, we have 
+    \begin{equation*}
+	\begin{aligned}
+            &E_{Q_\tau} \exp \Big(i \sum_{k=1}^{n-1} \lambda_{k} \cdot\left(W_{\tau+t_{k+1}}-W_{\tau+t_{k}}\right)\Big)\\
+            =&\mE_{x} \Big[ \exp \Big(i \sum_{k=1}^{n-1} \lambda_{k} \cdot\left(W_{\tau+t_{k+1}}-W_{\tau+t_{k}}\right)\Big)\Big|\cG_\tau\Big]\\
+            =& \exp \Big(\sum_{k=1}^{n-1}  |\lambda_k|^2\left(t_{k+1}-t_{k}\right) / 2\Big), 
+	\end{aligned}
+    \end{equation*}
+    we get what we claimed.
+\end{proof}

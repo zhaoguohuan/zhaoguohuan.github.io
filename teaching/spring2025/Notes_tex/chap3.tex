@@ -1,0 +1,683 @@
+
+\chapter{Path properties of Itô Processes}
+
+\section{Some Properties of Brownian Motion}
+Let \(d=1\). 
+
+\begin{lemma}\label{lem:BM_P0}
+    Let \((W_t)\) be a 1-dimensional Brownian motion. For any \(0<\delta\leq 10^{-4}\), it holds that 
+    \begin{enumerate}[(i)]
+        \item 
+        \begin{equation}\label{eq:BM_P1}
+            \inf_{|x|\leq 1/3} \bP_x\l(\sup_{t\in [0,\delta]} |W_t|\leq 1\r)\geq 5/6. 
+        \end{equation}
+        \item 
+        \begin{equation}\label{eq:BM_P2}
+            \inf_{|x|\leq 1/3} \bP_x (|W_{\delta}|\leq 1/3)\geq 1/3
+        \end{equation}
+    \end{enumerate}
+    
+\end{lemma}
+\begin{proof}
+    For \eqref{eq:BM_P1}, using Doob's inequality, we have 
+    \[
+        \bP_0\l(\sup_{t\in [0,\delta]} |W_t|> \frac{2}{3}\r) \leq \frac{3}{2} \bE_0 |W_{\delta}| \leq \frac{3\sqrt{\delta}}{2}. 
+    \]
+    Thus, 
+    \[
+        \bP_0\l(\sup_{t\in [0,\delta]} |W_t|> \frac{2}{3}\r)\leq \frac{1}{6}, \quad \delta<10^{-2},  
+    \]
+    which yields 
+    \[
+        \inf_{|x|\leq 1/3} \bP_x\l(\sup_{t\in [0,\delta]} |W_t|\leq 1\r)\geq\bP_0\l(\sup_{t\in [0,\delta]} |W_t|\leq \frac{2}{3}\r) \geq \frac{5}{6}, \quad \delta<10^{-2}. 
+    \]
+
+    For \eqref{eq:BM_P2}, we have 
+    \[
+    \inf_{|x|\leq 1/3} \bP_x (|W_{\delta}|\leq 1/3)\geq \bP_0 (0\leq W_\delta \leq 1/3) \geq \frac{1}{3}, \quad 0<\delta\leq 10^{-4}. 
+    \]
+\end{proof}
+
+\begin{proposition}\label{prop:BM_P2}
+    Let $W$ be a $1$-dimensional Brownian motion. For any $\eps>0$ and $T>0$, there is a constant $c(\eps, T)>0$ such that 
+    \[
+        \bP_0 \l(\sup_{t\in [0,T]}|W_t| \leq \eps\r) \geq c(\eps, T). 
+    \]
+\end{proposition}
+\begin{proof}
+    By the scaling property of Brownian motion ($\eps^{-1}W_t\overset{d}{=} W_{\eps^{-2}t}$), we only need to show 
+    \[
+        \bP_0 \l(\sup_{t\in[0,T\eps^{-2}]} |W_t|\leq 1 \r)\geq c(\eps,T)>0. 
+    \]
+    Set \(\delta=10^{-4}\). \eqref{eq:BM_P1} and \eqref{eq:BM_P2} imply that 
+    \[
+        \inf_{|x|\leq 1/3} \bP_x\l( \sup_{t\in [0,\delta]} |W_t|\leq 1, ~ |W_{\delta}| \leq 1/3\r)\geq \frac{1}{6}. 
+    \]
+    Letting $k=[T\eps^{-2}\delta^{-1}]=[10^4T\eps^{-2}]$, we have 
+    \begin{align*}
+        & \bP_0\l( \sup_{t\in [0, T\eps^{-2}]} |W_t|\leq 1 \r)\\
+        \geq&  \bP_0\l( \sup_{t\in [i\delta,(i+1)\delta]} |W_t|\leq 1 ~ \& ~ |W_{i\delta}|\leq 1/3, \quad i=0,1,\cdots k \r) \\
+        \geq& 6^{-k}=: c(\eps, T)>0. 
+    \end{align*}
+\end{proof}
+
+\begin{proposition}\label{prop:BM_P1}
+    Let $W$ be a $1$-dimensional Brownian motion. Then for any $\lambda, t>0$ 
+    \begin{equation*}
+        \bP \l(\sup_{s\in [0,t]}|W_s|> \lambda\r) \leq 2\e^{-\frac{\lambda^2}{2t}}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $X_t= \e^{a|W_t|}$ with $a>0$. Since $x\mapsto \e^{a|x|}$ is a convex function, $X_t$ is a submartingale. By Doob's inequality, we have 
+    \begin{align*}
+        \bP \l(W^*_t>\lambda \r)= \bP \l(X^*_t>\e^{a\lambda}\r)\leq \e^{-a\lambda} \bE X_t = \frac{2\e^{-a \lambda} }{\sqrt{2\pi t}} \int_{0}^\infty \e^{a x-\frac{x^2}{2t}} \d x = 2\e^{\frac{a^2 t}{2}-a\lambda}.
+    \end{align*}
+    Taking $a=\lambda/t$, we obtain 
+    \[
+    \bP \l(W^*_t>\lambda \r) \leq 2 \e^{-\frac{\lambda^2}{2t}}. 
+    \]
+\end{proof}
+
+\begin{corollary}[Exponential martingale inequality]\label{cor:EMI}
+    Let $M_t$ be a continuous martingale with \(M_0=0\), and $\tau$ be a bounded stopping time. Then 
+     \[
+     \bP\left(\sup_{t\leq \tau} |M_t|>\lambda~ \&~ \<M\>_\tau\leq\mu\right)\leq 2\e^{-\frac{\lambda^2}{2\mu}}.
+     \]
+\end{corollary}
+\begin{proof}
+    By Dambis-Dubins-Schwarz Theorem, $M_t$ is a time change of a Brownian motion $W_t$. So the desired probability is bounded by 
+    \[
+        \bP\left(\sup_{t\leq T} |W_t|>\lambda~ \&~ \<W\>_T<\mu\right),
+    \]
+    where $T$ is a stopping time. Since $\<W\>_T=T$, the probability above is in turn bounded by
+    \[
+        \bP\left(\sup_{t\leq \mu} |W_t|>\lambda\right)\leq 2\e^{-\frac{\lambda^2}{2\mu}}, 
+    \]
+    due to \Cref{prop:BM_P1}. 
+ \end{proof}
+ 
+The next result, which is known as the law of iterated logarithm shows in particular that Brownian paths are not $\frac{1}{2}$-H\"older continuous.
+	\begin{theorem}[law of iterated logarithm]
+		Let $(W_t)_{t\ge 0}$ be a Brownian motion. For $s \ge 0$,
+		\[
+		\bP \left( \liminf_{t \rightarrow 0} \frac{W_{t+s}-W_s}{\sqrt{2t \log  \log  \frac{1}{t}}} =-1 , \limsup_{t \rightarrow 0} \frac{W_{t+s}-W_s}{\sqrt{2t\log  \log  \frac{1}{t}}} =1 \right)=1.  
+		\]
+	\end{theorem}
+	\begin{proof}
+		Thanks to the symmetry and invariance by translation of the Brownian motion, it suffices to show that:
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{W_{t}}{\sqrt{2t\log  \log  \frac{1}{t}}} =1 \right)=1.  
+		$$
+		Let us first prove that 
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{W_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \leq 1 \right)=1.  
+		$$
+		Let us denote $h(t)=\sqrt{2t \log  \log  \frac{1}{t}}$.   Let $\alpha, \beta >0$, from Doob’s maximal inequality applied to the martingale $\left(e^{\alpha W_t-\frac{\alpha^2}{2}t} \right)_{t \ge 0}$, we have for $t \ge 0$:
+		\[
+		\bP  \left(  \sup_{0 \leq s \leq t} \left( W_s-\frac{\alpha}{2}s\right)>\beta \right)=\bP  \left(  \sup_{0 \leq s \leq t} e^{\alpha W_s -\frac{\alpha^2}{2}s} >e^{\alpha \beta}\right) \leq e^{-\alpha \beta}.
+		\]
+		Let now $\theta , \delta \in (0,1)$. Using the previous inequality for every $n \in \mathbb{N}$ with $t=\theta^n, \alpha=\frac{(1+\delta)h(\theta^n)}{\theta^n}, \beta=\frac{1}{2} h (\theta^n)$,  yields when $n \rightarrow +\infty$,
+		$$
+		\bP  \left(  \sup_{0 \leq s \leq \theta^n} \left( W_s -\frac{(1+\delta)h(\theta^n)}{2\theta^n}s\right)>\frac{1}{2} h (\theta^n) \right)=O\left( \frac{1}{n^{1+\delta}} \right).  
+		$$
+		Therefore from Borel-Cantelli lemma, for almost every $\omega \in \Omega$, we may find $N(\omega)\in \mathbb{N}$ such that for $n \ge N(\omega)$,
+		$$
+		\sup_{0 \leq s \leq \theta^n} \left( W_s(\omega)-\frac{(1+\delta)h(\theta^n)}{2\theta^n} s\right) \leq \frac{1}{2}h (\theta^n).  
+		$$
+		But,
+		$$
+		\sup_{0 \leq s \leq \theta^n} \left( W_s(\omega) -\frac{(1+\delta)h(\theta^n)}{2\theta^n} s\right) \leq \frac{1}{2} h (\theta^n)  
+		$$
+		implies that for $\theta^{n+1} \leq t\leq \theta^n$,
+		$$
+		W_t (\omega) \leq \sup_{0 \leq s \leq \theta^n} W_s(\omega) \leq \frac{1}{2} (2+\delta)h (\theta^n) \leq \frac{(2+\delta)h(t)}{2\sqrt{\theta}}.  
+		$$
+		We conclude:
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{W_{t}}{\sqrt{2t\log  \log  \frac{1}{t}}} \leq \frac{2+\delta}{2\sqrt{\theta}}\right)=1.  
+		$$
+		Letting now $\theta \rightarrow 1$ and $\delta \rightarrow 0$ yields
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{W_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \leq 1\right)=1.  
+		$$
+		Let us now prove that
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{W_{t}}{\sqrt{2t\log  \log  \frac{1}{t}}} \ge 1 \right)=1.  
+		$$
+		Let $\theta \in (0,1)$. For $n \in \mathbb{N}$, we denote
+		$$
+		A_n=\left\{ \omega, W_{\theta^n}(\omega)-W_{\theta^{n+1}}(\omega) \ge (1-\sqrt{\theta})h(\theta^n)\right\}.  
+		$$
+		Let us prove that $\sum \bP  (A_n)=+\infty$.  The basic inequality
+		$$
+		\int_{a}^{+\infty} e^{-\frac{u^2}{2}}du \ge \frac{a}{1+a^2}e^{-\frac{a^2}{2}},  
+		$$
+		implies
+		$$
+		\bP  (A_n)=\frac{1}{\sqrt{2\pi}}\int_{a_n}^{+\infty}e^{-\frac{u^2}{2}}du  \ge \frac{a_n}{1+a_n^2}e^{-\frac{a_n^2}{2}},  
+		$$
+		with
+		$$
+		a_n=\frac{(1-\sqrt{\theta})h(\theta^n)}{\theta^{n/2} \sqrt{1-\theta}}.  
+		$$
+		When $n \to +\infty$,
+		$$
+		\frac{a_n}{1+a_n^2} e^{-\frac{a_n^2}{2}}=O\left(\frac{1}{n^{\frac{1+\theta-2\sqrt{\theta}}{1-\theta}}}\right),  
+		$$
+		therefore,
+		$$
+		\sum \bP  (A_n)=+\infty.  
+		$$
+		As a consequence of the independence of the Brownian increments and of Borel-Cantelli lemma, the event
+		$$
+		W_{\theta^n}-W_{\theta^{n+1}} \ge (1-\sqrt{\theta})h(\theta^n)  
+		$$
+		will occur almost surely for infinitely many $n$'s. But, thanks to the first part of the proof, for almost every $\omega$, we may find $N(\omega)$ such that for $n \ge N(\omega)$,
+		$$
+		W_{\theta^{n+1}}>-2h(\theta^{n+1})\ge-2\sqrt{\theta} h(\theta^n).  
+		$$
+		
+		Thus, almost surely, the event $W_{\theta^n} >h(\theta^n)(1-3\sqrt{\theta})$ will occur for infinitely many $n$'s. This implies
+		$$
+		\bP \left( \limsup_{t \rightarrow 0} \frac{W_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \ge 1-3\sqrt{\theta} \right)=1.  
+		$$
+		We finally get
+		\[
+		\bP \left( \limsup_{t \rightarrow 0} \frac{W_{t}}{\sqrt{2t \log  \log  \frac{1}{t}}} \ge 1 \right)=1.  
+		\]
+		by letting $\theta \to 0$. 
+	\end{proof}
+	As a straightforward consequence, we may observe that the time inversion invariance property of Brownian motion implies: 
+	\begin{corollary}
+		Let $(W_t)_{t\ge 0}$ be a standard Brownian motion.
+		\[ 
+		\bP \left( \liminf_{t \rightarrow +\infty} \frac{W_{t}}{\sqrt{2t \log  \log  t}} =-1,\limsup_{t \rightarrow +\infty} \frac{W_{t}}{\sqrt{2t \log  \log  t}} =1\right)=1.
+		\]
+	\end{corollary}
+
+	
+\section{Support theorem} 
+Let 
+\[
+    \sigma: \mR_+\times\Omega\to \mR^{d\times d}, ~ b:\mR_+\times\Omega\to \mR^d ~\mbox{ and }~ a_t=\frac{1}{2} \sigma_t\sigma_t^{T}. 
+\]
+Set 
+\begin{equation}\label{eq:Ito-process}
+    x_t= \int_0^t \sigma_s \cdot \d W_s+\int_0^t b_s \d s. 
+\end{equation}
+For simplicity,  we always assume that $a\in \mS^d_{\delta}$. 
+
+The following result is a simplify version of Stroock-Varadhan's support theorem, which is taken from \cite{bass1998diffusions}. 
+	\begin{theorem}[Support theorem]
+		Suppose $\sigma$, $\sigma^{-1}$ and $b$ are bounded, $x_t$ is given by \eqref{eq:Ito-process}. Suppose $\varphi: [0,1]\to \mR^d$ is continuous with $\varphi(0)=0$. Then for each $\eps>0$, there exists a constant $c>0$ depending only on $\eps$, the modulus of continuity of $\varphi$, and the bounds on $b$, $\sigma$ and $\sigma^{-1}$ such that 
+		\begin{equation}\label{Eq-support}
+			\bP\l(\sup_{t\in [0,1]}|x_t-\varphi(t)|\leq \eps\r)\geq c. 
+		\end{equation}
+	\end{theorem}\label{thm:support}
+	This can be interpreted as saying that the graph of \(x_t\) remains within an \(\varepsilon\)-tube around \(\varphi\) with positive probability.
+
+\medskip
+
+To prove Theorem \ref{thm:support}, we need some  auxiliary lemmas. 
+
+\begin{lemma}\label{lem:support-mart}
+    Suppose $X_0=0$, $X_t=M_t+A_t$ is a continuous semimartingale with $\d A_t / \d t$ and $\d\langle M\rangle_t / \d t$ bounded above by $N_1$ and $\d\langle M\rangle_t / \d t$ bounded below by $N_2>0$. If $\varepsilon>0$ and $T>0$, then
+    \[
+    \bP \left(\sup _{t\in [0,T]}\left|X_t\right|<\varepsilon\right) \geq c(\eps, T, N_1, N_2)>0.
+    \]
+\end{lemma}
+\begin{proof}
+    Let $\tau_t=\<M\>^{-1}_t:=\inf\{s>0: \<M\>_s>t\}$. In virtue of Dambis-Dubins-Schwarz Theorem, $B_{t}:=M_{\tau_t}$ is a Brownian motion. By our assumptions on \(\<M\>\), $\tau_t\asymp t$, and $Y_t:= X_{\tau_t}=B_t+ \int_0^t b_s \d s$ with $|b_s|\leq C(N_1, N_2)$. Our assertion will follow if we can show 
+    \[
+        \bP \l( \sup_{t\in [0,T]} |Y_t| \leq \eps \r)\geq c>0. 
+    \]
+    We now use Girsanov’s theorem. Define a probability measure $\bQ$ by 
+    \[
+        \d \bQ/ \d \bP = \cE_T(-b):= \exp \l( - \int_0^T b_s \d B_s-\frac{1}{2} \int_0^T |b_s|^2 \d s \r) ~\mbox{ on } ~ \cF_{T}. 
+    \]
+    By Girsanov’s theorem, under $\bQ$, $Y_t$ is a Brownian motion. Therefore, 
+    \[
+        \bQ \l( A \r)\geq c>0, \quad A= \l\{\sup_{t\in [0,T]} |Y_t| \leq \eps\r\}.  
+    \]
+    By Hölder's inequality, 
+    \[
+        c\leq \bQ(A) \leq E_{\bP} (\cE_T(-b) \1_A)\leq  [E_{\bP} \cE_T^2(-b)]^{\frac{1}{2}} [\bP(A)]^{\frac{1}{2}}.
+    \]
+    Since $b$ is bounded, it is easy to verify that $E_{\bP} \cE_T^2(-b)<\infty$. This yields $\bP(A)\geq c>0$. 
+\end{proof}
+	
+	Now we are on the point to give 
+	\begin{proof}[Proof of Theorem \ref{thm:support}]	    	
+		{\em Step 1}: We first consider the case  and $\varphi = 0$. Fix $z\in \p B_{\eps/4}$. Applying It\^o's formula with $f(x)=|x-z|^2$ and setting $y_t= |x_t-z|^2$, then 
+    \[
+    y_t=z^2+ \int_0^t (x_s-z)\cdot \d x_s+ 2\int_0^t \mathrm{tr} a_s \d s, \quad \frac{\d }{\d t} \<y\>_t= (x_t-z)^T a_s (x_t-z)\asymp y_t. 
+    \]
+    Set $\tau:= \inf\{s>0: |y_s-y_0|\geq (\eps/8)^2\}$, then $c \eps^2 \leq \d \<y\>_t/\d t \leq C\eps^2$, \(t\in [0,\tau]\). If we set $z_t$  equal to $y_t$ for $t\leq\tau$ and equal to some Brownian motion for $t$ larger than this stopping time, then \Cref{lem:support-mart} applies (for $z_t$) and
+    \begin{align*}
+        \bP \l( \sup_{t\in [0,T]} |x_t|\leq \eps \r) \geq& \bP \l( \sup_{t\in [0,T]} |y_t-y_0| \leq( \eps/8 )^2\r)\\
+        =& \bP \l( \sup_{t\in [0,T]} |z_t-z_0| \leq (\eps/8)^2 \r)> 0. 
+    \end{align*}
+    
+    {\em Step 2}: Without loss of generality, we may assume $\varphi$ is differentiable with a derivative bounded by a constant. Define a new probability measure $\bQ$ by
+		\[
+		\d \bQ/\d \bP = \exp\l( -\int_0^T \varphi'(s) \sigma^{-1}_s \d W_s- \frac{1}{2}\int_0^T |\varphi'(s) \sigma^{-1}_s|^2 \d s \r) ~ \mbox{ on }~ \cF_T. 
+		\]
+		Noting that 
+		\[
+		\l\<-\int_0^\cdot \varphi'(s) \sigma^{-1}_s \d W_s, x\r\>_t = \int_0^t \varphi'(s) \d s = - \varphi(t). 
+		\]
+		So by the Girsanov theorem, under $\bQ$ each component of $x_t$ is a semimartingale and $n^i_t:=x_t^i - \int_0^t b_s^i \d s - \varphi^i(t)$ is a martingale for each $i=1,\cdots, d$, and \(\<n^i, n^j\>_t=\int_0^t \sigma^i_k(s)\sigma^j_k(s) \d s\). Therefore, 
+		\[
+		B_t:= \int_0^t \sigma^{-1}_s \d n_s 
+		\]
+		is a continuous local martingale with $\<B^i, B^j\>_t= \delta_{ij}t$ under $\bQ$. Thanks to L\'evy's Theorem, $B_t$ is a $d$-dimensional Brownian motion udner $\bQ$. Since 
+		\[
+		x_t- \varphi(t)= \int_0^t \sigma_s \d B_s+ \int_0^t b_s\d s, 
+		\]
+		by {\em Step 1}, $\bQ(\sup_{t\in [0,T]}|x_t-\varphi(t)|<\eps)\geq c>0$. similarly to the last paragraph of the proof for Lemma \ref{lem:support-mart}, we conclude
+		\[
+		\bP \l(\sup_{t\in [0,T]}|x_t-\varphi(t)|<\eps\r)\geq c>0. 
+		\]
+		
+	\end{proof}
+	
+	
+\section{ABP estimate and Generalized It\^o's formula}
+Below we will use the an analytic result due to Alexsandroff to study the It\^o process given by \eqref{eq:Ito-process}. 
+Below, we employ an analytic result due to Alexandroff to study the Itô process defined in \eqref{eq:Ito-process}. For simplicity, in this section, {\em we assume that \(b = 0\)}. However, all results except \Cref{Prop:ABP} remain valid if \(b\) is uniformly bounded. In that case, the constant \(C\) appearing in the estimates below may also depend on the upper bound of \(|b|\).
+
+ 
+\begin{proposition}[Alexsandroff]\label{Prop:ABP}
+    Let $f$ be a nonnegative function on $B_1$ such that $f^d$ has finite integral over $B_1$ and $f=0$ outside $B_1$. Then there exists a {\bf nonpositive  convex} function $u$ on $B_2$ such that
+    \begin{enumerate}[(i)]
+        \item  for any $x\in B_2$,
+        \begin{equation}\label{eq:ABP1}
+            |u(x)| \leq C \left(\int_{B_1} f^d d x\right)^{\frac{1}{d}}; 
+	\end{equation}
+        \item for any symmetric positive definite matrix $a\in \mR^{d\times d}$, $0<\eps<1$ and $x\in B_1$, 
+	\begin{equation}
+            a_{ij}\p_{ij} u_{\eps}(x)\geq d \sqrt[d]{\det a} \, f_{\eps}(x), 
+	\end{equation}
+        where $u_\eps= u*\zeta_\eps$, and $\zeta_\eps$ is a standard mollifier. 
+    \end{enumerate}
+\end{proposition}
+
+\eqref{eq:ABP1} is called Alexandroff–Bakelman–Pucci estimate in PDE literature. 
+	
+\medspace
+	
+In \Cref{app:MAE}, we provide the proof for Proposition \ref{Prop:ABP} based on the very initial knowledge of the solvability of the following Monge–Ampère equations and estimates of its solutions: 
+	\begin{equation}\label{eq:MAE}
+		\det \nabla^2 u(x)=f\quad \mbox{ in } D, 
+	\end{equation}
+	which, actually, after a long development became also one of the cornerstones of the theory of fully nonlinear elliptic partial differential equations. 
+	
+	%	\[
+	%	    Lu=a_{ij}\p_{ij} u ~\mbox{ and }~ D^{*}=  (\det a )^{\frac{1}{d}}. 
+	%    \]
+	%    For $u\in C^2(D)$, define 
+	%    \[
+	%        \Gamma^{+}=\l\{ y \in D:  u(x) \leq u(y)+\nabla u(y) \cdot(x-y) \text { for any } x \in D \r\} .
+	%    \]
+	%    The set $\Gamma^{+}$ is called the upper contact set of $u$ and Hessian matrix $\nabla^2 u=\left(\p_{i j} u\right)$ is nonpositive on $\Gamma^{+}$. In fact, the upper contact set can also be defined for continuous function $u$ by the following:
+	%    \[
+	%        \Gamma^+= \left\{y \in \Omega:  u(x) \leq u(y)+p \cdot(x-y) \text { for any } x \in \Omega \text { and some } p=p(y) \in \mathbb{R}^n\right\} \text {. }
+	%    \]
+	%    \begin{theorem}[Alexandroff–Bakelman–Pucci estimate]
+		%		Let $u\in C^2(D)\cap C(\bar{D})$. Assume that  $Lu\geq f$ in $D$, then 
+		%		\begin{equation}
+			%			\sup_{D} u \leq \sup_{\p D} u_{+} + C(d,   \mathrm{dist}(D)) \l\|\frac{f^{-}}{D^*}\r\|_{L^d(\Gamma^{+})}. 
+			%		\end{equation}
+		%	\end{theorem}
+	%	We need the following 
+	%	\begin{proof}
+		%		Without loss of generality, we assume $u\leq 0$ on $\p D$. Set $D^{+}= \{x\in D: u(x)>0\}$. By the Area formula, 
+		%		\[
+		%		    \int_{\nabla u(\Gamma^+\cap D^+)} g (y) \d y \leq \int_{\Gamma^+\cap D^+} g(x) |\det \nabla^2 u(x)| \d x.  
+		%		\]
+		%		Let $R=\sup_D u /\mathrm{dist}(D)$. 
+		%		
+		%		We {\bf claim} that 
+		%		\[
+		%		   B_R\subseteq \nabla u(\Gamma^+\cap D^+),      
+		%		\] 
+		%		that is, for each $p\in B_{R}$, there exists $x\in \Gamma^+\cap D^+$ such that  $\nabla u(x)=p$. This together with \eqref{eq:area} implies that 
+		%	    \begin{equation}
+			%	    	 \int_{B_R} g(y)\d y \leq \int_{\Gamma^{+}\cap D^{+}} g(x) |\det \nabla^2 u(x)| \d x, \quad \forall g\geq 0
+			%	    \end{equation}
+		%	    Arithmetic and geometric means inequality yields  
+		%	    \[
+		%	    \det \left(-\nabla^2 u\right) \leq \frac{1}{(D^*)^d}\left(\frac{-a_{i j} \nabla_{i j} u}{d}\right)^d ~ \text { on } \Gamma^{+} .
+		%	    \]
+		%	    Therefore, 
+		%	    \[
+		%	        u(0)^d \leq C |B_R| \leq C \int_{\Gamma^{+}} \frac{|f^-|^d}{(D^{*})^d}. 
+		%	    \]
+		%	    
+		%		For our claim, we can assume $0\in D$ and $u$ attach its maximal at $0$. For each $p\in B_R\backslash \{0\}$, consider 
+		%		\[
+		%		    L(x)= u(0)+p\cdot x.
+		%		\]
+		%		Then $L(x)|_{\overline{D}}>0$, $L(0)=u(0)=\max_{D}u$. Therefore, there exists $x'\in D$ such that $L(x')<u(x')$. Now we transform vertically such that the plane $y=L(x)$ to the highest position such that the plane touches the graph of $u$. If $(y, u(y))$ is one of these touch points, then $y\in D$ and $\nabla u(y)=p$. Therefore, $B_R\subseteq \nabla u(\Gamma^+\cap D^+)$. 
+		%	\end{proof}
+	
+	
+\medspace
+
+Let 
+\[
+    \sigma: \mR_+\times\Omega\to \mR^{d\times d} ~\mbox{ and }~ a_t=\frac{1}{2} \sigma_t\sigma_t^{T}. 
+\]
+Set 
+\begin{equation}\label{eq:Ito-process0}
+    x_t= \int_0^t \sigma_s \cdot \d W_s
+\end{equation}
+and 
+\[
+    \tau_R(x)=\inf\l\{t>0: x+x_t\notin B_R \r\}. 
+\]
+
+\Cref{Prop:ABP} implies 
+\const{\CKry}
+\begin{theorem}[Krylov \cite{krylov1980controlled}]\label{thm:Krylov1}
+    There is a constant $C_\CKry=C_\CKry(d)$ such that for any $R>0$, and nonnegative Borel $f$ given on $\mathbb{R}^d$, we have
+    \begin{equation}\label{eq:Kry1}
+        \bE \int_0^{\tau_{R}(x)} f\left(x+x_t\right) \sqrt[d]{\operatorname{det} a_t} \, \d t \leq C_{\CKry} R\|f\|_{L^d\left(B_R\right)}, 
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    By scaling, we only need to consider the case $R=1$. We can also assume $f\in C_c^\infty(B_1)$. 
+    
+    By It\^o's formula, 
+        \begin{equation*}
+            u_\eps (x+x_{t\wedge \tau_1(x)})-u_\eps(x) = \int_0^{t\wedge \tau_1(x)} a^{ij}_s \p_{ij} u_\eps(x+x_s) \d s + m_{t\wedge \tau_1(x)}, 
+        \end{equation*}
+      where \(m\) is a local martingale with \(m_0=0\). Selecting an appropriate stopping time sequence, taking expectation, letting $t\to\infty$ and using Proposition \ref{Prop:ABP}, we get 
+      \begin{align*}
+          &\int_0^{\tau_1(x)}\sqrt[d]{\det a_t} \, f_{\eps}(x+x_t) \d t  \leq d^{-1}\int_0^{\tau_1(x)} a^{ij}_t \p_{ij}u_\eps(x+x_t) \d t \\
+          \leq& \frac{2}{d}\sup_{x\in B_{1}}|u(x)|\leq C_{\CKry} \|f\|_{L^d(B_1)}.
+      \end{align*}
+      Letting $\eps\to0$, we obtain our assertion. 
+    \end{proof}
+	We should point out that here we do not need to assume $a\in \mS_\delta^d$.  
+	\begin{remark}
+        \begin{enumerate}[(i)]
+         \item \eqref{eq:Kry1} implies that if $x_t$ is a It\^o's process given by \eqref{eq:Ito-process} with $\sigma$ non-degenerate, then the process $t\mapsto \int_0^t f(x_s) \d s$ is well-defined. 
+         \item Suppose $x_t$ is a It\^o process given by \eqref{eq:Ito-process}, $a\in \mS^d_\delta$ and $b$ satisfying $|b_t|\leq \mathfrak{b}(x_t)$  with some $\mathfrak{b}\in L^d$.  In this case, Krylov \cite{krylov2021diffusion}  also proved \eqref{eq:Kry1}  with $\|f\|_{L^d(D)}$ replaced by $\|f\|_{L^{d-\eps}(D)}$ for some $\eps=\eps(d, \delta, \|\mathfrak{b}\|)>0$ . 
+       \end{enumerate}
+	\end{remark}
+	
+	Theorem \ref{thm:Krylov1} as many results below admits a natural generalization with conditional expectations. This generalization is obtained by tedious and not informative repeating the proof with obvious changes. We mean the following which we call the conditional version of Theorem \ref{thm:Krylov1} . Let $\gamma$ be a finite stopping time, then %and $\tau=\inf\{t: x_t\notin B_R\}$, then 
+	\begin{equation}\label{eq:Kry-cond}
+		\bE\left[\int_\gamma^{\tau_R(x)} f\left(x+x_t\right) \sqrt[d]{\operatorname{det} a_t} \, \1_{\{\gamma\leq \tau_R(x)\}} \, \d t \Big| \mathcal{F}_\gamma\right] \leq C_{\CKry} R\|f\|_{L_d\left(B_R\right)}. 
+	\end{equation}
+
+\const{\CtauR1}
+\begin{lemma}
+    Assume that \(a\in \mS^d_{\delta}\). Then for any \(R>0\) and \(x\in B_R\), it holds that 
+    \[
+        \bE {\tau_R(x)}^n \leq n! (C_{\CtauR1}R^2/\delta)^{n}, 
+    \]
+    where \(C_{\CtauR1}\) only depends on \(d\). 
+\end{lemma}
+\begin{proof}
+    We can assume $x=0$ and set \(\tau_R=\tau_R(0)\). 
+    \begin{framed}
+        We claim that 
+        \begin{equation}\label{eq:stop-n}
+            I_n(t):= \bE \l( [\tau_R-t]_+^n |\cF_t\r) \leq n! (C_{\CtauR1}R^2/\delta)^{n}. 
+	\end{equation}
+    \end{framed}
+    Of course, \eqref{eq:stop-n} implies our desired result. 
+    
+    When $n=1$, \eqref{eq:Kry-cond} implies \eqref{eq:stop-n}. If our assertion is true for a given $n$, then 
+    \begin{equation*}
+        \begin{aligned}
+            I_{n+1}(t)=& (n+1)! \bE \l( \int \1_{t<t_1<\cdots<t_{n+1}<\tau_R} \d t_1\cdots \d t_{n+1} \Big | \cF_t\r)\\
+            =& (n+1)! \int \d t_1\cdots t_{n+1} \bE \l( \1_{t<t_1<\cdots<t_n<\tau_R} \1_{t_n<t_{n+1}<\tau_R} \Big| \cF_t\r)\\
+            =& (n+1)! \int \d t_1\cdots t_{n+1} \bE \l[ \1_{t<t_1<\cdots<t_n<\tau_R} \bE \l(\1_{t_n<t_{n+1}<\tau_R}\Big| \cF_{t_{n}}\r) \Big| \cF_t\r]\\
+            =& (n+1) \bE \l[ n!\int \1_{t<t_1<\cdots<t_n<\tau_R} \d t_1\cdots t_{n}  \int \bE \l(\1_{t_n<t_{n+1}<\tau_R}\Big| \cF_{t_{n}}\r) \d t_{n+1}\Big| \cF_t\r]\\
+            =& (n+1) \bE \l\{  [\tau_R-t]_+^n \bE \l[\int_{t_n}^{\tau_R} \1_{B_R}(x_{t_{n+1}}) \d t_{n+1} \big| \cF_{t_n} \r] \Big|\cF_t \r\}\\
+            \overset{\eqref{eq:Kry-cond}}{\leq} & (n+1)C_{\CtauR1}\delta^{-1}R^2 I_n(t)\overset{\eqref{eq:stop-n}}{\leq} (n+1)! (C_{\CtauR1}R^2/\delta)^{n+1}. 
+        \end{aligned}
+    \end{equation*}
+    So we get what we desired. 
+\end{proof}
+
+\begin{theorem}\label{thm:tauR1}
+    Assume that \(a\in \mS^d_{\delta}\). Then for any $\mu<\delta/C_{\CtauR1}$, \(R\in(0,\infty)\) and \(x\in B_R\), 
+    \begin{equation}\label{eq:exp-stop1}
+        \bE \exp \l(\frac{\mu {\tau_R}(x)}{\delta R^2}\r) \leq (1-C_{\CtauR1}\mu/\delta)^{-1}. 
+    \end{equation}
+    In particular, for each $\lambda>0$, 
+    \begin{equation}\label{eq:stop-upper}
+        \bP\left({\tau_R(x)} \geq \lambda \right) \leq 2 \exp \l( -\frac{\lambda}{2C_{\CtauR1} R^2} \r). 
+    \end{equation}
+\end{theorem}
+	
+	\begin{exercise}
+		Let $B$ be a one-dimensional BM. Let $I=(-1,1)$. Prove  that 
+        \[
+            \bE \tau_I^n\leq C^n n!. 
+        \]
+        Using this to give another proof for \eqref{eq:exp-stop1}. 
+	\end{exercise}
+    
+    Put
+    \[
+        \tau_R:=\tau_R(0).
+    \]
+    \Cref{thm:tauR1} says that $\tau_R$ is smaller than a constant times $R^2$ with high probability. We want to show that in a sense the converse is also true: $R^2$ is basically smaller than a constant times $\tau_R$ with high probability. 
+
+\const{\CtauR2}
+\begin{lemma}
+    Assume that \(a\in \mS^d_{\delta}\). There exists $C_{\CtauR2}$ depending only on $d$ such that 	\begin{equation}\label{eq:stop-lower1}
+        \bP(\tau_R/R^2\leq t) \leq C_{\CtauR2}\delta^{-1} t, \quad t, R>0. 
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    We only need to prove the case $R=1$. Let $\phi$ be a $C^2$ function that is zero at $0$, one on $\partial B_1$, with $\partial_{i j} \phi$ bounded by a constant.  By It\^o's formula 
+    \[
+        \d \phi(x_t) = \nabla \phi(x_t) \cdot \sigma_t \d W_t + a_t^{ij} \p_{ij} \phi(x_t) \d t, 
+    \]
+    which yields that 
+    \[
+        \phi(x_{t\wedge \tau_1}) = \bE \int_0^{t\wedge \tau_1} a_{s}^{ij} \p_{ij}\phi(x_s) \d s\leq C_{\CtauR2} \delta^{-1} t. 
+    \]
+    Since $\phi(x_{t\wedge \tau_1}) \geq \1_{\{\tau_1\leq t\}}$, we get $\bP(\tau_1\leq t)\leq C_{\CtauR2}\delta^{-1} t$. 
+\end{proof}
+
+\const{\CtauR3}
+\begin{lemma}
+    Assume that \(a\in \mS^d_{\delta}\). There is a constant $\mathfrak{R}=R(d,\delta)$ such that 
+    \[
+        \bE \exp(-{\tau_{\mathfrak{R}}}) \leq 1/2. 
+    \]
+\end{lemma}
+\begin{proof}
+    \begin{framed}
+        {\bf Fact}: Let $X$ be a non-negative random variable, and let $F:\mR_+\to \mR$ be a decreasing  function with $F(\infty)=0$. Then 
+        \begin{equation*}
+            \bE F(X) = -\int_0^\infty F'(t) \bP (X\leq t) \d t. 
+        \end{equation*}
+    \end{framed}
+    Set $X=\tau_{R}$ and $F(t)=\e^{-t}$. In virtue of \eqref{eq:stop-lower1}, 
+    \begin{equation*}
+        \bE \e^{-\tau_{R}}=\int_0^\infty \e^{-t} \bP (\tau_R\leq t) \d t \leq \int_0^\infty \e^{-t} [1\wedge (C_{3}\delta^{-1}R^{-2}t)] \d t \leq C_{\CtauR3} \delta^{-1} R^{-2}. 
+    \end{equation*}
+    We set $\mathfrak{R}=\sqrt{2C_{\CtauR3}/\delta}$. 
+\end{proof}
+	
+\begin{exercise}
+    For any $R \in(0, \infty)$
+    \begin{equation}\label{eq:exp-stop2}
+        \bE \exp \left(-\mathfrak{R}^2 \tau_R/R^2 \right) \leq 1 / 2 .
+    \end{equation}
+\end{exercise}
+	
+\begin{theorem}
+    Assume that \(a\in \mS^d_{\delta}\). For any $\kappa \in(0,1), R \in(0, \infty), x \in B_{\kappa R}$, and $\lambda \geq 0$,
+    \begin{equation}\label{eq:exp-stop3}
+        \bE  \exp \left(-\lambda{\tau_R(x)}\right) \leq 2 e^{-\sqrt{\lambda}(1-\kappa) R / K},
+    \end{equation}
+    where $K= \mathfrak{R}/ \log 2$. Consequently,  
+    \begin{equation}\label{eq:stop-lower2}
+        \bP\left({\tau_R(x)} \leq t R^2\right) \leq 2 \exp \left(-\frac{\beta(1-\kappa)^2}{t}\right), 
+    \end{equation}
+    where $\beta=\beta(\mathfrak{R})=K^{-2}(\mathfrak{R})/4\in (0,1)$.
+\end{theorem}
+\begin{proof}
+    Recall that $\tau_R(x)$ is the first exit time of $x+x_t$ from $B_R$. Let $\tau'_R(x)$ be the first exit time of $x+x_t$ from $B_{(1-\kappa)R}(x)$. 
+    
+    We again assume that $R=1$, $x=0$ and $\kappa=0$. Take $N\in \mN$, to be specified later, and introduce $\tau^{k}$, $k=1,\cdots, N$, as the first exit time of $x_t$ from $B_{k/N}$. We also set $\gamma^k$ be the first exit times of $x_t$ from $B_{N^{-1}}(x_{\tau^{k-1}})$ after $\tau^{k-1}$, then 
+    \[
+        \tau^{k-1}\leq \gamma^k\leq \tau^k
+    \]
+    and
+    \[
+        \tau_1\geq (\gamma^1-\tau_0)+ (\gamma^2-\tau^1)+\cdots+ (\gamma^N-\tau^{N-1}). 
+    \]
+    By the conditional version of \eqref{eq:exp-stop2}, 
+    \begin{equation*}
+        \bE \l\{\exp\l[-\mathfrak{R}^2N^2 (\gamma^k-\tau^{k-1}) \r]| \cF_{\tau^{k-1}}\r\}\leq 1/2. 
+    \end{equation*}
+    Therefore, 
+    \begin{equation}\label{eq:exp-stop4}
+	\begin{aligned}
+            &\bE \l[ \exp\l(-\mathfrak{R}^2N^2 \tau_1 \r)\r]\\
+            \leq & \bE \l[\prod_{k=1}^{N}\exp\l(-\mathfrak{R}^2N^2 (\gamma^k-\tau^{k-1}) \r)\r]\\ 
+            \leq & \bE \l\{ \prod_{k=1}^{N-1}\exp\l(-\mathfrak{R}^2N^2 (\gamma^k-\tau^{k-1}) \r) \bE \l[ \exp\l(-\mathfrak{R}^2N^2 (\gamma^N-\tau^{N-1}) \r)\Big| \cF_{\tau^{N-1}}\r] \r\}\\ 
+            \leq & \frac{1}{2} \bE \l[\prod_{k=1}^{N-1}\exp\l(-\mathfrak{R}^2N^2 (\gamma^k-\tau^{k-1}) \r)\r] \leq \cdots \leq (1/2)^N. 
+	\end{aligned}
+    \end{equation}
+    Choosing  $N= [\sqrt{\lambda}/\mathfrak{R}]$, we get \eqref{eq:exp-stop3}. 
+
+    For \eqref{eq:stop-lower2}. Thanks to \eqref{eq:exp-stop3}, 
+    \begin{equation*}
+        \begin{aligned}
+            \bP\left({\tau_R(x)} \leq t R^2\right) = \bP \left(\e^{-\lambda\tau_R(x)} \geq \e^{-\lambda t R^2}\right) \leq 2\e^{\lambda t R^2-\sqrt{\lambda}(1-\kappa) R / K}, 
+        \end{aligned}
+    \end{equation*}
+    Choosing \(\lambda=(\frac{1-\kappa}{2tRK})^2\), we obtain the desired estimate. 
+\end{proof}
+
+The above estimates for first exit times have many important applications. Let 
+\[
+    \sigma_{\Gamma}(x)=\inf\l\{t>0: x+x_t\in \Gamma \r\}
+\]
+be the first time the process $x+x_t$ hits $\Gamma$.
+\begin{proposition}\label{prop:hit}
+    Assume that \(a\in \mS^d_{\delta}\). For any $\kappa \in(0,1)$ there is a function $q(\gamma), \gamma \in(0,1)$, depending only on $d, \delta,\kappa$ and naturally, also on $\gamma$, such that for any $R \in(0, \infty), x \in B_{\kappa R}$, and closed $\Gamma \subset B_R$ satisfying $|\Gamma| \geq \gamma\left|B_R\right|$, it holds that
+    \[
+        \bP\left(\sigma_{\Gamma}(x) \leq \tau_R(x)\right) \geq q(\gamma).
+    \]
+    Furthermore, $q(\gamma) \rightarrow 1$ as $\gamma \uparrow 1$. 
+\end{proposition}
+\begin{proof}
+    By using scaling as before we reduce the general case to the one in which $R=1$. For any $\varepsilon>0$, we have
+    \[
+        \begin{aligned}
+			& \bP\left(\sigma_{\Gamma}(x)>\tau_1(x)\right) \leq \bP\left(\tau_1(x)=\int_0^{\tau_1(x)} \1_{B_1 \backslash \Gamma}\left(x+x_t\right) \d t\right) \\
+			& \leq \bP\left(\tau_1(x) \leq \varepsilon\right)+\varepsilon^{-1} \bE \int_0^{\tau_1(x)} I_{B_1 \backslash \Gamma}\left(x+x_t\right) \d t .
+	\end{aligned}
+    \]
+    In virtue of \eqref{eq:stop-lower2} and \eqref{eq:Kry1}, for any \(x\in B_{\kappa}\) and any \(\eps>0\), it holds that 
+    \[
+        \begin{aligned}
+			& \bP\left(\sigma_{\Gamma}(x)>\tau_1(x)\right) \leq 2 e^{-\frac{\beta(1-\kappa)^2}{\eps}}+C \varepsilon^{-1}\left|B_1 \backslash \Gamma\right|^{1 / d} \\
+			& \leq 2 e^{-  \frac{1}{C\varepsilon}}+C \varepsilon^{-1}(1-\gamma)^{1 / d}, 
+	\end{aligned}
+    \]
+    where the constants $C$ depend only on $d, \delta, \kappa$. By denoting
+    \[
+        q(\gamma)=1-\inf _{\varepsilon>0}\left(2 e^{-\frac{1}{C\eps}}+ C \varepsilon^{-1}(1-\gamma)^{1 / d}\right), 
+    \]
+    we obtain our desired assertion. 
+\end{proof}
+
+Note that in the above result, we have no assumption on the shape of the set $\Gamma$. 
+\begin{exercise}
+    For any $\kappa \in(0,1)$, $R \in(0, \infty)$. For any $x\in B_{R/2}$ and $B_{\kappa R}(y)\subseteq B_R$, we have 
+    \[
+        \bP\l(\sigma_{B_{\kappa R}(y)} (x) <\tau_{R}(x) \r)\geq \zeta(\kappa)>0,  
+    \]
+    where $\zeta(\kappa)>0$ depends only on $d, \delta$, and naturally, also on $\kappa$.
+\end{exercise}
+{\bf Hint}: Using support theorem. 
+	
+\begin{theorem}\label{thm:Kry}
+    Let $p \geq d$. Then there exists constants $C$ depending only on $d, \delta$, such that for any $\lambda>0$ and Borel nonnegative $f$ given on $\mathbb{R}^d$ we have
+    \begin{equation}\label{eq:Kry2}
+        \bE \int_0^{\infty} e^{-\lambda t} f\left(x_t\right) \d t \leq C\lambda^{\frac{d}{2p}-1}  \left\|f\right\|_{p}.  
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Let $\gamma$ be a stopping time and $\gamma'$ be the first exit time of $x_t$ from $B_{R}(x_{\gamma})$ after $\gamma$.  By the conditional version of \eqref{eq:exp-stop3}, 
+    \[
+        \bE \l[ \exp \left(-\lambda (\gamma'-\gamma)\right)\Big| \cF_{\gamma} \r] \leq 2 e^{-\sqrt{\lambda} R/K}. 
+    \]
+    Choosing $R=K/\sqrt{\lambda}$, then 
+    \[
+        \bE \l[ \exp \left(-\lambda (\gamma'-\gamma)\right)\Big| \cF_{\gamma} \r] \leq 2/e<1. 
+    \]
+    Let $\tau^0=0$ and $\tau^k$ be the first exit time of $x_t$ from $B_{R}(x_{\tau^{k-1}})$ after $\tau^{k-1}$. As the proof for \eqref{eq:exp-stop4}, we have \begin{equation}\label{eq:exp-tauk}
+        \bE \e^{-\lambda \tau^k} = \bE \prod_{i=1}^k \e^{-\lambda (\tau^k-\tau^{k-1})} \leq (2/e)^k. 
+    \end{equation}
+    If \eqref{eq:exp-tauk} holds, then 
+    \begin{align*}
+        \bE \int_0^{\infty} e^{-\lambda t} f\left(x_t\right) \d t\leq& \sum_{k=1}^{\infty} \bE \l [e^{-\lambda \tau^{k-1}} \bE \l( \int_{\tau^{k-1}}^{\tau^{k}}  f\left(x_t\right) \d t \Big| \cF_{\tau^{k-1}} \r) \r]\\
+        \overset{\eqref{eq:Kry1}}{\leq} &\sum_{k=1}^{\infty} \bE  \l(  C\delta^{-1}R\|f\|_{L^d(B_{R}(x_{\tau^{k-1}}))} \e^{-\lambda \tau^{k-1}} \r)\\
+        \leq & C \delta^{-1} R^{2-\frac{d}{p}}\|f\|_{p} \sum_{k=0}^\infty  \bE \e^{-\lambda \tau^k}  \\
+        \leq&  C \delta^{-1} (K/\sqrt{\lambda})^{2-\frac{d}{p}} \|f\|_{p} \sum_{k=0}^\infty (2/e)^k\\
+        \leq & C \lambda^{\frac{d}{2p}-1}\|f\|_p. 
+    \end{align*}
+\end{proof}
+	
+\begin{theorem}[Generalized Itô's formula,  see Krylov-\cite{krylov1980controlled}]
+    Let $x_t$ be a  It\^o process given by \eqref{eq:Ito-process0}. Suppose that $a\in \mS^d_\delta$, then for any $u\in W^{2,p}_{loc}$ with $p\geq d$, we have 
+    \begin{equation}
+        \begin{aligned}
+            &u(x+x_t)-u(x)\\
+            =&\int_0^t \nabla u(x+x_s)\sigma_s \d W_s+ \int_0^t a_s^{ij} \p_{ij}u(x+x_s) \d s 
+        \end{aligned}			
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    We only consider the case  \(x=0\) and $u\in W^{2,d}$. Let $\eta\in C_c^\infty(B_1)$ with $\int\eta=1$. Set $\eta_\eps(x)=\eps^{-d} \eta(x/\eps)$ and $u_\eps=u*\eta_\eps$. By It\^o's formula, 
+		\begin{equation}\label{eq:approx-Ito}
+			u_\eps(x_t)-u_\eps(x_0)=\int_0^t \nabla u_\eps (x_s)\sigma_s \d W_s+ \int_0^t a_s^{ij} \p_{ij}u_\eps(x_s) ) \d s. 
+		\end{equation}
+		\begin{framed}
+			{\bf Fact}: by Sobolev embedding theorem, we have  
+			\begin{equation}\label{eq:sob1}
+				W^{2,d}\hookrightarrow C_b; \quad \|\nabla u\|_{2d} \leq C (\|\nabla^2 u\|_{L^d} + \|\nabla u\|_{L^d}) . 
+			\end{equation}
+		\end{framed}
+		Since $u\in C_b$, by letting $\eps\to0$, one sees the left-hand side of \eqref{eq:approx-Ito} goes to $u(x_t)-u(x_0)$ as $\eps\to0$. For the right-hand side of \eqref{eq:approx-Ito}. 
+		By Doob's maximal inequality
+		\[
+		\begin{aligned}
+			&\bE \sup_{t\in [0,T]} \l|\int_0^t \nabla u_\eps (x_s)\sigma_s \d W_s -\int_0^t \nabla u_{\eps'} (x_s)\sigma_s \d W_s\r|^2\\
+			\leq & C \bE \int_0^T |\nabla u_\eps- \nabla u_{\eps'}|^2 (x_s) \d s \leq C \|\nabla u_\eps -\nabla u_{\eps'}\|^2_{L^{2d}}\\
+			\overset{\eqref{eq:sob1}}{\leq} & C \|u_\eps - u_{\eps'}\|_{W^{2,d}} \to 0, \quad \eps,\eps'\to0. 
+		\end{aligned}
+		\]
+		Similarly, we can also show that the second integral on the right-hand side of \eqref{eq:approx-Ito} also converges to $ \int_0^t a_s^{ij} \p_{ij}u(x_s)  \d s$. 
+	\end{proof}
+
+ \begin{remark}
+     The above generalized It\^o's formula also holds for Itô process given by \eqref{eq:Ito-process}, where $a\in \mS^d_\delta$, and $b$ satisfying $|b_t|\leq \mathfrak{b}(x_t)$ with $\mathfrak{b}\in L^d$. 
+ \end{remark}
+
+ \begin{exercise}
+     Let \(d\geq 1\), \(p>1\vee \frac{d}{2}\) and \(W\) be a \(d\)-dimensional Brownian motion. Prove that 
+     \begin{enumerate}
+         \item if \(f\in L^p\), then \(\int_0^t f(W_s) \d s\) is well-defined; 
+         \item if \(u\in W^{2,p}\), then it holds that 
+         \[
+             u(W_t)-u(0)=\int_0^t \nabla u(W_s) \d W_s+\int_0^t \frac{1}{2}\Delta u(W_s) \d s. 
+         \]
+     \end{enumerate}
+ \end{exercise}
+
+ 

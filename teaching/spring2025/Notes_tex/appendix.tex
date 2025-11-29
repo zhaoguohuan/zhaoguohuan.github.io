@@ -1,0 +1,314 @@
+\chapter{Appendix}
+
+\section{Probabilistic terminology}
+Let $(\Omega, \cF, \bP)$ be a probability space and $(E, \cE)$ be a measurable space. $X:(\Omega,\cF)\to (E, \cE)$ a measurable map, and $\cG$ a $\sigma$-field $\subseteq \cF$.  
+	
+When $E=\mR$, we define the {\bf conditional expectation}\index{conditional expectation} of $X$ given $\cG$, $\bE(X|\cG)$, to be any random variable $Y$ that satisfies 
+\begin{enumerate}[(a)]
+    \item $Y\in \cG$; 
+    \item for all $A\in \cG$, $\bE(X; A)=\bE(Y; A)$. 
+\end{enumerate}
+	
+$Q_{\cG}: \Omega\times \cE\to [0,1]$ is said to be a {\bf {regular conditional distribution}\index{regular conditional distribution (probability)}} (RCD) for $X$ given $\cG$ if 
+\begin{enumerate}[(a)]
+    \item For each $A\in \cE$, $\omega\mapsto Q_{\cG}(\omega, A)$ is a version of $\bE(\1_A(X)|\cG)$; 
+    \item For a.e. $\omega\in \Omega$, $A\mapsto Q_{\cG}(\omega, A)$ is a probability measure. 
+\end{enumerate}
+If $E=\Omega$, $X(\omega)=\omega$, then $Q_{\cG}$ is called a {\bf regular conditional probability}. 
+	
+The following results can be found in Durrett's book \cite{durrett2019probability}.  
+\begin{proposition}
+    \begin{enumerate}[(i)]
+	\item If $\cG_1\subseteq \cG_2\subseteq \cF$, then 
+	\begin{equation}
+		\bE[(X|\cG_2)|\cG_1]=\bE (X|\cG_1)
+	\end{equation}
+	\item Assume that $X\in \cF$ and $Y\in \cG\subseteq \cF$, then 
+	\begin{equation}
+		\bE (XY|\cG)=\bE (X|\cG)Y. 
+	\end{equation}
+	\item (Jesen's inequality) If $\varphi$ is a convex function, then 
+	\begin{equation}
+		\bE (\varphi(X)|\cG) \leq \varphi(\bE (X|\cG)). 
+	\end{equation}
+    \end{enumerate}
+\end{proposition}
+	
+\begin{proposition}
+    Let $Q_{\cG}$ be a RCD for $X$ given $\cG$. If $f:E\to \mR$ satisfying $\bE |f(X)|<\infty$, then 
+    \[
+	\bE(f(X)|\cG)(\omega)= \int_{E} f(x) Q_{\cG}(\omega, \d x)\quad a.s.. 
+    \]
+\end{proposition}
+	
+\begin{theorem}
+    RCD exists if $E$ is a {\bf standard measure space} and $\cE=\cB(E)$. 
+\end{theorem}
+	
+\begin{proposition}
+    Assume $X\geq 0$, $f:\mR_+\to \mR_+$ such that $f\in C^1(\mR_+)$ and $f(0)=0$. Then 
+    \begin{equation}
+	\bE f(X)= \int_0^\infty f'(t) \bP (X>t) \d t. 
+    \end{equation}
+\end{proposition}
+\begin{exercise}
+    If $X\geq 0$, $f:\mR_+\to \mR_+$ such that $f\in C^1(\mR_+)$ and $f(\infty)=0$. Then 
+    \begin{equation}
+	\bE f(X)= -\int_0^\infty f'(t) \bP (X\leq t) \d t. 
+    \end{equation}
+\end{exercise}
+
+\section{Maximal Principle}
+Consider the linear parabolic equation:
+\[
+    \partial_t u = a_{ij}\partial_{ij} u + b_i\partial_i u + cu,
+\]
+where \(a_{ij}\) is uniformly elliptic, \(b_i\) and \(c\) are bounded and continuous. 
+
+\begin{proposition}[Weak Maximum Principle]
+    If \(c(x, t) \leq 0\) and \(u\) is bounded, then 
+    \[
+    \sup_{\mR_+\times\mathbb{R}^d} u = \sup_{\{0\}\times\mathbb{R}^d} u.
+    \]
+\end{proposition}
+\begin{proposition}[Strong Maximum Principle]
+    If \(u\) achieves its maximum (or minimum) at a point \((t_0,x_0) \in \mR_+\times \mathbb{R}^d\), then \(u\) is constant in \([0, t_0]\times\mathbb{R}^d\).
+\end{proposition}
+
+\section{Schauder estimate}\label{app:Schauder}
+
+Let $\sS$ be the Schwartz space of all rapidly decreasing functions, and $\sS'$ the dual space of $\sS$ called Schwartz generalized function (or tempered distribution) space. Given $f\in\sS$,
+let $\sF f=\hat f$  be the Fourier transform defined by
+$$
+    \hat f(\xi):=\int_{\mR^d}\e^{-\mathrm{i}2\pi\xi\cdot x} f(x)\d x.
+$$
+Let $\chi:\mR^d\to[0,1]$ be a smooth radial function with 
+$$
+\chi(\xi)=1,\ |\xi|\leq 1,\ \chi(\xi)=0,\ |\xi|\geq 3/2.
+$$
+Define
+$$
+\varphi(\xi):=\chi(\xi)-\chi(2\xi).
+$$
+It is easy to see that $\varphi\geq 0$ and supp $\varphi\subset B_{3/2}\setminus B_{1/2}$ and formally 
+\begin{align}\label{EE1}
+    \sum_{j=-k}^k\varphi(2^{-j}\xi)=\chi(2^{-k}\xi)-\chi(2^{k+1}\xi)\stackrel{k\to\infty}{\to} 1.
+\end{align}
+In particular, if $|j-j'|\geq 2$, then
+$$
+\mathrm{supp}\varphi(2^{-j}\cdot)\cap\mathrm{supp}\varphi(2^{-j'}\cdot)=\varnothing.
+$$
+From now on we shall fix such $\chi$ and $\varphi$ and define
+$$
+\Delta_j f:=\sF^{-1}(\varphi(2^{-j}\cdot) \sF f), \quad j\in \mZ.
+$$
+Set \(h:=\sF^{-1}(\varphi)\), then \(h_j := \sF^{-1}(\varphi (2^{-j}\cdot))= 2^{jd} h(2^j \cdot)\). Noting that we have 
+\[
+    \int_{\mR^d} h_j =\varphi(0)=0.  
+\]
+        
+We first recall the following useful lemmas. 
+\begin{lemma}\label{lem:Besov-Holder}
+    Let $\alpha\in (0,1)$. For any $u\in C^\alpha$, it holds that 
+    \begin{align}\label{Ch}
+	\frac{1}{C}\sup_{j\in \mZ} 2^{j\alpha} \|\Delta_j u\|_0\leq [u]_{\alpha} \leq C \sup_{j\in \mZ} 2^{j\alpha} \|\Delta_j u\|_0, 
+    \end{align}
+    where 
+    \[
+	[u]_\alpha:= \sup_{x\neq y} \frac{|u(x)-u(y)|}{|x-y|^\alpha}, 
+    \]
+    and $C$ only depends on $d$ and $\alpha$. 
+\end{lemma}
+\begin{proof}
+    1) For any \(x\neq y\), we have 
+    \begin{align*}
+        |u(x)-u(y)| \leq& \sum_{j} |\Delta_j u(x)-\Delta_j u(y)| \leq \sum_j (|x-y|\|\nabla \Delta_j u\|_{0}) \wedge (2 \|\Delta_j u\|_0)\\
+        \leq& C\sum_{j} (2^j|x-y|\wedge 1) \|\Delta_j u\|_0 \\
+        %\leq& C |x-y|^\alpha \sup_{j} 2^{j\alpha}\|\Delta_j u\|_0 \sum_{j} (2^{j(1-\alpha)} |x-y|^{1-\alpha} \wedge 2^{-j\alpha} |x-y|^{-\alpha}) \\
+        \leq & C 2^{j\alpha}\|\Delta_j u\|_0  \l( |x-y| \sum_{j\leq \log_2 |x-y|} 2^{j(1-\alpha)}+ \sum_{j\geq \log_2 |x-y|} 2^{-j\alpha} \r) \\
+        \leq & C |x-y|^\alpha \sup_{j} 2^{j\alpha} \|\Delta_j u\|_0. 
+    \end{align*}
+    
+    2) For any \(j\in \mZ\) and \(x\in \mR^d\), we have 
+    \begin{align*}
+        |\Delta_j u(x)|=& \l| \int_{\mR^d}  u(x-y) h_j(y) \d y \r|= \l| \int_{\mR^d} [u(x-y)-u(x)] h_j(y) \d y \r| \\
+        \leq & [u]_\alpha 2^{jd} \int_{\mR^d} |y|^{\alpha} |h(2^{j}y)| \d y \leq C 2^{-j\alpha} [u]_\alpha. 
+    \end{align*}
+\end{proof}
+	
+\begin{lemma}\label{lem:schauder}
+    There is a constant $C=C(d, \alpha)$, such that for any $u\in C^{2,\alpha}$ and \(\lambda \geq 0\), 
+    \begin{equation}
+        \lambda \|u\|_0\leq C \|\lambda u-\Delta u\|_0
+    \end{equation}
+    and 
+    \begin{equation}
+        \lambda [u]_\alpha+[\nabla^2 u]_\alpha \leq C [\lambda u- \Delta u]_\alpha
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    1) If there exits \(x_0\in \mR^d\) such that \(u(x_0) ( \mbox{ or }-u(x_0))=\|u\|_0\), then \(\Delta u(x_0) \leq 0~ (\Delta u(x_0)\geq 0)\). This implies 
+    \(|\lambda u(x_0)|\leq |\lambda u(x_0)-\Delta u(x_0)|\); If such \(x_0\) does not exist, then we can consider function \(u_R= u \chi(\cdot/R)\) (\(R\gg 1\)). 
+    
+    2) We only prove the case \(\lambda=0\). Let \(f=\Delta u\). Define 
+    $$
+        \varphi^{kl} (\xi):= \frac{\xi_k\xi_l}{|\xi|^2} \varphi (\xi),\ \  h^{kl}(x):=\sF^{-1}(\varphi^{kl})(x);  \ \ \varphi^{kl}_j (\xi):= \varphi^{kl}(2^{-j}\xi), \ \ h^{kl}_j(x):=2^{jd} h^{kl}(2^jx). 
+    $$
+    It is easy to see
+    $$
+        \p_{kl}u=\sum_{j\in \mZ} u^{kl}_j:=\sum_{j\in \mZ}\varphi^{kl}_j (D) f=\sum_{j\in \mZ} h^{kl}_j* f.  
+    $$
+    For any $x\in \mR^d$, noticing $h^{kl}\in \sS(\mR^d)$ and $\int h^{kl}=\varphi (0)=0$, we get 
+    \begin{align*}
+        |u^{kl}_j(x)|=&\left|\int_{\mR^d} h^{kl}_j (y)f(x-y) \d y\right|=\left|\int_{\mR^d} h^{kl} (z)(f(x-2^{-j}z)-f(x)) \d z\right| \\
+        \leq&  \int_{\mR^d} |h^{kl}(z)| \cdot [f]_\alpha |2^{-j}z|^\alpha  \d z\leq C [f]_\alpha 2^{-j\alpha}
+    \end{align*}
+    This together with \Cref{lem:Besov-Holder} yields that  
+    \[
+        [\nabla^2 u]_\alpha \leq C\sup_{j,k,l}2^{j\alpha}\|\Delta_j \partial_{kl}u\|_0 \leq C [f]_\alpha. 
+    \]
+\end{proof}
+
+
+\section{Monge-Ampère Equation}\label{app:MAE}
+
+\begin{lemma}[Area formula]
+    Consider a locally Lipschitz function $f: \mR^d \to \mR^d$ and a Borel set $A\subseteq \mR^d$. Then the function $y\mapsto N_A(y):= \mathrm{card}\{f^{-1}(y)\cap A\}\}$ is measurable and 
+    \begin{equation*}
+        \int_{A} |\det (\nabla f(x))| \d x = \int_{\mR^n} N_A(y) \d y \geq \sL^d(f(A)). 
+    \end{equation*}
+    Consequently, for any $g\geq 0$, 
+    \begin{equation}\label{eq:area}
+        \int_{f(A)}g(y)\d y\leq \int_{A} g(f(x)) |\det \nabla f(x)|\d x. 
+    \end{equation}
+\end{lemma}
+        
+To motivate the definition of weak solutions to \eqref{eq:MAE}, given an open set $D \subset \mathbb{R}^n$, consider $u: D \rightarrow \mathbb{R}$ a convex function of class $C^2$ satisfying \eqref{eq:MAE} 
+	for some $f: D \rightarrow \mathbb{R}^{+}$. Then given any Borel set $E \subset D$, it follows by the area formula that
+	$$
+	\int_E f \,\d x=\int_E \operatorname{det} D^2 u\, \d x=|\nabla u(E)| .
+	$$
+	
+	Notice that while the above argument needs $u$ to be of class $C^2$, the identity
+	$$
+	\int_E f=|\nabla u(E)|
+	$$
+	makes sense if $u$ is only of class $C^1$. To find a definition when $u$ is merely convex one could try to replace the gradient $\nabla u(x)$ with the subdifferential $\partial u(x)$ and ask for the above equality to hold for any Borel set $E$. Here $\p u(x)$ is given by 
+	$$
+	\partial u(x):=\left\{p \in \mathbb{R}^d: u(y) \geq u(x)+\langle p, y-x\rangle \quad \forall y \in D\right\}. 
+	$$
+	This motivates the following definition:
+	\begin{definition}
+		Given an open set $D \subset \mathbb{R}^n$ and a convex function $u: D \rightarrow \mathbb{R}$, we define the Monge-Ampère measure associated to $u$ by
+		$$
+		\mu_u(E):=\left|\bigcup_{x \in E} \partial u(x)\right|
+		$$
+	\end{definition}
+	The basic idea of Alexandrov was to say that $u$ is a weak solution
+	of \eqref{eq:MAE} if $\mu_u|_{D}=\nu|_{D}$. 
+	
+	\begin{lemma}
+		Let $u,v:D\to \mR$ be convex functions. Then 
+		$$
+		\mu_{u+v} \geq \mu_u+\mu_v \quad \text { and } \quad \mu_{\lambda u}=\lambda^n \mu_u \quad \forall \lambda>0 .
+		$$
+	\end{lemma}
+	
+	\medspace
+	
+	The following result is  the celebrated Alexandrov maximum principle.
+	\begin{theorem}
+		Let $D$ be  an open bounded convex set, and let $u: D\to \mR$ be a convex function such that $u|_{\p D}=0$. Then there exists a dimensional constant $C=C(d)$
+		such that 
+		\begin{equation}\label{eq:abp}
+			|u(x)| \leq C(d) \operatorname{diam}(D)^{\frac{d-1}{d}} \operatorname{dist}(x, \partial D)^{\frac{1}{d}}|\partial u(D)|^{\frac{1}{d}},  \quad \forall x \in D. 
+		\end{equation}
+	\end{theorem}
+	\begin{proof}
+		Let $(x, u(x))$ be a point on the graph of $u$, and consider the convex ``conical" function $y\mapsto \widehat C_x(y)$ with vertex at $(x, u(x))$ that vanishes on $\p D$. 
+		Since $u\leq \widehat C_x$ in $D$ (by the convexity of $u$), Lemma 2.7 implies that 
+		$$
+		\left|\partial \widehat{C}_x(x)\right| \leq\left|\partial \widehat{C}_x(D)\right| \leq|\partial u(D)| ;
+		$$
+		so, to conclude the proof, it suffices to bound $|\p \widehat C_x(x)|$ from below. It is not hard to see 
+		\begin{itemize}
+			\item $\p \widehat{C}_x(x)$ contains the ball $B_\rho$ with $\rho=|u(x)|/\mathrm{diam} (D)$
+			\item $\p \widehat{C}_x(x)$ contains a vector of norm $|u(x)|/\mathrm{dist} (x, \p D)$
+		\end{itemize}
+		Thus, 
+		$$
+		\partial \widehat{C}_x(x) \supset B_{\varrho}(0) \cup\{q\}, \quad |q|=|u(x)|/\mathrm{dist} (x, \p D). 
+		$$
+		Since $\p \widehat{C}_x(x)$ is convex, it follows that $\p \widehat{C}_x(x)$ contains the cone $\cC$ generated
+		by $q$ and $\Sigma_q:= \{p\in B_\rho: \<p,q\>=0\}$. Therefore 
+		$$
+		c(d) \rho^{d-1} |q| = |\cC| \leq |\p u(D)|. 
+		$$
+	\end{proof}
+	
+	\begin{theorem}
+		Let $D$ be an open bounded convex set, and let $\nu$ be a Borel measure on $D$ with $\nu(D)<\infty$. Then there exists a unique convex function $u: D \rightarrow \mathbb{R}$ solving the Dirichlet problem
+		$$
+		\begin{cases}
+			\mu_u=\nu & \text { in } D \\ u=0 & \text { on } \partial D
+		\end{cases}
+		$$
+	\end{theorem}
+	
+	\begin{proof}
+		By the stability result proved in Lemma below, since any finite measure can be approximated in the weak*
+		topology by a finite sum of Dirac deltas, we only need to
+		solve the Dirichlet problem  when $\nu=\sum_{i=1}^N \alpha_i \delta_{x_i}$ with $x_i\in D$ and $\alpha_i>0$. To prove existence of a solution, we use the so-called Perron method: we define 
+		$$
+		\mathcal{S}[\nu]:=\left\{v: \Omega \rightarrow \mathbb{R} \text { convex : }\left.v\right|_{\partial \Omega}=0, \mu_v \geq \nu \text { in } \Omega\right\}
+		$$
+		and we show that the largest element in $\cS[\nu]$ is the desired solution. We split the argument into several steps.
+		
+		{\em Step 1}: $\cS[\nu]\neq \emptyset$. To construct an element of $\cS[\nu]$, we consider the ``conical" function $C_{x_i}$, that is $0$ on $\p\Omega$ and takes the value $-1$ at its vertex $x_i$. The Monge–Ampère measure of this function is concentrated at $x_i$ and has mass equal
+		to some positive number $\beta_i$ corresponding to the measure of the set of supporting hyperplanes at $x_i$. Now, consider the convex function $\bar v=\sum_{i=1}^N \lambda C_{x_i}$, where $\lambda$ has to be chosen.
+		We notice that $\bar v|_{\p \Omega}=0$. In addition, provided $\lambda$ is sufficiently large, Lemma below  
+		implies that 
+		$$
+		\mu_{\bar{v}} \geq \sum_{i=1}^N \mu_{\lambda \hat{C}_{x_i}}=\sum_{i=1}^N \lambda^d \mu_{\hat{C}_{x_i}}=\sum_{i=1}^N \lambda^d \beta_i \delta_{x_i} \geq \sum_{i=1}^N \alpha_i \delta_{x_i} = \nu.
+		$$
+		This yields $\bar v\in \cS[\nu]$. 
+		
+		{\em Step 2}: $v_1, v_2 \in \mathcal{S}[\nu] \Rightarrow w:=\max \left\{v_1, v_2\right\} \in \mathcal{S}[\nu]$. Set 
+		$$
+		\Omega_0:=\left\{v_1=v_2\right\}, \quad \Omega_1:=\left\{v_1>v_2\right\}, \quad \text { and } \quad \Omega_2:=\left\{v_1<v_2\right\}
+		$$
+		Also, given a Borel set $E\subseteq \Omega$, consider $E_i= E\cap \Omega_i$. 
+		
+		Since $\Omega_1$ and $\Omega_2$ are open sets, $w|_{\Omega_1}=v_1$ and $w|_{\Omega_2}=v_2$, 
+		$$
+		\p w(E_1) = \p v_1(E_1), \quad   \p w(E_2) = \p v_2(E_2). 
+		$$
+		In addition, since $w=v_1$ on $\Omega_0$ and $w\geq v_1$ everywhere else, we have 
+		$$
+		\p v_1(E) \subseteq \p w(E_0). 
+		$$
+		Therefore, 
+		$$
+		\mu_w (E) \geq \mu_{v_1}(E_0\cup E_1)+ \mu_{v_2} (E_2) \geq \nu(E).  
+		$$
+		
+		{\em Step 3}: $u:=\sup _{v \in S[\nu]} v$  belongs to  $S[\nu]$. Let $w_m \uparrow u$ locally uniformly. Then $\mu_{w_m} \rightharpoonup*\mu_u$.  Also, we deduce
+		immediately that $u|_{\p\Omega}=0$ by construction;  hence, $u\in \cS[\nu]$. 
+		
+		{\em Step 4}: The measure $\mu_u$ is supported at the points $\{x_1,\cdots x_N\}$. Otherwise, there exists a set $E\subseteq D$ such that
+		$$
+		E \cap\left\{x_1, \ldots, x_N\right\}=\emptyset \quad \text { and } \quad|\partial u(E)|=\mu_u(E)>0
+		$$
+		Therefore, 
+		$$
+		\l|\partial u(E)\backslash [\cup_{i=1}^{N} \p u(x_i)\cup \p u(\p D)]\r|=|\p u (E)|>0 
+		$$
+		Let $x_0\in E$ and $p\in \p u(x_0)\backslash [\cup_{i=1}^{N} \p u(x_i)\cup \p u(\p D)]$. Then there exists $\delta>0$ such that
+		\begin{equation}\label{eq:baru}
+			u \geq \ell_{x_0, p}+2 \delta \quad \text { on }\left\{x_1, \ldots, x_N\right\} \cup \partial \Omega, 
+		\end{equation}
+		
+		where $\ell_{x_0, p}(x)=u(x_0)+p\cdot (x-x_0)$. Set $\bar{u}:=\max\{\ell_{x_0, p}+\delta, u\}\gneqq u$. Notice that $\bar{u}$ is convex, $\bar{u} \geqslant u$, and it follows by \eqref{eq:baru} that $\bar{u}=u$ in a neighborhood of $\left\{x_1, \ldots, x_N\right\} \cup \partial \Omega$. In particular, $\left.\bar{u}\right|_{\partial \Omega}=0$ and $\partial \bar{u}\left(x_i\right)=\partial u\left(x_i\right)$, which implies that $u\log eqq\bar u\in \cS[\nu]$. This is a contradiction. 
+		
+		{\em Step 5}: $\mu_u=\nu$. By {\em Step 3} and {\em Step 4}, we know that $\mu_{u}=\sum_{i=1}^N \beta_i \delta_{x_i}$ with $\beta_i\geq \alpha_i$. Assume that $\beta_1=\mu_u(x_1)>\nu(x_1)=\alpha_1$. 
+\end{proof}

@@ -1,0 +1,844 @@
+\chapter{Construction of Diffusion processes II}
+
+
+\section{Motivation} 
+Kolmogorov's approach to constructing diffusion processes is purely analytical. A natural question that arises is whether it is possible to provide a "microscopic" construction at the level of trajectories. This was one of the original motivations for Itô's introduction of stochastic integrals and stochastic differential equations.
+
+Assume \( d = 1 \). Intutively, the diffusion process can be constructed as follows: Let \( \Delta t \) be a fixed, small time interval, and consider the following approximation process: 
+\begin{align*}
+    X_t=&X_0+b(X_0)t+\sqrt{2a(X_0)}(W_t-W_0),&\quad t\in [0, \Delta t); \\
+    X_t=&X_{\Delta t}+b(X_{\Delta t})(t-\Delta t)+\sqrt{2a(X_{\Delta t})}(W_t-W_{\Delta t}),&\quad t\in [\Delta t, 2 \Delta t); \\
+    &\vdots\\
+    X_t=&X_{k\Delta t}+b(X_{k\Delta t})(t-k\Delta t)+\sqrt{2a(X_{k\Delta t})}(W_t-W_{k \Delta t}),&\quad t\in [k\Delta t, (k+1)\Delta t). 
+\end{align*}
+
+If, as \(\Delta t \to 0\), the process \(X_t\) (which depends on \(\Delta t\)) converges (in some sense) to a stochastic process, then formally, the limiting process (still denoted as \(X_t\)) satisfies:
+
+\begin{equation}\label{eq:sde0}
+    X_t = X_0 + \int_0^t b(X_t) \d t + \underbrace{\int_0^t \sqrt{2a(X_t)} \d W_t}_{?}.
+\end{equation}
+One issue is how to understand the last term in the above equation. 
+
+\begin{exercise}
+    Prove that 
+    \[
+    \bP \l( \limsup_{t\to 0}\frac{|W_t|}{t^{1/2}}=\infty \r)=1. 
+    \]
+\end{exercise}
+
+\medskip
+
+When \(h_t\) is \(\beta\)-Hölder continuous and \(x_t\) is \(\alpha\)-Hölder continuous, if \(\alpha + \beta > 1\), then we can prove that the following Riemann sum converges:
+\[
+    \sum_{k=0}^{n-1} h_k(x_{k+1} - x_k).
+\]
+However, when \(\alpha + \beta < 1\), in general, we cannot mathematically prove the convergence of the above Riemann sum. 
+
+
+Note that the paths of Brownian motion are only \(\alpha\)-Hölder continuous for \(\alpha < 1/2\). It is expected that the Hölder exponent of the paths of \(X\) will not exceed \(1/2\) either. Therefore, unless we uncover more information about the paths of Brownian motion, we cannot define the second term on the right-hand side of \eqref{eq:sde0} pathwise. 
+
+Itô considered a more general problem: Suppose \(H\) is an adapted process, how can we define the following integral
+\[
+    \int_0^1 H_s \d W_s.
+\]
+Assume \(F_t = \sigma(W_s : s \in [0,t])\), and \(H\) is a bounded simple process with respect to \(F_t\), i.e., \(H_t = H_0 I_{\{0\}}(t) + \sum_{i=0}^{n-1} H_{t_i}I_{(t_i,t_{i+1}]}(t)\), where \(0 = t_0 < t_1 < \cdots < t_n = 1\), and \(H_{t_i} \in F_{t_i}\). Naturally, we can define \(\int_0^t H_s \d W_s = \sum_{i=0}^{n-1} H_{t_i}(W_{t\wedge t_{i+1}} - W_{t\wedge t_i})\). Itô observed that \(t \mapsto \int_0^t H_s \d W_s\) is a martingale and satisfies the isometry property
+
+\[\mathbf{E}\left(\int_0^t H_s \d W_s\right)^2 = \mathbf{E}\int_0^t H_s^2 \d s.\]
+If \(H\) is a general adapted process, and there exists a sequence of simple processes \((H^n)_{n \in \mathbb{N}}\) such that
+\[\mathbf{E}\left(\int_0^1 (H_s^n - H_s)^2 \d s\right) \to 0, \quad n \to \infty,\]
+then by Doob's inequality,
+\[\mathbf{E}\left(\sup_{t \in [0,1]} \left| \int_0^t H_s^n \d W_s - \int_0^t H_s^{m} \d W_s \right|^2 \right) \leq C \mathbf{E}\int_0^1 (H_s^n - H_s^{m})^2 \d s \to 0.\]
+Thus, \(\int_0^t H_s^n \d W_s\) converges to a continuous martingale, which we define as \(\int_0^t H_s \d W_s\). In fact, later we can argue that we can define the integral of a very general adapted process \(H\) with respect to Brownian motion \(W\). Once the integral with respect to Brownian motion is defined, under very general conditions, we can solve equation \eqref{eq:sde0}, providing a probabilistic construction of diffusion processes.
+
+Essentially, Itô utilized the adaptability of the integrand and the martingale property of Brownian motion. Thus, stochastic analysis injected new vitality into the development of martingale theory. Kunita and Watanabe extended the theory of stochastic integrals from the case of Brownian motion to general square-integrable martingales using the Doob-Meyer decomposition. The Strasbourg school in France further generalized it to the most general case of semimartingales and established a general theory of stochastic processes. 
+
+\medskip
+
+Basic results in stochastic analysis will be used in this note are presented in the next section.
+
+\section{Basic Stochastic Analysis}
+
+Let $(\Omega, \cF, \bP)$ be a standard probability space. Let $\mathcal{F}_n\ (n\in \mN)$ be an increasing sequence of $\sigma$-fields. A sequence of random variables $X_n$ is {\bf adapted} to $\mathcal{F}_n$ if for each $n, X_n$ is $\mathcal{F}_n$ measurable. Similarly a collection of random variables $X_t\ (t\in \mR_+)$ is adapted to $\mathcal{F}_t$ if each $X_t$ is $\mathcal{F}_t$ measurable. We say the filtration $\mathcal{F}_t$ satisfies the usual conditions if $\mathcal{F}_t$ is {\bf right continuous} (i.e., $\mathcal{F}_t=\mathcal{F}_{t+}$ for all $t$, where $\mathcal{F}_{t+}=\cap_{\varepsilon>0} \mathcal{F}_{t+\varepsilon}$ ) and each $\mathcal{F}_t$ is {\bf complete} (i.e., $\mathcal{F}_t$ contains all $\mathbf{P}$-null sets). 
+	 
+We say $\tau: \Omega\to \mN \ (\mR_+) \cup\{\infty\}$ is a {\bf stopping time} if $\tau$ satisfying $\{\tau\leq n\}\in \cF_n \ (\{\tau\leq t\}\in \cF_t)$, for each $n\in \mN \ (t\in \mR_+)$.  
+	 
+$\mathcal{F}_\tau$ is a $\sigma$-field containing all measurable sets $A\in cF$ such that $A \cap \{\tau \leq n\} \in \mathcal{F}_n\ (A \cap \{\tau \leq t\} \in\cF_t)$ for all $n\in \mN\ (t \in \mR_+)$. 
+		
+	\begin{definition}
+		Let $X_t$ be a real-valued $\cF_t$-adapted processes. If for each $t$ and $s<t$, $X_t$ is integrable and $\bE(X_t | \cF_s) \geq (\leq) X_s$ a.s., then we call $X_t$ is a {\bf submartingale (supermartingale)}. We say $X_t$ is a {\bf martingale} if it is both a submartingale and a supermartingale. 
+	\end{definition}
+	
+	\begin{example}
+		Let $\xi_1, \xi_2, \cdots$ be a sequence of i.i.d random variable. Set $X_n:=\sum_{i=0}^n \xi_i$ and $\cF_n:=\sigma(\xi_0,\cdots \xi_n)$. 
+	\end{example}
+	
+ Below we recall the results about discrete time martingales and submartingales that will be used. The proof of the subsequent statements can be found in Durrett’s book \cite{durrett2019probability}, and in many other books dealing with discrete time martingales.
+	\begin{theorem}[Doob]\label{thm:Doob-D}
+ If $X_n\in \cF_n$  is a submartingale then it can be uniquely decomposed as $X_n=M_n+A_n$, where $M_n\in \cF_n$ is martingale, $A_n=0$, $A_{n+1}\geq A_n$ almost surely and $A_n$ is $\cF_{n-1}$-measurable.
+	\end{theorem}
+	The following theorem lies at the basis of all other results for
+	martingales.
+	\begin{theorem}[Doob's Optional stopping theorem]\label{thm:Doob}
+		Assume that $\sigma$ and $\tau$ are two bounded stopping time, and $X_t$ is a submartingale, then $\bE (X_{\tau}|\cF_{\sigma}) \geq  X_{\sigma\wedge \tau}$.  
+	\end{theorem}
+	
+	\begin{lemma}
+		Let  $X_n$ be a submartingale, and $\tau$ be a bounded stopping time and $\tau\leq K$ (constant). Then 
+		\begin{enumerate}[(i)]
+			\item $\bE(X_{K}|\cF_\tau)\geq X_\tau$; 
+			\item $X_{\tau\wedge n}$ is a $\cF_n$-submartingale. 
+		\end{enumerate}
+	\end{lemma}
+	\begin{proof}
+		(i). for each $A\in \cF_\tau$, we will show that $\bE(X_K; A)\geq \bE (X_\tau; A)$. In fact, 
+		\begin{align*}
+			\bE (X_\tau; A)=\sum_{k=0}^K \bE (X_{k}; \underbrace{A\cap \{\tau=k\}}_{\in \cF_k})\leq \sum_{k=0}^K \bE (X_{K}; A\cap \{\tau=k\}) = \bE (X_K; A). 
+		\end{align*}
+		(ii). For each $A\in \cF_{n-1}$, 
+		\begin{align*}
+			\bE(X_{\tau\wedge n}; A)=&\bE(X_{\tau\wedge n}; A\cap\{\tau\leq n-1\})+\bE(X_{\tau\wedge n}; A\cap\{\tau> n-1\})\\
+			=&\bE(X_{\tau}; A\cap\{\tau \leq n-1\})+\bE(X_{n}; \underbrace{A\cap\{\tau> n-1\}}_{\in \cF_{n-1}})\\
+			\geq& \bE(X_{\tau}; A\cap\{\tau\leq n-1\})+\bE(X_{n-1}; A\cap\{\tau> n-1\})\\
+			=& \bE(X_{\tau\wedge (n-1)}; A).
+		\end{align*}
+	\end{proof}
+	
+	\begin{proof}[Proof of Theorem \ref{thm:Doob}]
+		By the above lemma, we have $\bE (X_{\tau}|\cF_{\sigma})=\bE (X_{K\wedge \tau}|\cF_{\sigma})\geq X_{\sigma\wedge \tau}$.  
+	\end{proof}
+	\begin{theorem}[Doob's inequality]\label{Thm-Doob-Max}
+		Let $M_n$ be a martingale. If $M_n^*:=\sup_{k\leq n} |M_k|$, then 
+		$$
+		\bP(M^*_n>\lambda) \leq \lambda^{-1} \bE (|M_n|;M_n^*>\lambda). 
+		$$
+	\end{theorem}
+	\begin{proof}
+		Let $\tau=\inf\{k: |M_k|>\lambda\}$.  Noting that $\{M^*_n>\lambda\}\}=\{\tau \leq n\}$, we have 
+		\begin{align*}
+			\begin{aligned}
+				\lambda \bP (M^*_n>\lambda)=&\lambda \bP(\tau\leq n)\leq \bE(|M_\tau|;\tau\leq n)\\
+				\leq &\bE (|M_{\tau 
+					\wedge n}|; \tau\leq n) \leq  \bE(|M_n|; M_n^*>\lambda). 
+			\end{aligned}
+		\end{align*}
+	\end{proof}
+	
+	\begin{corollary}\label{Cor-Lp}
+		Let $M_n$ be a martingale and $T$ be a stopping time. For each $p>1$, $\bE |M_T^*|^p \leq C_p \bE |M_T|^p$. 
+	\end{corollary}
+	
+	 Let $a\leq b$. Set $\sigma_1=\inf\{n\geq 0: X_n\leq a\}$, $\tau_1= \inf\{n>\sigma_1: X_n\geq b\}$, $\sigma_2=\inf\{n>\tau_1: M_n\leq a\}$, $\tau_2= \inf\{n>\sigma_2: X_n\geq b\}$, $\dots$, and 
+	$U_N:= \max\{k: \tau_k\leq N\}$. 
+	\begin{lemma}[Upcrossing inequality]
+		Suppose that $X_N$ is a submartingale, then 
+		\[
+		(b-a)\bE U_N(a,b) \leq \bE (X_{N}-a)^+. 
+		\]
+	\end{lemma}
+	\begin{proof}
+		We only prove the case that $a=0$ and $X_k\geq 0$. 
+		\[
+		X_N=\underbrace{X_{S_1\wedge N}}_{\geq 0}+\underbrace{\sum_{i=1}^\infty X_{T_i\wedge N}-X_{S_i\wedge N}}_{\geq bU_N(0,b)}+ \sum_{i=1}^\infty \underbrace{X_{S_{i+1}\wedge N}-X_{T_i\wedge N}}_{\mbox{positive expectation}}. 
+		\] 
+	\end{proof}
+	Upcrossing inequality leads to 
+	\begin{theorem}
+		If $X_n$ is a submartingale such that $\sup_{n} \bE X_n^{+}<\infty$, then $X_n$ converges a.s. as $n\to \infty$. 
+	\end{theorem}
+	\begin{corollary}\label{Cor-convergence}
+		Suppose that $X\in L^1(\bP, \Omega)$, $\cF_n\uparrow \cF_\infty$, then 
+		\[
+		\lim_{n\to\infty}\bE (X|\cF_n) = \bE (X|\cF_\infty),\quad a.s. \mbox{ and in } L^1. 
+		\]
+	\end{corollary}
+
+\begin{example}
+    For an example of a discrete martingale, let $\Omega=[0,1], \mathbf{P}$ Lebesgue measure, and $f$ an integrable function on $[0,1]$. Let $\mathcal{F}_n$ be the $\sigma$-field generated by the sets 
+    \[
+        \left\{\left[k / 2^n,(k+1) / 2^n\right), k=0,1, \ldots, 2^n-1\right\}. 
+    \]
+    Let $f_n=\mathbf{E}\left[f \mid \mathcal{F}_n\right]$. If $I$ is an interval in $\mathcal{F}_n,$ shows that
+    $$
+      f_n(x)=\frac{1}{|I|} \int_I f(y) d y \quad \text { if } x \in I.
+    $$
+    $f_n$ is a particular example of what is known as a dyadic martingale. Of course, $[0,1]$ could be replaced by any interval as long as we normalize so that the total mass of the interval is $1$. We could also divide cubes in $\mathbb{R}^d$ into $2^d$ subcubes at each step and define $f_n$ analogously. Such martingales are called dyadic martingales. In fact, we could replace Lebesgue measure by any finite measure $\mu$, and instead of decomposing into equal subcubes, we could use any nested partition of sets we like, provided none of these sets had $\mu$ measure $0$.
+\end{example}
+    
+{\bf {\em All of the above results also hold for all right continuous martingale (submartingales) (see \cite{Huang})}}. 
+	
+	\begin{theorem}
+	Assume $X$ is a continuous submartingale, then there exists a unique martingale $M$ and a unique continuous increasing adapted process $A$ such that 
+	\[
+	A_0=0, \quad X_t= M_t+A_t. 
+	\]
+	\end{theorem}
+	If $M$ is a continuous square integrable martingale, then $M^2$ is a submartingale. Thus, there exists a continuous increasing process, denoted by $\langle M\rangle$, the {\bf quadratic variation} of $M$, such that $M^2-\langle M\rangle$ is a martingale. Particularly, $\bE M_t^2 - \bE M_0^2 = \bE \langle M \rangle_t$. 
+	 
+	
+\subsection{Stochastic Integral}
+	
+From now on, unless stated otherwise, our processes have continuous paths. 
+	
+	\begin{lemma}
+		Let $M_t$ be a square integrable martingale (that is, $M_t \in L^2$ for every $t \geq 0$ ). Let $0 \leq s<t$ and let $s=t_0<t_1<\cdots<t_n=t$ be a division of the interval $[s, t]$. Then,
+		$$
+		\bE\left[\sum_{i=1}^n\left(M_{t_i}-M_{t_{i-1}}\right)^2 \mid \mathcal{F}_s\right]=\bE\left[M_t^2-M_s^2 \mid \mathcal{F}_s\right]=\bE\left[\left(M_t-M_s\right)^2 \mid \mathcal{F}_s\right] .
+		$$
+	\end{lemma}
+	\begin{proof}
+		For every $i=1, \ldots, n$,
+		$$
+		\begin{aligned}
+			\bE \left[ \left(M_{t_i}-M_{t_{i-1}}\right)^2 \mid \mathcal{F}_s\right] & =\bE\left[\bE \left[\left(M_{t_i}-M_{t_{i-1}}\right)^2 \mid \mathcal{F}_{t_{i-1}}\right] \mid \mathcal{F}_s\right] \\
+			& =\bE\left[\bE\left[M_{t_i}^2 \mid \mathcal{F}_{t_{i-1}}\right]-2 M_{t_{i-1}} \bE\left[M_{t_i} \mid \mathcal{F}_{t_{i-1}}\right]+M_{t_{i-1}}^2 \mid \mathcal{F}_s\right] \\
+			& =\bE\left[\bE\left[M_{t_i}^2 \mid \mathcal{F}_{t_{i-1}}\right]-M_{t_{i-1}}^2 \mid \mathcal{F}_s\right] \\
+			& =\bE\left[M_{t_i}^2-M_{t_{i-1}}^2 \mid \mathcal{F}_s\right]
+		\end{aligned}
+		$$
+		and the desired result follows by summing over $i$. 
+	\end{proof}
+	
+	We say that $M_t$ if a {\bf local martingale} if there exist stopping times $\tau_n\uparrow \infty$ such that $X_{\tau_n\wedge t}$ is a martingale for each $n\in \mN$.
+	\begin{theorem}\label{Thm:quadratic}
+		Let $M_t$ be a continuous local martingale. There exists an increasing process denoted by $\langle M \rangle_t$, which is unique up to indistinguishability, such that $M_t^2-\langle M\rangle_t$ is a continuous local martingale. Furthermore, for every fixed $t>0$, if $\pi^n=\{(t_0^n,\cdots, t_{k_n}^n): 0=t_0^n<t_1^n<\cdots<t_{k_n}^n=t\}$ is an increasing sequence of subdivisions of $[0, t]$ with mesh going to 0 , then we have
+		$$
+		\langle  M\rangle_t=\lim _{n \rightarrow \infty} \sum_{i=1}^{k_n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right)^2
+		$$
+		in probability. The process $\langle M\rangle_t$ is called the quadratic variation of $M_t $. 
+	\end{theorem}
+
+\Cref{Thm:quadratic} is a consequence of the following lemma. 
+	\begin{lemma}
+		Let $M_t$ be a continuous bounded martingale.  Let $\pi^n=\{(t_0^n,\cdots, t_{k_n}^n): 0=t_0^n<t_1^n<\cdots<t_{k_n}^n=T\}$ be an increasing sequence of subdivisions of $[0, T]$ with mesh going to 0 , then for each $n$, 
+		$$
+		N^n_t:= \sum_{i=1}^{k_n}M_{t_{i-1}}(M_{t_i\wedge t}-M_{t_{i-1}\wedge t})
+		$$ 
+		is a martingale, and $N^n_t$ convergent uniformly on compacts, with probability one to some square integrable martingale $N_t$. 
+	\end{lemma}
+	\begin{proof}
+		It is easy to verify that $N_t^n$ is a martingale. 
+		Let us fix $n \leq m$ and evaluate the product $\bE\left(N_T^n N_T^m\right)$. This product is equal to
+		$$
+		\sum_{i=1}^{k_n} \sum_{j=1}^{k_m} \bE\left[M_{t_{i-1}^n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right) M_{t_{j-1}^m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)\right] .
+		$$
+		
+		In this double sum, the only terms that may be nonzero are those corresponding to indices $i$ and $j$ such that the interval $\left(t_{j-1}^m, t_j^m\right]$ is contained in $\left(t_{i-1}^n, t_i^n\right]$. Indeed, suppose that $t_i^n \leq t_{j-1}^m$ (the symmetric case $t_j^m \leq t_{i-1}^n$ is treated in an analogous way).
+		
+		Then, conditioning on the $\sigma$-field $\mathscr{F}_{t_{j-1}^m}$, we have
+		$$
+		\begin{aligned}
+			& \bE\left[M_{t_{i-1}^n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right) M_{t_{j-1}^m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)\right] \\
+		    =& \bE\left[M_{t_{i-1}^n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right) M_{t_{j-1}^m} \bE\left[M_{t_j^m}-M_{t_{j-1}^m} \mid \mathscr{F}_{t_{j-1}^m}\right]\right]=0 .
+		\end{aligned}
+		$$
+		
+		For every $j=1, \ldots, k_m$, write $i_{n, m}(j)$ for the unique index $i$ such that $\left(t_{j-1}^m, t_j^m\right] \subset$ $\left(t_{i-1}^n, t_i^n\right]$. It follows from the previous considerations that
+		$$
+		\bE\left[N_T^n N_T^m\right]=\sum_{1 \leq j \leq k_m, i=i_{n, m}(j)} \bE\left[M_{t_{i-1}^n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right) M_{t_{j-1}^m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)\right] .
+		$$
+		In each term $\bE\left[M_{t_{i-1}^n}\left(M_{t_i^n}-M_{t_{i-1}^n}\right) M_{t_{j-1}^m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)\right]$, we can now decompose
+		$$
+		M_{t_i^n}-M_{t_{i-1}^n}=\sum_{k: i_{n, m}(k)=i}\left(M_{t_k^m}-M_{t_{k-1}^m}\right)
+		$$
+		and we observe that, if $k$ is such that $i_{n, m}(k)=i$ but $k \neq j$,
+		$$
+	    \bE\left[M_{t_{i-1}^n}\left(M_{t_k^m}-M_{t_{k-1}^m}\right) M_{t_{j-1}^m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)\right]=0
+		$$
+		(condition on $\mathscr{F}_{t_{k-1}^m}$ if $k>j$ and on $\mathscr{F}_{t_{j-1}^m}$ if $k<j$ ). The only case that remains is $k=j$, and we have thus obtained
+		$$
+		\bE\left[N_T^n N_T^m\right]=\sum_{1 \leq j \leq k_m, i=i_{n, m}(j)} \bE\left[M_{t_{i-1}^n} M_{t_{j-1}^m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] .
+		$$
+		
+		As a special case of this relation, we have
+		$$
+		\bE\left[\left(N_T^m\right)^2\right]=\sum_{1 \leq j \leq k_m} \bE\left[M_{t_{j-1}^m}^2\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] .
+		$$
+		Furthermore,
+		\begin{equation*}
+			\begin{aligned}
+				\bE\left[\left(N_T^n\right)^2\right] & =\sum_{1 \leq i \leq n} \bE\left[M_{t_{i-1}^n}^2\left(M_{t_i^n}-M_{t_{i-1}^n}\right)^2\right] \\
+				& =\sum_{1 \leq i \leq n} \bE\left[M_{t_{i-1}^n}^2 \bE\left[\left(M_{t_i^n}-M_{t_{i-1}^n}\right)^2 \mid \mathscr{F}_{i_{i-1}^n}^n\right]\right] \\
+				& =\sum_{1 \leq i \leq k_n} \bE\left[M_{t_{i-1}^n}^2 \sum_{j: i_{n, m}(j)=i} \bE\left[\left(M_{t_j^m}-M_{t_{j-1}^m}^m\right)^2 \mid \mathscr{F}_{t_{i-1}^n}\right]\right] \\
+				& =\sum_{1 \leq j \leq k_m, i=i_{n, m}(j)} \bE\left[M_{t_{i-1}^n}^2\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right],
+			\end{aligned}
+		\end{equation*}
+		
+		If we combine the last three displays, we get
+		$$
+		\bE\left[\left(N_T^n-N_T^m\right)^2\right]=\bE\left[\sum_{1 \leq j \leq k_m, i=i_{n, m}(j)}\left(M_{t_{i-1}^n}-M_{t_{j-1}^m}\right)^2\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] .
+		$$
+		
+		Using the Cauchy-Schwarz inequality, we then have
+		$$
+		\begin{aligned}
+			\bE\left[\left(N_T^n-N_T^m\right)^2\right] \leq & \bE\left[\sup _{1 \leq j \leq k_m, i=i_{n, m}(j)}\left(M_{t_{i-1}^n}-M_{t_{j-1}^m}\right)^4\right]^{1 / 2} \\
+			& \times \bE\left[\left(\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}^m\right)^2\right)^2\right]^{1 / 2} .
+		\end{aligned}
+		$$
+		
+		By the continuity of sample paths (together with the fact that the mesh of our subdivisions tends to 0 ) and dominated convergence, we have
+		$$
+		\lim _{n, m \rightarrow \infty, n \leq m} \bE\left[\sup _{1 \leq j \leq k_m, i=i_{n, m}(j)}\left(M_{t_{i-1}^n}-M_{t_{j-1}^m}\right)^4\right]=0 .
+		$$
+		
+		To complete the proof of the lemma, it is then enough to prove the existence of a finite constant $C$ such that, for every $m$,
+		$$
+		\bE\left[\left(\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right)^2\right] \leq C .
+		$$
+		
+		Let $A$ be a constant such that $\left|M_t\right| \leq A$ for every $t \geq 0$. Expanding the square and using Proposition 3.14 twice, we have
+		$$
+		\begin{aligned}
+			& \bE\left[\left(\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right)^2\right] \\
+			& =\bE\left[\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^4\right]+2 \bE\left[\sum_{1 \leq j<k \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\left(M_{t_k^m}-M_{t_{k-1}^m}\right)^2\right] \\
+			& \leq 4 A^2 \bE\left[\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] \\
+			& \quad+2 \sum_{j=1}^{k_m-1} \bE\left[\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2 \bE\left[\sum_{k=j+1}^{k_m}\left(M_{t_k^m}-M_{t_{k-1}^m}\right)^2 \mid \mathscr{F}_{t_j^m}\right]\right] \\
+			& =4 A^2 \bE\left[\sum_{1 \leq j \leq k_m}\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2\right] \\
+			& \quad+2 \sum_{j=1}^{k_m-1} \bE\left[\left(M_{t_j^m}-M_{t_{j-1}^m}\right)^2 \bE\left[\left(M_T-M_{t_j^m}\right)^2 \mid \mathscr{F}_{t_j^m}\right]\right]
+		\end{aligned}
+		$$
+	\end{proof}
+		
+	Let $M_t$ be a square integrable martingale, $0=t_0\leq t_1\leq \cdots \leq t_{n}=T$ and $H_s(\omega) = \sum_{i=0}^{n-1} H_{t_i}(\omega)\1_{(t_{i},t_{i+1}]}(s)$, where $F_i$ is bounded and $\cF_{t_i}$-measurable. Define 
+	\[
+	\int_0^t H_s \d M_s:= \sum_{i=0}^{n-1} H_{t_i} (M_{t\wedge t_{i+1}}-M_{t\wedge t_{i}}). 
+	\]
+	Then 
+	\begin{lemma}
+		$t\mapsto \int_0^t H_s \d M_s$ is a $L^2$-martingale. Moreover, we have the following It\^o isometry:  
+		\begin{equation}
+			\bE \l(\int_0^t H_s \d M_s \r)^2 = \bE \int_0^t H_s^2 \d \<M\>_s. 
+		\end{equation}
+	\end{lemma}
+	\begin{proof}
+		\begin{align*}
+			\bE \l(\int_0^1 H_s \d M_s\r)^2=& \bE \sum_{i} H_{t_i}^2 (M_{t_{i+1}}-M_{t_i})^2 + 2\bE \sum_{i<j} H_{t_i}H_{t_j}(M_{t_{i+1}}-M_{t_i})(M_{t_{j+1}}-M_{t_j}) \\
+			=&: I_1+ I_2. 
+		\end{align*}
+		\begin{align*}
+			\begin{aligned}
+				I_1=&\sum_{i} \bE \bE \l(H_{t_i}^2 (M_{t_{i+1}}-M_{t_i})^2\big|\cF_{t_i}\r)= \sum_{i} \bE \l[ H_{t_i}^2 \bE\l( (M_{t_{i+1}}-M_{t_i})^2\big|\cF_{t_i}\r) \r] \\
+				=&\sum_{i}  \bE H_{t_i}^2 (\<M\>_{t_{i+1}}-\<M\>_{t_{i}})= \bE  \int_0^1 H^2_s \d \<M\>_s ,
+			\end{aligned}
+		\end{align*}
+		\begin{align*}
+			I_2= 2\sum_{i<j} \bE \l[  H_{t_i}H_{t_j}(M_{t_{i+1}}-M_{t_i}) \bE \l( (M_{t_{j+1}}-M_{t_j}) \big|\cF_{t_j}\r) \r]=0. 
+		\end{align*}
+		Therefore, 
+		\begin{equation*}
+			\bE \l(\int_0^1 H_s \d M_s\r)^2=  \bE  \int_0^1 H^2_s \d \<M\>_s. 
+		\end{equation*}
+		$t\mapsto \int_0^t H_s \d W_s=  \sum_{i=0}^{n-1} H_{t_i}(W_{t\wedge t_{i+1}}-W_{t\wedge t_i})$ is a continuous martingale. 
+	\end{proof}
+	
+	We then can use this to extend the above construction to more general $H_s$ satisfying $\int_0^t H_s^2 \d \langle M \rangle_s<\infty$ by taking limits in $L^2$. For general continuous local martingale, we can employ standard localization argument to define the above integral. For $X_t=M_t+A_t$, a semimartingale, $\int_0^t H_s \d X_s$ is given by
+	$$
+	\int_0^t H_s \d X_s=\int_0^t H_s \d M_s+\int_0^t H_s \d A_s, 
+	$$
+	where the first integral on the right is a stochastic integral and the second integral on the right is a Riemann-Stieltjes integral.
+	
+\begin{proposition}
+    \begin{equation*}
+        \l\<\int_0^\cdot H_s \d M_s\r\>_t= \int_0^t H_s^2 \d \<M\>_s. 
+    \end{equation*}
+    Let $N_t=\int_0^t H_s\d M_s$. Then 
+    \begin{equation*}
+    \int_0^t K_s\d N_s=\int_0^t K_s H_s \d M_s. 
+    \end{equation*}
+\end{proposition}
+	
+\section{It\^o's formula and its applications}
+We list some important results in stochastic calculus. 
+	\begin{theorem}[It\^o's formula]
+		If each $X_t^i$ (for each $i\in 1,\cdots d\}$) is a continuous semimartingale and $f\in C^2(\mR^d)$, then \begin{equation}\label{eq:Ito}
+			\begin{aligned}
+				&f\left(X_t\right)  -f\left(X_0\right) \\
+				= & \int_0^t \sum_{i=1}^d \partial_i f\left(X_s\right) \d X_s^i+\frac{1}{2} \int_0^t \sum_{i, j=1}^d \partial_{i j} f\left(X_s\right) \d\left\langle X^i, X^j\right\rangle_s
+			\end{aligned}
+		\end{equation}
+	\end{theorem}
+	(see \cite[Theorem 13.5]{Huang}). 
+
+ It is often useful to use the language of Stratonovitch's integration to study stochastic differential equations because the Itô’s formula takes a much nicer form. If $M_t$ is an $\cF_t$-adapted real valued local martingale and if $H_t$ is an $\cF_t$-adapted continuous semimartingale satisfying $\bP\left(\int_0^TH_s\d \<M\>_s<\infty\right)=1$, then by definition the Stratonovitch integral of  $H_t$ with respect to $M_t$ is defined as
+\[
+    \int_0^T H_t \circ \d  M_t =\int_0^T H_t\d M_t+\frac{1}{2} \langle H, M \rangle_T. 
+\]
+By using Stratonovitch integral instead of Itô’s, the Itô formula reduces to the classical change of variable formula.
+
+\begin{theorem}\label{thm:Stra}
+    Let  $M_t$ be a $d$–dimensional continuous semimartingale. Let now $f$ be a $C^2$ function. We have
+    \[
+    f(M_t)  =f(M_0)+\int_0^t \partial_i f (X_s) \circ \d M^i_s, \quad t \geq 0.
+    \]
+\end{theorem}
+	
+	\begin{theorem}[{Burkholder-Davis-Gundy inequalities}]
+		If $M_t$ is a continuous martingale with $M_0=0$, and $\tau$ is a stopping time, then 
+		\begin{equation}\label{eq:bdg}
+			\bE \sup_{t\in[0,\tau]} |M_t|^p \asymp_p \bE \langle M\rangle_\tau^{p/2}, \quad p\in (0,\infty) 
+		\end{equation}
+	\end{theorem}
+	\begin{proof}
+		{\em Step 1}: for any $p\geq 2$, by It\^o's formula 
+					\[
+					|M_\tau|^p = p \int_0^\tau \mathrm{sgn}(M_t)|M_t|^{p-2} M_t \d M_t + \frac{p(p-1)}{2}\int_0^T |M_t|^{p-2} \d \langle M \rangle_t ;
+					\]
+			By Doob's inequality and H\"older's inequality, 
+			\[
+					\begin{aligned}
+						\bE (M_\tau^*)^p\lesssim_p& \bE |M_\tau|^p  \lesssim_p \bE ( (M_\tau^*)^{p-2} \langle M \rangle_\tau)\\
+						\leq& (\bE(M_\tau^*)^p)^{1-\frac{2}{p}} (\bE \langle M \rangle_\tau^{\frac{p}{2}} )^{\frac{2}{p}}; 
+					\end{aligned}
+			\]
+			{\em Step 2:} using Lenglart's domination inequality, 
+			 we can get the proof for the case $p\in (0,2)$. 
+			 
+			 We proceed now to the proof of the left hand side inequality. We have,
+			 $$
+			     M_t^2 =\langle M \rangle_t +2\int_0^t M_s dM_s.
+			 $$
+			 Therefore, we get
+			 $$
+			     \mathbf{E} \left( \langle M\rangle_T^{\frac{p}{2} } \right) \lesssim   \mathbf{E} (M_T^*)^p +  \mathbf{E}\left(\sup_{0 \le t \le T}\ \left| \int_0^t M_s dM_s\right|^{p/2} \right) .
+			 $$
+			 By using the previous argument, we now have
+			 \begin{equation*}
+			 	\begin{aligned}
+			 		&2^{\frac{p}{2}}\mathbf{E}\left(\sup_{0 \le t \le T}\ \left| \int_0^t M_s dM_s\right|^{p/2} \right)  \le C \mathbf{E}\left( \left( \int_0^T M^2_s d\langle M\rangle_s\right)^{p/4} \right)\\
+			 		\leq  & C \mathbf{E}\left((M_T^*)^{p/2} \langle M \rangle_T^{p/4} \right)
+			 		\leq C  \left( \mathbf{E} (M_T^*)^{p}\right)^{1/2}  \left( \mathbf{E}  \langle M \rangle_T^{p/2} \right)^{1/2}\\
+			 		\leq & \eps'  \mathbf{E} (M_T^*)^{p} + C_{\eps'} \mathbf{E}  \langle M \rangle_T^{p/2} \leq \eps .
+			 	\end{aligned}
+			 \end{equation*}			 
+			 As a conclusion, we obtained that $d$
+	\end{proof}
+	
+	\begin{proposition}[Lenglart]
+		 Let $X_t$ be a positive adapted right-continuous process and $A_t$ be an increasing process. Assume that for every bounded stopping time $\tau$, $\mathbf{E} (X_\tau \mid \mathcal{F}_0 ) \leq \mathbf{E} (A_\tau \mid \mathcal{F}_0 )$. Then, for every $\kappa \in (0,1)$, 
+		 $$
+		     \mathbf{E} \left(X_T^* \right)^\kappa  \leq \frac{2-\kappa}{1-\kappa} \mathbf{E} \left( A_T^\kappa\right).
+		 $$
+	\end{proposition}
+	
+	We shall use this lemma to prove the following
+
+    
+	Another approach to proving \eqref{eq:bdg} is utilizing "good-$\lambda$" inequality (cf. \cite{revuz2013continuous}).   
+	\begin{theorem}[L\'evy's theorem]\label{thm:levy}
+		If $X_t$ is a $d$-dimensional $(\cF_t)_{t\geq 0}$-adapted process, each of whose coordinates is a continuous local martingale, and $\langle X^i, X^j \rangle_t=\delta_{ij} t$, then $X_t$ is a $d$-dimensional $(\cF_t)_{t\geq 0}$-Brownian motion.
+	\end{theorem}
+	\begin{proof}
+		Let $\xi\in \mR^d$. Then $\xi\cdot X_t$ is a continuous local martingale with quadratic variation $\<\xi\cdot X\>_t= |\xi|^2 t$. By It\^o's formula, $\exp(i\xi\cdot X_t+\frac{1}{2}|\xi|^2 t)$ is a continuous local martingale. This complex continuous local martingale is bounded on every finite interval and is therefore a (true) martingale, in the sense that its real and imaginary parts are
+		both martingales. Hence, for every $s<t$, 
+		$$
+		    \bE\left[\left.\exp \left(\mathrm{i} \xi \cdot X_t+\frac{1}{2}|\xi|^2 t\right) \right\rvert\, {\cF}_s\right]=\exp \left(\mathrm{i} \xi \cdot X_s+\frac{1}{2}|\xi|^2 s\right)
+		$$
+		Thus, 
+		$$
+		    \bE\left[\left.\exp \left(\mathrm{i} \xi \cdot (X_t-X_s)\right) \right\rvert\, {\cF}_s\right]=\exp \left(\frac{1}{2}|\xi|^2 (t-s)\right). 
+		$$
+		This implies $X_t-X_s$ is independent with $\cF_s$ and $X_t-X_s\sim \cN(0, t-s)$. 
+		
+		Finally, $X$ is adapted and has independent
+		increments with respect to the filtration $(\cF_t)_{t\geq 0}$ so that $X$ is a $s$-dimensional $(\cF_t)_{t\geq 0}$-Brownian motion. 
+	\end{proof}
+	
+	Let $M_t$ be a continuous local martingale with $M_0=0$. Set $\sE(M)_t:= \exp(M_t-\langle M \rangle_t/2)$. 
+	\begin{proposition}
+	    $\sE(M)_t$ is a continuous local martingale, and is the unique solution to 
+		$$
+		    \d X_t= X_t \d M_t, \quad X_0=1. 
+		$$
+	\end{proposition}
+		
+	\begin{theorem}[Girsanov theorem]
+		Let $X_t$ and $M_t$ be two continuous local martingales under $\mP$ with $M_0=0 ~  \mP$-a.s..  Assume that $\sE(M)_t$ is a martingale, we define a new probability measure $\mQ$ by setting the restriction of $\d\mQ/\d\mP$ to $\cF_t$ to be $\sE(M)_t$, then $X_t-\langle X, M \rangle_t$ is a martingale under $\mQ$ and the quadratic variation of $X_t$ is the same under $\mP$ and $\mQ$. 
+	\end{theorem}
+	\begin{proof}
+		By localization, we can assume $X$ is a martingale. Set $Y_t=X_t-\<X,M\>_t$. We only need to verify that $Y_t\sE(M)_t$ is a martingale under $\mP$. By Itô's formula, 
+		\[
+		  \begin{aligned}
+		  	\d Y_t \sE(M)_t=& \sE(M)_t \d X_t- \sE(M)_t \d \<X,M\>_t+ Y_t \sE(M)_t \d M_t+ \d \<X, \sE(M)\>_t \\
+		  	=& \sE(M)_t \d X_t+ Y_t \sE(M)_t \d M_t. 
+		  \end{aligned}
+		\]
+		Therefore, $Y_t\sE(M)_t$ is a martingale, which implies 
+		$$
+		    \bE_{\mQ} (Y_t; A) = \bE_{\mQ} (Y_s; A), \quad \forall A\in \cF_s, 
+		$$
+		i.e. 
+		\[
+		    \bE_{\mQ}(Y_t|\cF_s)= Y_s. 
+		\]
+	\end{proof}
+
+\begin{theorem}[Dambis-Dubins-Schwarz's Theorem]\label{Thm:Dambis-Dubins-Schwarz}
+    Let \( M \) be a continuous local martingale with respect to a filtration \( (\mathcal{F}_t)_{t \geq 0} \), such that \( M_0 = 0 \) and \( \langle M \rangle_\infty = \infty \) almost surely. For all \( t \geq 0 \), let
+    \[
+        T_t = \inf\{s \geq 0 : \langle M \rangle_s > t\} = \langle M \rangle_t^{-1}
+    \]
+    be the generalized inverse of the non-decreasing process \( \langle M \rangle \) issued from 0. Then
+    \begin{enumerate}[(i)]
+        \item \( B = (M_{T_t})_{t \geq 0} \) is a Brownian motion with respect to the filtration \( (\mathcal{F}_{T_t})_{t \geq 0} \).
+        \item \( (B_{\langle M \rangle_t})_{t \geq 0} = (M_t)_{t \geq 0} \).
+    \end{enumerate}
+\end{theorem}
+
+Since \( \langle M \rangle \) can be flat on an interval, the map \( t \mapsto T_t \) can be discontinuous. But this does not contradict the continuity of \( t \mapsto M_{T_t} \). Indeed, the flatness lemma states that 
+\begin{lemma}[Flatness Lemma]
+    \( M \) and \( \langle M \rangle \) are constant on the same intervals in the sense that almost surely, for all \( 0 \leq a < b \),
+    \[
+        \forall t \in [a, b], M_t = M_a \quad \text{if and only if} \quad \langle M \rangle_b = \langle M \rangle_a.
+    \]
+\end{lemma}
+\begin{proof}
+    Since \( M \) and \( \langle M \rangle \) are continuous, it suffices to show that for all \( 0 \leq a \leq b \), almost surely,
+\[
+\{\forall t \in [a, b] : M_t = M_a\} = \{\langle M \rangle_b = \langle M \rangle_a\}.
+\]
+
+The inclusion \( \subset \) comes from the approximation of the quadratic variation. Let us prove the converse. To this end, we consider the continuous local martingale \( (N_t)_{t \geq 0} = (M_t - M_{t \wedge a})_{t \geq 0} \). We have
+\[
+\langle N \rangle = \langle M \rangle - 2 \langle M, M^a \rangle + \langle M^a \rangle = \langle M \rangle - 2 \langle M \rangle^a + \langle M \rangle^a = \langle M \rangle - \langle M \rangle^a.
+\]
+
+For all \( \epsilon > 0 \), we set the stopping time \( T_\epsilon = \inf\{t \geq 0 : \langle N \rangle_t > \epsilon\} \). The continuous semi-martingale \( N^{T_\epsilon} \) satisfies \( N_0^{T_\epsilon} = 0 \) and \( \langle N^{T_\epsilon} \rangle_\infty = \langle N \rangle_{T_\epsilon} \leq \epsilon \). It follows that \( N^{T_\epsilon} \) is a martingale bounded in \( L^2 \), and for all \( t \geq 0 \),
+\[
+\bE (N_{t \wedge T_\epsilon}^2) = \bE (\langle N \rangle_{t \wedge T_\epsilon}) \leq \epsilon.
+\]
+
+Let us define the event \( A = \{\langle M \rangle_b = \langle M \rangle_a\} \). Then \( A \subset \{T_\epsilon \geq b\} \) and, for all \( t \in [a, b] \),
+\[
+\bE (1_A N_t^2) = \bE (1_A N_{t \wedge T_\epsilon}^2) \leq \bE (N_{t \wedge T_\epsilon}^2) \leq \epsilon.
+\]
+
+By sending \( \epsilon \) to 0 we obtain \( \bE (1_A N_t^2) = 0 \) and thus \( N_t = 0 \) almost surely on \( A \). This ends the proof of the flatness lemma, which is of independent interest.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{Thm:Dambis-Dubins-Schwarz}]
+    For all \( t \geq 0 \), the random variable \( T_t \) is a stopping time with respect to \( (\mathcal{F}_u)_{u \geq 0} \), and \( s \mapsto T_s \) is non-decreasing. It follows that for all \( 0 \leq s \leq t \), \( \mathcal{F}_{T_s} \subset \mathcal{F}_{T_t} \), and thus \( (\mathcal{F}_{T_u})_{u \geq 0} \) is a filtration. Moreover, for all \( t \geq 0 \), \( T_t \) is a stopping time for the filtration \( (\mathcal{F}_{T_u})_{u \geq 0} \). We have \( T_t < \infty \) for all \( t \geq 0 \) on the almost sure event \( \{ \langle M \rangle_\infty = \infty \} \). By construction, \( (T_t)_{t \geq 0} \) is right continuous, non-decreasing (and thus with left limits), and adapted with respect to \( (\mathcal{F}_{T_t})_{t \geq 0} \). Since \( M \) is continuous, \( B = (M_{T_t})_{t \geq 0} \) is right continuous with left limits. Moreover, for all \( t \geq 0 \),
+
+\[
+B_{t^-} = \lim_{s \to t^-} B_s = M_{T_{t^-}}.
+\]
+
+By the flatness lemma, almost surely \( B_{t^-} = B_t \) for all \( t \geq 0 \), hence \( B \) is continuous.
+
+Let us show that \( B \) is a Brownian motion for \( (\mathcal{F}_{T_t})_{t \geq 0} \). For all \( n \geq 0 \), \( M^{T_n} \) is a continuous local martingale issued from the origin and \( \langle M^{T_n} \rangle_\infty = \langle M \rangle_{T_n} = n \) almost surely. It follows that for all \( n \geq 0 \), the processes
+
+\[
+M^{T_n} \quad \text{and} \quad (M^{T_n})^2 - \langle M \rangle^{T_n}
+\]
+
+are uniformly integrable martingales. Now, for all \( 0 \leq s \leq t \leq n \), and by the Doob stopping theorem for uniformly integrable martingales, using \( T_s \leq T_t \leq T_n \),
+
+\[
+\bE (B_t | \mathcal{F}_{T_s}) = \bE (M_{T_t}^{T_n} | \mathcal{F}_{T_s}) = M_{T_s}^{T_n} = M_{T_n \wedge T_s} = B_s
+\]
+
+and similarly, using additionally the property \( \langle M \rangle_{T_t}^{T_n} = \langle M \rangle_{T_n \wedge T_t} = \langle M \rangle_{T_t} = t \),
+
+\[
+\bE (B_t^2 - t | \mathcal{F}_{T_s}) = \bE ((M_{T_t}^{T_n})^2 - \langle M^{T_n} \rangle_{T_t} | \mathcal{F}_{T_s}) = (M_{T_s}^{T_n})^2 - \langle M^{T_n} \rangle_{T_s} = B_s^2 - s.
+\]
+
+Thus, \( B \) and \( (B_t^2 - t)_{t \geq 0} \) are martingales with respect to the filtration \( (\mathcal{F}_{T_t})_{t \geq 0} \). It follows now from the Lévy characterization that \( B \) is a Brownian motion for \( (\mathcal{F}_{T_t})_{t \geq 0} \).
+
+Let us show that \( M = B_{\langle M \rangle} \). By definition of \( B \), almost surely, for all \( t \geq 0 \),
+
+\[
+B_{\langle M \rangle_t} = M_{T_{\langle M \rangle_t}}.
+\]
+
+Now, \( T_{\langle M \rangle_t} \leq t \leq T_{\langle M \rangle_t} \), and since \( \langle M \rangle \) takes the same value at \( T_{\langle M \rangle_t} \) and \( T_{\langle M \rangle_t} \), we get \( t = T_{\langle M \rangle_t} \), and the flatness lemma gives \( M_t = M_{T_{\langle M \rangle_t}} \) for all \( t \geq 0 \) almost surely. In other words, using the definition of \( B \), this means that almost surely, for all \( t \geq 0 \),
+
+\[
+M_t = M_{T_{\langle M \rangle_t}} = B_{\langle M \rangle_t}.
+\]
+\end{proof}
+
+\section{Stochastic Differential Equations}
+	One of the main object in this note is the following SDE:
+	\begin{equation}\label{eq:sde}
+		\d X_t^i = \sigma^{i}_{k}(X_t) \d W_t^k+b^i(X_t) \d t, \quad X_0=\xi \in \cF_0. 
+	\end{equation}
+	Given $(\Omega, \cF, \bP, (\cF_t)_{t\geq 0},W_t)$, we say \eqref{eq:sde} has a {\bf pathwise solution} if there exists a continuous $\cF_t$-adapted process $X_t$ satisfying \eqref{eq:sde}. We say that we have {\bf pathwise uniqueness} for \eqref{eq:sde} if whenever $X_t$ and $Y_t$ are two solutions, then there exists a set $\cN$ such that $\bP(\cN)=0$ and for all $\omega\notin \cN$, we have $(X_t(\omega))_{t\geq 0}=(Y_t(\omega))_{t\geq 0}$.
+	
+\subsection{Lipschitz conditions}
+\begin{theorem}[It\^o]\label{thm:Ito}
+    Suppose $\sigma$ and $b$ are Lipschitz. Then there exists a unique pathwise solution to the SDE \eqref{eq:sde} for any $X_0\in L^2(\Omega, \cF_0, \bP)$.
+\end{theorem}
+\begin{proof}
+    Let $\cB$ denote the set of all continuous processes $\xi$ that are adapted to the filtration $\mathcal{F}_t$ and satisfy
+    $$
+    \|\xi\|_\cB:= \l(\bE \sup_{t\in [0,T]} |\xi_t|^2\r)^{1/2}<\infty. 
+    $$
+    Here $T$ is a positive number which will be determined later. It is not hard to verify that $\cB$ is a Banach space. Define a map $\sA$ on $\cB$ by 
+    \begin{align*}
+	(\sA(\xi))_t:= X_0+ \int_0^t \sigma(\xi_s) \cdot \d W_s+\int_0^t b(\xi_s) \d s, \quad t\in [0,T]. 
+    \end{align*}
+    (Verify that \(\cA(\xi)\in \cB\)). By \eqref{eq:bdg} (or Doob's inequality) and Lipschitz condition on the coefficients, 
+    \begin{equation*}
+	\begin{aligned}
+            &\|\sA(\xi)-\sA(\eta)\|_{\cB}^2= \bE \sup_{t\in [0,T]}|\sA(\xi)_{t}-\sA(\eta)_{t}|^2\\
+            \leq & 2 \bE \sup_{t\in [0,T]} \l| \int_0^t (\sigma(\xi_s) -\sigma(\eta_s)) \d W_s\r|^2+ 2 \bE \sup_{t\in [0,T]} \l|\int_0^t (b(\xi_s) -b(\eta_s)) \d s\r|^2\\
+            \overset{\eqref{eq:bdg}}{\leq} & C \bE \int_0^T |\sigma(\xi_s)-\sigma(\eta_s)|^2 \d s + C \bE \l( \int_0^T |b(\xi_s)-b(\eta_s)| \d s \r)^2 \\
+            \leq & C (T+T^2) \bE \sup_{t\in [0,T]}|\xi_{t}-\eta_{t}|^2=C_1(T+T^2) \|\xi-\eta\|_B^2.
+	\end{aligned}
+    \end{equation*}
+    Choosing $T>0$ sufficiently small such that $C_1 (T+T^2)\leq 1/2$, then $\sA$ is a Contraction mapping on $\cB$. Banach fixed-point theorem yields that $\sA$ has a unique fixed point, which is the unique pathwise solution to \eqref{eq:sde}. We can extend the same result to arbitrarily time intervals. 
+\end{proof}
+	
+	\subsection{Definitions of solutions}
+	\begin{enumerate}
+		\item {\bf strong solution exists} to \eqref{eq:sde}: if given the Brownian motion $W_t$ there exists a process $X_t$ satisfying \eqref{eq:sde} such that $X_t$ is adapted to the filtration generated by $W_t$.
+		\item {\bf weak solution exists} to \eqref{eq:sde}: if there exists $(\Omega, \cF, \bP, (\cF_t)_{t\geq 0}; X_t, W_t)$ such that $W_t$ is a $(\cF_t)_{t\geq 0}$-Brownian motion and the equation \eqref{eq:sde} holds. 
+		\item {\bf weak uniqueness}: if whenever $(\Omega, \cF, \bP, (\cF_t)_{t\geq 0}; X_t, W_t)$ and \\ $(\Theta, \cG, \bQ, (\cG)_{t\geq 0}; Y_t, B_t)$ are two weak solutions, then the laws of the processes $X$ and $Y$ are equal; {\bf Joint uniqueness in law} means the joint law of $(X,W)$ and $(Y,B)$ are equal. 
+	\end{enumerate}
+A fundamental result is 
+\begin{theorem}[Yamada-Watanabe-Engelbert \cite{engelbert1991theorem}]\label{thm:YWE}
+    The following two conditions are equivalent.
+    \begin{enumerate}[(i)]
+        \item For every initial distribution, there exists a weak strong solution to \eqref{eq:sde} and the solution to \eqref{eq:sde} is pathwise unique. 
+        \item For every initial distribution, there exists a strong strong solution to \eqref{eq:sde} and the solution to \eqref{eq:sde} is jointly unique in law.
+    \end{enumerate}
+    If one (and therefore both) of these conditions is satisfied then every solution to \eqref{eq:sde} is a strong solution. 
+\end{theorem}
+
+\begin{proposition}
+        
+\end{proposition}
+
+\subsection{SDEs with H\"older drifts}
+For strong well-posedness, if the diffusion coefficient $\sigma$ is non-degenerate, then the condition on $b$ can be weakened. 
+
+Let \(\delta\in (0,1)\). Define 
+\[
+    \mS_\delta^d=\l\{ A\in S(d): \delta I_{d} \leq A\leq \delta^{-1}I_{d} \r\}
+\]
+\begin{theorem}[Krylov \cite{krylov2021strong}]
+    Suppose that $a\in \mS_\delta^d$  and $\nabla \sigma, b\in L^d(\mR^d)$, then equation \eqref{eq:sde} admits a unique strong solution. 
+\end{theorem}
+    
+	
+Of course, we will not to prove such a strong result here, but a simper one below. 
+\begin{theorem}[Flandoli-Gubinelli-Priola \cite{flandoli2010well}]\label{thm:Zvonkin}
+    Equation \eqref{eq:sde} admits a unique strong solution, provided that $a\in \mS_\delta^d$, $\sigma$ is Lipschitz, and $b\in C^\alpha(\mR^d)$ $(\forall \alpha>0)$. 
+\end{theorem}
+	
+Let 
+\[
+    Lu= a_{ij} \p_{ij} u+b_i\p_i u. 
+\] 
+We will consider
+\begin{equation}\label{eq:resolvent1}
+    \lambda u - L u =f, \quad \lambda>0. 
+\end{equation}
+
+
+We need the following apriori estimate. 
+\begin{lemma}\label{lem:Schauder}
+    Suppose $a\in \mS_\delta^d$ and $a, b\in C^\alpha$. Then for any \(\lambda>0\) and $u\in C^{2,\alpha}$, it holds that \begin{equation}\label{eq:schauder0}
+        \lambda \|u\|_{\alpha} + \|u\|_{2+\alpha} \leq C \|\lambda u-Lu\|_{\alpha}, 
+    \end{equation}
+    where $C$ only depends on $d$, $\delta, \alpha$, and $\|a\|_\alpha$ and $\|b\|_{\alpha}$. 
+\end{lemma}
+
+\begin{proof}
+    The proof for the above lemma for \(L=\Delta\) can be founded in Appendix \ref{app:Schauder}. 
+    
+    For general elliptic operators, let $\zeta\in C_c^\infty(B_2)$ such that $\zeta\geq 0$, $\zeta\equiv1$ in $B_1$. Set $\zeta_\eps^z=\zeta((x-z)/\eps)$, and \(f=\lambda u-L u\). Then 
+    \begin{equation*}
+        \begin{aligned}
+            &\lambda (u\zeta_\eps^z) - a_{ij}(z)\p_{ij}(u\zeta_\eps^z) \\
+            =& (a_{ij}-a_{ij}(z)) \p_{ij}(u\zeta_\eps^z)-2a_{ij}\p_i u\p_{j}\zeta_\eps^z -a_{ij}\p_{ij}\zeta_\eps^z u \\
+            &+b_i\p_iu \, \zeta^z_\eps +f\zeta_\eps^z, 
+        \end{aligned}
+    \end{equation*} 
+    In virtue of \Cref{lem:schauder},  we have 
+    \begin{equation*}
+	\begin{aligned}
+            &\lambda [u \zeta_\eps^z]_\alpha+ [\nabla^2(u\zeta_\eps^z)]_{\alpha}\leq  C
+            \eps [\nabla^2 (u\zeta_\eps^z)]_\alpha+C [f]_\alpha +C \eps^{-\alpha} \|f\|_0\\
+            &+ C \|\nabla^2 u\|_0+C\eps^{-1} [\nabla u]_\alpha + C\eps^{-1-\alpha} \|\nabla u\|_0+ C \eps^{-2} [u]_\alpha+ C \eps^{-2-\eps} \|u\|_0. 
+	\end{aligned}
+    \end{equation*}
+    Here we use the fact that 
+    \[
+        [fg]_{\alpha}\leq \|f\|_{0}[g]_\alpha+ [f]_{\alpha}\|g\|_{0}. 
+    \]
+    Choosing \(\eps_0>0\) sufficiently small so that \(C\eps_0\leq 1/2\), we get 
+    \begin{equation*}
+        \begin{aligned}
+        \lambda [u]_{\alpha} + [\nabla^2 u]_\alpha \leq \sup_{z\in \mR^d} \l( \lambda [u \zeta_{\eps_0}^z]_\alpha+ [\nabla^2(u\zeta_{\eps_0}^z)]_{\alpha} \r) \leq  C_{\eps_0} ( \|f\|_\alpha+ \|u\|_{2} ). 
+    \end{aligned}
+    \end{equation*}
+    Noting that 
+    \(\|u\|_2\leq \delta [\nabla^2 u]_\alpha+C_\delta \|u\|_0\), \(\delta>0\), we obtain that 
+    \[
+    \lambda [u]_{\alpha} + [\nabla^2 u]_\alpha \leq C (\|f\|_{\alpha}+ \|u\|_0). 
+    \]
+    Since \(\lambda \|u\|_0\leq \|f\|_0\), by interpolation, one sees that 
+    \[
+        \lambda \|u\|_{\alpha} + \|u\|_{2+\alpha} \leq C (1+\lambda^{-1}) \|f\|_{\alpha}.
+    \]
+    So we obtain our desired assertion. 
+\end{proof}
+
+\begin{theorem}\label{thm:Schauder}
+    Suppose $a\in \mS_\delta^d$ and $a, b\in C^\alpha$. Then for any $\lambda>0$ and $f\in C^\alpha$, equation \eqref{eq:resolvent1} admits a unique solution in $C^{2,\alpha}$. Moreover, 
+    \begin{equation}\label{eq:schauder}
+        \lambda \|u\|_{\alpha} + \|u\|_{2+\alpha} \leq C(1+\lambda^{-1}) \|f\|_{\alpha}, 
+    \end{equation}
+    where $C$ only depends on $d, \delta,\alpha$, and $\|a\|_\alpha$ and $\|b\|_{\alpha}$. 
+\end{theorem}
+
+
+	{\em Sketch of the proof for \Cref{thm:Schauder}}: 
+	\begin{enumerate}[(i)]
+		\item If $L=\Delta$ and $f\in \sS(\mR^d)$, then for each $\lambda>0$, one can use Fourier transformation to solve \eqref{eq:resolvent1}, i.e. $u=\cF^{-1}\l[ \cF(f)\cdot(\lambda + 4\pi^2 |\cdot|^2) \r]\in \cap_{s>0} H^s\subseteq C^\infty_b$. Moreover, \eqref{eq:schauder} can also be proved by Fourier analysis method (see Appendix \ref{app:Schauder}); 
+		\item For any $L$ satisfying the conditions in \Cref{thm:Schauder}, and any $u\in C^{2,\alpha}$, by \Cref{lem:Schauder}, \eqref{eq:schauder} holds true for any $\lambda>0$; 
+		\item Let $\chi$ be a cutoff function and $\zeta$ be a mollifier. For any $f\in C^\alpha$, we set $f_\eps=\chi_\eps(f*\zeta_\eps)$. Here $\chi_\eps(x)=\chi(x/\eps)$ and $\zeta_\eps(x)= \eps^{-d} \zeta(x/\eps)$. Using (i), for each $\eps>0$, there is a smooth soluiton, say $u_\eps$, to \eqref{eq:resolvent1} with $L$ and $f$ replaced by $\Delta$ and $f_\eps$. The limit of $(u_\eps)$, $u$, satisfies $\lambda u-\Delta u=f$, and $u$ also satisfies \eqref{eq:schauder}; 
+		\item In the light of \eqref{eq:schauder} and the method of continuity (see \Cref{lem:continum} below), one can obtain the solvability of \eqref{eq:resolvent1} in $C^{2,\alpha}$. 
+	\end{enumerate}
+	
+	\begin{lemma}[Method of continuity]\label{lem:continum}
+		Let $B$ be a Banach space, $V$ a normed vector space, and 
+		$T_t$ a norm continuous family of bounded linear operators from $B$ into $V$. Assume that there exists a positive constant $C$ such that for every $t\in [0,1]$ and every $x\in B$, 
+		\[
+		\|x\|_{B} \leq C \|T_t x\|_{V}. 
+		\]
+		Then $T_0$ is a surjective if and only if  $T_1$ is surjective as well.
+	\end{lemma}
+	
+\begin{proof}[Proof of Theorem \ref{thm:Zvonkin}] 
+		Since $\sigma$ and $b$ are bounded continuous, weak solution exists to \eqref{eq:sde} (see \cite{Huang}). Thanks to Theorem \ref{thm:YWE}, we only need to prove the pathwise uniqueness. 
+		
+	Let \(\lambda\gg 1\) Consider the following equation 
+		\[
+		\lambda {\bf u}_\lambda - L {\bf u}_\lambda = b. 
+		\]
+		By Lemma \ref{lem:Schauder} and interpolation theorem 
+		\[
+		\|\nabla {\bf u} \|_{0} \leq \|{\bf u}\|_{0}^{\frac{1}{2}} \|\nabla^2 {\bf u}\|_{0}^{\frac{1}{2}} \leq   C \lambda^{-\frac{1}{2}} \|b\|_{\alpha}. 
+		\]
+		Choosing $\lambda$ sufficiently large so that $C \lambda^{-\frac{1}{2}} <1/2$.  Set $\phi (x) = x + {\bf u}(x)$, then $\phi: \mR^d \to \mR^d$ is a $C^{1,\alpha}$-homeomorphism. 
+		
+		Assume that $X$ and $X'$ are two solutions to \eqref{eq:sde}. Set $Y_t=\phi(X_t)$ and $Y'_t=\phi(X'_t)$. Then by It\^o's formula, 
+		\begin{equation*}
+			\d Y_t^i = (\delta^i_j+\p_j {\bf u}^i)(X_t) \sigma_{jk} (X_t) \d W_t^k + \l[  a_{jk}(X_t)\p_{jk}{\bf u}^i (X_t)+ (\delta^i_j+\p_j {\bf u}^i)(X_t) b^j (X_t) \r]  \d t
+		\end{equation*}
+		i.e. 
+		\begin{equation*}
+			\begin{aligned}
+				\d Y_t=& [(I+\nabla {\bf u})\sigma ]\circ \phi^{-1}(Y_t) \d W_t + \l[ a:\nabla^2 {\bf u}+ (I+\nabla {\bf u})b\r] \circ \phi^{-1}(Y_t)   \d t \\
+				=&  \underbrace{[(I+\nabla {\bf u})\sigma ]\circ \phi^{-1} }_{=:\widetilde{\sigma}}(Y_t) \d W_t  + \underbrace{\lambda u \circ\phi^{-1}}_{=:\widetilde{b}} (Y_t) \d t. 
+			\end{aligned}
+		\end{equation*}
+		Similarly, $\d Y'_t = \widetilde{\sigma}(Y'_t)\d W_t + \widetilde{b}(Y'_t) \d t$. Since $\widetilde{\sigma}$ and $\widetilde{b}$ are both $C^{1,\alpha}$ functions, as in the proof for Theorem \ref{thm:Ito}, we have 
+		\[
+		\bE |Y_t-Y'_t|^2 \leq C \int_0^t \bE |Y_s-Y'_s|^2 \d s.  
+		\]
+		This yields $Y_t=Y'_t$, due to Gronwall's inequality. Since $\phi$ is one-to-one, $X_t=X'_t$. 
+	\end{proof}
+	
+	\subsection{Stochastic Flow}
+
+Consider \eqref{eq:sde}  .   \begin{theorem}\label{Thm:flow1}
+        If $\sigma$ and $b$ are Lipschitz, then there exists a version of $X_t(x)$ that is continuous in $(t,x)$ a.s.
+    \end{theorem}
+	\begin{proof}
+	    \begin{align*}
+	        X_t(x)-X_t(y)=x-y+\int_0^t \l[ \sigma(X_s(x))-\sigma(X_s(y))\r]\d W_s+ \int_0^t \l[b(X_s(x))-b(X_s(y))\r]\d s 
+	    \end{align*}
+     By the Burkholder-Davis-Gundy inequalities, for any $t\in[0,1]$ and \(p\geq 2\),  
+\begin{align*}
+    &\bE \sup_{s\in [0,t]} \l| \int_0^s \l[\sigma(X_r(x))-\sigma(X_r(y))\r]\d W_r \r|^p\\
+    \leq& C \bE \l(\int_0^t |X_{s}(x)-X_s(y)|^2 \d s \r)^{p/2}\\
+    \leq & C \bE \int_0^t |X_{s}(x)-X_s(y)|^p \d s. 
+\end{align*}
+Set $g(t)=\bE \sup_{s\in [0,t]}|X_s(x)-X_s(y)|^p$. Then for any \(T>0\), we have 
+\[
+    g(t)\leq C |x-y|^p+C \int_0^t g(s) \d s, \quad t\in [0,T],  
+\]
+where \(C\) only depends on \(d,p\) and \(T\). Gronwall's inequality yields 
+\[
+    \bE \sup_{t\in[0,1]} \l|X_t(x)-X_t(y)\r|^p \leq C |x-y|^p, \quad \forall p\geq 2. 
+\]
+Further, one can verify that 
+\[
+    \bE \l|X_t(x)-X_s(y)\r|^p\leq C \l(|x-y|+|t-s|^{\frac{1}{2}}\r)^p, \quad x,y\in \mR^d,~ t,s\in [0,T],~p\geq 2.
+\]
+This together with Kolmogorov's continuity theorem implies that there is a continuous version of $(t,x)\mapsto X_t(x)$ such that 
+\[
+    \|X(\omega)\|_{C^{\alpha}([0,1]; \dot C^\beta(B_R))} \leq K(\omega)
+\]
+with $\alpha\in (0,1/2)$ and $\beta\in(0,1)$, and $K\in L^p$ for all $p\geq 1$. 
+	\end{proof}
+ \begin{remark}
+     The above result also holds if $\sigma$ and $b$ are $\omega$-dependent and $\|\sigma\|_{C^1}+\|b\|_{C^1}\leq L$ a.s., for some constant $L$. 
+ \end{remark}
+   The collection of processes $X_t(x)$ is called a flow. If $\sigma$ and $b$ are smoother functions, then $X_t(x)$ will be smoother in $x$.  Taking derivative, and using the chain rule, formally we have 
+    \[
+        \begin{aligned}
+            \partial_j X^i_t(x) = & \delta^i_j +\int_0^t \partial_l\sigma^i_k(X_s(x))  \partial_jX^l_s(x) \d W^k_s\\
+            & +\int_0^t \partial_l b^i(X_s(x))\partial_j X^l_s(x) \d s .
+        \end{aligned}
+    \]
+    
+Suppose that $\sigma$ and $b$ are in $C^1_b$, we consider the SDE 
+\begin{equation}\label{eq:DX}
+    \d J^i_j(t,x)=\partial_l\sigma^i_k(X_t(x)) J^l_j(t,x) \d W^k_t+\partial_l b^i(X_t(x)) J^l_j(t,x) \d t, \quad J^i_j(0,x)=\delta^i_j. 
+\end{equation}
+Follow the proof of Theorem \ref{Thm:flow1}, we have 
+\begin{proposition}\label{Prop:J}
+    Assume $\sigma, b\in C^2_b$. A strong solution to \eqref{eq:DX} exists and is pathwise unique. The solution has moments of all orders. Moreover, $J(t,x)$ has a Hölder continuous version, and 
+    \[
+        \bE \sup_{t\in[0,T]}\l|J(t,x)-J(t,y)\r|^p\leq C |x-y|^p, \quad x,y\in \mR^d,~p\geq 1.
+    \]    
+\end{proposition}
+    
+\begin{exercise}
+    Prove \Cref{Prop:J}. 
+\end{exercise}
+
+We now prove the differentiability of $X_t(x)$. 
+\begin{theorem}
+    Suppose  $\sigma,b\in C^k_b$. Then $x\mapsto X_t(x)$ is $C^{k-1,\alpha}$ a.s., and $\nabla X_t(x)=J(t,x)$. 
+\end{theorem}
+\begin{proof}
+    For simplicity, we take $b=0$ and $k=2$. Then 
+    \[
+    X_t^i(x)=x^i+\int_0^t \sigma^i_k(X_s(x)) \d W^k_s. 
+    \]
+    Set 
+    \[
+        S^i_j(t,x,h):=X_t^i(x+e_jh), \quad Y^i_j(t,x,h):=\frac{X_t^i(x+e_jh)-X_t^i(x)}{|h|}, \quad h\neq 0. 
+    \]
+    Then 
+    \[
+    S_j^i(t,x,h)=x^i+e_j h + \int_0^t \sigma^i_k(S_j(s,x,h)) \d W^k_s
+    \]
+    and
+    \[
+     Y^i_j(t,x,h)=\delta^i_j+\int_0^t \underbrace{\left[\int_0^1 \partial_l\sigma^i_k(\theta S_j(s,x,h)+(1-\theta)X_s(x)) \d \theta\right]}_{\leq \|\nabla \sigma\|_0} Y_j^l(s,x,h) \d W_s^k. 
+    \]
+    Set 
+    \[
+        Z(t,x,h)=(X(t,x), S(t,x,h), Y(t,x,h)).
+    \] 
+    Then 
+    \[
+    Z(0,x,h)= \l(x,(x^i+e_jh), (\delta^i_j) \r)
+    \]
+    and \(Z\) satisfies an SDE with Lipschitz continuous coefficients. Noting that 
+    \[
+        |Z(0,x,h)-Z(0,x',h')|\leq C (|x-x'|+|h-h'|),
+    \] 
+    following the arguments in \Cref{Thm:flow1}, we can obtain that 
+    \[
+    \bE \sup_{t\in [0,T]}|Z(t,x,h)-Z(t,x',h')|^p  \leq C (|x-x'|^p+ |h-h'|^p), \quad p\gg 1. 
+    \]
+    This implies that \(Z(t, x, h)\) admits a locally Hölder continuous version. Consequently, for almost every \(\omega \in \Omega\), the limit \(\lim_{h \to 0} Y(t, x, h)(\omega)\) exists for each \(t \geq 0\) and \(x \in \mathbb{R}^d\). Furthermore, it is straightforward to verify that this limit coincides with \(J\), as both satisfy the same equation. 
+\end{proof}
+One can also show (see Ikeda and Watanabe \cite{ikeda2014stochastic}) that the map $x\mapsto X_t(x)$ is one-to-one and onto $\mR^d$. 
