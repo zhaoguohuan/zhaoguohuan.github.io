@@ -135,3 +135,11 @@ ol li{
   line-height: 125%;
 }
 
+
+/* 上标：用于论文标题里的 L^p 之类记号，避免行距被撑开 */
+sup {
+  font-size: 72%;
+  line-height: 0;
+  vertical-align: 0.42em;
+  padding-right: 1px;
+}
